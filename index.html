@@ -137,6 +137,15 @@ td.hover-cell{
   background:#2e5e2e;
 }
 
+.sub-tabs{
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.sub-tabs button.active{
+  background:#2e5e2e;
+}
+
 .equip-btn.active{
   background:#2e5e2e;
   border:1px solid #4a8f4a;
@@ -231,6 +240,8 @@ td.hover-cell{
   <button class="tab" onclick="switchTab('equipment', event)">Оборудование</button>
 </div>
 <div id="statsPage">
+
+<div class="sub-tabs" id="campaignTabs"></div>
   
 <div class="buttons">
   <button class="mode" onclick="loadTable('damage',event)">Урон</button>
@@ -250,6 +261,12 @@ td.hover-cell{
 
 <div id="equipmentPage" style="display:none; text-align:center;">
 
+  <div class="sub-tabs" id="equipmentTabs">
+    <button class="equip-mode active" onclick="switchEquipmentMode('abs', event)">АБС</button>
+    <button class="equip-mode" onclick="switchEquipmentMode('random', event)">Рандом</button>
+  </div>
+
+  <div id="equipmentAbs">
   <div class="equip-buttons">
     <button class="equip-btn" onclick="loadEquipment('orso', event)">Orso</button>
     <button class="equip-btn" onclick="loadEquipment('Wilk', event)">Wilk/CS-63</button>
@@ -287,6 +304,11 @@ td.hover-cell{
   </div>
 
   <div id="equipmentContent"></div>
+  </div>
+
+  <div id="equipmentRandom" style="display:none;">
+    <p>Раздел «Рандом» пока пустой — добавим данные, когда они появятся.</p>
+  </div>
 
 </div>
   
@@ -346,6 +368,70 @@ const DATA_FILES = [
   // сюда просто добавляешь новые файлы
 ];
 
+
+const CAMPAIGNS = [
+  { key: "global_map", label: "Глобальная карта", start: [3, 23], end: [4, 5] },
+  { key: "thunder", label: "И грянул гром", start: [4, 20], end: [4, 26] },
+  { key: "rain_wall", label: "Стена дождя", start: [5, 12], end: [5, 18] },
+  { key: "eternal_storm", label: "Вечная гроза", start: [6, 1], end: [6, 7] }
+];
+
+let currentCampaign = CAMPAIGNS[0].key;
+
+function getCampaignByDate(dateStr){
+  const parsed = parseDate(dateStr);
+  const month = parsed.getMonth() + 1;
+  const day = parsed.getDate();
+
+  return CAMPAIGNS.find(c => {
+    const [sm, sd] = c.start;
+    const [em, ed] = c.end;
+    if(month < sm || month > em) return false;
+    if(month === sm && day < sd) return false;
+    if(month === em && day > ed) return false;
+    return true;
+  })?.key || null;
+}
+
+function switchCampaign(key, event){
+  currentCampaign = key;
+  document.querySelectorAll("#campaignTabs button")
+    .forEach(b => b.classList.remove("active"));
+  if(event) event.target.classList.add("active");
+  renderCampaignTabs();
+  initDates();
+  loadTable(currentType);
+}
+
+function renderCampaignTabs(){
+  const wrap = document.getElementById("campaignTabs");
+  wrap.innerHTML = "";
+
+  CAMPAIGNS.forEach((campaign, idx) => {
+    const btn = document.createElement("button");
+    btn.textContent = campaign.label;
+    if(campaign.key === currentCampaign) btn.classList.add("active");
+    btn.onclick = (event) => switchCampaign(campaign.key, event);
+    wrap.appendChild(btn);
+  });
+}
+
+function switchEquipmentMode(mode, event){
+  document.querySelectorAll(".equip-mode").forEach(btn => btn.classList.remove("active"));
+  if(event) event.target.classList.add("active");
+
+  const abs = document.getElementById("equipmentAbs");
+  const random = document.getElementById("equipmentRandom");
+
+  if(mode === "abs"){
+    abs.style.display = "block";
+    random.style.display = "none";
+  } else {
+    abs.style.display = "none";
+    random.style.display = "block";
+  }
+}
+
 Promise.all(
   DATA_FILES.map(async file => {
     const response = await fetch(file);
@@ -376,8 +462,17 @@ function initDates(){
   const box=document.getElementById("dateButtons");
   box.innerHTML="";
 
-  let dates=[...new Set(DATA.battles.map(b=>b.date))];
+  let dates=[...new Set(DATA.battles
+    .filter(b => getCampaignByDate(b.date) === currentCampaign)
+    .map(b=>b.date))];
   dates.sort((a,b)=>parseDate(a)-parseDate(b));
+
+  if(!dates.length){
+    box.innerHTML = "<p>Для этого блока пока нет данных.</p>";
+    currentDate = null;
+    loadTable(currentType);
+    return;
+  }
 
   dates.forEach((date,index)=>{
     let btn=document.createElement("button");
@@ -437,7 +532,7 @@ function loadTable(type,event){
   }
 
   let battles=DATA.battles.filter(
-    b=>!currentDate || b.date===currentDate
+    b=>getCampaignByDate(b.date)===currentCampaign && (!currentDate || b.date===currentDate)
   );
 
   if(!battles.length){
