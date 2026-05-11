@@ -446,6 +446,7 @@ Promise.all(
     battles: allData.flatMap(d => d.battles || [])
   };
 
+  renderCampaignTabs();
   initDates();
   loadTable(currentType);
 })
