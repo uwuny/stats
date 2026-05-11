@@ -199,14 +199,6 @@ td.hover-cell{
   padding:0;
 }
 
-.bottom-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
 .bottom-row img{
   display:block;
 }
@@ -306,6 +298,21 @@ td.hover-cell{
 <script>
 let DATA = null;
 
+function escapeHtml(value){
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function parseDate(str){
+  const [d,m,y] = str.split(".").map(Number);
+  const year = Number.isFinite(y) ? y : new Date().getFullYear();
+  return new Date(year, (m||1)-1, d||1);
+}
+
 function switchTab(tab, event){
 
   document.querySelectorAll(".tab")
@@ -340,26 +347,29 @@ const DATA_FILES = [
 ];
 
 Promise.all(
-  DATA_FILES.map(file => fetch(file).then(r => r.json()))
+  DATA_FILES.map(async file => {
+    const response = await fetch(file);
+    if(!response.ok){
+      throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
+    }
+    return response.json();
+  })
 )
 .then(allData => {
-
   DATA = {
-    battles: allData.flatMap(d => d.battles)
+    battles: allData.flatMap(d => d.battles || [])
   };
 
   initDates();
   loadTable(currentType);
+})
+.catch(error => {
+  document.getElementById("table").textContent = `Ошибка загрузки данных: ${error.message}`;
 });
 
 function toggleAverage(){
   avgPosition = avgPosition==="right" ? "left" : "right";
   loadTable(currentType);
-}
-
-function parseDate(str){
-  let [d,m] = str.split(".").map(Number);
-  return new Date(2025,m-1,d);
 }
 
 function initDates(){
@@ -492,7 +502,7 @@ function loadTable(type,event){
   if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
 
   battles.forEach(b=>{
-    html+=`<th class="${b.win?"win":"lose"}">${b.map}</th>`;
+    html+=`<th class="${b.win?"win":"lose"}">${escapeHtml(b.map)}</th>`;
   });
 
   if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
@@ -502,7 +512,7 @@ function loadTable(type,event){
 
   sorted.forEach(name=>{
     html+="<tr>";
-    html+=`<td>${name}</td>`;
+    html+=`<td>${escapeHtml(name)}</td>`;
 
     if(type==="hits" && avgPosition==="left")
       html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
@@ -535,7 +545,7 @@ function loadTable(type,event){
         }
 
       html+=`<td>
-        <span class="${tankClass}">${cell.tank}</span><br>
+        <span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>
         ${displayValue}
       </td>`;
     });
