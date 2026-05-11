@@ -3,12 +3,27 @@ let avgPosition = "right";
 let currentType = "damage";
 let currentDate = null;
 
+function escapeHtml(value){
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 fetch("battle_data.json")
-.then(r=>r.json())
+.then(r=>{
+  if(!r.ok) throw new Error(`Не удалось загрузить battle_data.json: ${r.status}`);
+  return r.json();
+})
 .then(data=>{
   DATA=data;
   initDates();
   loadTable(currentType);
+})
+.catch(error=>{
+  document.getElementById("table").textContent = `Ошибка загрузки данных: ${error.message}`;
 });
 
 function toggleAverage(){
@@ -17,8 +32,9 @@ function toggleAverage(){
 }
 
 function parseDate(str){
-  let [d,m] = str.split(".").map(Number);
-  return new Date(2025,m-1,d);
+  const [d,m,y] = str.split(".").map(Number);
+  const year = Number.isFinite(y) ? y : new Date().getFullYear();
+  return new Date(year,(m||1)-1,d||1);
 }
 
 function initDates(){
@@ -156,7 +172,7 @@ function loadTable(type,event){
     html+="<th>Ср</th>";
 
   battles.forEach(b=>{
-    html+=`<th class="${b.win ? "win":"lose"}">${b.map}</th>`;
+    html+=`<th class="${b.win ? "win":"lose"}">${escapeHtml(b.map)}</th>`;
   });
 
   if(type==="hits" && avgPosition==="right")
@@ -169,7 +185,7 @@ function loadTable(type,event){
 
   sorted.forEach(name=>{
     html+="<tr>";
-    html+=`<td>${name}</td>`;
+    html+=`<td>${escapeHtml(name)}</td>`;
 
     if(type==="hits" && avgPosition==="left")
       html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
@@ -188,7 +204,7 @@ function loadTable(type,event){
       let tankClass = cell.alive ? "alive":"dead";
 
       html+=`<td>
-        <span class="${tankClass}">${cell.tank}</span><br>
+        <span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>
         <span>${cell.value}</span>
       </td>`;
     });
