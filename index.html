@@ -146,6 +146,11 @@ td.hover-cell{
   background:#2e5e2e;
 }
 
+.sub-tabs button.current-campaign{
+  border:1px solid #63b3ff;
+  box-shadow:0 0 8px rgba(99,179,255,0.45);
+}
+
 .equip-btn.active{
   background:#2e5e2e;
   border:1px solid #4a8f4a;
@@ -307,7 +312,7 @@ td.hover-cell{
   </div>
 
   <div id="equipmentRandom" style="display:none;">
-    <p>Чиво смотрим, пока пусто тута</p>
+    <p>Раздел «Рандом» пока пустой — добавим данные, когда они появятся.</p>
   </div>
 
 </div>
@@ -411,6 +416,7 @@ function renderCampaignTabs(){
     const btn = document.createElement("button");
     btn.textContent = campaign.label;
     if(campaign.key === currentCampaign) btn.classList.add("active");
+    if(campaign.key === "rain_wall") btn.classList.add("current-campaign");
     btn.onclick = (event) => switchCampaign(campaign.key, event);
     wrap.appendChild(btn);
   });
