@@ -230,6 +230,16 @@ td.hover-cell{
   object-fit:contain;
 }
 
+.map-link{
+  color:inherit;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+.map-link:hover{
+  color:#9be8ff;
+}
+
 </style>
 </head>
 
@@ -360,6 +370,7 @@ let avgPosition = "left";
 
 let currentType = "damage";
 let currentDate = null;
+let visibleBattles = [];
 
 const DATA_FILES = [
   "data/battle_data.json",
@@ -383,6 +394,29 @@ const CAMPAIGNS = [
 ];
 
 let currentCampaign = CAMPAIGNS[0].key;
+
+
+const HTML_REPLAYS_DIR = "replays_html";
+
+function normalizeReplayFilename(rawName){
+  if(!rawName) return null;
+  const name = String(rawName).trim();
+  if(!name) return null;
+  return name.toLowerCase().endsWith(".html") ? name : `${name}.html`;
+}
+
+function openBattleHtml(battle){
+  const fileFromFilename = normalizeReplayFilename(battle.filename);
+  const fileFromHtmlFile = normalizeReplayFilename(battle.html_file);
+  const replayFile = fileFromFilename || fileFromHtmlFile;
+
+  if(!replayFile){
+    alert("У этого боя нет поля filename/html_file в JSON.");
+    return;
+  }
+
+  window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
+}
 
 function getCampaignByDate(dateStr){
   const parsed = parseDate(dateStr);
@@ -460,6 +494,12 @@ Promise.all(
 .catch(error => {
   document.getElementById("table").textContent = `Ошибка загрузки данных: ${error.message}`;
 });
+
+function openBattleHtmlByIndex(index){
+  const battle = visibleBattles[index];
+  if(!battle) return;
+  openBattleHtml(battle);
+}
 
 function toggleAverage(){
   avgPosition = avgPosition==="right" ? "left" : "right";
@@ -545,8 +585,11 @@ function loadTable(type,event){
 
   if(!battles.length){
     document.getElementById("table").innerHTML="Нет боёв";
+    visibleBattles = [];
     return;
   }
+
+  visibleBattles = battles;
 
   let players={};
 
@@ -604,8 +647,10 @@ function loadTable(type,event){
   if(type==="hits" && avgPosition==="left") html+="<th>%</th>";
   if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
 
-  battles.forEach(b=>{
-    html+=`<th class="${b.win?"win":"lose"}">${escapeHtml(b.map)}</th>`;
+  battles.forEach((b, battleIndex)=>{
+    html+=`<th class="${b.win?"win":"lose"}">
+      <a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a>
+    </th>`;
   });
 
   if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
