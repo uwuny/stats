@@ -396,39 +396,27 @@ const CAMPAIGNS = [
 let currentCampaign = CAMPAIGNS[0].key;
 
 
-const HTML_REPLAYS_DIR = "html";
-const HTML_YEAR = 2026; // если файлы за другой год — поменяй здесь
+const HTML_REPLAYS_DIR = "replays_html";
 
-const MAP_SLUGS = {
-  "Линия Зигфрида": "siegfried_line",
-  "Редшир": "redshire"
-};
-
-function buildDateToken(dateStr){
-  const [d,m,y] = dateStr.split(".").map(Number);
-  const year = Number.isFinite(y) ? y : HTML_YEAR;
-  return `${String(year).padStart(4,"0")}${String(m||1).padStart(2,"0")}${String(d||1).padStart(2,"0")}`;
-}
-
-function getMapSlug(mapName){
-  return MAP_SLUGS[mapName] || mapName.toLowerCase().replace(/\s+/g, "_");
+function normalizeReplayFilename(rawName){
+  if(!rawName) return null;
+  const name = String(rawName).trim();
+  if(!name) return null;
+  return name.toLowerCase().endsWith(".html") ? name : `${name}.html`;
 }
 
 function openBattleHtml(battle){
-  const explicitFile = battle.html_file ? `${HTML_REPLAYS_DIR}/${battle.html_file}` : null;
+  const fileFromFilename = normalizeReplayFilename(battle.filename);
+  const fileFromHtmlFile = normalizeReplayFilename(battle.html_file);
+  const replayFile = fileFromFilename || fileFromHtmlFile;
 
-  const dateToken = buildDateToken(battle.date);
-  const mapSlug = getMapSlug(battle.map);
-
-  if(explicitFile){
-    window.open(explicitFile, "_blank");
+  if(!replayFile){
+    alert("У этого боя нет поля filename/html_file в JSON.");
     return;
   }
 
-  // Для статического хостинга без индекса папки — надёжный способ через battle.html_file
-  window.open(`${HTML_REPLAYS_DIR}/${dateToken}_${mapSlug}.html`, "_blank");
+  window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
 }
-
 
 function getCampaignByDate(dateStr){
   const parsed = parseDate(dateStr);
