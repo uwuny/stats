@@ -1,0 +1,1704 @@
+{
+    "battles": [
+        {
+            "date": "13.05",
+            "map": "Рудники",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 1097,
+                    "damage_received": 1430,
+                    "shots": 3,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 891,
+                    "damage_received": 3150,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Драгун",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2640,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 2722,
+                    "damage_received": 3000,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1735,
+                    "damage_received": 3050,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1672,
+                    "damage_received": 3000,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 557
+                },
+                "PeHeuM": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 889,
+                    "damage_received": 2590,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2201_uk-GB13_FV215b_10_hills"
+        },
+        {
+            "date": "13.05",
+            "map": "Эрленберг",
+            "win": false,
+            "players": {
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 1308,
+                    "damage_received": 3090,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 435,
+                    "damage_received": 1430,
+                    "shots": 2,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 454,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1034,
+                    "damage_received": 2940,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2660,
+                    "damage_received": 2900,
+                    "shots": 11,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 866,
+                    "damage_received": 2620,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "ТЭТ-100",
+                    "alive": false,
+                    "damage": 2112,
+                    "damage_received": 3630,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 942,
+                    "damage_received": 2690,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2206_ussr-R213_TET_100_13_erlenberg"
+        },
+        {
+            "date": "13.05",
+            "map": "Лайв Окс",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 1980,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 761,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 1330,
+                    "damage_received": 2950,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 226,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 2317,
+                    "damage_received": 2650,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 454
+                },
+                "sanek_master": {
+                    "tank": "113 BO",
+                    "alive": false,
+                    "damage": 454,
+                    "damage_received": 2530,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 455
+                },
+                "Mudazor": {
+                    "tank": "Type 71",
+                    "alive": false,
+                    "damage": 2045,
+                    "damage_received": 2910,
+                    "shots": 8,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 2255,
+                    "damage_received": 2650,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "Драгун",
+                    "alive": false,
+                    "damage": 2270,
+                    "damage_received": 2940,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2213_uk-GB120_Concept_No_5_44_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Минск",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2671,
+                    "damage_received": 2900,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 4819,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 1748,
+                    "damage_received": 2630,
+                    "shots": 12,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 437,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2590,
+                    "damage_received": 2870,
+                    "shots": 10,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "WZ-111 QL",
+                    "alive": false,
+                    "damage": 2475,
+                    "damage_received": 2690,
+                    "shots": 11,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 142,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 2938,
+                    "damage_received": 2790,
+                    "shots": 13,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 142,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Wilk",
+                    "alive": false,
+                    "damage": 1360,
+                    "damage_received": 2450,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 1982,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 547,
+                    "damage_received": 2870,
+                    "shots": 7,
+                    "hits": 5,
+                    "piercings": 1,
+                    "assist_radio": 142,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2220_italy-It33_Orso_90_minsk"
+        },
+        {
+            "date": "13.05",
+            "map": "Хайвей",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 1322,
+                    "damage_received": 2790,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 15,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 3916,
+                    "damage_received": 3075,
+                    "shots": 13,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 15,
+                    "assist_track": 385
+                },
+                "Ray__White": {
+                    "tank": "S. Conqueror",
+                    "alive": false,
+                    "damage": 1217,
+                    "damage_received": 3000,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 15,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 1816,
+                    "damage_received": 2420,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 3808,
+                    "damage_received": 2650,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 8,
+                    "assist_radio": 15,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "CS-63",
+                    "alive": true,
+                    "damage": 5171,
+                    "damage_received": 1549,
+                    "shots": 15,
+                    "hits": 15,
+                    "piercings": 14,
+                    "assist_radio": 530,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3380,
+                    "damage_received": 1376,
+                    "shots": 14,
+                    "hits": 11,
+                    "piercings": 9,
+                    "assist_radio": 15,
+                    "assist_track": 404
+                }
+            },
+            "filename": "20260513_2227_china-Ch22_113_45_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Хайвей",
+            "win": true,
+            "players": {
+                "asman666": {
+                    "tank": "CS-63",
+                    "alive": true,
+                    "damage": 2745,
+                    "damage_received": 1411,
+                    "shots": 14,
+                    "hits": 12,
+                    "piercings": 9,
+                    "assist_radio": 1000,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 4392,
+                    "damage_received": 2900,
+                    "shots": 18,
+                    "hits": 12,
+                    "piercings": 10,
+                    "assist_radio": 521,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 3922,
+                    "damage_received": 3120,
+                    "shots": 15,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 225,
+                    "assist_track": 431
+                },
+                "Ray__White": {
+                    "tank": "S. Conqueror",
+                    "alive": false,
+                    "damage": 914,
+                    "damage_received": 3000,
+                    "shots": 7,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 225,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 3334,
+                    "damage_received": 2790,
+                    "shots": 15,
+                    "hits": 9,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Об. 277",
+                    "alive": true,
+                    "damage": 3558,
+                    "damage_received": 848,
+                    "shots": 18,
+                    "hits": 11,
+                    "piercings": 9,
+                    "assist_radio": 440,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 945,
+                    "damage_received": 2650,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2233_china-Ch22_113_45_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Лайв Окс",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 2201,
+                    "damage_received": 2560,
+                    "shots": 12,
+                    "hits": 9,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "CS-63",
+                    "alive": false,
+                    "damage": 2582,
+                    "damage_received": 2200,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 363,
+                    "damage_received": 2370,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 137,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 3447,
+                    "damage_received": 2670,
+                    "shots": 9,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 953,
+                    "damage_received": 2420,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 586,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 3512,
+                    "damage_received": 2670,
+                    "shots": 13,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 966,
+                    "damage_received": 2720,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 586,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2241_usa-A67_T57_58_44_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Ласвилль",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Żubr",
+                    "alive": false,
+                    "damage": 2851,
+                    "damage_received": 2140,
+                    "shots": 10,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 2291,
+                    "damage_received": 2810,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 519,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2599,
+                    "damage_received": 2840,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 953,
+                    "assist_track": 414
+                },
+                "tao666999": {
+                    "tank": "Type 5 H",
+                    "alive": false,
+                    "damage": 2432,
+                    "damage_received": 3690,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 1702,
+                    "damage_received": 1980,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 748,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 937,
+                    "damage_received": 2790,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 2075,
+                    "damage_received": 2940,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2246_poland-Pl29_NC_Wz_70T_07_lakeville"
+        },
+        {
+            "date": "13.05",
+            "map": "Старая гавань",
+            "win": false,
+            "players": {
+                "Mudazor": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 1659,
+                    "damage_received": 2840,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "tao666999": {
+                    "tank": "Maus",
+                    "alive": false,
+                    "damage": 1476,
+                    "damage_received": 3820,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 1455,
+                    "damage_received": 2370,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 250,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 444,
+                    "damage_received": 3150,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 281,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "M-V-Y",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2720,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 0,
+                    "assist_radio": 250,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Об. 907",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2450,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "VK 72.01 K",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2750,
+                    "shots": 3,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 281,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2254_ussr-R95_Object_907_127_japort"
+        },
+        {
+            "date": "13.05",
+            "map": "Химмельсдорф",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Leopard 1",
+                    "alive": false,
+                    "damage": 1248,
+                    "damage_received": 2040,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 227,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Maus",
+                    "alive": false,
+                    "damage": 1950,
+                    "damage_received": 3670,
+                    "shots": 13,
+                    "hits": 12,
+                    "piercings": 4,
+                    "assist_radio": 212,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 953,
+                    "damage_received": 2620,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 212,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Warrior",
+                    "alive": false,
+                    "damage": 2001,
+                    "damage_received": 2570,
+                    "shots": 10,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 2767,
+                    "damage_received": 2870,
+                    "shots": 12,
+                    "hits": 8,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Об. 140",
+                    "alive": false,
+                    "damage": 977,
+                    "damage_received": 2510,
+                    "shots": 5,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 3091,
+                    "assist_track": 0
+                },
+                "PeHeuM": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 426,
+                    "damage_received": 2590,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2259_germany-G89_Leopard1_04_himmelsdorf"
+        },
+        {
+            "date": "13.05",
+            "map": "Хайвей",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "ТЭТ-100",
+                    "alive": false,
+                    "damage": 957,
+                    "damage_received": 3630,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 950,
+                    "damage_received": 2790,
+                    "shots": 12,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 107,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 1617,
+                    "damage_received": 2570,
+                    "shots": 14,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Об. 907",
+                    "alive": false,
+                    "damage": 3264,
+                    "damage_received": 2470,
+                    "shots": 15,
+                    "hits": 9,
+                    "piercings": 9,
+                    "assist_radio": 107,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 1266,
+                    "damage_received": 2790,
+                    "shots": 12,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 107,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "WZ-111 QL",
+                    "alive": false,
+                    "damage": 975,
+                    "damage_received": 2690,
+                    "shots": 6,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 107,
+                    "assist_track": 441
+                },
+                "PeHeuM": {
+                    "tank": "ТЭТ-100",
+                    "alive": false,
+                    "damage": 1036,
+                    "damage_received": 3550,
+                    "shots": 5,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2307_ussr-R213_TET_100_45_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Минск",
+            "win": false,
+            "players": {
+                "Mudazor": {
+                    "tank": "T110E5",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 3,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Квант",
+                    "alive": false,
+                    "damage": 1754,
+                    "damage_received": 2330,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 1,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 1980,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 0,
+                    "assist_radio": 869,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "WZ-111 5A",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 1,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2314_italy-It33_Orso_90_minsk"
+        },
+        {
+            "date": "13.05",
+            "map": "Прохоровка",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Leopard 1",
+                    "alive": false,
+                    "damage": 1842,
+                    "damage_received": 2040,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 776,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 2114,
+                    "damage_received": 3000,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 562
+                },
+                "Ray__White": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 1398,
+                    "damage_received": 2550,
+                    "shots": 9,
+                    "hits": 6,
+                    "piercings": 3,
+                    "assist_radio": 252,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2140,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Об. 718Б",
+                    "alive": false,
+                    "damage": 777,
+                    "damage_received": 2930,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 252,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 2509,
+                    "damage_received": 2730,
+                    "shots": 10,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 1609,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 562,
+                    "damage_received": 3180,
+                    "shots": 5,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2320_germany-G89_Leopard1_05_prohorovka"
+        },
+        {
+            "date": "13.05",
+            "map": "Калининград",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Żubr",
+                    "alive": false,
+                    "damage": 3029,
+                    "damage_received": 2140,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 388,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 927,
+                    "damage_received": 2900,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": false,
+                    "damage": 400,
+                    "damage_received": 2910,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "S. Conqueror",
+                    "alive": false,
+                    "damage": 1980,
+                    "damage_received": 3000,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "CS-63",
+                    "alive": false,
+                    "damage": 385,
+                    "damage_received": 2380,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Type 5 H",
+                    "alive": false,
+                    "damage": 681,
+                    "damage_received": 3690,
+                    "shots": 6,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Драгун",
+                    "alive": false,
+                    "damage": 513,
+                    "damage_received": 3000,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2328_poland-Pl29_NC_Wz_70T_503_kaliningrad"
+        },
+        {
+            "date": "13.05",
+            "map": "Утёс",
+            "win": false,
+            "players": {
+                "gorbacho": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 2688,
+                    "damage_received": 2790,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 390,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 390,
+                    "damage_received": 2560,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 1192,
+                    "damage_received": 2780,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 1740,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "T110E5",
+                    "alive": false,
+                    "damage": 1133,
+                    "damage_received": 2620,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 976,
+                    "damage_received": 2720,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 1817,
+                    "damage_received": 2650,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 756
+                }
+            },
+            "filename": "20260513_2333_usa-A67_T57_58_18_cliff"
+        },
+        {
+            "date": "13.05",
+            "map": "Минск",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Об. 907",
+                    "alive": false,
+                    "damage": 2581,
+                    "damage_received": 2450,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 1015,
+                    "damage_received": 2750,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Manticore",
+                    "alive": false,
+                    "damage": 799,
+                    "damage_received": 1620,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1608,
+                    "damage_received": 2970,
+                    "shots": 7,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "113 BO",
+                    "alive": false,
+                    "damage": 967,
+                    "damage_received": 2530,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "H-3",
+                    "alive": false,
+                    "damage": 2537,
+                    "damage_received": 2660,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 887,
+                    "damage_received": 2900,
+                    "shots": 4,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2339_ussr-R95_Object_907_90_minsk"
+        },
+        {
+            "date": "13.05",
+            "map": "Линия Зигфрида",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Об. 261",
+                    "alive": true,
+                    "damage": 1146,
+                    "damage_received": 0,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 2052,
+                    "damage_received": 1322,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 150,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 780",
+                    "alive": false,
+                    "damage": 2308,
+                    "damage_received": 2750,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 225,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "STB-1",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2380,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Ampere",
+                    "alive": false,
+                    "damage": 837,
+                    "damage_received": 2530,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 192,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Gendarme",
+                    "alive": false,
+                    "damage": 1191,
+                    "damage_received": 2140,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 150,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "WZ-111 QL",
+                    "alive": false,
+                    "damage": 518,
+                    "damage_received": 2720,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 1,
+                    "assist_radio": 375,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2344_ussr-R52_Object_261_14_siegfried_line"
+        },
+        {
+            "date": "13.05",
+            "map": "Лайв Окс",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "AMX 50 B",
+                    "alive": false,
+                    "damage": 810,
+                    "damage_received": 2660,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "StuG Maus",
+                    "alive": false,
+                    "damage": 2262,
+                    "damage_received": 2810,
+                    "shots": 7,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 790,
+                    "damage_received": 2730,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 780",
+                    "alive": false,
+                    "damage": 1067,
+                    "damage_received": 2670,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 1713,
+                    "assist_track": 392
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 2646,
+                    "damage_received": 3270,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 184,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Type 71",
+                    "alive": false,
+                    "damage": 2050,
+                    "damage_received": 2940,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 5,
+                    "assist_radio": 549,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 891,
+                    "damage_received": 3150,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 593,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2350_france-F10_AMX_50B_44_north_america"
+        },
+        {
+            "date": "13.05",
+            "map": "Рудники",
+            "win": false,
+            "players": {
+                "gorbacho": {
+                    "tank": "B-C 25 t",
+                    "alive": false,
+                    "damage": 2581,
+                    "damage_received": 2260,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 2468,
+                    "damage_received": 2370,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "B-C 25 t",
+                    "alive": false,
+                    "damage": 1491,
+                    "damage_received": 2260,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 382
+                },
+                "Ray__White": {
+                    "tank": "Condor",
+                    "alive": false,
+                    "damage": 1611,
+                    "damage_received": 2910,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Firebird",
+                    "alive": false,
+                    "damage": 1394,
+                    "damage_received": 2090,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "MBT-59",
+                    "alive": false,
+                    "damage": 717,
+                    "damage_received": 1980,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Strv 103B",
+                    "alive": false,
+                    "damage": 4111,
+                    "damage_received": 1980,
+                    "shots": 12,
+                    "hits": 12,
+                    "piercings": 11,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2355_usa-A175_OTAC_MT_58_02_10_hills"
+        },
+        {
+            "date": "13.05",
+            "map": "Лайв Окс",
+            "win": false,
+            "players": {
+                "McQueen": {
+                    "tank": "Roland",
+                    "alive": false,
+                    "damage": 409,
+                    "damage_received": 1980,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "sanek_master": {
+                    "tank": "Gendarme",
+                    "alive": false,
+                    "damage": 748,
+                    "damage_received": 1980,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 430У",
+                    "alive": false,
+                    "damage": 2630,
+                    "damage_received": 2520,
+                    "shots": 8,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "gorbacho": {
+                    "tank": "Об. 140",
+                    "alive": false,
+                    "damage": 967,
+                    "damage_received": 2260,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "TVP T 50/51",
+                    "alive": false,
+                    "damage": 658,
+                    "damage_received": 1980,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "B-C 25 t",
+                    "alive": false,
+                    "damage": 1533,
+                    "damage_received": 2090,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 732
+                },
+                "asman666": {
+                    "tank": "TVP T 50/51",
+                    "alive": false,
+                    "damage": 2587,
+                    "damage_received": 1980,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260513_2359_france-F135_Schneider_120_AC_Gendarme_02_44_north_america"
+        }
+    ]
+}
