@@ -1,0 +1,1364 @@
+{
+    "battles": [
+        {
+            "date": "14.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3117,
+                    "damage_received": 1772,
+                    "shots": 12,
+                    "hits": 10,
+                    "piercings": 8,
+                    "assist_radio": 546,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2608,
+                    "damage_received": 532,
+                    "shots": 13,
+                    "hits": 10,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2472,
+                    "damage_received": 1414,
+                    "shots": 13,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 133,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 1460,
+                    "damage_received": 747,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 44
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 3868,
+                    "damage_received": 1533,
+                    "shots": 20,
+                    "hits": 14,
+                    "piercings": 10,
+                    "assist_radio": 282,
+                    "assist_track": 243
+                },
+                "asman666": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 1170,
+                    "damage_received": 2448,
+                    "shots": 9,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 1946,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 2915,
+                    "damage_received": 1430,
+                    "shots": 12,
+                    "hits": 9,
+                    "piercings": 6,
+                    "assist_radio": 2480,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1903_italy-It33_Orso_18_cliff"
+        },
+        {
+            "date": "14.05",
+            "map": "Песчаная река",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 2603,
+                    "damage_received": 421,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 7,
+                    "assist_radio": 1102,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3793,
+                    "damage_received": 1334,
+                    "shots": 16,
+                    "hits": 13,
+                    "piercings": 10,
+                    "assist_radio": 964,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2198,
+                    "damage_received": 422,
+                    "shots": 13,
+                    "hits": 11,
+                    "piercings": 6,
+                    "assist_radio": 120,
+                    "assist_track": 811
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3631,
+                    "damage_received": 2420,
+                    "shots": 16,
+                    "hits": 13,
+                    "piercings": 10,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 2876,
+                    "damage_received": 1742,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 740,
+                    "assist_track": 428
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 1745,
+                    "damage_received": 3090,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 1814,
+                    "damage_received": 2900,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1914_italy-It33_Orso_28_desert"
+        },
+        {
+            "date": "14.05",
+            "map": "Прохоровка",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 383,
+                    "damage_received": 980,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 2420,
+                    "assist_track": 787
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2191,
+                    "damage_received": 2900,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2621,
+                    "damage_received": 0,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 113,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2923,
+                    "damage_received": 1270,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 8,
+                    "assist_radio": 86,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 3357,
+                    "damage_received": 0,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 5,
+                    "assist_radio": 86,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 3319,
+                    "damage_received": 328,
+                    "shots": 8,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 86,
+                    "assist_track": 725
+                },
+                "asman666": {
+                    "tank": "BZ-74-1",
+                    "alive": true,
+                    "damage": 3436,
+                    "damage_received": 2413,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 199,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1920_italy-It33_Orso_05_prohorovka"
+        },
+        {
+            "date": "14.05",
+            "map": "Эрленберг",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1147,
+                    "damage_received": 0,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 425,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3967,
+                    "damage_received": 557,
+                    "shots": 11,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 3793,
+                    "damage_received": 1302,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 229
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 1295,
+                    "damage_received": 2840,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 2372,
+                    "damage_received": 3167,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 2271,
+                    "damage_received": 3090,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 936
+                },
+                "asman666": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2485,
+                    "damage_received": 0,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 415
+                }
+            },
+            "filename": "20260514_1924_italy-It33_Orso_13_erlenberg"
+        },
+        {
+            "date": "14.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 3011,
+                    "damage_received": 3270,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1965,
+                    "damage_received": 0,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3472,
+                    "damage_received": 1660,
+                    "shots": 12,
+                    "hits": 11,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 449
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 4270,
+                    "damage_received": 0,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2129,
+                    "damage_received": 0,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 686
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2813,
+                    "damage_received": 410,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 840,
+                    "damage_received": 2900,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1929_italy-It33_Orso_18_cliff"
+        },
+        {
+            "date": "14.05",
+            "map": "Калининград",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3387,
+                    "damage_received": 1859,
+                    "shots": 11,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 199,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 2443,
+                    "damage_received": 1413,
+                    "shots": 11,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 1256,
+                    "damage_received": 1980,
+                    "shots": 8,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 199,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2558,
+                    "damage_received": 1060,
+                    "shots": 11,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 438,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2225,
+                    "damage_received": 0,
+                    "shots": 8,
+                    "hits": 5,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 487
+                },
+                "asman666": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 3229,
+                    "damage_received": 2908,
+                    "shots": 9,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 2362,
+                    "damage_received": 1430,
+                    "shots": 11,
+                    "hits": 10,
+                    "piercings": 6,
+                    "assist_radio": 630,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1934_italy-It33_Orso_503_kaliningrad"
+        },
+        {
+            "date": "14.05",
+            "map": "Старая гавань",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 395,
+                    "damage_received": 1430,
+                    "shots": 4,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 3956,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 3579,
+                    "damage_received": 2900,
+                    "shots": 22,
+                    "hits": 16,
+                    "piercings": 9,
+                    "assist_radio": 82,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 4207,
+                    "damage_received": 1965,
+                    "shots": 16,
+                    "hits": 12,
+                    "piercings": 10,
+                    "assist_radio": 1173,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 1747,
+                    "damage_received": 2840,
+                    "shots": 13,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 82,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 1779,
+                    "damage_received": 1693,
+                    "shots": 14,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 82,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 4320,
+                    "damage_received": 890,
+                    "shots": 18,
+                    "hits": 14,
+                    "piercings": 11,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 1533,
+                    "damage_received": 3240,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 82,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1940_italy-It33_Orso_127_japort"
+        },
+        {
+            "date": "14.05",
+            "map": "Жемчужная река",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 2328,
+                    "damage_received": 1036,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 3697,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2989,
+                    "damage_received": 2751,
+                    "shots": 15,
+                    "hits": 11,
+                    "piercings": 7,
+                    "assist_radio": 250,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 4007,
+                    "damage_received": 1980,
+                    "shots": 17,
+                    "hits": 12,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 915,
+                    "damage_received": 2840,
+                    "shots": 9,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 250,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 427,
+                    "damage_received": 2820,
+                    "shots": 3,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 1290,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 2632,
+                    "damage_received": 3090,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 1747,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 3730,
+                    "damage_received": 3240,
+                    "shots": 8,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 668,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_1950_italy-It33_Orso_60_asia_miao"
+        },
+        {
+            "date": "14.05",
+            "map": "Жемчужная река",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 1150,
+                    "damage_received": 1430,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 590,
+                    "damage_received": 2820,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 1824,
+                    "damage_received": 3090,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 852,
+                    "damage_received": 1980,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2140,
+                    "damage_received": 2840,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 81
+                },
+                "asman666": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 1480,
+                    "damage_received": 3240,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2730,
+                    "damage_received": 2900,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2003_italy-It33_Orso_60_asia_miao"
+        },
+        {
+            "date": "14.05",
+            "map": "Химмельсдорф",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 2086,
+                    "damage_received": 1430,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 431,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 2598,
+                    "damage_received": 3150,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 439,
+                    "damage_received": 2870,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1504,
+                    "damage_received": 2910,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 667
+                },
+                "_CKOBOPODA_": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 440,
+                    "damage_received": 2140,
+                    "shots": 2,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 929,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 3308,
+                    "damage_received": 2650,
+                    "shots": 11,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "Feuerbär",
+                    "alive": false,
+                    "damage": 1285,
+                    "damage_received": 3430,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2013_uk-GB13_FV215b_04_himmelsdorf"
+        },
+        {
+            "date": "14.05",
+            "map": "Химмельсдорф",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 2612,
+                    "damage_received": 0,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 3232,
+                    "damage_received": 1422,
+                    "shots": 13,
+                    "hits": 12,
+                    "piercings": 8,
+                    "assist_radio": 1114,
+                    "assist_track": 280
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2600,
+                    "damage_received": 872,
+                    "shots": 12,
+                    "hits": 12,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 301
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 2553,
+                    "damage_received": 866,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 2322,
+                    "damage_received": 2870,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 222,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "T95/FV4201",
+                    "alive": true,
+                    "damage": 3899,
+                    "damage_received": 786,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 1512,
+                    "damage_received": 3180,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2023_china-Ch22_113_04_himmelsdorf"
+        },
+        {
+            "date": "14.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 4251,
+                    "damage_received": 455,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 10,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2604,
+                    "damage_received": 0,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 236,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 3024,
+                    "damage_received": 1546,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 2086,
+                    "damage_received": 379,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 482,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "T95/FV4201",
+                    "alive": false,
+                    "damage": 1766,
+                    "damage_received": 3000,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 236,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "WZ-111 5A",
+                    "alive": true,
+                    "damage": 3291,
+                    "damage_received": 1272,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 688,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1278,
+                    "damage_received": 180,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 490
+                }
+            },
+            "filename": "20260514_2029_china-Ch22_113_18_cliff"
+        },
+        {
+            "date": "14.05",
+            "map": "Старая гавань",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 2731,
+                    "damage_received": 516,
+                    "shots": 10,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 481,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 3484,
+                    "damage_received": 2790,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 276,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 1339,
+                    "damage_received": 1106,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": true,
+                    "damage": 3693,
+                    "damage_received": 582,
+                    "shots": 12,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 153,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 2402,
+                    "damage_received": 1255,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 276,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "WZ-111 5A",
+                    "alive": true,
+                    "damage": 2929,
+                    "damage_received": 912,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 107,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 2602,
+                    "damage_received": 760,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 276,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2032_china-Ch22_113_127_japort"
+        },
+        {
+            "date": "14.05",
+            "map": "Рыбацкая бухта",
+            "win": true,
+            "players": {
+                "Mudazor": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": true,
+                    "damage": 1327,
+                    "damage_received": 0,
+                    "shots": 10,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 4353,
+                    "damage_received": 0,
+                    "shots": 14,
+                    "hits": 12,
+                    "piercings": 11,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 1428,
+                    "damage_received": 786,
+                    "shots": 8,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "60TP",
+                    "alive": true,
+                    "damage": 4143,
+                    "damage_received": 2071,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 777
+                },
+                "asman666": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 1877,
+                    "damage_received": 2770,
+                    "shots": 7,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 5231,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 4032,
+                    "damage_received": 861,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 1495,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 450,
+                    "damage_received": 2790,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 1,
+                    "assist_radio": 463,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2038_china-Ch22_113_36_fishing_bay"
+        },
+        {
+            "date": "14.05",
+            "map": "Хайвей",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 570,
+                    "damage_received": 1430,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 2630,
+                    "damage_received": 2790,
+                    "shots": 16,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 426,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 424,
+                    "damage_received": 1980,
+                    "shots": 4,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 1554,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": false,
+                    "damage": 1262,
+                    "damage_received": 2940,
+                    "shots": 16,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 1046,
+                    "damage_received": 3150,
+                    "shots": 18,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 252,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 2946,
+                    "damage_received": 3180,
+                    "shots": 12,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 252,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "WZ-111 QL",
+                    "alive": false,
+                    "damage": 2045,
+                    "damage_received": 2720,
+                    "shots": 18,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2045_china-Ch22_113_45_north_america"
+        },
+        {
+            "date": "14.05",
+            "map": "Жемчужная река",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": false,
+                    "damage": 832,
+                    "damage_received": 1740,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 3,
+                    "assist_radio": 983,
+                    "assist_track": 483
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 4687,
+                    "damage_received": 2403,
+                    "shots": 21,
+                    "hits": 13,
+                    "piercings": 11,
+                    "assist_radio": 1855,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 3718,
+                    "damage_received": 1275,
+                    "shots": 14,
+                    "hits": 13,
+                    "piercings": 10,
+                    "assist_radio": 269,
+                    "assist_track": 660
+                },
+                "BUrning_CHAir": {
+                    "tank": "WZ-111 5A",
+                    "alive": true,
+                    "damage": 1439,
+                    "damage_received": 503,
+                    "shots": 8,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 274,
+                    "assist_track": 409
+                },
+                "Ray__White": {
+                    "tank": "BZ-75",
+                    "alive": true,
+                    "damage": 660,
+                    "damage_received": 98,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 130,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 2797,
+                    "damage_received": 409,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 779,
+                    "assist_track": 0
+                },
+                "asman666": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 2997,
+                    "damage_received": 2870,
+                    "shots": 11,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 482,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260514_2053_china-Ch22_113_60_asia_miao"
+        }
+    ]
+}
