@@ -680,7 +680,7 @@ if(type!=="hits" && avgPosition==="left") html+="<th></th>";
 battles.forEach((b)=>{
   let clanTag = (b.enemy_clan_tag || "").toString().trim().toUpperCase();
   let clanCell = clanTag 
-    ? `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag)}" target="_blank">[${escapeHtml(clanTag)}]</a>` 
+    ? `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag)}" target="_blank">${escapeHtml(clanTag)}</a>` 
     : "";
   html += `<th class="clan-header">${clanCell}</th>`;
 });
