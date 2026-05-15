@@ -1,0 +1,1619 @@
+{
+    "battles": [
+        {
+            "date": "15.05",
+            "map": "Рыбацкая бухта",
+            "win": false,
+            "players": {
+                "Ray__White": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 2116,
+                    "damage_received": 2790,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 5,
+                    "assist_radio": 91,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 2680,
+                    "damage_received": 3270,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 91,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 811,
+                    "damage_received": 1430,
+                    "shots": 6,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 1620,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 869,
+                    "damage_received": 2900,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 3166,
+                    "damage_received": 3090,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 91,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 1534,
+                    "damage_received": 2720,
+                    "shots": 10,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 795
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2940,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 0,
+                    "assist_radio": 91,
+                    "assist_track": 431
+                }
+            },
+            "filename": "20260515_1906_italy-It33_Orso_36_fishing_bay"
+        },
+        {
+            "date": "15.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 4645,
+                    "damage_received": 2990,
+                    "shots": 15,
+                    "hits": 13,
+                    "piercings": 11,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Wilk",
+                    "alive": true,
+                    "damage": 2571,
+                    "damage_received": 1885,
+                    "shots": 12,
+                    "hits": 10,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 911,
+                    "damage_received": 1110,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "ИС-7",
+                    "alive": true,
+                    "damage": 2738,
+                    "damage_received": 1624,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 1822,
+                    "damage_received": 2820,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "ИС-7",
+                    "alive": true,
+                    "damage": 3257,
+                    "damage_received": 0,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3426,
+                    "damage_received": 411,
+                    "shots": 11,
+                    "hits": 11,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1911_uk-GB13_FV215b_18_cliff"
+        },
+        {
+            "date": "15.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "Umbrella_corp_AG": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 2158,
+                    "damage_received": 2960,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 541
+                },
+                "BUrning_CHAir": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 2794,
+                    "damage_received": 2820,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 5,
+                    "assist_radio": 190,
+                    "assist_track": 1910
+                },
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 932,
+                    "damage_received": 2650,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 2,
+                    "assist_radio": 190,
+                    "assist_track": 0
+                },
+                "_CKOBOPODA_": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 3318,
+                    "damage_received": 2970,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 705
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1926,
+                    "damage_received": 409,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 3815,
+                    "damage_received": 3150,
+                    "shots": 14,
+                    "hits": 13,
+                    "piercings": 10,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Wilk",
+                    "alive": true,
+                    "damage": 2727,
+                    "damage_received": 926,
+                    "shots": 16,
+                    "hits": 13,
+                    "piercings": 10,
+                    "assist_radio": 0,
+                    "assist_track": 347
+                }
+            },
+            "filename": "20260515_1916_uk-GB13_FV215b_18_cliff"
+        },
+        {
+            "date": "15.05",
+            "map": "Затерянный город",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 1430,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 4962,
+                    "damage_received": 3104,
+                    "shots": 25,
+                    "hits": 15,
+                    "piercings": 11,
+                    "assist_radio": 438,
+                    "assist_track": 140
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3644,
+                    "damage_received": 501,
+                    "shots": 15,
+                    "hits": 12,
+                    "piercings": 9,
+                    "assist_radio": 217,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": false,
+                    "damage": 2498,
+                    "damage_received": 1980,
+                    "shots": 13,
+                    "hits": 9,
+                    "piercings": 6,
+                    "assist_radio": 217,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 2515,
+                    "damage_received": 3210,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 4,
+                    "assist_radio": 425,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2800,
+                    "damage_received": 1064,
+                    "shots": 10,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 2011,
+                    "damage_received": 2550,
+                    "shots": 12,
+                    "hits": 10,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1922_uk-GB13_FV215b_95_lost_city_ctf"
+        },
+        {
+            "date": "15.05",
+            "map": "Жемчужная река",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 775,
+                    "damage_received": 0,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 78,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 6501,
+                    "damage_received": 0,
+                    "shots": 18,
+                    "hits": 17,
+                    "piercings": 15,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2071,
+                    "damage_received": 1189,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 78,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "60TP",
+                    "alive": false,
+                    "damage": 1465,
+                    "damage_received": 3210,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 1796,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2991,
+                    "damage_received": 578,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 210,
+                    "assist_track": 112
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3691,
+                    "damage_received": 2075,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 8,
+                    "assist_radio": 659,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 260",
+                    "alive": true,
+                    "damage": 1806,
+                    "damage_received": 0,
+                    "shots": 8,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 210,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1930_uk-GB13_FV215b_60_asia_miao"
+        },
+        {
+            "date": "15.05",
+            "map": "Затерянный город",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1331,
+                    "damage_received": 0,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 4,
+                    "assist_radio": 409,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 2283,
+                    "damage_received": 0,
+                    "shots": 11,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 799,
+                    "damage_received": 393,
+                    "shots": 7,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2704,
+                    "damage_received": 2356,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 417,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2235,
+                    "damage_received": 2330,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 387,
+                    "assist_track": 240
+                },
+                "Ray__White": {
+                    "tank": "Об. 260",
+                    "alive": true,
+                    "damage": 2228,
+                    "damage_received": 1584,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3860,
+                    "damage_received": 2065,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 427,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1935_uk-GB13_FV215b_95_lost_city_ctf"
+        },
+        {
+            "date": "15.05",
+            "map": "Минск",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 1071,
+                    "damage_received": 1113,
+                    "shots": 6,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 2327,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 6174,
+                    "damage_received": 970,
+                    "shots": 20,
+                    "hits": 17,
+                    "piercings": 12,
+                    "assist_radio": 0,
+                    "assist_track": 458
+                },
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 3303,
+                    "damage_received": 1812,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 83,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 2826,
+                    "damage_received": 1159,
+                    "shots": 13,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 3104,
+                    "damage_received": 2520,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 7,
+                    "assist_radio": 585,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2550,
+                    "shots": 4,
+                    "hits": 2,
+                    "piercings": 0,
+                    "assist_radio": 83,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 1392,
+                    "damage_received": 2620,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 83,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1941_uk-GB13_FV215b_90_minsk"
+        },
+        {
+            "date": "15.05",
+            "map": "Минск",
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 2264,
+                    "damage_received": 1405,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 216,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/FV4201",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 430,
+                    "damage_received": 0,
+                    "shots": 5,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Об. 260",
+                    "alive": true,
+                    "damage": 432,
+                    "damage_received": 340,
+                    "shots": 3,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "BZ-74-1",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 0,
+                    "shots": 1,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 539,
+                    "damage_received": 0,
+                    "shots": 2,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 0,
+                    "damage_received": 832,
+                    "shots": 0,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 1209,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1947_uk-GB13_FV215b_90_minsk"
+        },
+        {
+            "date": "15.05",
+            "map": "Утёс",
+            "win": false,
+            "players": {
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": true,
+                    "damage": 525,
+                    "damage_received": 1183,
+                    "shots": 4,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": false,
+                    "damage": 524,
+                    "damage_received": 1430,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 1731,
+                    "damage_received": 1875,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 847,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/FV4201",
+                    "alive": true,
+                    "damage": 1319,
+                    "damage_received": 1255,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 1727,
+                    "damage_received": 0,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Об. 260",
+                    "alive": false,
+                    "damage": 417,
+                    "damage_received": 2570,
+                    "shots": 2,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "BZ-74-1",
+                    "alive": false,
+                    "damage": 541,
+                    "damage_received": 2870,
+                    "shots": 2,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1950_uk-GB13_FV215b_18_cliff"
+        },
+        {
+            "date": "15.05",
+            "map": "Ласвилль",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "EBR 105",
+                    "alive": true,
+                    "damage": 408,
+                    "damage_received": 0,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 1189,
+                    "damage_received": 3150,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 215,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/FV4201",
+                    "alive": false,
+                    "damage": 1302,
+                    "damage_received": 2640,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 353,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 1143,
+                    "damage_received": 3030,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 899,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Concept 5",
+                    "alive": true,
+                    "damage": 1336,
+                    "damage_received": 381,
+                    "shots": 9,
+                    "hits": 3,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "T95/FV4201",
+                    "alive": false,
+                    "damage": 400,
+                    "damage_received": 3000,
+                    "shots": 3,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 799,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1613,
+                    "damage_received": 2940,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_1955_uk-GB13_FV215b_07_lakeville"
+        },
+        {
+            "date": "15.05",
+            "map": "Линия Зигфрида",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 889,
+                    "damage_received": 0,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 1055,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 3940,
+                    "damage_received": 1276,
+                    "shots": 11,
+                    "hits": 10,
+                    "piercings": 8,
+                    "assist_radio": 409,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3420,
+                    "damage_received": 615,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 333,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Об. 277",
+                    "alive": false,
+                    "damage": 1440,
+                    "damage_received": 2690,
+                    "shots": 2,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 210,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": true,
+                    "damage": 409,
+                    "damage_received": 0,
+                    "shots": 3,
+                    "hits": 1,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2210,
+                    "damage_received": 1090,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 5,
+                    "assist_radio": 212,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": true,
+                    "damage": 1811,
+                    "damage_received": 0,
+                    "shots": 12,
+                    "hits": 10,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2002_china-Ch22_113_14_siegfried_line"
+        },
+        {
+            "date": "15.05",
+            "map": "Утёс",
+            "win": true,
+            "players": {
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 2255,
+                    "damage_received": 1257,
+                    "shots": 14,
+                    "hits": 8,
+                    "piercings": 5,
+                    "assist_radio": 416,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 2578,
+                    "damage_received": 1284,
+                    "shots": 15,
+                    "hits": 11,
+                    "piercings": 10,
+                    "assist_radio": 1155,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": true,
+                    "damage": 3192,
+                    "damage_received": 2018,
+                    "shots": 10,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": true,
+                    "damage": 3221,
+                    "damage_received": 435,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 228,
+                    "assist_track": 334
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": true,
+                    "damage": 2518,
+                    "damage_received": 1737,
+                    "shots": 16,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 275,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": true,
+                    "damage": 1496,
+                    "damage_received": 2618,
+                    "shots": 10,
+                    "hits": 7,
+                    "piercings": 4,
+                    "assist_radio": 542,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": true,
+                    "damage": 747,
+                    "damage_received": 2908,
+                    "shots": 5,
+                    "hits": 5,
+                    "piercings": 2,
+                    "assist_radio": 228,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2007_china-Ch22_113_18_cliff"
+        },
+        {
+            "date": "15.05",
+            "map": "Ласвилль",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 4870,
+                    "damage_received": 1676,
+                    "shots": 27,
+                    "hits": 23,
+                    "piercings": 18,
+                    "assist_radio": 1510,
+                    "assist_track": 431
+                },
+                "Mudazor": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 2403,
+                    "damage_received": 2650,
+                    "shots": 7,
+                    "hits": 7,
+                    "piercings": 5,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": true,
+                    "damage": 3957,
+                    "damage_received": 1304,
+                    "shots": 23,
+                    "hits": 17,
+                    "piercings": 13,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": false,
+                    "damage": 2857,
+                    "damage_received": 2970,
+                    "shots": 15,
+                    "hits": 12,
+                    "piercings": 7,
+                    "assist_radio": 532,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 1284,
+                    "damage_received": 2790,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": false,
+                    "damage": 2669,
+                    "damage_received": 2950,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2650,
+                    "shots": 4,
+                    "hits": 2,
+                    "piercings": 0,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2014_china-Ch22_113_07_lakeville"
+        },
+        {
+            "date": "15.05",
+            "map": "Минск",
+            "win": true,
+            "players": {
+                "Mudazor": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2630,
+                    "damage_received": 2223,
+                    "shots": 12,
+                    "hits": 11,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 201
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 2127,
+                    "damage_received": 2150,
+                    "shots": 10,
+                    "hits": 9,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "ИС-7",
+                    "alive": false,
+                    "damage": 1067,
+                    "damage_received": 2910,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 354,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Об. 278",
+                    "alive": false,
+                    "damage": 1871,
+                    "damage_received": 2620,
+                    "shots": 7,
+                    "hits": 6,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Kpz. 07 P(E)",
+                    "alive": false,
+                    "damage": 1946,
+                    "damage_received": 3000,
+                    "shots": 13,
+                    "hits": 11,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": false,
+                    "damage": 1034,
+                    "damage_received": 1740,
+                    "shots": 8,
+                    "hits": 6,
+                    "piercings": 3,
+                    "assist_radio": 2705,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": true,
+                    "damage": 5845,
+                    "damage_received": 2297,
+                    "shots": 16,
+                    "hits": 14,
+                    "piercings": 14,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2025_uk-GB13_FV215b_90_minsk"
+        },
+        {
+            "date": "15.05",
+            "map": "Степи",
+            "win": true,
+            "players": {
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": true,
+                    "damage": 4295,
+                    "damage_received": 480,
+                    "shots": 20,
+                    "hits": 17,
+                    "piercings": 13,
+                    "assist_radio": 224,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 1102,
+                    "damage_received": 3150,
+                    "shots": 4,
+                    "hits": 3,
+                    "piercings": 2,
+                    "assist_radio": 127,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": false,
+                    "damage": 1172,
+                    "damage_received": 2950,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 366,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "T95/FV4201",
+                    "alive": false,
+                    "damage": 405,
+                    "damage_received": 3000,
+                    "shots": 3,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 124,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 3519,
+                    "damage_received": 1177,
+                    "shots": 14,
+                    "hits": 14,
+                    "piercings": 12,
+                    "assist_radio": 1289,
+                    "assist_track": 254
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 3749,
+                    "damage_received": 3150,
+                    "shots": 13,
+                    "hits": 9,
+                    "piercings": 9,
+                    "assist_radio": 699,
+                    "assist_track": 335
+                },
+                "Mudazor": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 3578,
+                    "damage_received": 1925,
+                    "shots": 15,
+                    "hits": 13,
+                    "piercings": 8,
+                    "assist_radio": 699,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2033_uk-GB13_FV215b_35_steppes"
+        },
+        {
+            "date": "15.05",
+            "map": "Химмельсдорф",
+            "win": true,
+            "players": {
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 2632,
+                    "damage_received": 67,
+                    "shots": 10,
+                    "hits": 10,
+                    "piercings": 9,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 2683,
+                    "damage_received": 3150,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": true,
+                    "damage": 2524,
+                    "damage_received": 502,
+                    "shots": 12,
+                    "hits": 9,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 330
+                },
+                "BUrning_CHAir": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 2649,
+                    "damage_received": 2820,
+                    "shots": 6,
+                    "hits": 6,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": false,
+                    "damage": 2984,
+                    "damage_received": 2950,
+                    "shots": 9,
+                    "hits": 9,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 1247
+                },
+                "Ray__White": {
+                    "tank": "WZ-111 5A",
+                    "alive": true,
+                    "damage": 2239,
+                    "damage_received": 1357,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Orso",
+                    "alive": true,
+                    "damage": 2419,
+                    "damage_received": 1736,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2039_uk-GB13_FV215b_04_himmelsdorf"
+        },
+        {
+            "date": "15.05",
+            "map": "Песчаная река",
+            "win": false,
+            "players": {
+                "Ray__White": {
+                    "tank": "WZ-111 5A",
+                    "alive": false,
+                    "damage": 1478,
+                    "damage_received": 2670,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 348,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": true,
+                    "damage": 2460,
+                    "damage_received": 1507,
+                    "shots": 17,
+                    "hits": 11,
+                    "piercings": 8,
+                    "assist_radio": 775,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "FV215b",
+                    "alive": false,
+                    "damage": 3949,
+                    "damage_received": 3150,
+                    "shots": 13,
+                    "hits": 12,
+                    "piercings": 9,
+                    "assist_radio": 348,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T95/Chieftain",
+                    "alive": false,
+                    "damage": 376,
+                    "damage_received": 2950,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "Orso",
+                    "alive": false,
+                    "damage": 3356,
+                    "damage_received": 2840,
+                    "shots": 14,
+                    "hits": 10,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 2258,
+                    "damage_received": 2150,
+                    "shots": 13,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 354,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "116-F3",
+                    "alive": false,
+                    "damage": 2032,
+                    "damage_received": 3150,
+                    "shots": 5,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 605,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2043_uk-GB13_FV215b_28_desert"
+        },
+        {
+            "date": "15.05",
+            "map": "Прохоровка",
+            "win": false,
+            "players": {
+                "MACb": {
+                    "tank": "Т-100 ЛТ",
+                    "alive": false,
+                    "damage": 2978,
+                    "damage_received": 1740,
+                    "shots": 9,
+                    "hits": 8,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 1803,
+                    "damage_received": 2790,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Mudazor": {
+                    "tank": "T95/FV4201",
+                    "alive": false,
+                    "damage": 881,
+                    "damage_received": 3000,
+                    "shots": 3,
+                    "hits": 2,
+                    "piercings": 2,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "BZ-75",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 3060,
+                    "shots": 1,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 521,
+                    "assist_track": 0
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "T57 Heavy",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2560,
+                    "shots": 1,
+                    "hits": 0,
+                    "piercings": 0,
+                    "assist_radio": 151,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Type 71",
+                    "alive": false,
+                    "damage": 411,
+                    "damage_received": 2940,
+                    "shots": 5,
+                    "hits": 2,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Т-62А",
+                    "alive": false,
+                    "damage": 370,
+                    "damage_received": 2150,
+                    "shots": 7,
+                    "hits": 3,
+                    "piercings": 1,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                }
+            },
+            "filename": "20260515_2052_china-Ch22_113_05_prohorovka"
+        },
+        {
+            "date": "15.05",
+            "map": "Редшир",
+            "win": false,
+            "players": {
+                "Mudazor": {
+                    "tank": "113",
+                    "alive": false,
+                    "damage": 0,
+                    "damage_received": 2790,
+                    "shots": 1,
+                    "hits": 1,
+                    "piercings": 0,
+                    "assist_radio": 609,
+                    "assist_track": 0
+                },
+                "McQueen": {
+                    "tank": "Roland",
+                    "alive": false,
+                    "damage": 2408,
+                    "damage_received": 1980,
+                    "shots": 16,
+                    "hits": 13,
+                    "piercings": 6,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "l_Phoenix_I": {
+                    "tank": "Vulcan",
+                    "alive": true,
+                    "damage": 2689,
+                    "damage_received": 1293,
+                    "shots": 10,
+                    "hits": 8,
+                    "piercings": 6,
+                    "assist_radio": 259,
+                    "assist_track": 0
+                },
+                "MACb": {
+                    "tank": "Rhm. Pzw.",
+                    "alive": false,
+                    "damage": 912,
+                    "damage_received": 1850,
+                    "shots": 4,
+                    "hits": 4,
+                    "piercings": 3,
+                    "assist_radio": 954,
+                    "assist_track": 0
+                },
+                "BUrning_CHAir": {
+                    "tank": "M-V-Y",
+                    "alive": true,
+                    "damage": 3321,
+                    "damage_received": 863,
+                    "shots": 19,
+                    "hits": 14,
+                    "piercings": 9,
+                    "assist_radio": 686,
+                    "assist_track": 553
+                },
+                "Umbrella_corp_AG": {
+                    "tank": "Maus",
+                    "alive": false,
+                    "damage": 1295,
+                    "damage_received": 3820,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0
+                },
+                "Ray__White": {
+                    "tank": "Об. 780",
+                    "alive": true,
+                    "damage": 1397,
+                    "damage_received": 2582,
+                    "shots": 9,
+                    "hits": 7,
+                    "piercings": 3,
+                    "assist_radio": 1142,
+                    "assist_track": 734
+                }
+            },
+            "filename": "20260515_2059_france-F135_Schneider_120_AC_Gendarme_02_34_redshire"
+        }
+    ]
+}
