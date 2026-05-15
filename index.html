@@ -88,6 +88,31 @@ th, td{
   transition:0.15s;
 }
 
+/* === Клан-тэг в шапке таблицы === */
+.clan-header{
+  padding:4px 6px 2px 6px;
+  font-size:13px;
+  min-width:120px;
+}
+
+.clan-link{
+  color:#9be8ff;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.15s;
+}
+
+.clan-link:hover{
+  color:#00ff66;
+  text-shadow:0 0 6px rgba(0,255,102,0.6);
+}
+
+/* Чтобы две строки в заголовке не слипались */
+th{
+  vertical-align:top;
+  padding-top:8px;
+}
+  
 th:first-child, td:first-child{
   width:180px;
   min-width:180px;
@@ -644,22 +669,42 @@ function loadTable(type,event){
   else
     sorted.sort((a,b)=>averages[b]-averages[a]);
 
-  let html="<table>";
-  html+="<tr><th>Ник</th>";
+let html="<table>";
 
-  if(type==="hits" && avgPosition==="left") html+="<th>%</th>";
-  if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
+// === ПЕРВАЯ СТРОКА: пустые ячейки + тэги кланов ===
+html += "<tr>";
+html += "<th></th>"; // под "Ник"
+if(type==="hits" && avgPosition==="left") html+="<th></th>";
+if(type!=="hits" && avgPosition==="left") html+="<th></th>";
 
-  battles.forEach((b, battleIndex)=>{
-    html+=`<th class="${b.win?"win":"lose"}">
-      <a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a>
-    </th>`;
-  });
+battles.forEach((b)=>{
+  let clanTag = (b.enemy_clan_tag || "").toString().trim().toUpperCase();
+  let clanCell = clanTag 
+    ? `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag)}" target="_blank">[${escapeHtml(clanTag)}]</a>` 
+    : "";
+  html += `<th class="clan-header">${clanCell}</th>`;
+});
 
-  if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
-  if(type!=="hits" && avgPosition==="right") html+="<th>Среднее</th>";
+if(type==="hits" && avgPosition==="right") html+="<th></th>";
+if(type!=="hits" && avgPosition==="right") html+="<th></th>";
+html += "</tr>";
 
-  html+="</tr>";
+// === ВТОРАЯ СТРОКА: Ник + Среднее + названия карт ===
+html+="<tr><th>Ник</th>";
+
+if(type==="hits" && avgPosition==="left") html+="<th>%</th>";
+if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
+
+battles.forEach((b, battleIndex)=>{
+  html+=`<th class="${b.win?"win":"lose"}">
+    <a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a>
+  </th>`;
+});
+
+if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
+if(type!=="hits" && avgPosition==="right") html+="<th>Среднее</th>";
+
+html+="</tr>";
 
   sorted.forEach(name=>{
     html+="<tr>";
