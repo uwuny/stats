@@ -6,7 +6,7 @@
             "win": false,
             "players": {
                 "Gluvit": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": false,
                     "damage": 2282,
                     "damage_received": 2590,
@@ -18,7 +18,7 @@
                     "lifetime": 241
                 },
                 "PeHeuM": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": false,
                     "damage": 493,
                     "damage_received": 2590,
@@ -30,7 +30,7 @@
                     "lifetime": 229
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": false,
                     "damage": 731,
                     "damage_received": 1430,
@@ -42,7 +42,7 @@
                     "lifetime": 121
                 },
                 "l_Phoenix_I": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": false,
                     "damage": 1139,
                     "damage_received": 1980,
@@ -54,7 +54,7 @@
                     "lifetime": 120
                 },
                 "BUrning_CHAir": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 2942,
                     "damage_received": 2840,
@@ -66,7 +66,7 @@
                     "lifetime": 263
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": false,
                     "damage": 1848,
                     "damage_received": 2620,
@@ -78,7 +78,7 @@
                     "lifetime": 237
                 },
                 "vip_a_danya": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 2550,
                     "damage_received": 2840,
@@ -91,7 +91,9 @@
                 }
             },
             "filename": "20260516_1904_france-F108_Panhard_EBR_105_07_lakeville",
-            "enemy_clan_tag": "OWNE"
+            "enemy_clan_abbrev": "OWNE",
+            "enemy_clan_dbid": 617033,
+            "elo": 1228
         },
         {
             "date": "16.05",
@@ -99,7 +101,7 @@
             "win": true,
             "players": {
                 "McQueen": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 2184,
                     "damage_received": 1606,
@@ -111,7 +113,7 @@
                     "lifetime": 471
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 1507,
                     "damage_received": 425,
@@ -123,7 +125,7 @@
                     "lifetime": 471
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 567,
                     "damage_received": 2960,
@@ -135,7 +137,7 @@
                     "lifetime": 341
                 },
                 "BUrning_CHAir": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": true,
                     "damage": 3113,
                     "damage_received": 465,
@@ -147,7 +149,7 @@
                     "lifetime": 471
                 },
                 "Gluvit": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": false,
                     "damage": 2993,
                     "damage_received": 2200,
@@ -159,7 +161,7 @@
                     "lifetime": 447
                 },
                 "PeHeuM": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 3065,
                     "damage_received": 0,
@@ -171,7 +173,7 @@
                     "lifetime": 471
                 },
                 "vip_a_danya": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 1726,
                     "damage_received": 3000,
@@ -184,7 +186,9 @@
                 }
             },
             "filename": "20260516_1912_poland-Pl21_CS_63_60_asia_miao",
-            "enemy_clan_tag": "GNEVV"
+            "enemy_clan_abbrev": "GNEVV",
+            "enemy_clan_dbid": 419771,
+            "elo": 917
         },
         {
             "date": "16.05",
@@ -192,7 +196,7 @@
             "win": true,
             "players": {
                 "Gluvit": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": true,
                     "damage": 4340,
                     "damage_received": 532,
@@ -204,7 +208,7 @@
                     "lifetime": 274
                 },
                 "vip_a_danya": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 1085,
                     "damage_received": 3000,
@@ -216,7 +220,7 @@
                     "lifetime": 217
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 1666,
                     "damage_received": 2180,
@@ -228,7 +232,7 @@
                     "lifetime": 274
                 },
                 "BUrning_CHAir": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": true,
                     "damage": 2941,
                     "damage_received": 149,
@@ -240,7 +244,7 @@
                     "lifetime": 274
                 },
                 "McQueen": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 2521,
                     "damage_received": 1747,
@@ -252,7 +256,7 @@
                     "lifetime": 274
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 1436,
                     "damage_received": 2960,
@@ -264,7 +268,7 @@
                     "lifetime": 204
                 },
                 "PeHeuM": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 4321,
                     "damage_received": 463,
@@ -277,7 +281,9 @@
                 }
             },
             "filename": "20260516_1921_poland-Pl21_CS_63_35_steppes",
-            "enemy_clan_tag": "KNOKS"
+            "enemy_clan_abbrev": "KNOKS",
+            "enemy_clan_dbid": 658098,
+            "elo": 1045
         },
         {
             "date": "16.05",
@@ -285,7 +291,7 @@
             "win": true,
             "players": {
                 "PeHeuM": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 1021,
                     "damage_received": 1462,
@@ -297,7 +303,7 @@
                     "lifetime": 180
                 },
                 "McQueen": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 807,
                     "damage_received": 1324,
@@ -309,7 +315,7 @@
                     "lifetime": 180
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 1799,
                     "damage_received": 29,
@@ -321,7 +327,7 @@
                     "lifetime": 180
                 },
                 "BUrning_CHAir": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": true,
                     "damage": 1900,
                     "damage_received": 930,
@@ -333,7 +339,7 @@
                     "lifetime": 180
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 3670,
                     "damage_received": 2960,
@@ -345,7 +351,7 @@
                     "lifetime": 149
                 },
                 "vip_a_danya": {
-                    "tank": "WZ-111 5A",
+                    "tank": "",
                     "alive": true,
                     "damage": 1552,
                     "damage_received": 0,
@@ -357,7 +363,7 @@
                     "lifetime": 180
                 },
                 "Gluvit": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": true,
                     "damage": 1725,
                     "damage_received": 0,
@@ -370,7 +376,9 @@
                 }
             },
             "filename": "20260516_1928_poland-Pl21_CS_63_34_redshire",
-            "enemy_clan_tag": "BARNU"
+            "enemy_clan_abbrev": "BARNU",
+            "enemy_clan_dbid": 72306,
+            "elo": 1079
         },
         {
             "date": "16.05",
@@ -378,7 +386,7 @@
             "win": true,
             "players": {
                 "BUrning_CHAir": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": false,
                     "damage": 2132,
                     "damage_received": 2520,
@@ -390,7 +398,7 @@
                     "lifetime": 518
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 3088,
                     "damage_received": 0,
@@ -402,7 +410,7 @@
                     "lifetime": 560
                 },
                 "Gluvit": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": true,
                     "damage": 5074,
                     "damage_received": 1296,
@@ -414,7 +422,7 @@
                     "lifetime": 560
                 },
                 "PeHeuM": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 3250,
                     "damage_received": 910,
@@ -426,7 +434,7 @@
                     "lifetime": 560
                 },
                 "vip_a_danya": {
-                    "tank": "WZ-111 5A",
+                    "tank": "",
                     "alive": true,
                     "damage": 742,
                     "damage_received": 2655,
@@ -438,7 +446,7 @@
                     "lifetime": 560
                 },
                 "McQueen": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 3152,
                     "damage_received": 1355,
@@ -450,7 +458,7 @@
                     "lifetime": 560
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 852,
                     "damage_received": 2870,
@@ -463,7 +471,9 @@
                 }
             },
             "filename": "20260516_1932_poland-Pl21_CS_63_95_lost_city_ctf",
-            "enemy_clan_tag": "URFO_"
+            "enemy_clan_abbrev": "URFO_",
+            "enemy_clan_dbid": 73986,
+            "elo": 1142
         },
         {
             "date": "16.05",
@@ -471,7 +481,7 @@
             "win": false,
             "players": {
                 "l_Phoenix_I": {
-                    "tank": "BZ-74-1",
+                    "tank": "",
                     "alive": false,
                     "damage": 2132,
                     "damage_received": 2820,
@@ -483,7 +493,7 @@
                     "lifetime": 238
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 2427,
                     "damage_received": 2960,
@@ -495,7 +505,7 @@
                     "lifetime": 211
                 },
                 "BUrning_CHAir": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 3119,
                     "damage_received": 2910,
@@ -507,7 +517,7 @@
                     "lifetime": 178
                 },
                 "McQueen": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": false,
                     "damage": 1585,
                     "damage_received": 2200,
@@ -519,7 +529,7 @@
                     "lifetime": 164
                 },
                 "PeHeuM": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 1132,
                     "damage_received": 2940,
@@ -531,7 +541,7 @@
                     "lifetime": 133
                 },
                 "vip_a_danya": {
-                    "tank": "WZ-111 5A",
+                    "tank": "",
                     "alive": false,
                     "damage": 1544,
                     "damage_received": 2670,
@@ -543,7 +553,7 @@
                     "lifetime": 150
                 },
                 "Gluvit": {
-                    "tank": "Concept 5",
+                    "tank": "",
                     "alive": false,
                     "damage": 3070,
                     "damage_received": 1980,
@@ -556,7 +566,9 @@
                 }
             },
             "filename": "20260516_1943_poland-Pl21_CS_63_28_desert",
-            "enemy_clan_tag": "J1MMI"
+            "enemy_clan_abbrev": "J1MMI",
+            "enemy_clan_dbid": 552256,
+            "elo": 1533
         },
         {
             "date": "16.05",
@@ -564,7 +576,7 @@
             "win": true,
             "players": {
                 "l_Phoenix_I": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": false,
                     "damage": 1370,
                     "damage_received": 2910,
@@ -576,7 +588,7 @@
                     "lifetime": 135
                 },
                 "Umbrella_corp_AG": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 2430,
                     "damage_received": 358,
@@ -588,7 +600,7 @@
                     "lifetime": 206
                 },
                 "BUrning_CHAir": {
-                    "tank": "WZ-111 5A",
+                    "tank": "",
                     "alive": true,
                     "damage": 2745,
                     "damage_received": 1172,
@@ -600,7 +612,7 @@
                     "lifetime": 206
                 },
                 "vip_a_danya": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": true,
                     "damage": 1965,
                     "damage_received": 1214,
@@ -612,7 +624,7 @@
                     "lifetime": 206
                 },
                 "Gluvit": {
-                    "tank": "К-91",
+                    "tank": "",
                     "alive": true,
                     "damage": 5143,
                     "damage_received": 2197,
@@ -624,7 +636,7 @@
                     "lifetime": 206
                 },
                 "PeHeuM": {
-                    "tank": "Драгун",
+                    "tank": "",
                     "alive": true,
                     "damage": 2720,
                     "damage_received": 1255,
@@ -636,7 +648,7 @@
                     "lifetime": 206
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 2237,
                     "damage_received": 877,
@@ -649,7 +661,9 @@
                 }
             },
             "filename": "20260516_1950_france-F108_Panhard_EBR_105_08_ruinberg",
-            "enemy_clan_tag": "XNOVA"
+            "enemy_clan_abbrev": "XNOVA",
+            "enemy_clan_dbid": 597379,
+            "elo": 1015
         },
         {
             "date": "16.05",
@@ -657,7 +671,7 @@
             "win": true,
             "players": {
                 "Umbrella_corp_AG": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 924,
                     "damage_received": 2940,
@@ -669,7 +683,7 @@
                     "lifetime": 184
                 },
                 "BUrning_CHAir": {
-                    "tank": "WZ-111 5A",
+                    "tank": "",
                     "alive": false,
                     "damage": 1887,
                     "damage_received": 2720,
@@ -681,7 +695,7 @@
                     "lifetime": 260
                 },
                 "vip_a_danya": {
-                    "tank": "ИС-7",
+                    "tank": "",
                     "alive": false,
                     "damage": 4133,
                     "damage_received": 3000,
@@ -693,7 +707,7 @@
                     "lifetime": 316
                 },
                 "Gluvit": {
-                    "tank": "К-91",
+                    "tank": "",
                     "alive": false,
                     "damage": 3311,
                     "damage_received": 2390,
@@ -705,7 +719,7 @@
                     "lifetime": 286
                 },
                 "PeHeuM": {
-                    "tank": "Драгун",
+                    "tank": "",
                     "alive": false,
                     "damage": 2984,
                     "damage_received": 2940,
@@ -717,7 +731,7 @@
                     "lifetime": 275
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 3049,
                     "damage_received": 0,
@@ -729,7 +743,7 @@
                     "lifetime": 322
                 },
                 "l_Phoenix_I": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 3012,
                     "damage_received": 1037,
@@ -742,7 +756,9 @@
                 }
             },
             "filename": "20260516_1955_france-F108_Panhard_EBR_105_60_asia_miao",
-            "enemy_clan_tag": "OSA43"
+            "enemy_clan_abbrev": "OSA43",
+            "enemy_clan_dbid": 519392,
+            "elo": 1011
         },
         {
             "date": "16.05",
@@ -750,7 +766,7 @@
             "win": true,
             "players": {
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": false,
                     "damage": 1393,
                     "damage_received": 1430,
@@ -762,7 +778,7 @@
                     "lifetime": 234
                 },
                 "Mudazor": {
-                    "tank": "Об. 278",
+                    "tank": "",
                     "alive": false,
                     "damage": 2957,
                     "damage_received": 2650,
@@ -774,7 +790,7 @@
                     "lifetime": 210
                 },
                 "l_Phoenix_I": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 3792,
                     "damage_received": 1996,
@@ -786,7 +802,7 @@
                     "lifetime": 240
                 },
                 "BUrning_CHAir": {
-                    "tank": "113",
+                    "tank": "",
                     "alive": true,
                     "damage": 2491,
                     "damage_received": 1337,
@@ -798,7 +814,7 @@
                     "lifetime": 240
                 },
                 "Gluvit": {
-                    "tank": "Wilk",
+                    "tank": "",
                     "alive": true,
                     "damage": 3394,
                     "damage_received": 1958,
@@ -810,7 +826,7 @@
                     "lifetime": 240
                 },
                 "PeHeuM": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 2158,
                     "damage_received": 1730,
@@ -822,7 +838,7 @@
                     "lifetime": 240
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 260",
+                    "tank": "",
                     "alive": false,
                     "damage": 1645,
                     "damage_received": 2570,
@@ -835,7 +851,9 @@
                 }
             },
             "filename": "20260516_2002_france-F108_Panhard_EBR_105_35_steppes",
-            "enemy_clan_tag": "CM_2"
+            "enemy_clan_abbrev": "CM_2",
+            "enemy_clan_dbid": 139658,
+            "elo": 1072
         },
         {
             "date": "16.05",
@@ -843,7 +861,7 @@
             "win": false,
             "players": {
                 "BUrning_CHAir": {
-                    "tank": "113",
+                    "tank": "",
                     "alive": false,
                     "damage": 2177,
                     "damage_received": 2820,
@@ -855,7 +873,7 @@
                     "lifetime": 293
                 },
                 "PeHeuM": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 447,
                     "damage_received": 2900,
@@ -867,7 +885,7 @@
                     "lifetime": 228
                 },
                 "Gluvit": {
-                    "tank": "Wilk",
+                    "tank": "",
                     "alive": false,
                     "damage": 1683,
                     "damage_received": 2450,
@@ -879,7 +897,7 @@
                     "lifetime": 303
                 },
                 "vip_a_danya": {
-                    "tank": "BZ-74-1",
+                    "tank": "",
                     "alive": false,
                     "damage": 1493,
                     "damage_received": 2900,
@@ -891,7 +909,7 @@
                     "lifetime": 240
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": false,
                     "damage": 1838,
                     "damage_received": 1430,
@@ -903,7 +921,7 @@
                     "lifetime": 271
                 },
                 "l_Phoenix_I": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": false,
                     "damage": 2198,
                     "damage_received": 2910,
@@ -915,7 +933,7 @@
                     "lifetime": 251
                 },
                 "Mudazor": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 3935,
                     "damage_received": 2840,
@@ -928,7 +946,9 @@
                 }
             },
             "filename": "20260516_2008_france-F108_Panhard_EBR_105_10_hills",
-            "enemy_clan_tag": "BARNU"
+            "enemy_clan_abbrev": "BARNU",
+            "enemy_clan_dbid": 72306,
+            "elo": 1079
         },
         {
             "date": "16.05",
@@ -936,7 +956,7 @@
             "win": true,
             "players": {
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 3523,
                     "damage_received": 0,
@@ -948,7 +968,7 @@
                     "lifetime": 166
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 3913,
                     "damage_received": 2220,
@@ -960,7 +980,7 @@
                     "lifetime": 166
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": true,
                     "damage": 2604,
                     "damage_received": 1428,
@@ -972,7 +992,7 @@
                     "lifetime": 166
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 1164,
                     "damage_received": 1223,
@@ -984,7 +1004,7 @@
                     "lifetime": 166
                 },
                 "Mudazor": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 2211,
                     "damage_received": 1687,
@@ -996,7 +1016,7 @@
                     "lifetime": 166
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 2254,
                     "damage_received": 2870,
@@ -1008,7 +1028,7 @@
                     "lifetime": 118
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": true,
                     "damage": 3761,
                     "damage_received": 1651,
@@ -1021,15 +1041,104 @@
                 }
             },
             "filename": "20260516_2015_france-F108_Panhard_EBR_105_503_kaliningrad",
-            "enemy_clan_tag": "-OLMP"
+            "enemy_clan_abbrev": "-OLMP",
+            "enemy_clan_dbid": 165609,
+            "elo": 1188
         },
         {
             "date": "16.05",
             "map": "Степи",
-            "win": false,
-            "players": {},
-            "filename": "20260516_2019_france-F108_Panhard_EBR_105_35_steppes",
-            "enemy_clan_tag": ""
+            "win": true,
+            "players": {
+                "McQueen": {
+                    "tank": "",
+                    "alive": false,
+                    "damage": 1414,
+                    "damage_received": 1430,
+                    "shots": 6,
+                    "hits": 4,
+                    "piercings": 4,
+                    "assist_radio": 1211,
+                    "assist_track": 0,
+                    "lifetime": 276
+                },
+                "l_Phoenix_I": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 3589,
+                    "damage_received": 2621,
+                    "shots": 18,
+                    "hits": 15,
+                    "piercings": 8,
+                    "assist_radio": 0,
+                    "assist_track": 18,
+                    "lifetime": 347
+                },
+                "BUrning_CHAir": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 4201,
+                    "damage_received": 1045,
+                    "shots": 18,
+                    "hits": 15,
+                    "piercings": 8,
+                    "assist_radio": 846,
+                    "assist_track": 495,
+                    "lifetime": 347
+                },
+                "vip_a_danya": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 1462,
+                    "damage_received": 2310,
+                    "shots": 9,
+                    "hits": 5,
+                    "piercings": 3,
+                    "assist_radio": 0,
+                    "assist_track": 0,
+                    "lifetime": 347
+                },
+                "Mudazor": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 2355,
+                    "damage_received": 437,
+                    "shots": 8,
+                    "hits": 8,
+                    "piercings": 7,
+                    "assist_radio": 0,
+                    "assist_track": 462,
+                    "lifetime": 347
+                },
+                "Gluvit": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 3600,
+                    "damage_received": 892,
+                    "shots": 12,
+                    "hits": 11,
+                    "piercings": 11,
+                    "assist_radio": 272,
+                    "assist_track": 392,
+                    "lifetime": 347
+                },
+                "PeHeuM": {
+                    "tank": "",
+                    "alive": true,
+                    "damage": 1629,
+                    "damage_received": 1420,
+                    "shots": 14,
+                    "hits": 12,
+                    "piercings": 4,
+                    "assist_radio": 0,
+                    "assist_track": 0,
+                    "lifetime": 347
+                }
+            },
+            "filename": "20260516_2019_ussr-R155_Object_277_35_steppes",
+            "enemy_clan_abbrev": "_S-_",
+            "enemy_clan_dbid": 595769,
+            "elo": 1239
         },
         {
             "date": "16.05",
@@ -1037,7 +1146,7 @@
             "win": true,
             "players": {
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 1749,
                     "damage_received": 1356,
@@ -1049,7 +1158,7 @@
                     "lifetime": 255
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 1302,
                     "damage_received": 1490,
@@ -1061,7 +1170,7 @@
                     "lifetime": 255
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": true,
                     "damage": 3587,
                     "damage_received": 1158,
@@ -1073,7 +1182,7 @@
                     "lifetime": 255
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": false,
                     "damage": 3879,
                     "damage_received": 3020,
@@ -1085,7 +1194,7 @@
                     "lifetime": 239
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": true,
                     "damage": 2867,
                     "damage_received": 426,
@@ -1097,7 +1206,7 @@
                     "lifetime": 255
                 },
                 "Mudazor": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 3469,
                     "damage_received": 1054,
@@ -1109,7 +1218,7 @@
                     "lifetime": 255
                 },
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": false,
                     "damage": 1507,
                     "damage_received": 2450,
@@ -1122,7 +1231,9 @@
                 }
             },
             "filename": "20260516_2026_france-F108_Panhard_EBR_105_04_himmelsdorf",
-            "enemy_clan_tag": "MYA"
+            "enemy_clan_abbrev": "MYA",
+            "enemy_clan_dbid": 641716,
+            "elo": 1327
         },
         {
             "date": "16.05",
@@ -1130,7 +1241,7 @@
             "win": true,
             "players": {
                 "Mudazor": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": false,
                     "damage": 2007,
                     "damage_received": 2940,
@@ -1142,7 +1253,7 @@
                     "lifetime": 283
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": false,
                     "damage": 1049,
                     "damage_received": 3150,
@@ -1154,7 +1265,7 @@
                     "lifetime": 237
                 },
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": false,
                     "damage": 2444,
                     "damage_received": 2450,
@@ -1166,7 +1277,7 @@
                     "lifetime": 199
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 4507,
                     "damage_received": 2475,
@@ -1178,7 +1289,7 @@
                     "lifetime": 334
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": false,
                     "damage": 1864,
                     "damage_received": 2870,
@@ -1190,7 +1301,7 @@
                     "lifetime": 242
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": true,
                     "damage": 4189,
                     "damage_received": 1092,
@@ -1202,7 +1313,7 @@
                     "lifetime": 334
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 1620,
                     "damage_received": 920,
@@ -1215,7 +1326,9 @@
                 }
             },
             "filename": "20260516_2032_france-F108_Panhard_EBR_105_44_north_america",
-            "enemy_clan_tag": "LION"
+            "enemy_clan_abbrev": "LION",
+            "enemy_clan_dbid": 611441,
+            "elo": 1275
         },
         {
             "date": "16.05",
@@ -1223,7 +1336,7 @@
             "win": true,
             "players": {
                 "Mudazor": {
-                    "tank": "FV215b",
+                    "tank": "",
                     "alive": true,
                     "damage": 2582,
                     "damage_received": 804,
@@ -1235,7 +1348,7 @@
                     "lifetime": 290
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 2011,
                     "damage_received": 2539,
@@ -1247,7 +1360,7 @@
                     "lifetime": 290
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": true,
                     "damage": 2114,
                     "damage_received": 775,
@@ -1259,7 +1372,7 @@
                     "lifetime": 290
                 },
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": false,
                     "damage": 1533,
                     "damage_received": 2450,
@@ -1271,7 +1384,7 @@
                     "lifetime": 197
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 3285,
                     "damage_received": 1599,
@@ -1283,7 +1396,7 @@
                     "lifetime": 290
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 2162,
                     "damage_received": 0,
@@ -1295,7 +1408,7 @@
                     "lifetime": 290
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": true,
                     "damage": 3023,
                     "damage_received": 1072,
@@ -1308,7 +1421,9 @@
                 }
             },
             "filename": "20260516_2039_france-F108_Panhard_EBR_105_05_prohorovka",
-            "enemy_clan_tag": "RELEX"
+            "enemy_clan_abbrev": "RELEX",
+            "enemy_clan_dbid": 535355,
+            "elo": 1301
         },
         {
             "date": "16.05",
@@ -1316,7 +1431,7 @@
             "win": true,
             "players": {
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": true,
                     "damage": 2337,
                     "damage_received": 485,
@@ -1328,7 +1443,7 @@
                     "lifetime": 129
                 },
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": true,
                     "damage": 1667,
                     "damage_received": 0,
@@ -1340,7 +1455,7 @@
                     "lifetime": 129
                 },
                 "Mudazor": {
-                    "tank": "FV215b",
+                    "tank": "",
                     "alive": true,
                     "damage": 3980,
                     "damage_received": 2331,
@@ -1352,7 +1467,7 @@
                     "lifetime": 129
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 3132,
                     "damage_received": 398,
@@ -1364,7 +1479,7 @@
                     "lifetime": 129
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": true,
                     "damage": 2155,
                     "damage_received": 1302,
@@ -1376,7 +1491,7 @@
                     "lifetime": 129
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": true,
                     "damage": 1982,
                     "damage_received": 1585,
@@ -1388,7 +1503,7 @@
                     "lifetime": 129
                 },
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": true,
                     "damage": 2927,
                     "damage_received": 2009,
@@ -1401,7 +1516,9 @@
                 }
             },
             "filename": "20260516_2045_france-F108_Panhard_EBR_105_36_fishing_bay",
-            "enemy_clan_tag": "S-__B"
+            "enemy_clan_abbrev": "S-__B",
+            "enemy_clan_dbid": 446934,
+            "elo": 1284
         },
         {
             "date": "16.05",
@@ -1409,7 +1526,7 @@
             "win": false,
             "players": {
                 "McQueen": {
-                    "tank": "EBR 105",
+                    "tank": "",
                     "alive": false,
                     "damage": 828,
                     "damage_received": 1430,
@@ -1421,7 +1538,7 @@
                     "lifetime": 334
                 },
                 "Mudazor": {
-                    "tank": "FV215b",
+                    "tank": "",
                     "alive": true,
                     "damage": 4909,
                     "damage_received": 2905,
@@ -1433,7 +1550,7 @@
                     "lifetime": 556
                 },
                 "l_Phoenix_I": {
-                    "tank": "Orso",
+                    "tank": "",
                     "alive": true,
                     "damage": 3511,
                     "damage_received": 787,
@@ -1445,7 +1562,7 @@
                     "lifetime": 556
                 },
                 "BUrning_CHAir": {
-                    "tank": "116-F3",
+                    "tank": "",
                     "alive": false,
                     "damage": 4113,
                     "damage_received": 3150,
@@ -1457,7 +1574,7 @@
                     "lifetime": 531
                 },
                 "PeHeuM": {
-                    "tank": "Kpz. 07 P(E)",
+                    "tank": "",
                     "alive": false,
                     "damage": 393,
                     "damage_received": 3020,
@@ -1469,7 +1586,7 @@
                     "lifetime": 103
                 },
                 "vip_a_danya": {
-                    "tank": "Об. 277",
+                    "tank": "",
                     "alive": false,
                     "damage": 724,
                     "damage_received": 2750,
@@ -1481,7 +1598,7 @@
                     "lifetime": 230
                 },
                 "Gluvit": {
-                    "tank": "CS-63",
+                    "tank": "",
                     "alive": false,
                     "damage": 4662,
                     "damage_received": 2450,
@@ -1494,7 +1611,9 @@
                 }
             },
             "filename": "20260516_2049_france-F108_Panhard_EBR_105_02_malinovka",
-            "enemy_clan_tag": "TRONS"
+            "enemy_clan_abbrev": "TRONS",
+            "enemy_clan_dbid": 643352,
+            "elo": 1309
         }
     ]
 }
