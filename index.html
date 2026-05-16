@@ -730,16 +730,23 @@ if(type==="hits" && avgPosition==="left") html+="<th></th>";
 if(type!=="hits" && avgPosition==="left") html+="<th></th>";
 
 battles.forEach((b)=>{
-  let clanTag = (b.enemy_clan_tag || b.enemy_clan_abbrev || "").toString().trim().toUpperCase();
+  // 1. Ищем тэг клана (проверяем оба возможных названия ключа)
+  let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
   
-  // Формируем ячейку: клан-тэг + (опционально) ELO под ним
   let clanCell = "";
+  
+  // 2. Если тэг есть — делаем ссылку
   if(clanTag){
-    clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag)}" target="_blank">${escapeHtml(clanTag)}</a>`;
+    clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
   }
-  // Если есть ELO — добавляем его отдельной строкой под кланом
-  if(b.elo !== undefined && b.elo !== null){
+  
+  // 3. Если ELO есть и это число — добавляем под тэгом
+  // Проверяем, что elo не null и не undefined
+  if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
     clanCell += `<br><span class="elo-value">${b.elo}</span>`;
+  } else {
+    // Для отладки: если ELO нет, можно вывести прочерк (убери эту строку потом, если не нужно)
+    // clanCell += `<br><span style="color:#555; font-size:10px;">-</span>`;
   }
   
   html += `<th class="clan-header">${clanCell}</th>`;
