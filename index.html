@@ -351,6 +351,15 @@ td.hover-cell{
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
 }
+
+/* Стиль для ячейки со средним ELO в шапке */
+.elo-avg-header {
+  color: #00ff66 !important;
+  font-weight: 700;
+  font-size: 14px;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+  vertical-align: middle;
+}
   
 </style>
 </head>
@@ -649,154 +658,169 @@ function getPenRate(name,battles){
   return hits ? pen/hits : 0;
 }
 
-function loadTable(type,event){
+function loadTable(type, event) {
+  currentType = type;
 
-  currentType=type;
-
-  if(event){
+  if (event) {
     document.querySelectorAll(".mode")
-      .forEach(b=>b.classList.remove("active"));
+      .forEach(b => b.classList.remove("active"));
     event.target.classList.add("active");
   }
 
-  let battles=DATA.battles.filter(
-    b=>getCampaignByDate(b.date)===currentCampaign && (!currentDate || b.date===currentDate)
+  let battles = DATA.battles.filter(
+    b => getCampaignByDate(b.date) === currentCampaign && (!currentDate || b.date === currentDate)
   );
 
-  if(!battles.length){
-    document.getElementById("table").innerHTML="Нет боёв";
+  if (!battles.length) {
+    document.getElementById("table").innerHTML = "Нет боёв";
     visibleBattles = [];
     return;
   }
 
   visibleBattles = battles;
 
-  let players={};
+  // === 🆕 1. Расчет среднего ELO противников ===
+  let eloSum = 0;
+  let eloCount = 0;
+  battles.forEach(b => {
+    // Проверяем, что elo есть и это число
+    if (b.elo !== null && b.elo !== undefined && b.elo !== "") {
+      eloSum += Number(b.elo);
+      eloCount++;
+    }
+  });
+  let avgElo = eloCount > 0 ? Math.round(eloSum / eloCount) : "-";
 
-  battles.forEach((battle,idx)=>{
-    for(let name in battle.players){
 
-      let p=battle.players[name];
-      if(!players[name]) players[name]={};
+  let players = {};
 
-      let value=0;
+  battles.forEach((battle, idx) => {
+    for (let name in battle.players) {
+      let p = battle.players[name];
+      if (!players[name]) players[name] = {};
 
-      if(type==="damage") value=p.damage;
-      if(type==="damage_received") value=p.damage_received;
-      if(type==="hits") value=`${p.shots}/${p.hits}/${p.piercings}`;
-      if(type==="assist") value=p.assist_track+p.assist_radio;
+      let value = 0;
 
-      players[name][idx]={
-        tank:p.tank,
-        value:value,
-        assist_track:p.assist_track,
-        assist_radio:p.assist_radio,
-        alive:p.alive
+      if (type === "damage") value = p.damage;
+      if (type === "damage_received") value = p.damage_received;
+      if (type === "hits") value = `${p.shots}/${p.hits}/${p.piercings}`;
+      if (type === "assist") value = p.assist_track + p.assist_radio;
+
+      players[name][idx] = {
+        tank: p.tank,
+        value: value,
+        assist_track: p.assist_track,
+        assist_radio: p.assist_radio,
+        alive: p.alive
       };
     }
   });
 
-  let averages={};
-
-  for(let name in players){
-    let sum=0,count=0;
-
-    battles.forEach((b,i)=>{
-      let cell=players[name][i];
-      if(!cell) return;
-
-      if(typeof cell.value==="number"){
-        sum+=cell.value;
+  // Средние значения игроков (используем только для сортировки списка)
+  let averages = {};
+  for (let name in players) {
+    let sum = 0, count = 0;
+    battles.forEach((b, i) => {
+      let cell = players[name][i];
+      if (!cell) return;
+      if (typeof cell.value === "number") {
+        sum += cell.value;
         count++;
       }
     });
-
-    averages[name]=count ? Math.round(sum/count) : 0;
+    averages[name] = count ? Math.round(sum / count) : 0;
   }
 
-  let sorted=Object.keys(players);
+  let sorted = Object.keys(players);
 
-  if(type==="hits")
-    sorted.sort((a,b)=>getPenRate(b,battles)-getPenRate(a,battles));
+  // Сортировка
+  if (type === "hits")
+    sorted.sort((a, b) => getPenRate(b, battles) - getPenRate(a, battles));
   else
-    sorted.sort((a,b)=>averages[b]-averages[a]);
+    sorted.sort((a, b) => averages[b] - averages[a]);
 
-let html="<table>";
 
-// === ПЕРВАЯ СТРОКА: пустые ячейки + тэги кланов ===
-html += "<tr>";
-html += "<th></th>"; // под "Ник"
-if(type==="hits" && avgPosition==="left") html+="<th></th>";
-if(type!=="hits" && avgPosition==="left") html+="<th></th>";
+  let html = "<table>";
 
-battles.forEach((b)=>{
-  // 1. Ищем тэг клана (проверяем оба возможных названия ключа)
-  let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
+  // === 🆕 2. ПЕРВАЯ СТРОКА: Ник + СРЕДНЕЕ ЭЛО + Клан-тэги ===
+  html += "<tr>";
   
-  let clanCell = "";
+  // Ячейка под "Ник"
+  html += "<th></th>"; 
+
+  // 🆕 Ячейка ПОД "Среднее" — сюда выводим рассчитанный Avg ELO
+  if (type === "hits" && avgPosition === "left") html += "<th></th>"; // Если режим hits, там проценты, можно оставить пустым или тоже Elo
+  if (type !== "hits" && avgPosition === "left") html += `<th class="elo-avg-header">${avgElo}</th>`;
+
+  // Остальные ячейки — Кланы противников
+  battles.forEach((b) => {
+    let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
+    let clanCell = "";
+    
+    if (clanTag) {
+      clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
+    }
+    
+    // Eло под кланом (как было раньше)
+    if (b.elo !== null && b.elo !== undefined && b.elo !== "") {
+      clanCell += `<br><span class="elo-value">${b.elo}</span>`;
+    }
+    
+    html += `<th class="clan-header">${clanCell}</th>`;
+  });
+
+  // Правая сторона "Среднее"
+  if (type === "hits" && avgPosition === "right") html += "<th></th>";
+  if (type !== "hits" && avgPosition === "right") html += `<th class="elo-avg-header">${avgElo}</th>`;
   
-  // 2. Если тэг есть — делаем ссылку
-  if(clanTag){
-    clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
-  }
-  
-  // 3. Если ELO есть и это число — добавляем под тэгом
-  // Проверяем, что elo не null и не undefined
-  if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
-    clanCell += `<br><span class="elo-value">${b.elo}</span>`;
-  } else {
-    // Для отладки: если ELO нет, можно вывести прочерк (убери эту строку потом, если не нужно)
-    // clanCell += `<br><span style="color:#555; font-size:10px;">-</span>`;
-  }
-  
-  html += `<th class="clan-header">${clanCell}</th>`;
-});
+  html += "</tr>";
 
-if(type==="hits" && avgPosition==="right") html+="<th></th>";
-if(type!=="hits" && avgPosition==="right") html+="<th></th>";
-html += "</tr>";
 
-// === ВТОРАЯ СТРОКА: Ник + Среднее + названия карт ===
-html+="<tr><th>Ник</th>";
+  // === 3. ВТОРАЯ СТРОКА: Заголовки (Ник, Среднее, Карты) ===
+  html += "<tr><th>Ник</th>";
 
-if(type==="hits" && avgPosition==="left") html+="<th>%</th>";
-if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
+  if (type === "hits" && avgPosition === "left") html += "<th>%</th>";
+  if (type !== "hits" && avgPosition === "left") html += "<th>Среднее</th>";
 
-battles.forEach((b, battleIndex)=>{
-  html+=`<th class="${b.win?"win":"lose"}">
+  battles.forEach((b, battleIndex) => {
+    html += `<th class="${b.win ? "win" : "lose"}">
     <a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a>
   </th>`;
-});
+  });
 
-if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
-if(type!=="hits" && avgPosition==="right") html+="<th>Среднее</th>";
+  if (type === "hits" && avgPosition === "right") html += "<th>%</th>";
+  if (type !== "hits" && avgPosition === "right") html += "<th>Среднее</th>";
 
-html+="</tr>";
+  html += "</tr>";
 
-  sorted.forEach(name=>{
-    html+="<tr>";
-    html+=`<td>${escapeHtml(name)}</td>`;
 
-    if(type==="hits" && avgPosition==="left")
-      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
+  // === 4. Строки игроков ===
+  sorted.forEach(name => {
+    html += "<tr>";
+    html += `<td>${escapeHtml(name)}</td>`;
 
-    if(type!=="hits" && avgPosition==="left")
-      html+=`<td>${averages[name]}</td>`;
+    if (type === "hits" && avgPosition === "left")
+      html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
 
-    battles.forEach((b,i)=>{
-      let cell=players[name][i];
+    // В колонке "Среднее" у игрока теперь пусто или можно вернуть его личный средний урон, 
+    // но по твоему запросу мы меняем только верхнюю ячейку. 
+    // Если хочешь, чтобы там было пусто:
+    if (type !== "hits" && avgPosition === "left")
+      html += `<td></td>`; 
 
-      if(!cell){
-        html+="<td></td>";
+    battles.forEach((b, i) => {
+      let cell = players[name][i];
+
+      if (!cell) {
+        html += "<td></td>";
         return;
       }
 
-      let tankClass = cell.alive ? "alive":"dead";
-
+      let tankClass = cell.alive ? "alive" : "dead";
       let displayValue = cell.value;
 
-      if(type==="assist"){
-          displayValue = `
+      if (type === "assist") {
+        displayValue = `
             ${cell.value}
             <br>
             <small class="assist-icons">
@@ -805,31 +829,29 @@ html+="</tr>";
               <img src="icons/spot.png"> ${cell.assist_radio}
             </small>
           `;
-        }
+      }
 
-      html+=`<td>
+      html += `<td>
         <span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>
         ${displayValue}
       </td>`;
     });
 
-    if(type==="hits" && avgPosition==="right")
-      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
+    if (type === "hits" && avgPosition === "right")
+      html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
 
-    if(type!=="hits" && avgPosition==="right")
-      html+=`<td>${averages[name]}</td>`;
+    if (type !== "hits" && avgPosition === "right")
+      html += `<td></td>`;
 
-    html+="</tr>";
+    html += "</tr>";
   });
 
-  html+="</table>";
+  html += "</table>";
 
-  document.getElementById("table").innerHTML=html;
-
+  document.getElementById("table").innerHTML = html;
   enableHover();
 }
-
-/* hover */
+  
 function enableHover(){
   const table=document.querySelector("table");
   if(!table) return;
