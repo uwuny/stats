@@ -268,6 +268,75 @@ td.hover-cell{
   text-shadow:0 0 4px rgba(255,255,255,0.4);
 }
 
+/* === ПОЛЕВАЯ МОДЕРНИЗАЦИЯ === */
+.mod-block {
+  position: relative;
+  width: 240px;
+  height: 140px;
+  display: inline-block;
+  margin: 10px;
+  vertical-align: top;
+}
+
+.mod-base {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+  top: 20px;
+}
+
+.mod-base.left { left: 0; }
+.mod-base.right { left: 120px; }
+
+.mod-overlay {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  top: 20px;
+}
+
+.mod-overlay.left { left: 0; }
+.mod-overlay.right { left: 120px; }
+
+.mod-icon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 3;
+  top: 112px;
+}
+
+.mod-icon.cross { left: 90px; }
+.mod-icon.check { left: 122px; }
+
+.mod-hex {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  z-index: 4;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.tank-name {
+  text-align: center;
+  font-size: 24px;
+  color: #00ff66;
+  text-shadow: 0 0 12px #00ff66;
+  margin: 30px 0 15px 0;
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 700;
+}
+
+.mods-wrapper {
+  text-align: center;
+  padding: 20px;
+}
+
+  
 </style>
 </head>
 
@@ -344,6 +413,10 @@ td.hover-cell{
     <button class="equip-btn" onclick="loadEquipment('T110E4', event)">T110E4</button>
     <button class="equip-btn" onclick="loadEquipment('T110E5', event)">T110E5</button>
     <button class="equip-btn" onclick="loadEquipment('113G', event)">WZ-113G FT</button>
+    <!-- Пример: добавь эти кнопки в список -->
+<button class="equip-btn" onclick="openRandomMods('IS7', event)">ИС-7</button>
+<button class="equip-btn" onclick="openRandomMods('Object277', event)">Об. 277</button>
+<!-- Добавляй новые танки -->
   </div>
 
   <div id="equipmentContent"></div>
@@ -870,6 +943,98 @@ window.addEventListener("DOMContentLoaded", () => {
     firstBtn.click();
   }
 });
+
+
+// === БАЗА МОДЕРНИЗАЦИЙ ===
+const MODS_DB = {
+  "IS7": {
+    name: "ИС-7",
+    builds: [
+      {
+        left: "improvedEnginePower.png",
+        right: "improvedChassisDurability.png",
+        level: "8.png",
+        leftState: "disabled",  // disabled или active
+        rightState: "checkmark" // checkmark или marker_blocked
+      },
+      {
+        left: "improvedGunBreach.png",
+        right: "improvedAimingHandling.png",
+        level: "7.png",
+        leftState: "disabled",
+        rightState: "checkmark"
+      },
+      {
+        left: "improvedTurretTurningStability.png",
+        right: "improvedChassisStability.png",
+        level: "5.png",
+        leftState: "active",
+        rightState: "marker_blocked"
+      }
+    ]
+  },
+  "Object277": {
+    name: "Об. 277",
+    builds: [
+      {
+        left: "improvedEnginePower.png",
+        right: "improvedChassisBalance.png",
+        level: "8.png",
+        leftState: "disabled",
+        rightState: "checkmark"
+      }
+    ]
+  }
+  // Добавляй новые танки по аналогии
+};
+
+function renderModBlock(build) {
+  return `
+    <div class="mod-block">
+      <img src="Modernization/${build.left}" class="mod-base left">
+      <img src="Modernization/${build.right}" class="mod-base right">
+      <img src="Modernization/${build.leftState}.png" class="mod-overlay left">
+      <img src="Modernization/${build.rightState}.png" class="mod-overlay right">
+      <img src="Modernization/marker_blocked.png" class="mod-icon cross">
+      <img src="Modernization/checkmark.png" class="mod-icon check">
+      <img src="Modernization/${build.level}" class="mod-hex">
+    </div>
+  `;
+}
+
+function showTankMods(tankKey) {
+  const tank = MODS_DB[tankKey];
+  if(!tank) {
+    document.getElementById("equipmentRandom").innerHTML = 
+      "<p>Данные для этого танка не найдены</p>";
+    return;
+  }
+  
+  let html = `<div class="tank-name">${tank.name}</div>`;
+  html += `<div class="mods-wrapper">`;
+  
+  tank.builds.forEach(build => {
+    html += renderModBlock(build);
+  });
+  
+  html += `</div>`;
+  
+  // Основная картинка танка
+  html += `<div style="text-align:center; margin-top:30px;">`;
+  html += `<img src="images/${tankKey}_01.png" style="max-width:600px; border-radius:8px;">`;
+  html += `</div>`;
+  
+  document.getElementById("equipmentRandom").innerHTML = html;
+}
+
+// Функция для переключения на рандом и показа танка
+function openRandomMods(tankKey, event) {
+  // Переключаем на вкладку "Рандом"
+  switchEquipmentMode('random', event);
+  
+  // Показываем модернизации
+  showTankMods(tankKey);
+}
 
 </script>
 
