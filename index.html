@@ -272,67 +272,58 @@ td.hover-cell{
 .mod-block {
   position: relative;
   width: 240px;
-  height: 120px;
+  height: 120px; /* Жесткая высота блока */
   display: inline-block;
   margin: 15px;
   vertical-align: top;
 }
 
-.mod-base {
+/* Общий стиль для всех слоев */
+.mod-base, .mod-overlay {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 120px;  /* ПРИНУДИТЕЛЬНО 120px */
+  height: 120px; /* ПРИНУДИТЕЛЬНО 120px */
   z-index: 1;
   top: 0;
 }
 
-.mod-base.left { left: 0; }
-.mod-base.right { left: 120px; }
+.mod-base { z-index: 1; }
+.mod-overlay { z-index: 2; }
 
-.mod-overlay {
-  position: absolute;
-  width: 120px;   /* Принудительно подгоняем под базу */
-  height: 120px;
-  z-index: 2;
-  top: 0;
-}
+.mod-base.left, .mod-overlay.left { left: 0; }
+.mod-base.right, .mod-overlay.right { left: 120px; }
 
-.mod-overlay.left {
-  left: 0;
-}
-
-.mod-overlay.right {
-  left: 120px;
-}
-
+/* Иконки (Крестик и Галочка) */
 .mod-icon {
   position: absolute;
   z-index: 3;
+  /* Центрирование по низу */
 }
 
-/* Крестик 14x14 - центрируется по нижнему центру левой половинки */
+/* Крестик 14x14. Центр левой части: X=60, Y=120 */
 .mod-icon.cross {
   width: 14px;
   height: 14px;
-  left: 53px;   /* 60 - 7 (половина ширины) */
-  top: 113px;   /* 120 - 7 (половина высоты) */
+  left: 53px;   /* 60 - 7 */
+  top: 113px;   /* 120 - 7 */
 }
 
-/* Галочка 64x32 - центрируется по нижнему центру правой половинки */
+/* Галочка 64x32. Центр правой части: X=180, Y=120 */
 .mod-icon.check {
   width: 64px;
   height: 32px;
-  left: 148px;  /* 180 - 32 (половина ширины) */
-  top: 104px;   /* 120 - 16 (половина высоты) */
+  left: 148px;  /* 180 - 32 */
+  top: 104px;   /* 120 - 16 */
 }
 
+/* Шестиугольник с уровнем */
 .mod-hex {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   z-index: 4;
   left: 50%;
-  top: -24px; /* Сдвиг вверх на половину высоты, чтобы центр совпал с верхним краем */
+  top: -20px;  /* Чуть выше стыка, подбери если нужно */
   transform: translateX(-50%);
 }
 
@@ -349,16 +340,6 @@ td.hover-cell{
 .mods-wrapper {
   text-align: center;
   padding: 20px;
-}
-
-.tank-main-image {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.tank-main-image img {
-  max-width: 600px;
-  border-radius: 8px;
 }
   
 </style>
@@ -905,6 +886,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// === БАЗА МОДЕРНИЗАЦИЙ ===
 const MODS_DB = {
   "IS7": {
     name: "ИС-7",
@@ -918,39 +900,43 @@ const MODS_DB = {
         rightActive: true
       },
       {
-        left: "improvedGunBreech.png",  // ИСПРАВЛЕНО: Breech вместо Breach
-        right: "improvedAimingHandling.png",
+        left: "improvedGunBreech.png",
+        right: "improvedTurretRingStability.png", // ← ИСПРАВЛЕНО НАЗВАНИЕ
         level: "7.png",
         leftActive: false,
         rightActive: true
       },
       {
-        left: "improvedTurretRingStability.png",
+        left: "improvedObservationDevice.png", // ← Поставь нужную левую картинку
         right: "improvedChassisStability.png",
         level: "5.png",
-        leftActive: true,
-        rightActive: false
+        leftActive: true,  // ← Если тут true, обводка будет
+        rightActive: false // ← Если тут false, будет крестик
       }
     ]
   }
 };
-  
+
 function renderModBlock(build) {
   return `
     <div class="mod-block">
-      <!-- Базовые картинки -->
+      <!-- 1. Картинки модулей -->
       <img src="Modernization/${build.left}" class="mod-base left">
       <img src="Modernization/${build.right}" class="mod-base right">
       
-      <!-- Наложения (затемнение/обводка) -->
+      <!-- 2. Обводки/Затемнения (Оверлеи) -->
+      <!-- Если active=false, показываем disabled.png (затемнение) -->
       <img src="Modernization/disabled.png" class="mod-overlay left" style="opacity: ${build.leftActive ? '0' : '1'}">
+      <!-- Если active=true, показываем active.png (обводка) -->
       <img src="Modernization/active.png" class="mod-overlay right" style="opacity: ${build.rightActive ? '1' : '0'}">
       
-      <!-- Иконки статуса (крестик/галочка) -->
+      <!-- 3. Иконки (Крестик/Галочка) -->
+      <!-- Если active=false, показываем крестик -->
       <img src="Modernization/marker_blocked.png" class="mod-icon cross" style="opacity: ${build.leftActive ? '0' : '1'}">
+      <!-- Если active=true, показываем галочку -->
       <img src="Modernization/checkmark.png" class="mod-icon check" style="opacity: ${build.rightActive ? '1' : '0'}">
       
-      <!-- Шестиугольник с уровнем -->
+      <!-- 4. Уровень (Шестиугольник) -->
       <img src="Modernization/${build.level}" class="mod-hex">
     </div>
   `;
