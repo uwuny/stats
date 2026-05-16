@@ -272,7 +272,7 @@ td.hover-cell{
 .mod-block {
   position: relative;
   width: 240px;
-  height: 140px;
+  height: 120px;
   display: inline-block;
   margin: 15px;
   vertical-align: top;
@@ -283,7 +283,7 @@ td.hover-cell{
   width: 120px;
   height: 120px;
   z-index: 1;
-  top: 20px;
+  top: 0;
 }
 
 .mod-base.left { left: 0; }
@@ -294,7 +294,7 @@ td.hover-cell{
   width: 120px;
   height: 120px;
   z-index: 2;
-  top: 20px;
+  top: 0;
 }
 
 .mod-overlay.left { left: 0; }
@@ -302,23 +302,23 @@ td.hover-cell{
 
 .mod-icon {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   z-index: 3;
-  /* Центрируем по точке: левый край + 60px (центр 120px), низ + 120px */
+  /* Центрируем по нижнему центру каждой половинки */
   transform: translate(-50%, -50%);
 }
 
-/* Крестик - центрируется по нижнему центру левой половинки */
+/* Крестик - центрируется по нижнему центру левой половинки (60px от левого края, 120px снизу) */
 .mod-icon.cross {
   left: 60px;
-  top: 140px;
+  top: 120px;
 }
 
-/* Галочка - центрируется по нижнему центру правой половинки */
+/* Галочка - центрируется по нижнему центру правой половинки (180px от левого края, 120px снизу) */
 .mod-icon.check {
   left: 180px;
-  top: 140px;
+  top: 120px;
 }
 
 .mod-hex {
@@ -327,7 +327,7 @@ td.hover-cell{
   height: 48px;
   z-index: 4;
   left: 50%;
-  top: 0;
+  top: -24px; /* Сдвиг вверх на половину высоты, чтобы центр совпал с верхним краем */
   transform: translateX(-50%);
 }
 
@@ -928,40 +928,25 @@ const MODS_DB = {
         rightActive: false
       }
     ]
-  },
-  "Object277": {
-    name: "Об. 277",
-    image: "Object277_01.png",
-    builds: [
-      {
-        left: "improvedEnginePower.png",
-        right: "improvedChassisBalance.png",
-        level: "8.png",
-        leftActive: false,
-        rightActive: true
-      }
-    ]
   }
-  // Добавляй новые танки по аналогии
 };
 
 function renderModBlock(build) {
-  // Определяем какие иконки показывать
-  const crossClass = build.leftActive ? 'mod-icon cross' : 'mod-icon cross';
-  const checkClass = build.rightActive ? 'mod-icon check' : 'mod-icon check';
-  
-  // Показываем/скрываем через opacity или display
-  const crossOpacity = build.leftActive ? '0' : '1';
-  const checkOpacity = build.rightActive ? '1' : '0';
-  
   return `
     <div class="mod-block">
+      <!-- Базовые картинки -->
       <img src="Modernization/${build.left}" class="mod-base left">
       <img src="Modernization/${build.right}" class="mod-base right">
-      <img src="Modernization/active.png" class="mod-overlay left" style="opacity: ${build.leftActive ? '1' : '0'}">
+      
+      <!-- Наложения (затемнение/обводка) -->
+      <img src="Modernization/disabled.png" class="mod-overlay left" style="opacity: ${build.leftActive ? '0' : '1'}">
       <img src="Modernization/checkmark.png" class="mod-overlay right" style="opacity: ${build.rightActive ? '1' : '0'}">
-      <img src="Modernization/marker_blocked.png" class="${crossClass}" style="opacity: ${crossOpacity}">
-      <img src="Modernization/checkmark.png" class="${checkClass}" style="opacity: ${checkOpacity}">
+      
+      <!-- Иконки статуса (крестик/галочка) -->
+      <img src="Modernization/marker_blocked.png" class="mod-icon cross" style="opacity: ${build.leftActive ? '0' : '1'}">
+      <img src="Modernization/checkmark.png" class="mod-icon check" style="opacity: ${build.rightActive ? '1' : '0'}">
+      
+      <!-- Шестиугольник с уровнем -->
       <img src="Modernization/${build.level}" class="mod-hex">
     </div>
   `;
