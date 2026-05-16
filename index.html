@@ -291,14 +291,23 @@ td.hover-cell{
 
 .mod-overlay {
   position: absolute;
-  width: 120px;
-  height: 120px;
   z-index: 2;
   top: 0;
 }
 
-.mod-overlay.left { left: 0; }
-.mod-overlay.right { left: 120px; }
+/* disabled.png (150x150) - затемнение */
+.mod-overlay.left {
+  width: 150px;
+  height: 150px;
+  left: -15px;  /* (150-120)/2 = 15px влево */
+}
+
+/* active.png (180x180) - обводка */
+.mod-overlay.right {
+  width: 180px;
+  height: 180px;
+  left: 90px;   /* 120 - (180-120)/2 = 120-30 = 90px */
+}
 
 .mod-icon {
   position: absolute;
@@ -939,7 +948,7 @@ function renderModBlock(build) {
       
       <!-- Наложения (затемнение/обводка) -->
       <img src="Modernization/disabled.png" class="mod-overlay left" style="opacity: ${build.leftActive ? '0' : '1'}">
-      <img src="Modernization/checkmark.png" class="mod-overlay right" style="opacity: ${build.rightActive ? '1' : '0'}">
+      <img src="Modernization/active.png" class="mod-overlay right" style="opacity: ${build.rightActive ? '1' : '0'}">
       
       <!-- Иконки статуса (крестик/галочка) -->
       <img src="Modernization/marker_blocked.png" class="mod-icon cross" style="opacity: ${build.leftActive ? '0' : '1'}">
