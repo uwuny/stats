@@ -291,22 +291,18 @@ td.hover-cell{
 
 .mod-overlay {
   position: absolute;
+  width: 120px;   /* Принудительно подгоняем под базу */
+  height: 120px;
   z-index: 2;
   top: 0;
 }
 
-/* disabled.png (150x150) - затемнение */
 .mod-overlay.left {
-  width: 150px;
-  height: 150px;
-  left: -15px;  /* (150-120)/2 = 15px влево */
+  left: 0;
 }
 
-/* active.png (180x180) - обводка */
 .mod-overlay.right {
-  width: 180px;
-  height: 180px;
-  left: 90px;   /* 120 - (180-120)/2 = 120-30 = 90px */
+  left: 120px;
 }
 
 .mod-icon {
@@ -929,7 +925,7 @@ const MODS_DB = {
         rightActive: true
       },
       {
-        left: "improvedTurretTurningStability.png",
+        left: "improvedTurretRingStability.png",
         right: "improvedChassisStability.png",
         level: "5.png",
         leftActive: true,
