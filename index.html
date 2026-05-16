@@ -302,22 +302,23 @@ td.hover-cell{
 
 .mod-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
   z-index: 3;
-  /* Убираем transform, будем позиционировать точно */
 }
 
-/* Крестик - центрируется по нижнему центру левой половинки */
+/* Крестик 14x14 - центрируется по нижнему центру левой половинки */
 .mod-icon.cross {
-  left: 48px;  /* 60px - 12px (половина ширины иконки) */
-  top: 96px;   /* 120px - 24px (высота иконки) */
+  width: 14px;
+  height: 14px;
+  left: 53px;   /* 60 - 7 (половина ширины) */
+  top: 113px;   /* 120 - 7 (половина высоты) */
 }
 
-/* Галочка - центрируется по нижнему центру правой половинки */
+/* Галочка 64x32 - центрируется по нижнему центру правой половинки */
 .mod-icon.check {
-  left: 168px; /* 180px - 12px (половина ширины иконки) */
-  top: 96px;   /* 120px - 24px (высота иконки) */
+  width: 64px;
+  height: 32px;
+  left: 148px;  /* 180 - 32 (половина ширины) */
+  top: 104px;   /* 120 - 16 (половина высоты) */
 }
 
 .mod-hex {
@@ -899,7 +900,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// === БАЗА МОДЕРНИЗАЦИЙ ===
 const MODS_DB = {
   "IS7": {
     name: "ИС-7",
@@ -909,11 +909,11 @@ const MODS_DB = {
         left: "improvedEnginePower.png",
         right: "improvedChassisDurability.png",
         level: "8.png",
-        leftActive: false,   // false = крестик, true = галочка
+        leftActive: false,
         rightActive: true
       },
       {
-        left: "improvedGunBreach.png",
+        left: "improvedGunBreech.png",  // ИСПРАВЛЕНО: Breech вместо Breach
         right: "improvedAimingHandling.png",
         level: "7.png",
         leftActive: false,
@@ -929,7 +929,7 @@ const MODS_DB = {
     ]
   }
 };
-
+  
 function renderModBlock(build) {
   return `
     <div class="mod-block">
