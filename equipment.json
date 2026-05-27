@@ -49,8 +49,8 @@
           "activeSide": "right"
         },
         {
-          "left": "improvedStabilizer.png",
-          "right": "improvedLoadingMechanism.png",
+          "left": "improvedSpeedIndicatorBackwards.png",
+          "right": "improvedMuzzleBreak.png",
           "level": "8.png",
           "activeSide": "left"
         }
@@ -62,7 +62,7 @@
       "nation": "ussr",
       "level": 10,
       "class": "heavy",
-      "images": ["R45_IS_7.png"],
+      "images": ["R45_IS-7.png"],
       "equipmentBuilds": [
         {
           "type": "main",
@@ -95,8 +95,8 @@
           "activeSide": "left"
         },
         {
-          "left": "improvedLightFilters.png",
-          "right": "improvedMuzzleBreak.png",
+          "left": "improvedSpallingResistance.png",
+          "right": "improvedReflexScopes.png",
           "level": "8.png",
           "activeSide": "right"
         }
