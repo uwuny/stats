@@ -552,16 +552,9 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 
 .custom-select option {
-    background-color: #111;
+    background: #111;
     color: #fff;
-
-    padding: 10px 10px 10px 48px;
-
-    background-repeat: no-repeat;
-    background-position: 12px center;
-    background-size: 24px 16px;
-
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding: 10px;
 }
 
 /* последняя строка без линии */
@@ -1007,7 +1000,6 @@ function renderFilters() {
     const opt = document.createElement('option');
     opt.value = n.id;
     opt.textContent = n.name;
-    opt.style.backgroundImage = `url(flags/${n.id}.png)`;
     nationSelect.appendChild(opt);
   });
 
@@ -1028,7 +1020,6 @@ function renderFilters() {
     const opt = document.createElement('option');
     opt.value = c.id;
     opt.textContent = c.name;
-    opt.style.backgroundImage = `url(classes/${c.icon})`;
     classSelect.appendChild(opt);
   });
 
