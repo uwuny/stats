@@ -12,7 +12,7 @@
       "equipmentBuilds": [
         {
           "type": "main",
-          "items": ["BonDosil.png", "ExpRastochka.png", "Grunti.png"]
+          "items": ["BonDosil.png", "ExpZakalka.png", "Grunti.png"]
         },
         {
           "type": "alternative",
