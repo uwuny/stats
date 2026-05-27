@@ -2,26 +2,25 @@
   "tanks": [
     {
       "id": "R215_KV_90",
-      "name": "КВ-5",
+      "name": "КВ-90",
       "nation": "ussr",
       "level": 9,
       "class": "heavy",
       "images": [
-        "ussr-R215_KV_90.png",
-        "ussr-R215_KV_90_1.png"
+        "ussr-R215_KV_90.png"
       ],
       "equipmentBuilds": [
         {
           "type": "main",
-          "items": ["rammer.png", "turbo.png", "hardening.png"]
+          "items": ["BonDosil.png", "ExpRastochka.png", "Grunti.png"]
         },
         {
           "type": "alternative",
-          "items": ["vents.png", "stabs.png", "rammer.png"]
+          "items": ["ExpKaretka.png", "TrophyTurbina.png", "TruphyUMP.png"]
         },
         {
           "type": "situational",
-          "items": ["optics.png", "turbo.png", "hardening.png"]
+          "items": ["BonVentil.png", "TrophyZakalka.png", "TrophyPricel.png"]
         }
       ],
       "mods": [
