@@ -539,6 +539,40 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     max-width: 420px;
   }
 }
+
+/* ===== СТИЛЬ ВЫПАДАЮЩЕГО СПИСКА КАК В WoT ===== */
+
+.custom-select {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px 14px;
+    min-width: 220px;
+    font-size: 15px;
+}
+
+.custom-select option {
+    background-color: #111;
+    color: #fff;
+
+    padding: 10px 10px 10px 48px;
+
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 24px 16px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* последняя строка без линии */
+.custom-select option:last-child {
+    border-bottom: none;
+}
+
+.custom-select option:hover {
+    background-color: #1f1f1f;
+}
+
 </style>
 </head>
 
@@ -938,9 +972,9 @@ async function loadEquipmentDB() {
   }
 }
 
-/* === РЕНДЕР ФИЛЬТРОВ === */
 function renderFilters() {
-  // Уровень 1-11
+
+  /* ===== УРОВНИ ===== */
   const levelSelect = document.getElementById('filterLevel');
   for (let i = 1; i <= 11; i++) {
     const opt = document.createElement('option');
@@ -950,38 +984,54 @@ function renderFilters() {
   }
   levelSelect.addEventListener('change', applyFilters);
 
-  // Нации с флагами
+
+  /* ===== НАЦИИ ===== */
   const nations = [
-    {id:'ussr', name:'СССР'}, {id:'germany', name:'Германия'},
-    {id:'usa', name:'США'}, {id:'china', name:'Китай'},
-    {id:'france', name:'Франция'}, {id:'uk', name:'Великобритания'},
-    {id:'japan', name:'Япония'}, {id:'czech', name:'Чехия'},
-    {id:'sweden', name:'Швеция'}, {id:'poland', name:'Польша'},
-    {id:'italy', name:'Италия'}, {id:'intunion', name:'Евросоюз'}
+    {id:'ussr', name:'СССР'},
+    {id:'germany', name:'Германия'},
+    {id:'usa', name:'США'},
+    {id:'china', name:'Китай'},
+    {id:'france', name:'Франция'},
+    {id:'uk', name:'Великобритания'},
+    {id:'japan', name:'Япония'},
+    {id:'czech', name:'Чехословакия'},
+    {id:'sweden', name:'Швеция'},
+    {id:'poland', name:'Польша'},
+    {id:'italy', name:'Италия'},
+    {id:'intunion', name:'Сборная наций'}
   ];
+
   const nationSelect = document.getElementById('filterNation');
+
   nations.forEach(n => {
     const opt = document.createElement('option');
     opt.value = n.id;
-    opt.innerHTML = `<img src="flags/${n.id}.png" width="60" height="40" style="vertical-align:middle;margin-right:8px"> ${n.name}`;
+    opt.textContent = n.name;
+    opt.style.backgroundImage = `url(flags/${n.id}.png)`;
     nationSelect.appendChild(opt);
   });
+
   nationSelect.addEventListener('change', applyFilters);
 
-  // Классы техники (только иконки)
+
+  /* ===== КЛАССЫ ===== */
   const classes = [
-    {id:'heavy', icon:'heavyTanks.png'},
-    {id:'medium', icon:'mediumTank.png'},
-    {id:'light', icon:'lightTank.png'},
-    {id:'td', icon:'AT-SPG.png'}
+    {id:'heavy', name:'Тяжёлые', icon:'heavyTanks.png'},
+    {id:'medium', name:'Средние', icon:'mediumTank.png'},
+    {id:'light', name:'Лёгкие', icon:'lightTank.png'},
+    {id:'td', name:'ПТ-САУ', icon:'AT-SPG.png'}
   ];
+
   const classSelect = document.getElementById('filterClass');
+
   classes.forEach(c => {
     const opt = document.createElement('option');
     opt.value = c.id;
-    opt.innerHTML = `<img src="classes/${c.icon}" width="27" height="17" style="vertical-align:middle">`;
+    opt.textContent = c.name;
+    opt.style.backgroundImage = `url(classes/${c.icon})`;
     classSelect.appendChild(opt);
   });
+
   classSelect.addEventListener('change', applyFilters);
 }
 
