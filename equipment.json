@@ -1,0 +1,107 @@
+{
+  "tanks": [
+    {
+      "id": "R215_KV_90",
+      "name": "КВ-5",
+      "nation": "ussr",
+      "level": 9,
+      "class": "heavy",
+      "images": [
+        "ussr-R215_KV_90.png",
+        "ussr-R215_KV_90_1.png"
+      ],
+      "equipmentBuilds": [
+        {
+          "type": "main",
+          "items": ["rammer.png", "turbo.png", "hardening.png"]
+        },
+        {
+          "type": "alternative",
+          "items": ["vents.png", "stabs.png", "rammer.png"]
+        },
+        {
+          "type": "situational",
+          "items": ["optics.png", "turbo.png", "hardening.png"]
+        }
+      ],
+      "mods": [
+        {
+          "left": "improvedMuzzleBreak.png",
+          "right": "improvedSelfRepairingWheels.png",
+          "level": "2.png",
+          "activeSide": "left"
+        },
+        {
+          "left": "improvedGunBreech.png",
+          "right": "improvedTurretRingStability.png",
+          "level": "5.png",
+          "activeSide": "right"
+        },
+        {
+          "left": "improvedObservationDevice.png",
+          "right": "improvedChassisStability.png",
+          "level": "6.png",
+          "activeSide": "left"
+        },
+        {
+          "left": "improvedEnginePower.png",
+          "right": "improvedChassisDurability.png",
+          "level": "8.png",
+          "activeSide": "right"
+        },
+        {
+          "left": "improvedStabilizer.png",
+          "right": "improvedLoadingMechanism.png",
+          "level": "10.png",
+          "activeSide": "left"
+        }
+      ]
+    },
+    {
+      "id": "R01_IS7",
+      "name": "ИС-7",
+      "nation": "ussr",
+      "level": 10,
+      "class": "heavy",
+      "images": ["ussr-IS7.png"],
+      "equipmentBuilds": [
+        {
+          "type": "main",
+          "items": ["rammer.png", "turbo.png", "vents.png"]
+        }
+      ],
+      "mods": [
+        {
+          "left": "improvedMuzzleBreak.png",
+          "right": "improvedSelfRepairingWheels.png",
+          "level": "2.png",
+          "activeSide": "right"
+        },
+        {
+          "left": "improvedGunBreech.png",
+          "right": "improvedTurretRingStability.png",
+          "level": "5.png",
+          "activeSide": "left"
+        },
+        {
+          "left": "improvedObservationDevice.png",
+          "right": "improvedChassisStability.png",
+          "level": "6.png",
+          "activeSide": "right"
+        },
+        {
+          "left": "improvedEnginePower.png",
+          "right": "improvedChassisDurability.png",
+          "level": "8.png",
+          "activeSide": "left"
+        },
+        {
+          "left": "improvedStabilizer.png",
+          "right": "improvedLoadingMechanism.png",
+          "level": "10.png",
+          "activeSide": "right"
+        }
+      ]
+    }
+  ]
+}
