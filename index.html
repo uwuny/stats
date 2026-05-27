@@ -998,16 +998,29 @@ function openTank(tankId) {
   currentTankId = tankId;
   const tank = EQUIPMENT_DB.tanks.find(t => t.id === tankId);
   if (!tank) return;
+  
+  // Обновляем active на кнопках
   document.querySelectorAll('#tankButtons .equip-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent === tank.name);
   });
+
   let html = `<div class="tank-name">${tank.name}</div>`;
+  
+  // Основная картинка танка
   if (tank.images?.[0]) {
-    html += `<div class="tank-main-image">
-<img src="images/${tank.images[0]}" alt="${tank.name}">
-</div>`;
-  if (tank.equipmentBuilds?.length) html += renderEquipmentBuilds(tank.equipmentBuilds);
-  if (tank.mods?.length === 5) html += renderFieldMods(tank.mods);
+    html += `<div class="tank-main-image"><img src="images/${tank.images[0]}" alt="${tank.name}"></div>`;
+  }
+  
+  // Блоки оборудования
+  if (tank.equipmentBuilds?.length) {
+    html += renderEquipmentBuilds(tank.equipmentBuilds);
+  }
+  
+  // Полевая модернизация (ровно 5 блоков)
+  if (tank.mods?.length === 5) {
+    html += renderFieldMods(tank.mods);
+  }
+  
   document.getElementById('equipmentContent').innerHTML = html;
 }
 
