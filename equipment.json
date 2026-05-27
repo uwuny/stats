@@ -66,7 +66,7 @@
       "equipmentBuilds": [
         {
           "type": "main",
-          "items": ["rammer.png", "turbo.png", "vents.png"]
+          "items": ["BonDosil.png", "TrophyTurbina.png", "ExpStab.png"]
         }
       ],
       "mods": [
