@@ -1105,6 +1105,16 @@ function renderEquipmentBuilds(builds) {
   return html;
 }
 
+/* === РЕНДЕР ОБЁРТКИ ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
+function renderFieldMods(mods) {
+
+  return `
+    <div class="mods-wrapper">
+      ${mods.map(mod => renderModBlock(mod)).join('')}
+    </div>
+  `;
+}
+  
 /* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderModBlock(mod) {
 
