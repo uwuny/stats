@@ -4,345 +4,123 @@
 <meta charset="UTF-8">
 <title>Статистика</title>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
-
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  color:white;
-  overflow-x:auto;
-
+/* ==================== БАЗОВЫЕ СТИЛИ ==================== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  overflow-x: auto;
   background: url('backgrounds.png') center center no-repeat;
   background-size: cover;
 }
 
-@media (min-width: 768px){
-  body{
-    background-attachment: fixed;
-  }
+@media (min-width: 768px) {
+  body { background-attachment: fixed; }
 }
 
-.page{
-  position:relative;
-  z-index:1;
-  padding-top:10px;
-}
-
-.matrix-title{
-  text-align:center;
-  font-size:60px;
-
-  font-family: 'Sofia Sans', sans-serif;
-  font-weight:700;
-  letter-spacing:2px;
-
-  color:#00ff66;
-  text-shadow:0 0 20px #00ff66;
-
-  margin-bottom:5px;
-}
-
-.buttons{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.date-buttons{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-button{
-  background:#2b2b2b;
-  color:#fff;
-  border:1px solid #444;
-  padding:6px 12px;
-  margin:4px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button.active{
-  background:#4a6ed1;
-}
-
-#tableWrapper{
-  width:100%;
-  overflow-x:auto;
-}
-
-table{
-  border-collapse:collapse;
-  background:#1a1a1a;
-  width:max-content;
-  min-width:100%;
-  table-layout:fixed;
-}
-
-th, td{
-  border:1px solid #444;
-  padding:6px;
-  text-align:center;
-  transition:0.15s;
-}
-
-/* === Клан-тэг в шапке таблицы === */
-.clan-header{
-  padding:4px 6px 2px 6px;
-  font-size:13px;
-  min-width:120px;
-}
-
-.clan-link{
-  color:#57a9c2;
-  text-decoration:none;
-  font-weight:700;
-  transition:0.15s;
-}
-
-.clan-link:hover{
-  color:#9be8ff;
-  text-shadow:0 0 6px rgba(0,255,102,0.6);
-}
-
-/* Чтобы две строки в заголовке не слипались */
-th{
-  vertical-align:top;
-  padding-top:8px;
-}
-  
-th:first-child, td:first-child{
-  width:180px;
-  min-width:180px;
-  max-width:180px;
-}
-
-/* hover */
-tr.hover-row td{
-  background: rgba(255,255,255,0.05);
-}
-
-td.hover-col, th.hover-col{
-  background: rgba(255,255,255,0.05);
-}
-
-td.hover-cell{
-  background: rgba(255,255,255,0.12);
-}
-
-.win{background:#2e5e2e;}
-.lose{background:#5e2e2e;}
-
-.alive{color:#00ff66; font-weight:bold;}
-.dead{color:#ff4444; font-weight:bold;}
-
-.bottom-line{
-  width:90%;
-  height:1px;
-  background:#00ff66;
-  margin:40px auto 10px auto;
-  box-shadow:0 0 8px #00ff66;
-}
-
-.footer-text{
-  text-align:center;
-  color:rgba(255,255,255,0.9);
-  font-size:14px;
-  margin-bottom:20px;
-}
-
-.main-tabs{
-  text-align:center;
-  margin-bottom:15px;
-}
-
-.main-tabs button.active{
-  background:#2e5e2e;
-}
-
-.sub-tabs{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.sub-tabs button.active{
-  background:#2e5e2e;
-}
-
-.sub-tabs button.current-campaign{
-  border:1px solid #63b3ff;
-  box-shadow:0 0 8px rgba(99,179,255,0.45);
-}
-
-.equip-btn.active{
-  background:#2e5e2e;
-  border:1px solid #4a8f4a;
-}
-
-.equip-buttons{
-  margin-top:20px;
-  text-align:center;
-}
-
-.equipment-wrapper{
-  margin-top:30px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.equipment-row{
-  align-items:center;
-  display:flex;
-  justify-content:center;
-  gap:20px;
-}
-
-.equipment-row + .equipment-row{
-  margin-top:40px;
-}
-
-.equipment-row img{
-  max-width:100%;
-  height:auto;
-}
-
-.top-row img{
-  width:600px;
-  height:450px;
-  object-fit:cover;
-
-  border-radius:8px;
-  border:none;
-  background:none;
-  padding:0;
-}
-
-.bottom-row{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.bottom-row img{
-  width:240px;
-  height:150px;
-  object-fit:cover;
-
-  border-radius:8px;
-  border:none;
-  background:none;
-  padding:0;
-}
-
-.bottom-row img{
-  display:block;
-}
-
-.assist-icons{
-  opacity:0.8;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
-
-.assist-icons img{
-  width:20px;
-  height:20px;
-  object-fit:contain;
-}
-
-.map-link{
-  color:#f0f0f0; 
-  text-decoration:none; 
-  cursor:pointer;
-  font-weight:600; 
-  transition:0.15s;
-}
-
-.map-link:hover{
-  color:#ffffff; 
-  text-shadow:0 0 4px rgba(255,255,255,0.4);
-}
-
-/* === ПОЛЕВАЯ МОДЕРНИЗАЦИЯ === */
-.mod-block {
+.page {
   position: relative;
-  width: 240px;
-  height: 120px; /* Жесткая высота блока */
-  display: inline-block;
-  margin: 15px;
+  z-index: 1;
+  padding-top: 10px;
+}
+
+.matrix-title {
+  text-align: center;
+  font-size: 60px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ff66;
+  text-shadow: 0 0 20px #00ff66;
+  margin-bottom: 5px;
+}
+
+.buttons, .date-buttons, .main-tabs, .sub-tabs, .equip-buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+button {
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  margin: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+button:hover {
+  border-color: #00ff66;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+}
+
+button.active {
+  background: #4a6ed1;
+}
+
+.main-tabs button.active,
+.sub-tabs button.active,
+.equip-btn.active {
+  background: #2e5e2e;
+  border-color: #00ff66;
+}
+
+.sub-tabs button.current-campaign {
+  border: 1px solid #63b3ff;
+  box-shadow: 0 0 8px rgba(99, 179, 255, 0.45);
+}
+
+/* ==================== ТАБЛИЦА ==================== */
+#tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  background: #1a1a1a;
+  width: max-content;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 6px;
+  text-align: center;
+  transition: 0.15s;
   vertical-align: top;
 }
 
-/* Общий стиль для всех слоев */
-.mod-base, .mod-overlay {
-  position: absolute;
-  width: 120px;  /* ПРИНУДИТЕЛЬНО 120px */
-  height: 120px; /* ПРИНУДИТЕЛЬНО 120px */
-  z-index: 1;
-  top: 0;
+th:first-child, td:first-child {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
 }
 
-.mod-base { z-index: 1; }
-.mod-overlay { z-index: 2; }
-
-.mod-base.left, .mod-overlay.left { left: 0; }
-.mod-base.right, .mod-overlay.right { left: 120px; }
-
-/* Иконки (Крестик и Галочка) */
-.mod-icon {
-  position: absolute;
-  z-index: 3;
-  /* Центрирование по низу */
+.clan-header {
+  padding: 4px 6px 2px 6px;
+  font-size: 13px;
+  min-width: 120px;
 }
 
-/* Крестик 14x14. Центр левой части: X=60, Y=120 */
-.mod-icon.cross {
-  width: 14px;
-  height: 14px;
-  left: 53px;   /* 60 - 7 */
-  top: 113px;   /* 120 - 7 */
-}
-
-/* Галочка 64x32. Центр правой части: X=180, Y=120 */
-.mod-icon.check {
-  width: 64px;
-  height: 32px;
-  left: 148px;  /* 180 - 32 */
-  top: 104px;   /* 120 - 16 */
-}
-
-/* Шестиугольник с уровнем */
-.mod-hex {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  z-index: 4;
-  left: 50%;
-  top: -20px;  /* Чуть выше стыка, подбери если нужно */
-  transform: translateX(-50%);
-}
-
-.tank-name {
-  text-align: center;
-  font-size: 28px;
-  color: #00ff66;
-  text-shadow: 0 0 15px #00ff66;
-  margin: 30px 0 20px 0;
-  font-family: 'Sofia Sans', sans-serif;
+.clan-link {
+  color: #57a9c2;
+  text-decoration: none;
   font-weight: 700;
+  transition: 0.15s;
 }
 
-.mods-wrapper {
-  text-align: center;
-  padding: 20px;
+.clan-link:hover {
+  color: #9be8ff;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
 }
 
-/* === ELO под клан-тэгом === */
 .clan-header .elo-value {
   display: block;
   font-size: 11px;
@@ -351,13 +129,376 @@ td.hover-cell{
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
 }
-  
+
+tr.hover-row td { background: rgba(255, 255, 255, 0.05); }
+td.hover-col, th.hover-col { background: rgba(255, 255, 255, 0.05); }
+td.hover-cell { background: rgba(255, 255, 255, 0.12); }
+
+.win { background: #2e5e2e; }
+.lose { background: #5e2e2e; }
+.alive { color: #00ff66; font-weight: bold; }
+.dead { color: #ff4444; font-weight: bold; }
+
+.assist-icons {
+  opacity: 0.8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.assist-icons img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.map-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.15s;
+}
+.map-link:hover {
+  color: #fff;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+/* ==================== ПОДВАЛ ==================== */
+.bottom-line {
+  width: 90%;
+  height: 1px;
+  background: #00ff66;
+  margin: 40px auto 10px;
+  box-shadow: 0 0 8px #00ff66;
+}
+.footer-text {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ==================== ОБОРУДОВАНИЕ: ФИЛЬТРЫ ==================== */
+.equip-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0 25px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-group label {
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.custom-select {
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px 6px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 120px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.custom-select:hover {
+  border-color: #00ff66;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #00ff66;
+}
+
+.nation-select option,
+.class-select option {
+  background: #1a1a1a;
+  padding: 4px;
+}
+
+.class-select {
+  min-width: 50px;
+  text-align: center;
+  padding: 6px;
+}
+
+/* ==================== ОБОРУДОВАНИЕ: КНОПКИ ТАНКОВ ==================== */
+#tankButtons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+#tankButtons button {
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#tankButtons button.active {
+  background: #2e5e2e;
+  border-color: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+}
+
+/* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
+#equipmentContent {
+  padding: 0 20px;
+}
+
+.tank-name {
+  text-align: center;
+  font-size: 28px;
+  color: #00ff66;
+  text-shadow: 0 0 15px #00ff66;
+  margin: 20px 0 30px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 700;
+}
+
+.tank-main-image {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tank-main-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+}
+
+/* Блоки оборудования */
+.equipment-builds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.equip-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  min-width: 420px;
+  max-width: 100%;
+}
+
+.equip-card .title {
+  font-size: 14px;
+  color: #00ff66;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.equip-items {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.equip-item {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+.equip-item img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+/* Layout: 1 блок */
+.equipment-builds[data-count="1"] .equip-card {
+  margin: 0 auto;
+}
+
+/* Layout: 2 блока */
+.equipment-builds[data-count="2"] {
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Layout: 3 блока */
+.equipment-builds[data-count="3"] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  justify-items: center;
+}
+
+.equipment-builds[data-count="3"] .equip-card:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+}
+
+.equipment-builds[data-count="3"] .equip-card:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.equipment-builds[data-count="3"] .equip-card:nth-child(3) {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-self: center;
+  margin-top: 10px;
+}
+
+/* ==================== ПОЛЕВАЯ МОДЕРНИЗАЦИЯ ==================== */
+.mods-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid #333;
+  margin-top: 20px;
+}
+
+.mod-block {
+  position: relative;
+  width: 240px;
+  height: 120px;
+  display: inline-block;
+}
+
+.mod-base {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  z-index: 1;
+  object-fit: contain;
+}
+.mod-base.left { left: 0; }
+.mod-base.right { left: 120px; }
+
+.mod-overlay {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+  object-fit: contain;
+}
+.mod-overlay.left { left: 0; }
+.mod-overlay.right { left: 120px; }
+
+.mod-overlay.active {
+  width: 142px;
+  height: 142px;
+}
+.mod-overlay.active.left { left: -11px; top: -11px; }
+.mod-overlay.active.right { left: 109px; top: -11px; }
+
+.mod-overlay.disabled {
+  width: 120px;
+  height: 120px;
+  opacity: 0.7;
+}
+
+.mod-level {
+  position: absolute;
+  width: 38px;
+  height: 36px;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  object-fit: contain;
+}
+
+.mod-icon {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.mod-icon.checkmark {
+  width: 64px;
+  height: 32px;
+}
+.mod-icon.checkmark.left { left: 28px; bottom: -16px; }
+.mod-icon.checkmark.right { left: 148px; bottom: -16px; }
+
+.mod-icon.blocked {
+  width: 14px;
+  height: 14px;
+}
+.mod-icon.blocked.left { left: 53px; bottom: -7px; }
+.mod-icon.blocked.right { left: 173px; bottom: -7px; }
+
+/* ==================== АДАПТИВНОСТЬ ==================== */
+@media (max-width: 768px) {
+  .equip-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  .custom-select {
+    width: 100%;
+    max-width: 200px;
+  }
+  .equipment-builds[data-count="2"],
+  .equipment-builds[data-count="3"] {
+    flex-direction: column;
+    display: flex;
+  }
+  .equipment-builds[data-count="3"] .equip-card {
+    justify-self: center !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+  .equip-card {
+    min-width: auto;
+    width: 100%;
+    max-width: 420px;
+  }
+}
 </style>
 </head>
 
 <body>
-
-
 <div class="page">
 
 <h1 class="matrix-title">СТАТИСТИКА</h1>
@@ -366,48 +507,53 @@ td.hover-cell{
   <button class="tab active" onclick="switchTab('stats', event)">Статистика</button>
   <button class="tab" onclick="switchTab('equipment', event)">Оборудование</button>
 </div>
+
+<!-- ==================== ВКЛАДКА СТАТИСТИКИ ==================== -->
 <div id="statsPage">
-  
-<div class="buttons">
-  <button class="mode" onclick="loadTable('damage',event)">Урон</button>
-  <button class="mode" onclick="loadTable('damage_received',event)">Получено</button>
-  <button class="mode" onclick="loadTable('hits',event)">Попадания</button>
-  <button class="mode" onclick="loadTable('assist',event)">Ассист</button>
-  <button onclick="toggleAverage()">Среднее</button>
-</div>
-
-<div class="sub-tabs" id="campaignTabs"></div>
-
-<div class="date-buttons" id="dateButtons"></div>
-
-<div id="tableWrapper">
-  <div id="table"></div>
-</div>
-  
-</div> <!-- statsPage -->
-
-<div id="equipmentPage" style="display:none; text-align:center;">
-
-  <div class="equip-buttons" id="tankModsButtons">
-    <button class="equip-btn" onclick="openTankMods('IS7', event)">ИС-7</button>
-    <button class="equip-btn" onclick="openTankMods('Object277', event)">Об. 277</button>
-    <button class="equip-btn" onclick="openTankMods('Object279', event)">Об. 279(р)</button>
-    <!-- Добавляй новые кнопки по аналогии -->
+  <div class="buttons">
+    <button class="mode" onclick="loadTable('damage',event)">Урон</button>
+    <button class="mode" onclick="loadTable('damage_received',event)">Получено</button>
+    <button class="mode" onclick="loadTable('hits',event)">Попадания</button>
+    <button class="mode" onclick="loadTable('assist',event)">Ассист</button>
+    <button onclick="toggleAverage()">Среднее</button>
   </div>
+  <div class="sub-tabs" id="campaignTabs"></div>
+  <div class="date-buttons" id="dateButtons"></div>
+  <div id="tableWrapper"><div id="table"></div></div>
+</div>
 
+<!-- ==================== ВКЛАДКА ОБОРУДОВАНИЯ ==================== -->
+<div id="equipmentPage" style="display:none;">
+  <div class="equip-filters">
+    <div class="filter-group">
+      <label>Уровень</label>
+      <select id="filterLevel" class="custom-select">
+        <option value="all">Все</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Нация</label>
+      <select id="filterNation" class="custom-select nation-select">
+        <option value="all">Все</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Класс</label>
+      <select id="filterClass" class="custom-select class-select">
+        <option value="all">Все</option>
+      </select>
+    </div>
+  </div>
+  <div class="equip-buttons" id="tankButtons"></div>
   <div id="equipmentContent"></div>
-
 </div>
 
-  </div>
-
-</div>
-  
 <div class="bottom-line"></div>
 <div class="footer-text">Created by McQueen</div>
 
 </div>
 
+<!-- ==================== СКРИПТ #1: СТАТИСТИКА (без изменений) ==================== -->
 <script>
 let DATA = null;
 
@@ -427,46 +573,28 @@ function parseDate(str){
 }
 
 function switchTab(tab, event){
-
-  document.querySelectorAll(".tab")
-    .forEach(b=>b.classList.remove("active"));
-
+  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
   event.target.classList.add("active");
-
-  if(tab==="stats"){
-    document.getElementById("statsPage").style.display="block";
-    document.getElementById("equipmentPage").style.display="none";
+  if(tab === "stats"){
+    document.getElementById("statsPage").style.display = "block";
+    document.getElementById("equipmentPage").style.display = "none";
   } else {
-    document.getElementById("statsPage").style.display="none";
-    document.getElementById("equipmentPage").style.display="block";
+    document.getElementById("statsPage").style.display = "none";
+    document.getElementById("equipmentPage").style.display = "block";
   }
 }
-  
-let avgPosition = "left";
 
+let avgPosition = "left";
 let currentType = "damage";
 let currentDate = null;
 let visibleBattles = [];
 
 const DATA_FILES = [
-  "data/battle_data.json",
-  "data/2.json",
-  "data/3.json",
-  "data/4.json",
-  "data/5.json",
-  "data/6.json",
-  "data/7.json",
-  "data/8.json",
-  "data/9.json",
-  "data/10.json",
-  "data/11.json",
-  "data/12.json",
-  "data/13.json",
-  "data/14.json",
-  "data/15.json"
-  // сюда просто добавляешь новые файлы
+  "data/battle_data.json", "data/2.json", "data/3.json", "data/4.json",
+  "data/5.json", "data/6.json", "data/7.json", "data/8.json",
+  "data/9.json", "data/10.json", "data/11.json", "data/12.json",
+  "data/13.json", "data/14.json", "data/15.json"
 ];
-
 
 const CAMPAIGNS = [
   { key: "global_map", label: "Глобальная карта", start: [3, 23], end: [4, 5] },
@@ -474,10 +602,7 @@ const CAMPAIGNS = [
   { key: "rain_wall", label: "Стена дождя", start: [5, 12], end: [5, 18] },
   { key: "eternal_storm", label: "Вечная гроза", start: [6, 1], end: [6, 7] }
 ];
-
 let currentCampaign = CAMPAIGNS[0].key;
-
-
 const HTML_REPLAYS_DIR = "replays_html";
 
 function normalizeReplayFilename(rawName){
@@ -491,12 +616,10 @@ function openBattleHtml(battle){
   const fileFromFilename = normalizeReplayFilename(battle.filename);
   const fileFromHtmlFile = normalizeReplayFilename(battle.html_file);
   const replayFile = fileFromFilename || fileFromHtmlFile;
-
   if(!replayFile){
     alert("У этого боя нет поля filename/html_file в JSON.");
     return;
   }
-
   window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
 }
 
@@ -504,7 +627,6 @@ function getCampaignByDate(dateStr){
   const parsed = parseDate(dateStr);
   const month = parsed.getMonth() + 1;
   const day = parsed.getDate();
-
   return CAMPAIGNS.find(c => {
     const [sm, sd] = c.start;
     const [em, ed] = c.end;
@@ -517,8 +639,7 @@ function getCampaignByDate(dateStr){
 
 function switchCampaign(key, event){
   currentCampaign = key;
-  document.querySelectorAll("#campaignTabs button")
-    .forEach(b => b.classList.remove("active"));
+  document.querySelectorAll("#campaignTabs button").forEach(b => b.classList.remove("active"));
   if(event) event.target.classList.add("active");
   renderCampaignTabs();
   initDates();
@@ -528,8 +649,7 @@ function switchCampaign(key, event){
 function renderCampaignTabs(){
   const wrap = document.getElementById("campaignTabs");
   wrap.innerHTML = "";
-
-  CAMPAIGNS.forEach((campaign, idx) => {
+  CAMPAIGNS.forEach(campaign => {
     const btn = document.createElement("button");
     btn.textContent = campaign.label;
     if(campaign.key === currentCampaign) btn.classList.add("active");
@@ -542,10 +662,8 @@ function renderCampaignTabs(){
 function switchEquipmentMode(mode, event){
   document.querySelectorAll(".equip-mode").forEach(btn => btn.classList.remove("active"));
   if(event) event.target.classList.add("active");
-
   const abs = document.getElementById("equipmentAbs");
   const random = document.getElementById("equipmentRandom");
-
   if(mode === "abs"){
     abs.style.display = "block";
     random.style.display = "none";
@@ -555,20 +673,13 @@ function switchEquipmentMode(mode, event){
   }
 }
 
-Promise.all(
-  DATA_FILES.map(async file => {
-    const response = await fetch(file);
-    if(!response.ok){
-      throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
-    }
-    return response.json();
-  })
-)
+Promise.all(DATA_FILES.map(async file => {
+  const response = await fetch(file);
+  if(!response.ok) throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
+  return response.json();
+}))
 .then(allData => {
-  DATA = {
-    battles: allData.flatMap(d => d.battles || [])
-  };
-
+  DATA = { battles: allData.flatMap(d => d.battles || []) };
   renderCampaignTabs();
   initDates();
   loadTable(currentType);
@@ -584,428 +695,353 @@ function openBattleHtmlByIndex(index){
 }
 
 function toggleAverage(){
-  avgPosition = avgPosition==="right" ? "left" : "right";
+  avgPosition = avgPosition === "right" ? "left" : "right";
   loadTable(currentType);
 }
 
 function initDates(){
-  const box=document.getElementById("dateButtons");
-  box.innerHTML="";
-
-  let dates=[...new Set(DATA.battles
+  const box = document.getElementById("dateButtons");
+  box.innerHTML = "";
+  let dates = [...new Set(DATA.battles
     .filter(b => getCampaignByDate(b.date) === currentCampaign)
-    .map(b=>b.date))];
-  dates.sort((a,b)=>parseDate(a)-parseDate(b));
-
+    .map(b => b.date))];
+  dates.sort((a,b) => parseDate(a) - parseDate(b));
   if(!dates.length){
     box.innerHTML = "<p>Для этого блока пока нет данных.</p>";
     currentDate = null;
     loadTable(currentType);
     return;
   }
-
-  dates.forEach((date,index)=>{
-    let btn=document.createElement("button");
-    btn.innerText=date;
-
-    btn.onclick=()=>{
-      currentDate=date;
-      document.querySelectorAll(".date-buttons button")
-        .forEach(b=>b.classList.remove("active"));
+  dates.forEach((date, index) => {
+    let btn = document.createElement("button");
+    btn.innerText = date;
+    btn.onclick = () => {
+      currentDate = date;
+      document.querySelectorAll(".date-buttons button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       loadTable(currentType);
     };
-
     box.appendChild(btn);
-
-    if(index===0){
-      btn.classList.add("active");
-      currentDate=date;
-    }
+    if(index === 0){ btn.classList.add("active"); currentDate = date; }
   });
-
-  let allBtn=document.createElement("button");
-  allBtn.innerText="ВСЕ БОИ";
-
-  allBtn.onclick=()=>{
-    currentDate=null;
-    document.querySelectorAll(".date-buttons button")
-      .forEach(b=>b.classList.remove("active"));
+  let allBtn = document.createElement("button");
+  allBtn.innerText = "ВСЕ БОИ";
+  allBtn.onclick = () => {
+    currentDate = null;
+    document.querySelectorAll(".date-buttons button").forEach(b => b.classList.remove("active"));
     allBtn.classList.add("active");
     loadTable(currentType);
   };
-
   box.appendChild(allBtn);
 }
 
-function getPenRate(name,battles){
-  let hits=0,pen=0;
-
-  battles.forEach(b=>{
-    let p=b.players[name];
+function getPenRate(name, battles){
+  let hits = 0, pen = 0;
+  battles.forEach(b => {
+    let p = b.players[name];
     if(!p) return;
-    hits+=p.hits;
-    pen+=p.piercings;
+    hits += p.hits;
+    pen += p.piercings;
   });
-
-  return hits ? pen/hits : 0;
+  return hits ? pen / hits : 0;
 }
 
-function loadTable(type,event){
-
-  currentType=type;
-
+function loadTable(type, event){
+  currentType = type;
   if(event){
-    document.querySelectorAll(".mode")
-      .forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".mode").forEach(b => b.classList.remove("active"));
     event.target.classList.add("active");
   }
-
-  let battles=DATA.battles.filter(
-    b=>getCampaignByDate(b.date)===currentCampaign && (!currentDate || b.date===currentDate)
+  let battles = DATA.battles.filter(
+    b => getCampaignByDate(b.date) === currentCampaign && (!currentDate || b.date === currentDate)
   );
-
   if(!battles.length){
-    document.getElementById("table").innerHTML="Нет боёв";
+    document.getElementById("table").innerHTML = "Нет боёв";
     visibleBattles = [];
     return;
   }
-
   visibleBattles = battles;
-
-  let players={};
-
-  battles.forEach((battle,idx)=>{
+  let players = {};
+  battles.forEach((battle, idx) => {
     for(let name in battle.players){
-
-      let p=battle.players[name];
-      if(!players[name]) players[name]={};
-
-      let value=0;
-
-      if(type==="damage") value=p.damage;
-      if(type==="damage_received") value=p.damage_received;
-      if(type==="hits") value=`${p.shots}/${p.hits}/${p.piercings}`;
-      if(type==="assist") value=p.assist_track+p.assist_radio;
-
-      players[name][idx]={
-        tank:p.tank,
-        value:value,
-        assist_track:p.assist_track,
-        assist_radio:p.assist_radio,
-        alive:p.alive
+      let p = battle.players[name];
+      if(!players[name]) players[name] = {};
+      let value = 0;
+      if(type === "damage") value = p.damage;
+      if(type === "damage_received") value = p.damage_received;
+      if(type === "hits") value = `${p.shots}/${p.hits}/${p.piercings}`;
+      if(type === "assist") value = p.assist_track + p.assist_radio;
+      players[name][idx] = {
+        tank: p.tank,
+        value: value,
+        assist_track: p.assist_track,
+        assist_radio: p.assist_radio,
+        alive: p.alive
       };
     }
   });
-
-  let averages={};
-
+  let averages = {};
   for(let name in players){
-    let sum=0,count=0;
-
-    battles.forEach((b,i)=>{
-      let cell=players[name][i];
+    let sum = 0, count = 0;
+    battles.forEach((b, i) => {
+      let cell = players[name][i];
       if(!cell) return;
-
-      if(typeof cell.value==="number"){
-        sum+=cell.value;
-        count++;
-      }
+      if(typeof cell.value === "number"){ sum += cell.value; count++; }
     });
-
-    averages[name]=count ? Math.round(sum/count) : 0;
+    averages[name] = count ? Math.round(sum / count) : 0;
   }
-
-  let sorted=Object.keys(players);
-
-  if(type==="hits")
-    sorted.sort((a,b)=>getPenRate(b,battles)-getPenRate(a,battles));
+  let sorted = Object.keys(players);
+  if(type === "hits")
+    sorted.sort((a,b) => getPenRate(b, battles) - getPenRate(a, battles));
   else
-    sorted.sort((a,b)=>averages[b]-averages[a]);
+    sorted.sort((a,b) => averages[b] - averages[a]);
 
-let html="<table>";
-
-// === ПЕРВАЯ СТРОКА: пустые ячейки + тэги кланов ===
-html += "<tr>";
-html += "<th></th>"; // под "Ник"
-if(type==="hits" && avgPosition==="left") html+="<th></th>";
-if(type!=="hits" && avgPosition==="left") html+="<th></th>";
-
-battles.forEach((b)=>{
-  // 1. Ищем тэг клана (проверяем оба возможных названия ключа)
-  let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
-  
-  let clanCell = "";
-  
-  // 2. Если тэг есть — делаем ссылку
-  if(clanTag){
-    clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
-  }
-  
-  // 3. Если ELO есть и это число — добавляем под тэгом
-  // Проверяем, что elo не null и не undefined
-  if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
-    clanCell += `<br><span class="elo-value">${b.elo}</span>`;
-  } else {
-    // Для отладки: если ELO нет, можно вывести прочерк (убери эту строку потом, если не нужно)
-    // clanCell += `<br><span style="color:#555; font-size:10px;">-</span>`;
-  }
-  
-  html += `<th class="clan-header">${clanCell}</th>`;
-});
-
-if(type==="hits" && avgPosition==="right") html+="<th></th>";
-if(type!=="hits" && avgPosition==="right") html+="<th></th>";
-html += "</tr>";
-
-// === ВТОРАЯ СТРОКА: Ник + Среднее + названия карт ===
-html+="<tr><th>Ник</th>";
-
-if(type==="hits" && avgPosition==="left") html+="<th>%</th>";
-if(type!=="hits" && avgPosition==="left") html+="<th>Среднее</th>";
-
-battles.forEach((b, battleIndex)=>{
-  html+=`<th class="${b.win?"win":"lose"}">
-    <a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a>
-  </th>`;
-});
-
-if(type==="hits" && avgPosition==="right") html+="<th>%</th>";
-if(type!=="hits" && avgPosition==="right") html+="<th>Среднее</th>";
-
-html+="</tr>";
-
-  sorted.forEach(name=>{
-    html+="<tr>";
-    html+=`<td>${escapeHtml(name)}</td>`;
-
-    if(type==="hits" && avgPosition==="left")
-      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
-
-    if(type!=="hits" && avgPosition==="left")
-      html+=`<td>${averages[name]}</td>`;
-
-    battles.forEach((b,i)=>{
-      let cell=players[name][i];
-
-      if(!cell){
-        html+="<td></td>";
-        return;
-      }
-
-      let tankClass = cell.alive ? "alive":"dead";
-
-      let displayValue = cell.value;
-
-      if(type==="assist"){
-          displayValue = `
-            ${cell.value}
-            <br>
-            <small class="assist-icons">
-              <img src="icons/track.png"> ${cell.assist_track}
-              &nbsp;|&nbsp;
-              <img src="icons/spot.png"> ${cell.assist_radio}
-            </small>
-          `;
-        }
-
-      html+=`<td>
-        <span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>
-        ${displayValue}
-      </td>`;
-    });
-
-    if(type==="hits" && avgPosition==="right")
-      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
-
-    if(type!=="hits" && avgPosition==="right")
-      html+=`<td>${averages[name]}</td>`;
-
-    html+="</tr>";
+  let html = "<table>";
+  html += "<tr><th></th>";
+  if(type === "hits" && avgPosition === "left") html += "<th></th>";
+  if(type !== "hits" && avgPosition === "left") html += "<th></th>";
+  battles.forEach(b => {
+    let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
+    let clanCell = "";
+    if(clanTag) clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
+    if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
+    html += `<th class="clan-header">${clanCell}</th>`;
   });
+  if(type === "hits" && avgPosition === "right") html += "<th></th>";
+  if(type !== "hits" && avgPosition === "right") html += "<th></th>";
+  html += "</tr>";
 
-  html+="</table>";
+  html += "<tr><th>Ник</th>";
+  if(type === "hits" && avgPosition === "left") html += "<th>%</th>";
+  if(type !== "hits" && avgPosition === "left") html += "<th>Среднее</th>";
+  battles.forEach((b, battleIndex) => {
+    html += `<th class="${b.win ? 'win' : 'lose'}"><a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a></th>`;
+  });
+  if(type === "hits" && avgPosition === "right") html += "<th>%</th>";
+  if(type !== "hits" && avgPosition === "right") html += "<th>Среднее</th>";
+  html += "</tr>";
 
-  document.getElementById("table").innerHTML=html;
-
+  sorted.forEach(name => {
+    html += "<tr>";
+    html += `<td>${escapeHtml(name)}</td>`;
+    if(type === "hits" && avgPosition === "left") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
+    if(type !== "hits" && avgPosition === "left") html += `<td>${averages[name]}</td>`;
+    battles.forEach((b, i) => {
+      let cell = players[name][i];
+      if(!cell){ html += "<td></td>"; return; }
+      let tankClass = cell.alive ? "alive" : "dead";
+      let displayValue = cell.value;
+      if(type === "assist"){
+        displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png"> ${cell.assist_radio}</small>`;
+      }
+      html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>${displayValue}</td>`;
+    });
+    if(type === "hits" && avgPosition === "right") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
+    if(type !== "hits" && avgPosition === "right") html += `<td>${averages[name]}</td>`;
+    html += "</tr>";
+  });
+  html += "</table>";
+  document.getElementById("table").innerHTML = html;
   enableHover();
 }
 
-/* hover */
 function enableHover(){
-  const table=document.querySelector("table");
+  const table = document.querySelector("table");
   if(!table) return;
-
-  const cells=table.querySelectorAll("td");
-
-  cells.forEach(cell=>{
-    cell.addEventListener("mouseenter",()=>{
-      const row=cell.parentElement;
-      const index=cell.cellIndex;
-
+  const cells = table.querySelectorAll("td");
+  cells.forEach(cell => {
+    cell.addEventListener("mouseenter", () => {
+      const row = cell.parentElement;
+      const index = cell.cellIndex;
       row.classList.add("hover-row");
-
-      table.querySelectorAll("tr").forEach(tr=>{
-        if(tr.children[index]){
-          tr.children[index].classList.add("hover-col");
-        }
+      table.querySelectorAll("tr").forEach(tr => {
+        if(tr.children[index]) tr.children[index].classList.add("hover-col");
       });
-
       cell.classList.add("hover-cell");
     });
-
-    cell.addEventListener("mouseleave",()=>{
-      const row=cell.parentElement;
-      const index=cell.cellIndex;
-
+    cell.addEventListener("mouseleave", () => {
+      const row = cell.parentElement;
+      const index = cell.cellIndex;
       row.classList.remove("hover-row");
-
-      table.querySelectorAll("tr").forEach(tr=>{
-        if(tr.children[index]){
-          tr.children[index].classList.remove("hover-col");
-        }
+      table.querySelectorAll("tr").forEach(tr => {
+        if(tr.children[index]) tr.children[index].classList.remove("hover-col");
       });
-
       cell.classList.remove("hover-cell");
     });
   });
 }
+</script>
 
+<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ (новый, чистый) ==================== -->
+<script>
+/* === ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ === */
+let EQUIPMENT_DB = null;
+let currentTankId = null;
 
-function loadEquipment(key, event){
-
-  document.querySelectorAll(".equip-btn")
-    .forEach(b => b.classList.remove("active"));
-
-  if(event){
-    event.target.classList.add("active");
+/* === ЗАГРУЗКА БАЗЫ ОБОРУДОВАНИЯ === */
+async function loadEquipmentDB() {
+  try {
+    const response = await fetch('equipment.json');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    EQUIPMENT_DB = await response.json();
+    renderFilters();
+    renderTankButtons();
+    if (EQUIPMENT_DB.tanks?.length > 0) openTank(EQUIPMENT_DB.tanks[0].id);
+  } catch (err) {
+    console.error('Ошибка загрузки equipment.json:', err);
+    document.getElementById('equipmentContent').innerHTML = 
+      `<p style="color:#ff4444">Не удалось загрузить данные оборудования</p>`;
   }
-
-  let data = EQUIPMENT[key];
-  if(!data) return;
-  
-  let html = "";
-  html += `<div class="equipment-wrapper">`;
-
-  html += `<div class="equipment-row top-row">`;
-  data.row1.forEach(img=>{
-    html += `<img src="${img}">`;
-  });
-  html += `</div>`;
-
-  html += `<div class="equipment-row bottom-row">`;
-  data.row2.forEach(img=>{
-    html += `<img src="${img}">`;
-  });
-  html += `</div>`;
-
-  html += `</div>`;
-
-  document.getElementById("equipmentContent").innerHTML = html;
 }
 
-
-window.addEventListener("DOMContentLoaded", () => {
-  const firstBtn = document.querySelector(".equip-btn");
-
-  if(firstBtn){
-    firstBtn.click();
+/* === РЕНДЕР ФИЛЬТРОВ === */
+function renderFilters() {
+  // Уровень 1-11
+  const levelSelect = document.getElementById('filterLevel');
+  for (let i = 1; i <= 11; i++) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = i;
+    levelSelect.appendChild(opt);
   }
-});
+  levelSelect.addEventListener('change', applyFilters);
 
+  // Нации с флагами
+  const nations = [
+    {id:'ussr', name:'СССР'}, {id:'germany', name:'Германия'},
+    {id:'usa', name:'США'}, {id:'china', name:'Китай'},
+    {id:'france', name:'Франция'}, {id:'uk', name:'Великобритания'},
+    {id:'japan', name:'Япония'}, {id:'czech', name:'Чехия'},
+    {id:'sweden', name:'Швеция'}, {id:'poland', name:'Польша'},
+    {id:'italy', name:'Италия'}, {id:'intunion', name:'Евросоюз'}
+  ];
+  const nationSelect = document.getElementById('filterNation');
+  nations.forEach(n => {
+    const opt = document.createElement('option');
+    opt.value = n.id;
+    opt.innerHTML = `<img src="flags/${n.id}.png" width="60" height="40" style="vertical-align:middle;margin-right:8px"> ${n.name}`;
+    nationSelect.appendChild(opt);
+  });
+  nationSelect.addEventListener('change', applyFilters);
 
-// === БАЗА МОДЕРНИЗАЦИЙ ===
-const MODS_DB = {
-  "IS7": {
-    name: "ИС-7",
-    image: "IS7_01.png",
-    builds: [
-      {
-        left: "improvedEnginePower.png",
-        right: "improvedChassisDurability.png",
-        level: "8.png",
-        leftActive: false,
-        rightActive: true
-      },
-      {
-        left: "improvedGunBreech.png",
-        right: "improvedTurretRingStability.png", // ← ИСПРАВЛЕНО НАЗВАНИЕ
-        level: "7.png",
-        leftActive: false,
-        rightActive: true
-      },
-      {
-        left: "improvedObservationDevice.png", // ← Поставь нужную левую картинку
-        right: "improvedChassisStability.png",
-        level: "5.png",
-        leftActive: true,  // ← Если тут true, обводка будет
-        rightActive: false // ← Если тут false, будет крестик
-      }
-    ]
+  // Классы техники (только иконки)
+  const classes = [
+    {id:'heavy', icon:'heavyTanks.png'},
+    {id:'medium', icon:'mediumTank.png'},
+    {id:'light', icon:'lightTank.png'},
+    {id:'td', icon:'AT-SPG.png'}
+  ];
+  const classSelect = document.getElementById('filterClass');
+  classes.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.innerHTML = `<img src="classes/${c.icon}" width="27" height="17" style="vertical-align:middle">`;
+    classSelect.appendChild(opt);
+  });
+  classSelect.addEventListener('change', applyFilters);
+}
+
+/* === ПРИМЕНЕНИЕ ФИЛЬТРОВ === */
+function applyFilters() {
+  const level = document.getElementById('filterLevel').value;
+  const nation = document.getElementById('filterNation').value;
+  const cls = document.getElementById('filterClass').value;
+  const filtered = EQUIPMENT_DB.tanks.filter(tank => {
+    if (level !== 'all' && tank.level != level) return false;
+    if (nation !== 'all' && tank.nation !== nation) return false;
+    if (cls !== 'all' && tank.class !== cls) return false;
+    return true;
+  });
+  renderTankButtons(filtered);
+  if (currentTankId && !filtered.find(t => t.id === currentTankId)) {
+    currentTankId = null;
+    document.getElementById('equipmentContent').innerHTML = '';
   }
-};
+}
 
-function renderModBlock(build) {
+/* === РЕНДЕР КНОПОК ТАНКОВ === */
+function renderTankButtons(tanks = null) {
+  const container = document.getElementById('tankButtons');
+  container.innerHTML = '';
+  const list = tanks || EQUIPMENT_DB?.tanks || [];
+  list.forEach(tank => {
+    const btn = document.createElement('button');
+    btn.textContent = tank.name;
+    btn.className = 'equip-btn';
+    if (tank.id === currentTankId) btn.classList.add('active');
+    btn.onclick = () => openTank(tank.id);
+    container.appendChild(btn);
+  });
+}
+
+/* === ОТКРЫТИЕ ТАНКА === */
+function openTank(tankId) {
+  currentTankId = tankId;
+  const tank = EQUIPMENT_DB.tanks.find(t => t.id === tankId);
+  if (!tank) return;
+  document.querySelectorAll('#tankButtons .equip-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === tank.name);
+  });
+  let html = `<div class="tank-name">${tank.name}</div>`;
+  if (tank.images?.[0]) {
+    html += `<div class="tank-main-image"><img src="${tank.images[0]}" alt="${tank.name}"></div>`;
+  }
+  if (tank.equipmentBuilds?.length) html += renderEquipmentBuilds(tank.equipmentBuilds);
+  if (tank.mods?.length === 5) html += renderFieldMods(tank.mods);
+  document.getElementById('equipmentContent').innerHTML = html;
+}
+
+/* === РЕНДЕР БЛОКОВ ОБОРУДОВАНИЯ === */
+function renderEquipmentBuilds(builds) {
+  const titles = { main: 'Основной', alternative: 'Альтернативный', situational: 'Ситуативный' };
+  const count = builds.length;
+  let html = `<div class="equipment-builds" data-count="${count}">`;
+  builds.forEach(build => {
+    html += `
+      <div class="equip-card">
+        <div class="title">${titles[build.type] || build.type}</div>
+        <div class="equip-items">
+          ${build.items.map(item => `<div class="equip-item"><img src="equipment/${item}" alt=""></div>`).join('')}
+        </div>
+      </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+/* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
+function renderFieldMods(mods) {
+  let html = `<div class="mods-wrapper">`;
+  mods.forEach(mod => html += renderModBlock(mod));
+  html += `</div>`;
+  return html;
+}
+
+/* === РЕНДЕР ОДНОГО БЛОКА МОДА === */
+function renderModBlock(mod) {
+  const isLeftActive = mod.activeSide === 'left';
   return `
     <div class="mod-block">
-      <!-- 1. Картинки модулей -->
-      <img src="Modernization/${build.left}" class="mod-base left">
-      <img src="Modernization/${build.right}" class="mod-base right">
-      
-      <!-- 2. Обводки/Затемнения (Оверлеи) -->
-      <!-- Если active=false, показываем disabled.png (затемнение) -->
-      <img src="Modernization/disabled.png" class="mod-overlay left" style="opacity: ${build.leftActive ? '0' : '1'}">
-      <!-- Если active=true, показываем active.png (обводка) -->
-      <img src="Modernization/active.png" class="mod-overlay right" style="opacity: ${build.rightActive ? '1' : '0'}">
-      
-      <!-- 3. Иконки (Крестик/Галочка) -->
-      <!-- Если active=false, показываем крестик -->
-      <img src="Modernization/marker_blocked.png" class="mod-icon cross" style="opacity: ${build.leftActive ? '0' : '1'}">
-      <!-- Если active=true, показываем галочку -->
-      <img src="Modernization/checkmark.png" class="mod-icon check" style="opacity: ${build.rightActive ? '1' : '0'}">
-      
-      <!-- 4. Уровень (Шестиугольник) -->
-      <img src="Modernization/${build.level}" class="mod-hex">
-    </div>
-  `;
+      <img src="Modernization/${mod.left}" class="mod-base left" alt="">
+      <img src="Modernization/${mod.right}" class="mod-base right" alt="">
+      <img src="Modernization/active.png" class="mod-overlay active ${isLeftActive ? 'left' : 'right'}" style="opacity:${isLeftActive ? 1 : 0}" alt="">
+      <img src="Modernization/disabled.png" class="mod-overlay disabled ${isLeftActive ? 'right' : 'left'}" style="opacity:${isLeftActive ? 0 : 0.7}" alt="">
+      <img src="Modernization/${mod.level}" class="mod-level" alt="">
+      <img src="Modernization/checkmark.png" class="mod-icon checkmark ${isLeftActive ? 'left' : 'right'}" style="opacity:${isLeftActive ? 1 : 0}" alt="">
+      <img src="Modernization/marker_blocked.png" class="mod-icon blocked ${isLeftActive ? 'right' : 'left'}" style="opacity:${isLeftActive ? 0 : 1}" alt="">
+    </div>`;
 }
 
-function openTankMods(tankKey, event) {
-  // Убираем active со всех кнопок
-  document.querySelectorAll("#tankModsButtons .equip-btn").forEach(btn => {
-    btn.classList.remove("active");
-  });
-  
-  if(event) {
-    event.target.classList.add("active");
-  }
-  
-  const tank = MODS_DB[tankKey];
-  if(!tank) {
-    document.getElementById("equipmentContent").innerHTML = 
-      "<p>Данные для этого танка не найдены</p>";
-    return;
-  }
-  
-  let html = `<div class="tank-name">${tank.name}</div>`;
-  html += `<div class="mods-wrapper">`;
-  
-  tank.builds.forEach(build => {
-    html += renderModBlock(build);
-  });
-  
-  html += `</div>`;
-  
-  // Основная картинка танка
-  if(tank.image) {
-    html += `<div class="tank-main-image">`;
-    html += `<img src="images/${tank.image}" alt="${tank.name}">`;
-    html += `</div>`;
-  }
-  
-  document.getElementById("equipmentContent").innerHTML = html;
-}
-
+/* === ИНИЦИАЛИЗАЦИЯ === */
+document.addEventListener('DOMContentLoaded', () => {
+  const equipmentPage = document.getElementById('equipmentPage');
+  if (equipmentPage?.style.display !== 'none') loadEquipmentDB();
+  const originalSwitchTab = window.switchTab;
+  window.switchTab = function(tab, event) {
+    if (originalSwitchTab) originalSwitchTab(tab, event);
+    if (tab === 'equipment' && !EQUIPMENT_DB) loadEquipmentDB();
+  };
+});
 </script>
 
 </body>
