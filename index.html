@@ -280,8 +280,9 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 
 .tank-main-image {
-  text-align: center;
-  margin-bottom: 30px;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 40px;
 }
 
 .tank-main-image img {
@@ -289,9 +290,9 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   height: auto;
   max-height: 450px;
   object-fit: contain;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #1a1a1a;
+  border: none;
+  border-radius: 0;
+  background: transparent;
 }
 
 /* Блоки оборудования */
@@ -387,22 +388,46 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 /* ==================== ПОЛЕВАЯ МОДЕРНИЗАЦИЯ — НОВЫЙ ВИЗУАЛ ==================== */
 .mods-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  padding: 15px 0 25px;
-  border-top: 1px solid #333;
-  margin-top: 25px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 /* Основной контейнер блока мода */
 .mod-block {
-  position: relative;
+  position: absolute;
   width: 240px;
   height: 120px;
-  display: block;
-  margin: 0;
+}
+
+/* 2 мод */
+.mod-block:nth-child(1){
+  top: 70px;
+  left: -120px;
+}
+
+/* 4 мод */
+.mod-block:nth-child(2){
+  top: 185px;
+  left: -210px;
+}
+
+/* 5 мод */
+.mod-block:nth-child(3){
+  top: 300px;
+  left: -120px;
+}
+
+/* 7 мод */
+.mod-block:nth-child(4){
+  top: 70px;
+  right: -120px;
+}
+
+/* 8 мод */
+.mod-block:nth-child(5){
+  top: 185px;
+  right: -210px;
 }
 
 /* === БАЗОВЫЕ КАРТИНКИ МОДУЛЕЙ (120×120) === */
@@ -1007,18 +1032,15 @@ function openTank(tankId) {
   let html = `<div class="tank-name">${tank.name}</div>`;
   
   // Основная картинка танка
-  if (tank.images?.[0]) {
-    html += `<div class="tank-main-image"><img src="images/${tank.images[0]}" alt="${tank.name}"></div>`;
-  }
-  
-  // Блоки оборудования
-  if (tank.equipmentBuilds?.length) {
+if (tank.images?.[0]) {
+  html += `<div class="tank-main-image">
+    <img src="images/${tank.images[0]}" alt="${tank.name}">
+    ${tank.mods?.length === 5 ? renderFieldMods(tank.mods) : ''}
+  </div>`;
+}
+
+if (tank.equipmentBuilds?.length) {
     html += renderEquipmentBuilds(tank.equipmentBuilds);
-  }
-  
-  // Полевая модернизация (ровно 5 блоков)
-  if (tank.mods?.length === 5) {
-    html += renderFieldMods(tank.mods);
   }
   
   document.getElementById('equipmentContent').innerHTML = html;
