@@ -1106,45 +1106,93 @@ function renderEquipmentBuilds(builds) {
 }
 
 /* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
-function renderFieldMods(mods) {
-  let html = `<div class="mods-wrapper">`;
-  mods.forEach(mod => html += renderModBlock(mod));
-  html += `</div>`;
-  return html;
-}
-
-/* === РЕНДЕР ОДНОГО БЛОКА ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderModBlock(mod) {
-  const isLeftActive = (mod.activeSide === 'left');
-  
-  // Определяем позиции для оверлеев и иконок
-  const activeOverlayClass = isLeftActive ? 'active left' : 'active right';
-  const disabledOverlayClass = isLeftActive ? 'disabled right' : 'disabled left';
-  const checkmarkClass = isLeftActive ? 'checkmark left' : 'checkmark right';
-  const blockedClass = isLeftActive ? 'blocked right' : 'blocked left';
-  
-  return `
+
+  const isNone = mod.activeSide === 'none';
+  const isLeftActive = mod.activeSide === 'left';
+  const isRightActive = mod.activeSide === 'right';
+
+  let html = `
     <div class="mod-block">
-      <!-- Базовые картинки модулей (120×120, z:1) -->
+
+      <!-- Базовые картинки -->
       <img src="Modernization/${mod.left}" class="mod-base left" alt="">
       <img src="Modernization/${mod.right}" class="mod-base right" alt="">
-      
-      <!-- Disabled overlay на НЕактивной стороне (120×120, z:2, opacity:0.75) -->
-      <img src="Modernization/disabled.png" class="mod-overlay disabled ${disabledOverlayClass}" alt="">
-      
-      <!-- Active overlay на активной стороне (142×142, z:3, opacity:1) -->
-      <img src="Modernization/active.png" class="mod-overlay active ${activeOverlayClass}" alt="">
-      
-      <!-- Уровень (38×36, центр на стыке сверху, z:5) -->
-      <img src="Modernization/${mod.level}" class="mod-level" alt="">
-      
-      <!-- Галочка на активной стороне (64×32, центр снизу, z:6) -->
-      <img src="Modernization/checkmark.png" class="mod-icon ${checkmarkClass}" alt="">
-      
-      <!-- Крестик на неактивной стороне (14×14, центр снизу, z:6) -->
-      <img src="Modernization/marker_blocked.png" class="mod-icon ${blockedClass}" alt="">
+  `;
+
+  /* ===== LEFT ACTIVE ===== */
+  if (isLeftActive) {
+
+    html += `
+      <!-- disabled справа -->
+      <img src="Modernization/disabled.png"
+           class="mod-overlay disabled right" alt="">
+
+      <!-- active слева -->
+      <img src="Modernization/active.png"
+           class="mod-overlay active left" alt="">
+
+      <!-- галочка -->
+      <img src="Modernization/checkmark.png"
+           class="mod-icon checkmark left" alt="">
+
+      <!-- крестик -->
+      <img src="Modernization/marker_blocked.png"
+           class="mod-icon blocked right" alt="">
+    `;
+  }
+
+  /* ===== RIGHT ACTIVE ===== */
+  else if (isRightActive) {
+
+    html += `
+      <!-- disabled слева -->
+      <img src="Modernization/disabled.png"
+           class="mod-overlay disabled left" alt="">
+
+      <!-- active справа -->
+      <img src="Modernization/active.png"
+           class="mod-overlay active right" alt="">
+
+      <!-- галочка -->
+      <img src="Modernization/checkmark.png"
+           class="mod-icon checkmark right" alt="">
+
+      <!-- крестик -->
+      <img src="Modernization/marker_blocked.png"
+           class="mod-icon blocked left" alt="">
+    `;
+  }
+
+  /* ===== ОБЕ ЗАБЛОКИРОВАНЫ ===== */
+  else if (isNone) {
+
+    html += `
+      <!-- disabled overlays -->
+      <img src="Modernization/disabled.png"
+           class="mod-overlay disabled left" alt="">
+
+      <img src="Modernization/disabled.png"
+           class="mod-overlay disabled right" alt="">
+
+      <!-- два крестика -->
+      <img src="Modernization/marker_blocked.png"
+           class="mod-icon blocked left" alt="">
+
+      <img src="Modernization/marker_blocked.png"
+           class="mod-icon blocked right" alt="">
+    `;
+  }
+
+  /* ===== LEVEL ===== */
+
+  html += `
+      <img src="Modernization/${mod.level}"
+           class="mod-level" alt="">
     </div>
   `;
+
+  return html;
 }
 
 /* === ИНИЦИАЛИЗАЦИЯ === */
