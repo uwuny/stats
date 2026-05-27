@@ -28,7 +28,7 @@
           "left": "improvedScope.png",
           "right": "improvedSelfRepairingTracks.png",
           "level": "2.png",
-          "activeSide": "left"
+          "activeSide": "none"
         },
         {
           "left": "improvedSelfRepairingWheels.png",
@@ -80,7 +80,7 @@
           "left": "improvedAimingHandling.png",
           "right": "improvedChassisBalance.png",
           "level": "4.png",
-          "activeSide": "left"
+          "activeSide": "none"
         },
         {
           "left": "improvedChassisDurability.png",
@@ -98,7 +98,7 @@
           "left": "improvedSpallingResistance.png",
           "right": "improvedReflexScopes.png",
           "level": "8.png",
-          "activeSide": "right"
+          "activeSide": "none"
         }
       ]
     }
