@@ -385,24 +385,27 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   margin-top: 10px;
 }
 
-/* ==================== ПОЛЕВАЯ МОДЕРНИЗАЦИЯ ==================== */
+/* ==================== ПОЛЕВАЯ МОДЕРНИЗАЦИЯ — НОВЫЙ ВИЗУАЛ ==================== */
 .mods-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 18px;
+  padding: 15px 0 25px;
   border-top: 1px solid #333;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
+/* Основной контейнер блока мода */
 .mod-block {
   position: relative;
   width: 240px;
   height: 120px;
-  display: inline-block;
+  display: block;
+  margin: 0;
 }
 
+/* === БАЗОВЫЕ КАРТИНКИ МОДУЛЕЙ (120×120) === */
 .mod-base {
   position: absolute;
   width: 120px;
@@ -410,64 +413,80 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   top: 0;
   z-index: 1;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
-.mod-base.left { left: 0; }
+.mod-base.left  { left: 0; }
 .mod-base.right { left: 120px; }
 
+/* === ОВЕРЛЕИ === */
 .mod-overlay {
   position: absolute;
-  top: 0;
-  z-index: 2;
   pointer-events: none;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
-.mod-overlay.left { left: 0; }
-.mod-overlay.right { left: 120px; }
 
+/* Active overlay: 180×180 → 142×142, z-index:3 */
 .mod-overlay.active {
   width: 142px;
   height: 142px;
+  z-index: 3;
+  opacity: 1;
 }
-.mod-overlay.active.left { left: -11px; top: -11px; }
+.mod-overlay.active.left  { left: -11px; top: -11px; }
 .mod-overlay.active.right { left: 109px; top: -11px; }
 
+/* Disabled overlay: 150×150 → 120×120, z-index:2, opacity:0.75 */
 .mod-overlay.disabled {
   width: 120px;
   height: 120px;
-  opacity: 0.7;
+  z-index: 2;
+  opacity: 0.75;
 }
+.mod-overlay.disabled.left  { left: 0; top: 0; }
+.mod-overlay.disabled.right { left: 120px; top: 0; }
 
+/* === УРОВЕНЬ (38×36) — центр на верхнем стыке, z-index:5 === */
 .mod-level {
   position: absolute;
   width: 38px;
   height: 36px;
-  top: -18px;
   left: 50%;
+  top: -18px;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 5;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
+/* === ИКОНКИ: ГАЛОЧКА И КРЕСТИК (z-index:6) === */
 .mod-icon {
   position: absolute;
-  z-index: 4;
   pointer-events: none;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  z-index: 6;
 }
 
+/* Checkmark: 64×32, центр на нижнем центре АКТИВНОЙ стороны */
 .mod-icon.checkmark {
   width: 64px;
   height: 32px;
 }
-.mod-icon.checkmark.left { left: 28px; bottom: -16px; }
-.mod-icon.checkmark.right { left: 148px; bottom: -16px; }
+.mod-icon.checkmark.left  { left: 28px; bottom: -16px; }   /* 60 - 32, 0 + 16 */
+.mod-icon.checkmark.right { left: 148px; bottom: -16px; }  /* 180 - 32, 0 + 16 */
 
+/* Blocked marker: 14×14, центр на нижнем центре НЕАКТИВНОЙ стороны */
 .mod-icon.blocked {
   width: 14px;
   height: 14px;
 }
-.mod-icon.blocked.left { left: 53px; bottom: -7px; }
-.mod-icon.blocked.right { left: 173px; bottom: -7px; }
+.mod-icon.blocked.left  { left: 53px; bottom: -7px; }   /* 60 - 7, 0 + 7 */
+.mod-icon.blocked.right { left: 173px; bottom: -7px; }  /* 180 - 7, 0 + 7 */
 
 /* ==================== АДАПТИВНОСТЬ ==================== */
 @media (max-width: 768px) {
@@ -984,8 +1003,9 @@ function openTank(tankId) {
   });
   let html = `<div class="tank-name">${tank.name}</div>`;
   if (tank.images?.[0]) {
-    html += `<div class="tank-main-image"><img src="${tank.images[0]}" alt="${tank.name}"></div>`;
-  }
+    html += `<div class="tank-main-image">
+<img src="images/${tank.images[0]}" alt="${tank.name}">
+</div>`;
   if (tank.equipmentBuilds?.length) html += renderEquipmentBuilds(tank.equipmentBuilds);
   if (tank.mods?.length === 5) html += renderFieldMods(tank.mods);
   document.getElementById('equipmentContent').innerHTML = html;
@@ -1017,19 +1037,38 @@ function renderFieldMods(mods) {
   return html;
 }
 
-/* === РЕНДЕР ОДНОГО БЛОКА МОДА === */
+/* === РЕНДЕР ОДНОГО БЛОКА ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderModBlock(mod) {
-  const isLeftActive = mod.activeSide === 'left';
+  const isLeftActive = (mod.activeSide === 'left');
+  
+  // Определяем позиции для оверлеев и иконок
+  const activeOverlayClass = isLeftActive ? 'active left' : 'active right';
+  const disabledOverlayClass = isLeftActive ? 'disabled right' : 'disabled left';
+  const checkmarkClass = isLeftActive ? 'checkmark left' : 'checkmark right';
+  const blockedClass = isLeftActive ? 'blocked right' : 'blocked left';
+  
   return `
     <div class="mod-block">
+      <!-- Базовые картинки модулей (120×120, z:1) -->
       <img src="Modernization/${mod.left}" class="mod-base left" alt="">
       <img src="Modernization/${mod.right}" class="mod-base right" alt="">
-      <img src="Modernization/active.png" class="mod-overlay active ${isLeftActive ? 'left' : 'right'}" style="opacity:${isLeftActive ? 1 : 0}" alt="">
-      <img src="Modernization/disabled.png" class="mod-overlay disabled ${isLeftActive ? 'right' : 'left'}" style="opacity:${isLeftActive ? 0 : 0.7}" alt="">
+      
+      <!-- Disabled overlay на НЕактивной стороне (120×120, z:2, opacity:0.75) -->
+      <img src="Modernization/disabled.png" class="mod-overlay disabled ${disabledOverlayClass}" alt="">
+      
+      <!-- Active overlay на активной стороне (142×142, z:3, opacity:1) -->
+      <img src="Modernization/active.png" class="mod-overlay active ${activeOverlayClass}" alt="">
+      
+      <!-- Уровень (38×36, центр на стыке сверху, z:5) -->
       <img src="Modernization/${mod.level}" class="mod-level" alt="">
-      <img src="Modernization/checkmark.png" class="mod-icon checkmark ${isLeftActive ? 'left' : 'right'}" style="opacity:${isLeftActive ? 1 : 0}" alt="">
-      <img src="Modernization/marker_blocked.png" class="mod-icon blocked ${isLeftActive ? 'right' : 'left'}" style="opacity:${isLeftActive ? 0 : 1}" alt="">
-    </div>`;
+      
+      <!-- Галочка на активной стороне (64×32, центр снизу, z:6) -->
+      <img src="Modernization/checkmark.png" class="mod-icon ${checkmarkClass}" alt="">
+      
+      <!-- Крестик на неактивной стороне (14×14, центр снизу, z:6) -->
+      <img src="Modernization/marker_blocked.png" class="mod-icon ${blockedClass}" alt="">
+    </div>
+  `;
 }
 
 /* === ИНИЦИАЛИЗАЦИЯ === */
