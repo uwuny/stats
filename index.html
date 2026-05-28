@@ -572,6 +572,21 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .custom-select option:last-child { border-bottom: none; }
 .custom-select option:hover { background-color: #1f1f1f; }
 
+/* ==================== ИКОНКИ В ТАБЛИЦЕ ТАНКОВ ==================== */
+.icon-img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.tank-table td {
+    vertical-align: middle !important;
+}
+
 </style>
 </head>
 
@@ -1069,15 +1084,23 @@ function renderTankTable(tanks = null) {
     
   list.forEach(tank => {
     const id = String(tank.id || tank["id "] || "").trim();
+    const rawNation = String(tank.nation || tank["nation "] || "").trim();
+    const rawClass = String(tank.class || tank["class "] || "").trim();
+    
     const isActive = id === currentTankId ? 'active' : '';
-    const nation = nationNames[String(tank.nation || tank["nation "] || "").trim()] || tank.nation;
-    const cls = classNames[String(tank.class || tank["class "] || "").trim()] || tank.class;
+    const nation = nationNames[rawNation] || rawNation;
+    const cls = classNames[rawClass] || rawClass;
     const name = String(tank.name || tank["name "] || "").trim();
+
+    // Формируем пути к картинкам
+    const tankIcon = `icons/${id}.png`;
+    const nationIcon = `flags/${rawNation}.png`;
+    const classIcon = `classes/${rawClass}.png`;
     
     html += `<tr class="${isActive}" data-id="${id}">
-      <td>${name}</td>
-      <td>${nation}</td>
-      <td>${cls}</td>
+      <td><img src="${tankIcon}" class="icon-img" alt=""> ${name}</td>
+      <td><img src="${nationIcon}" class="icon-img" alt=""> ${nation}</td>
+      <td><img src="${classIcon}" class="icon-img" alt=""> ${cls}</td>
       <td>${tank.level || tank["level "]}</td>
     </tr>`;
   });
