@@ -239,29 +239,62 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   padding: 6px;
 }
 
-/* ==================== ОБОРУДОВАНИЕ: КНОПКИ ТАНКОВ ==================== */
-#tankButtons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 25px;
-}
-
-#tankButtons button {
-  background: #2b2b2b;
-  color: #fff;
+/* ==================== ОБОРУДОВАНИЕ: ТАБЛИЦА ТАНКОВ ==================== */
+.tank-table {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto 25px;
+  border-collapse: collapse;
+  background: #1a1a1a;
   border: 1px solid #444;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
+  font-family: 'Sofia Sans', sans-serif;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-#tankButtons button.active {
+.tank-table th, .tank-table td {
+  border: 1px solid #333;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 0.15s;
+}
+
+.tank-table th {
+  background: #222;
+  color: #00ff66;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid #00ff66;
+}
+
+.tank-table tbody tr {
+  cursor: pointer;
+}
+
+.tank-table tbody tr:nth-child(even) {
+  background: #1f1f1f;
+}
+
+.tank-table tbody tr:hover td {
   background: #2e5e2e;
-  border-color: #00ff66;
-  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+  color: #fff;
+}
+
+.tank-table tbody tr.active td {
+  background: #4a6ed1;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+.tank-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  font-size: 15px;
 }
 
 /* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
@@ -943,7 +976,7 @@ function enableHover(){
 }
 </script>
 
-<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ (новый, чистый) ==================== -->
+<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ (Исправленный) ==================== -->
 <script>
 /* === ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ === */
 let EQUIPMENT_DB = null;
@@ -956,17 +989,15 @@ async function loadEquipmentDB() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     EQUIPMENT_DB = await response.json();
     renderFilters();
-    renderTankButtons();
-    if (EQUIPMENT_DB.tanks?.length > 0) openTank(EQUIPMENT_DB.tanks[0].id);
+    applyFilters();
   } catch (err) {
     console.error('Ошибка загрузки equipment.json:', err);
     document.getElementById('equipmentContent').innerHTML = 
-      `<p style="color:#ff4444">Не удалось загрузить данные оборудования</p>`;
+      `<p style="color:#ff4444; text-align:center;">Не удалось загрузить данные оборудования</p>`;
   }
 }
 
 function renderFilters() {
-
   /* ===== УРОВНИ ===== */
   const levelSelect = document.getElementById('filterLevel');
   for (let i = 8; i <= 11; i++) {
@@ -977,111 +1008,160 @@ function renderFilters() {
   }
   levelSelect.addEventListener('change', applyFilters);
 
-
   /* ===== НАЦИИ ===== */
   const nations = [
-    {id:'ussr', name:'СССР'},
-    {id:'germany', name:'Германия'},
-    {id:'usa', name:'США'},
-    {id:'china', name:'Китай'},
-    {id:'france', name:'Франция'},
-    {id:'uk', name:'Великобритания'},
-    {id:'japan', name:'Япония'},
-    {id:'czech', name:'Чехословакия'},
-    {id:'sweden', name:'Швеция'},
-    {id:'poland', name:'Польша'},
-    {id:'italy', name:'Италия'},
-    {id:'intunion', name:'Сборная наций'}
+    {id:'ussr', name:'СССР'}, {id:'germany', name:'Германия'}, {id:'usa', name:'США'},
+    {id:'china', name:'Китай'}, {id:'france', name:'Франция'}, {id:'uk', name:'Великобритания'},
+    {id:'japan', name:'Япония'}, {id:'czech', name:'Чехословакия'}, {id:'sweden', name:'Швеция'},
+    {id:'poland', name:'Польша'}, {id:'italy', name:'Италия'}, {id:'intunion', name:'Сборная наций'}
   ];
 
   const nationSelect = document.getElementById('filterNation');
-
   nations.forEach(n => {
     const opt = document.createElement('option');
     opt.value = n.id;
     opt.textContent = n.name;
     nationSelect.appendChild(opt);
   });
-
   nationSelect.addEventListener('change', applyFilters);
 
-
-  /* ===== КЛАССЫ ===== */
+  /* ===== КЛАССЫ (ID совпадают с JSON без пробелов) ===== */
   const classes = [
-    {id:'heavy', name:'Тяжёлые', icon:'heavyTanks.png'},
-    {id:'medium', name:'Средние', icon:'mediumTank.png'},
-    {id:'light', name:'Лёгкие', icon:'lightTank.png'},
-    {id:'td', name:'ПТ-САУ', icon:'AT-SPG.png'}
+    {id:'heavyTank', name:'Тяжёлые'},
+    {id:'mediumTank', name:'Средние'},
+    {id:'lightTank', name:'Лёгкие'},
+    {id:'AT-SPG', name:'ПТ-САУ'},
+    {id:'SPG', name:'САУ'}
   ];
 
   const classSelect = document.getElementById('filterClass');
-
   classes.forEach(c => {
     const opt = document.createElement('option');
     opt.value = c.id;
     opt.textContent = c.name;
     classSelect.appendChild(opt);
   });
-
   classSelect.addEventListener('change', applyFilters);
 }
 
 /* === ПРИМЕНЕНИЕ ФИЛЬТРОВ === */
 function applyFilters() {
+  if (!EQUIPMENT_DB) return;
+  
   const level = document.getElementById('filterLevel').value;
   const nation = document.getElementById('filterNation').value;
   const cls = document.getElementById('filterClass').value;
+  
   const filtered = EQUIPMENT_DB.tanks.filter(tank => {
-    if (level !== 'all' && tank.level != level) return false;
-    if (nation !== 'all' && tank.nation !== nation) return false;
-    if (cls !== 'all' && tank.class !== cls) return false;
+    // Используем .trim() для защиты от пробелов в концах строк JSON
+    const tankLevel = String(tank.level || tank["level "] || "").trim();
+    const tankNation = String(tank.nation || tank["nation "] || "").trim();
+    const tankClass = String(tank.class || tank["class "] || "").trim();
+    
+    if (level !== 'all' && tankLevel !== level) return false;
+    if (nation !== 'all' && tankNation !== nation) return false;
+    if (cls !== 'all' && tankClass !== cls) return false;
     return true;
   });
-  renderTankButtons(filtered);
-  if (currentTankId && !filtered.find(t => t.id === currentTankId)) {
+  
+  renderTankTable(filtered);
+  
+  const currentId = currentTankId;
+  if (currentId && !filtered.find(t => String(t.id || t["id "] || "").trim() === currentId)) {
     currentTankId = null;
     document.getElementById('equipmentContent').innerHTML = '';
   }
 }
 
-/* === РЕНДЕР КНОПОК ТАНКОВ === */
-function renderTankButtons(tanks = null) {
+/* === РЕНДЕР ТАБЛИЦЫ ТАНКОВ === */
+function renderTankTable(tanks = null) {
   const container = document.getElementById('tankButtons');
   container.innerHTML = '';
   const list = tanks || EQUIPMENT_DB?.tanks || [];
+  
+  if (list.length === 0) {
+    container.innerHTML = '<p style="text-align:center; color:#aaa; font-size:16px;">Танки не найдены</p>';
+    return;
+  }
+
+  const nationNames = {
+    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
+    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
+    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
+    'italy': 'Италия', 'intunion': 'Сборная наций'
+  };
+  
+  const classNames = {
+    'heavyTank': 'Тяжёлый', 'mediumTank': 'Средний', 'lightTank': 'Лёгкий',
+    'AT-SPG': 'ПТ-САУ', 'SPG': 'САУ'
+  };
+
+  let html = `<table class="tank-table">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Нация</th>
+        <th>Класс</th>
+        <th>Уровень</th>
+      </tr>
+    </thead>
+    <tbody>`;
+    
   list.forEach(tank => {
-    const btn = document.createElement('button');
-    btn.textContent = tank.name;
-    btn.className = 'equip-btn';
-    if (tank.id === currentTankId) btn.classList.add('active');
-    btn.onclick = () => openTank(tank.id);
-    container.appendChild(btn);
+    const id = String(tank.id || tank["id "] || "").trim();
+    const isActive = id === currentTankId ? 'active' : '';
+    const nation = nationNames[String(tank.nation || tank["nation "] || "").trim()] || tank.nation;
+    const cls = classNames[String(tank.class || tank["class "] || "").trim()] || tank.class;
+    const name = String(tank.name || tank["name "] || "").trim();
+    
+    html += `<tr class="${isActive}" data-id="${id}">
+      <td>${name}</td>
+      <td>${nation}</td>
+      <td>${cls}</td>
+      <td>${tank.level || tank["level "]}</td>
+    </tr>`;
+  });
+  
+  html += `</tbody></table>`;
+  container.innerHTML = html;
+  
+  // Обработчики клика на строки
+  container.querySelectorAll('tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => {
+      openTank(row.dataset.id);
+    });
   });
 }
 
 /* === ОТКРЫТИЕ ТАНКА === */
 function openTank(tankId) {
   currentTankId = tankId;
-  const tank = EQUIPMENT_DB.tanks.find(t => t.id === tankId);
+  const tank = EQUIPMENT_DB.tanks.find(t => String(t.id || t["id "] || "").trim() === tankId);
   if (!tank) return;
   
-  // Обновляем active на кнопках
-  document.querySelectorAll('#tankButtons .equip-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent === tank.name);
+  // Обновляем active на строках таблицы
+  document.querySelectorAll('#tankButtons tr[data-id]').forEach(row => {
+    row.classList.toggle('active', row.dataset.id === tankId);
   });
 
-  let html = `<div class="tank-name">${tank.name}</div>`;
+  let name = String(tank.name || tank["name "] || "").trim();
+  let html = `<div class="tank-name">${name}</div>`;
   
   // Основная картинка танка
-if (tank.images?.[0]) {
-  html += `<div class="tank-main-image">
-    <img src="images/${tank.images[0]}" alt="${tank.name}">
-    ${tank.mods?.length === 5 ? renderFieldMods(tank.mods) : ''}
-  </div>`;
-}
+  let images = tank.images || tank["images "];
+  let mods = tank.mods || tank["mods "];
+  
+  if (images && images[0]) {
+    let imgSrc = String(images[0]).trim();
+    html += `<div class="tank-main-image">
+      <img src="images/${imgSrc}" alt="${name}">
+      ${mods?.length === 5 ? renderFieldMods(mods) : ''}
+    </div>`;
+  }
 
-if (tank.equipmentBuilds?.length) {
-    html += renderEquipmentBuilds(tank.equipmentBuilds);
+  let builds = tank.equipmentBuilds || tank["equipmentBuilds "];
+  if (builds && builds.length) {
+    html += renderEquipmentBuilds(builds);
   }
   
   document.getElementById('equipmentContent').innerHTML = html;
@@ -1093,11 +1173,13 @@ function renderEquipmentBuilds(builds) {
   const count = builds.length;
   let html = `<div class="equipment-builds" data-count="${count}">`;
   builds.forEach(build => {
+    let type = build.type || build["type "];
+    let items = build.items || build["items "] || [];
     html += `
       <div class="equip-card">
-        <div class="title">${titles[build.type] || build.type}</div>
+        <div class="title">${titles[type] || type}</div>
         <div class="equip-items">
-          ${build.items.map(item => `<div class="equip-item"><img src="equipment/${item}" alt=""></div>`).join('')}
+          ${items.map(item => `<div class="equip-item"><img src="equipment/${String(item).trim()}" alt=""></div>`).join('')}
         </div>
       </div>`;
   });
@@ -1105,9 +1187,8 @@ function renderEquipmentBuilds(builds) {
   return html;
 }
 
-/* === РЕНДЕР ОБЁРТКИ ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
+/* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderFieldMods(mods) {
-
   return `
     <div class="mods-wrapper">
       ${mods.map(mod => renderModBlock(mod)).join('')}
@@ -1115,93 +1196,49 @@ function renderFieldMods(mods) {
   `;
 }
   
-/* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderModBlock(mod) {
+  let left = String(mod.left || mod["left "] || "").trim();
+  let right = String(mod.right || mod["right "] || "").trim();
+  let level = String(mod.level || mod["level "] || "").trim();
+  let activeSide = String(mod.activeSide || mod["activeSide "] || "").trim();
 
-  const isNone = mod.activeSide === 'none';
-  const isLeftActive = mod.activeSide === 'left';
-  const isRightActive = mod.activeSide === 'right';
+  const isNone = activeSide === 'none';
+  const isLeftActive = activeSide === 'left';
+  const isRightActive = activeSide === 'right';
 
   let html = `
     <div class="mod-block">
-
-      <!-- Базовые картинки -->
-      <img src="Modernization/${mod.left}" class="mod-base left" alt="">
-      <img src="Modernization/${mod.right}" class="mod-base right" alt="">
+      <img src="Modernization/${left}" class="mod-base left" alt="">
+      <img src="Modernization/${right}" class="mod-base right" alt="">
   `;
 
-  /* ===== LEFT ACTIVE ===== */
   if (isLeftActive) {
-
     html += `
-      <!-- disabled справа -->
-      <img src="Modernization/disabled.png"
-           class="mod-overlay disabled right" alt="">
-
-      <!-- active слева -->
-      <img src="Modernization/active.png"
-           class="mod-overlay active left" alt="">
-
-      <!-- галочка -->
-      <img src="Modernization/checkmark.png"
-           class="mod-icon checkmark left" alt="">
-
-      <!-- крестик -->
-      <img src="Modernization/marker_blocked.png"
-           class="mod-icon blocked right" alt="">
+      <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
+      <img src="Modernization/active.png" class="mod-overlay active left" alt="">
+      <img src="Modernization/checkmark.png" class="mod-icon checkmark left" alt="">
+      <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
+    `;
+  } else if (isRightActive) {
+    html += `
+      <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
+      <img src="Modernization/active.png" class="mod-overlay active right" alt="">
+      <img src="Modernization/checkmark.png" class="mod-icon checkmark right" alt="">
+      <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
+    `;
+  } else if (isNone) {
+    html += `
+      <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
+      <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
+      <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
+      <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
     `;
   }
-
-  /* ===== RIGHT ACTIVE ===== */
-  else if (isRightActive) {
-
-    html += `
-      <!-- disabled слева -->
-      <img src="Modernization/disabled.png"
-           class="mod-overlay disabled left" alt="">
-
-      <!-- active справа -->
-      <img src="Modernization/active.png"
-           class="mod-overlay active right" alt="">
-
-      <!-- галочка -->
-      <img src="Modernization/checkmark.png"
-           class="mod-icon checkmark right" alt="">
-
-      <!-- крестик -->
-      <img src="Modernization/marker_blocked.png"
-           class="mod-icon blocked left" alt="">
-    `;
-  }
-
-  /* ===== ОБЕ ЗАБЛОКИРОВАНЫ ===== */
-  else if (isNone) {
-
-    html += `
-      <!-- disabled overlays -->
-      <img src="Modernization/disabled.png"
-           class="mod-overlay disabled left" alt="">
-
-      <img src="Modernization/disabled.png"
-           class="mod-overlay disabled right" alt="">
-
-      <!-- два крестика -->
-      <img src="Modernization/marker_blocked.png"
-           class="mod-icon blocked left" alt="">
-
-      <img src="Modernization/marker_blocked.png"
-           class="mod-icon blocked right" alt="">
-    `;
-  }
-
-  /* ===== LEVEL ===== */
 
   html += `
-      <img src="Modernization/${mod.level}"
-           class="mod-level" alt="">
+      <img src="Modernization/${level}" class="mod-level" alt="">
     </div>
   `;
-
   return html;
 }
 
