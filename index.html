@@ -1274,7 +1274,8 @@ function applyFilters() {
   const nation = getDropdownValue('filterNationDropdown');
   const cls = getDropdownValue('filterClassDropdown');
   
-  const filtered = EQUIPMENT_DB.tanks.filter(tank => {
+  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
+  const filtered = tanksList.filter(tank => {
     const tankLevel = String(tank.level || tank["level "] || "").trim();
     const tankNation = String(tank.nation || tank["nation "] || "").trim();
     const tankClass = String(tank.class || tank["class "] || "").trim();
@@ -1292,7 +1293,8 @@ function applyFilters() {
 function renderTankTable(tanks = null) {
   const container = document.getElementById('tankButtons');
   container.innerHTML = '';
-  const list = tanks || EQUIPMENT_DB?.tanks || [];
+  const tanksList = EQUIPMENT_DB?.tanks || EQUIPMENT_DB?.["tanks "] || [];
+  const list = tanks || tanksList;
   
   if (list.length === 0) {
     container.innerHTML = '<p style="text-align:center; color:#aaa; font-size:16px;">Танки не найдены</p>';
@@ -1353,6 +1355,7 @@ function renderTankTable(tanks = null) {
       <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${cls}</span></div></td>
       <td>${romanLevel}</td>
     </tr>`;
+  });
   
   html += `</tbody></table>`;
   container.innerHTML = html;
@@ -1367,7 +1370,8 @@ function renderTankTable(tanks = null) {
 /* === ОТКРЫТИЕ ТАНКА === */
 function openTank(tankId) {
   currentTankId = tankId;
-  const tank = EQUIPMENT_DB.tanks.find(t => String(t.id || t["id "] || "").trim() === tankId);
+  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
+  const tank = tanksList.find(t => String(t.id || t["id "] || "").trim() === tankId);
   if (!tank) return;
   
   // Скрываем фильтры и таблицу
