@@ -209,7 +209,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  min-width: 180px;
+  min-width: 210px;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -559,7 +559,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     color: #fff;
     border: 1px solid #333;
     padding: 8px 12px;
-    min-width: 180px;
+    min-width: 210px;
     font-size: 14px;
 }
 
@@ -581,6 +581,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     object-fit: contain;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    display: inline-block;
 }
 
 .tank-table td {
@@ -590,7 +591,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 /* ==================== КАСТОМНЫЙ DROPDOWN С ИКОНКАМИ ==================== */
 .custom-dropdown {
     position: relative;
-    min-width: 180px;
+    min-width: 210px;
     user-select: none;
 }
 
@@ -1273,8 +1274,11 @@ function renderTankTable(tanks = null) {
   };
   
   const classNames = {
-    'heavyTank': 'Тяжёлый', 'mediumTank': 'Средний', 'lightTank': 'Лёгкий',
-    'AT-SPG': 'ПТ-САУ', 'SPG': 'САУ'
+    'heavyTank': 'Тяжёлый танк',
+    'mediumTank': 'Средний танк',
+    'lightTank': 'Лёгкий танк',
+    'AT-SPG': 'ПТ-САУ',
+    'SPG': 'САУ'
   };
 
   let html = `<table class="tank-table">
@@ -1287,7 +1291,12 @@ function renderTankTable(tanks = null) {
       </tr>
     </thead>
     <tbody>`;
-    
+  const romanLevels = {
+    8: 'VIII',
+    9: 'IX',
+    10: 'X',
+    11: 'XI'
+  };
   list.forEach(tank => {
     const id = String(tank.id || tank["id "] || "").trim();
     const rawNation = String(tank.nation || tank["nation "] || "").trim();
@@ -1302,12 +1311,14 @@ function renderTankTable(tanks = null) {
     const tankIcon = `icons/${id}.png`;
     const nationIcon = `flags/${rawNation}.png`;
     const classIcon = `classes/${rawClass}.png`;
+    const level = tank.level || tank["level "];
+    const romanLevel = romanLevels[level] || level;
     
     html += `<tr class="${isActive}" data-id="${id}">
       <td><img src="${tankIcon}" class="icon-img" alt=""> ${name}</td>
       <td><img src="${nationIcon}" class="icon-img" alt=""> ${nation}</td>
       <td><img src="${classIcon}" class="icon-img" alt=""> ${cls}</td>
-      <td>${tank.level || tank["level "]}</td>
+      <td>${romanLevel}</td>
     </tr>`;
   });
   
