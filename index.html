@@ -577,9 +577,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 /* ==================== ИКОНКИ В ТАБЛИЦЕ ТАНКОВ ==================== */
 .cell-content {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 .cell-content .icon-img {
@@ -591,10 +593,10 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     image-rendering: crisp-edges;
 }
 
-.tank-table td {
-    vertical-align: middle !important;
+.cell-content span {
+    text-align: left;
+    white-space: nowrap;
 }
-
 /* ==================== КАСТОМНЫЙ DROPDOWN С ИКОНКАМИ ==================== */
 .custom-dropdown {
     position: relative;
