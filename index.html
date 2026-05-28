@@ -239,6 +239,26 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   padding: 6px;
 }
 
+/* ==================== ОБОРУДОВАНИЕ: КНОПКА ВОЗВРАТА ==================== */
+#backToTableBtn {
+  background: #2b2b2b;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.15s;
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+#backToTableBtn:hover {
+  background: #2e5e2e;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+}
+
 /* ==================== ОБОРУДОВАНИЕ: ТАБЛИЦА ТАНКОВ ==================== */
 .tank-table {
   width: 95%;
@@ -426,44 +446,18 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   pointer-events: none;
 }
 
-/* Основной контейнер блока мода */
 .mod-block {
   position: absolute;
   width: 240px;
   height: 120px;
 }
 
-/* 2 мод */
-.mod-block:nth-child(1){
-  top: 20px;
-  left: -260px;
-}
+.mod-block:nth-child(1){ top: 20px; left: -260px; }
+.mod-block:nth-child(2){ top: 185px; left: -345px; }
+.mod-block:nth-child(3){ top: 350px; left: -270px; }
+.mod-block:nth-child(4){ top: 20px; right: -210px; }
+.mod-block:nth-child(5){ top: 185px; right: -320px; }
 
-/* 4 мод */
-.mod-block:nth-child(2){
-  top: 185px;
-  left: -345px;
-}
-
-/* 5 мод */
-.mod-block:nth-child(3){
-  top: 350px;
-  left: -270px;
-}
-
-/* 7 мод */
-.mod-block:nth-child(4){
-  top: 20px;
-  right: -210px;
-}
-
-/* 8 мод */
-.mod-block:nth-child(5){
-  top: 185px;
-  right: -320px;
-}
-
-/* === БАЗОВЫЕ КАРТИНКИ МОДУЛЕЙ (120×120) === */
 .mod-base {
   position: absolute;
   width: 120px;
@@ -477,7 +471,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .mod-base.left  { left: 0; }
 .mod-base.right { left: 120px; }
 
-/* === ОВЕРЛЕИ === */
 .mod-overlay {
   position: absolute;
   pointer-events: none;
@@ -486,7 +479,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   image-rendering: crisp-edges;
 }
 
-/* Active overlay: 180×180 → 142×142, z-index:3 */
 .mod-overlay.active {
   width: 142px;
   height: 142px;
@@ -496,7 +488,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .mod-overlay.active.left  { left: -11px; top: -11px; }
 .mod-overlay.active.right { left: 109px; top: -11px; }
 
-/* Disabled overlay: 150×150 → 120×120, z-index:2, opacity:0.75 */
 .mod-overlay.disabled {
   width: 120px;
   height: 120px;
@@ -506,7 +497,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .mod-overlay.disabled.left  { left: 0; top: 0; }
 .mod-overlay.disabled.right { left: 120px; top: 0; }
 
-/* === УРОВЕНЬ (38×36) — центр на верхнем стыке, z-index:5 === */
 .mod-level {
   position: absolute;
   width: 38px;
@@ -520,7 +510,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   image-rendering: crisp-edges;
 }
 
-/* === ИКОНКИ: ГАЛОЧКА И КРЕСТИК (z-index:6) === */
 .mod-icon {
   position: absolute;
   pointer-events: none;
@@ -530,21 +519,13 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   z-index: 6;
 }
 
-/* Checkmark: 64×32, центр на нижнем центре АКТИВНОЙ стороны */
-.mod-icon.checkmark {
-  width: 64px;
-  height: 32px;
-}
-.mod-icon.checkmark.left  { left: 28px; bottom: -16px; }   /* 60 - 32, 0 + 16 */
-.mod-icon.checkmark.right { left: 148px; bottom: -16px; }  /* 180 - 32, 0 + 16 */
+.mod-icon.checkmark { width: 64px; height: 32px; }
+.mod-icon.checkmark.left  { left: 28px; bottom: -16px; }
+.mod-icon.checkmark.right { left: 148px; bottom: -16px; }
 
-/* Blocked marker: 14×14, центр на нижнем центре НЕАКТИВНОЙ стороны */
-.mod-icon.blocked {
-  width: 14px;
-  height: 14px;
-}
-.mod-icon.blocked.left  { left: 53px; bottom: -7px; }   /* 60 - 7, 0 + 7 */
-.mod-icon.blocked.right { left: 173px; bottom: -7px; }  /* 180 - 7, 0 + 7 */
+.mod-icon.blocked { width: 14px; height: 14px; }
+.mod-icon.blocked.left  { left: 53px; bottom: -7px; }
+.mod-icon.blocked.right { left: 173px; bottom: -7px; }
 
 /* ==================== АДАПТИВНОСТЬ ==================== */
 @media (max-width: 768px) {
@@ -573,8 +554,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   }
 }
 
-/* ===== СТИЛЬ ВЫПАДАЮЩЕГО СПИСКА КАК В WoT ===== */
-
 .custom-select {
     background-color: #111;
     color: #fff;
@@ -590,14 +569,8 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     padding: 10px;
 }
 
-/* последняя строка без линии */
-.custom-select option:last-child {
-    border-bottom: none;
-}
-
-.custom-select option:hover {
-    background-color: #1f1f1f;
-}
+.custom-select option:last-child { border-bottom: none; }
+.custom-select option:hover { background-color: #1f1f1f; }
 
 </style>
 </head>
@@ -628,6 +601,8 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 <!-- ==================== ВКЛАДКА ОБОРУДОВАНИЯ ==================== -->
 <div id="equipmentPage" style="display:none;">
+  
+  <!-- Фильтры -->
   <div class="equip-filters">
     <div class="filter-group">
       <label>Уровень</label>
@@ -648,7 +623,16 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
       </select>
     </div>
   </div>
+
+  <!-- Кнопка возврата -->
+  <div id="backButtonContainer" style="display:none; text-align:center;">
+    <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
+  </div>
+
+  <!-- Контейнер для таблицы танков -->
   <div class="equip-buttons" id="tankButtons"></div>
+  
+  <!-- Контейнер для деталей танка -->
   <div id="equipmentContent"></div>
 </div>
 
@@ -657,7 +641,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 </div>
 
-<!-- ==================== СКРИПТ #1: СТАТИСТИКА (без изменений) ==================== -->
+<!-- ==================== СКРИПТ #1: СТАТИСТИКА ==================== -->
 <script>
 let DATA = null;
 
@@ -761,20 +745,6 @@ function renderCampaignTabs(){
     btn.onclick = (event) => switchCampaign(campaign.key, event);
     wrap.appendChild(btn);
   });
-}
-
-function switchEquipmentMode(mode, event){
-  document.querySelectorAll(".equip-mode").forEach(btn => btn.classList.remove("active"));
-  if(event) event.target.classList.add("active");
-  const abs = document.getElementById("equipmentAbs");
-  const random = document.getElementById("equipmentRandom");
-  if(mode === "abs"){
-    abs.style.display = "block";
-    random.style.display = "none";
-  } else {
-    abs.style.display = "none";
-    random.style.display = "block";
-  }
 }
 
 Promise.all(DATA_FILES.map(async file => {
@@ -976,7 +946,7 @@ function enableHover(){
 }
 </script>
 
-<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ (Исправленный) ==================== -->
+<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ ==================== -->
 <script>
 /* === ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ === */
 let EQUIPMENT_DB = null;
@@ -998,7 +968,6 @@ async function loadEquipmentDB() {
 }
 
 function renderFilters() {
-  /* ===== УРОВНИ ===== */
   const levelSelect = document.getElementById('filterLevel');
   for (let i = 8; i <= 11; i++) {
     const opt = document.createElement('option');
@@ -1008,7 +977,6 @@ function renderFilters() {
   }
   levelSelect.addEventListener('change', applyFilters);
 
-  /* ===== НАЦИИ ===== */
   const nations = [
     {id:'ussr', name:'СССР'}, {id:'germany', name:'Германия'}, {id:'usa', name:'США'},
     {id:'china', name:'Китай'}, {id:'france', name:'Франция'}, {id:'uk', name:'Великобритания'},
@@ -1025,7 +993,6 @@ function renderFilters() {
   });
   nationSelect.addEventListener('change', applyFilters);
 
-  /* ===== КЛАССЫ (ID совпадают с JSON без пробелов) ===== */
   const classes = [
     {id:'heavyTank', name:'Тяжёлые'},
     {id:'mediumTank', name:'Средние'},
@@ -1053,7 +1020,6 @@ function applyFilters() {
   const cls = document.getElementById('filterClass').value;
   
   const filtered = EQUIPMENT_DB.tanks.filter(tank => {
-    // Используем .trim() для защиты от пробелов в концах строк JSON
     const tankLevel = String(tank.level || tank["level "] || "").trim();
     const tankNation = String(tank.nation || tank["nation "] || "").trim();
     const tankClass = String(tank.class || tank["class "] || "").trim();
@@ -1065,12 +1031,6 @@ function applyFilters() {
   });
   
   renderTankTable(filtered);
-  
-  const currentId = currentTankId;
-  if (currentId && !filtered.find(t => String(t.id || t["id "] || "").trim() === currentId)) {
-    currentTankId = null;
-    document.getElementById('equipmentContent').innerHTML = '';
-  }
 }
 
 /* === РЕНДЕР ТАБЛИЦЫ ТАНКОВ === */
@@ -1125,7 +1085,6 @@ function renderTankTable(tanks = null) {
   html += `</tbody></table>`;
   container.innerHTML = html;
   
-  // Обработчики клика на строки
   container.querySelectorAll('tr[data-id]').forEach(row => {
     row.addEventListener('click', () => {
       openTank(row.dataset.id);
@@ -1139,15 +1098,16 @@ function openTank(tankId) {
   const tank = EQUIPMENT_DB.tanks.find(t => String(t.id || t["id "] || "").trim() === tankId);
   if (!tank) return;
   
-  // Обновляем active на строках таблицы
-  document.querySelectorAll('#tankButtons tr[data-id]').forEach(row => {
-    row.classList.toggle('active', row.dataset.id === tankId);
-  });
+  // Скрываем фильтры и таблицу
+  document.querySelector('.equip-filters').style.display = 'none';
+  document.getElementById('tankButtons').style.display = 'none';
+  
+  // Показываем кнопку возврата
+  document.getElementById('backButtonContainer').style.display = 'block';
 
   let name = String(tank.name || tank["name "] || "").trim();
   let html = `<div class="tank-name">${name}</div>`;
   
-  // Основная картинка танка
   let images = tank.images || tank["images "];
   let mods = tank.mods || tank["mods "];
   
@@ -1165,6 +1125,24 @@ function openTank(tankId) {
   }
   
   document.getElementById('equipmentContent').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* === ВОЗВРАТ К ТАБЛИЦЕ === */
+function backToTable() {
+  // Скрываем детали танка и кнопку возврата
+  document.getElementById('equipmentContent').innerHTML = '';
+  document.getElementById('backButtonContainer').style.display = 'none';
+  
+  // Показываем фильтры и таблицу
+  document.querySelector('.equip-filters').style.display = 'flex';
+  document.getElementById('tankButtons').style.display = 'block';
+  
+  // Сбрасываем выбранный танк и перерисовываем таблицу
+  currentTankId = null;
+  applyFilters();
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* === РЕНДЕР БЛОКОВ ОБОРУДОВАНИЯ === */
