@@ -227,7 +227,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .tank-table {
   width: 95%;
   max-width: 1200px;
-  margin: 0 auto 25px;
+  margin: 15 auto 25px;
   border-collapse: collapse;
   background: #1a1a1a;
   border: 1px solid #444;
@@ -381,7 +381,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .slot:hover {
   border-color: #00ff66;
   box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
-  transform: translateY(-2px);
 }
 
 .slot::before {
@@ -402,16 +401,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 
 .slot-icon img {
-  width: 80%;
-  height: 80%;
+  max-width: 95%;
+  max-height: 95%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(0, 255, 102, 0.4));
-  transition: 0.2s;
-}
-
-.slot:hover .slot-icon img {
-  filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.8));
-  transform: scale(1.05);
 }
 
 .corner { 
@@ -426,7 +420,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .corner.bl { bottom:-1px; left:-1px;  border-bottom:2px solid #00ff66; border-left:2px solid #00ff66;  border-radius:0 0 0 2px; }
 .corner.br { bottom:-1px; right:-1px; border-bottom:2px solid #00ff66; border-right:2px solid #00ff66; border-radius:0 0 2px 0; }
 
-.bottom-line {
+.slot-bottom-line {
   position: absolute;
   bottom: 0; left: 20px; right: 20px;
   height: 1px;
@@ -1023,11 +1017,12 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
   </div>
 
-  <!-- Контейнер для таблицы танков -->
-  <div class="equip-buttons" id="tankButtons"></div>
-  
   <!-- Контейнер для деталей танка -->
   <div id="equipmentContent"></div>
+
+  <!-- ==================== ПОДВАЛ ==================== -->
+  <div class="bottom-line"></div>
+  <div class="footer-text">Created by McQueen</div>
 </div>
 
 <!-- ==================== СКРИПТ #1: СТАТИСТИКА ==================== -->
@@ -1626,7 +1621,7 @@ function renderEquipmentBuilds(builds) {
         <div class="corner tr"></div>
         <div class="corner bl"></div>
         <div class="corner br"></div>
-        <div class="bottom-line"></div>
+        <div class="slot-bottom-line"></div>
         <div class="slot-icon">
           <img src="equipment/${String(item).trim()}" alt="">
         </div>
