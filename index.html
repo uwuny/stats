@@ -621,9 +621,9 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 /* ==================== КАСТОМНЫЙ DROPDOWN С ИКОНКАМИ ==================== */
 .custom-dropdown {
     position: relative;
-    user-select: none;
-    padding: 0 !important; /* Убираем padding у родителя */
-    margin: 0 !important; /* Убираем margin у родителя */
+    margin: 0;
+    padding: 0;
+    line-height: normal;
 }
 
 .dropdown-nation {
@@ -690,20 +690,18 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 .dropdown-options {
     position: absolute;
-    top: calc(100% + 0px); /* Точное позиционирование */
+    top: 100%;
     left: 0;
     right: 0;
-    margin: 0 !important; /* Убираем все отступы */
-    padding: 0; /* Убираем padding */
+
+    margin: -1px 0 0 0 !important; /* перекрываем границу */
+    padding: 0;
+
     background: #111;
     border: 1px solid #333;
     border-top: none;
-    border-radius: 0 0 6px 6px;
-    max-height: 300px;
-    overflow-y: auto;
-    z-index: 1000;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+
+    box-sizing: border-box;
 }
 
 .custom-dropdown.open .dropdown-options {
