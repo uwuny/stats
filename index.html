@@ -191,7 +191,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
-  margin: 15px 0 10px;
+  margin: 15px 0 3px; /* Уменьшили нижний отступ с 10px до 3px */
   flex-wrap: nowrap;
 }
   
@@ -234,7 +234,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .tank-table {
   width: 95%;
   max-width: 1200px;
-  margin: 8px auto 20px !important; /* 8px сверху вместо 15px */
+  margin: 3px auto 20px !important; /* Уменьшили верхний отступ с 8px до 3px */
   border-collapse: collapse;
   background: #1a1a1a;
   border: 1px solid #444;
@@ -691,10 +691,10 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 .dropdown-options {
     position: absolute;
-    top: calc(100% - 1px); /* Прижимаем вплотную, перекрывая нижнюю границу селектора */
+    top: 100%;
     left: 0;
     right: 0;
-    margin-top: 0 !important; /* Жёстко убираем любые наследуемые отступы */
+    margin-top: -1px !important; /* Прижимаем вплотную, перекрывая рамку */
     background: #111;
     border: 1px solid #333;
     border-top: none;
