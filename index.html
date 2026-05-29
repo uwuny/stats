@@ -38,9 +38,15 @@ body {
   margin-bottom: 5px;
 }
 
-.buttons, .date-buttons, .main-tabs, .sub-tabs, .equip-buttons {
+.buttons, .date-buttons, .main-tabs, .sub-tabs {
   text-align: center;
   margin-bottom: 10px;
+}
+
+.equip-buttons {
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -184,7 +190,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
-  margin: 15px 0 25px;
+  margin: 15px 0 10px;
   flex-wrap: nowrap;
 }
   
@@ -309,7 +315,8 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   
 /* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
 #equipmentContent {
-  padding: 0 20px;
+  padding: 0;
+  margin: 0;
 }
 
 .tank-name {
@@ -1013,7 +1020,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 </div>
 
   <!-- Кнопка возврата -->
-  <div id="backButtonContainer" style="display:none; text-align:center;">
+  <div id="backButtonContainer" style="display:none !important; text-align:center; margin:0; padding:0;">
     <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
   </div>
 
