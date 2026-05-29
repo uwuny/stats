@@ -189,7 +189,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .equip-filters {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 15px;
 
   margin: 15px 0;
@@ -208,7 +208,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .filter-group label {
   height: 16px;
   line-height: 16px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 
   font-size: 12px;
   color: #aaa;
@@ -631,6 +631,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     padding: 0;
     line-height: normal;
     vertical-align: bottom;
+    display: inline-block;
     z-index: 1000;
 }
 
@@ -641,17 +642,17 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 .dropdown-class {
     width: 150px;
-    flex: 0 0 150px;
+    flex: none;
 }
 
 .dropdown-role {
     width: 320px;
-    flex: 0 0 320px;
+    flex: none;
 }
 
 .dropdown-level {
     width: 90px;
-    flex: 0 0 90px;
+    flex: none;
 }
 
 .dropdown-selected {
