@@ -1345,7 +1345,7 @@ function renderTankTable(tanks = null) {
     const name = String(tank.name || tank["name "] || "").trim();
 
     // Формируем пути к картинкам
-    const tankIcon = `icons/${id}.png`;
+    const tankIcon = `icons/${rawNation}-${id}.png`;
     const nationIcon = `flags/${rawNation}.png`;
     const classIcon = `classes/${rawClass}.png`;
     const level = tank.level || tank["level "];
