@@ -338,59 +338,105 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   background: transparent;
 }
 
-/* Блоки оборудования */
-.equipment-builds {
+/* ==================== ОБОРУДОВАНИЕ: НОВЫЕ СЛОТЫ ==================== */
+.equip-build {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 15px;
+  padding: 1rem 0;
 }
 
-.equip-card {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-  min-width: 420px;
-  max-width: 100%;
-}
-
-.equip-card .title {
+.build-label {
   font-size: 14px;
   color: #00ff66;
-  margin-bottom: 12px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+  margin-bottom: 10px;
 }
 
 .equip-items {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-.equip-item {
-  width: 130px;
-  height: 130px;
+.slot {
+  width: 140px;
+  height: 140px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #222;
-  border-radius: 6px;
+  background: #1f1f1f;
+  border-radius: 3px;
   border: 1px solid #444;
+  transition: 0.2s;
 }
 
-.equip-item img {
-  max-width: 90%;
-  max-height: 90%;
+.slot:hover {
+  border-color: #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+  transform: translateY(-2px);
+}
+
+.slot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: radial-gradient(ellipse at 30% 30%, rgba(0,255,102,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.slot-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-icon img {
+  width: 80%;
+  height: 80%;
   object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 102, 0.4));
+  transition: 0.2s;
+}
+
+.slot:hover .slot-icon img {
+  filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.8));
+  transform: scale(1.05);
+}
+
+.corner { 
+  position: absolute; 
+  width: 14px; 
+  height: 14px; 
+  pointer-events: none;
+  z-index: 2;
+}
+.corner.tl { top:-1px; left:-1px;   border-top:2px solid #00ff66; border-left:2px solid #00ff66;   border-radius:2px 0 0 0; }
+.corner.tr { top:-1px; right:-1px;  border-top:2px solid #00ff66; border-right:2px solid #00ff66;  border-radius:0 2px 0 0; }
+.corner.bl { bottom:-1px; left:-1px;  border-bottom:2px solid #00ff66; border-left:2px solid #00ff66;  border-radius:0 0 0 2px; }
+.corner.br { bottom:-1px; right:-1px; border-bottom:2px solid #00ff66; border-right:2px solid #00ff66; border-radius:0 0 2px 0; }
+
+.bottom-line {
+  position: absolute;
+  bottom: 0; left: 20px; right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff6666, transparent);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Layout: 1 блок */
-.equipment-builds[data-count="1"] .equip-card {
+.equipment-builds[data-count="1"] .equip-build {
   margin: 0 auto;
 }
 
@@ -410,19 +456,19 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   justify-items: center;
 }
 
-.equipment-builds[data-count="3"] .equip-card:nth-child(1) {
+.equipment-builds[data-count="3"] .equip-build:nth-child(1) {
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
 }
 
-.equipment-builds[data-count="3"] .equip-card:nth-child(2) {
+.equipment-builds[data-count="3"] .equip-build:nth-child(2) {
   grid-column: 2;
   grid-row: 1;
   justify-self: end;
 }
 
-.equipment-builds[data-count="3"] .equip-card:nth-child(3) {
+.equipment-builds[data-count="3"] .equip-build:nth-child(3) {
   grid-column: 1 / -1;
   grid-row: 2;
   justify-self: center;
@@ -536,12 +582,12 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     flex-direction: column;
     display: flex;
   }
-  .equipment-builds[data-count="3"] .equip-card {
+  .equipment-builds[data-count="3"] .equip-build {
     justify-self: center !important;
     grid-column: auto !important;
     grid-row: auto !important;
   }
-  .equip-card {
+  .equip-build {
     min-width: auto;
     width: 100%;
     max-width: 420px;
@@ -1572,11 +1618,26 @@ function renderEquipmentBuilds(builds) {
   builds.forEach(build => {
     let type = build.type || build["type "];
     let items = build.items || build["items "] || [];
+    
+    // Генерируем HTML для каждого слота с уголками и нижней линией
+    const slotsHtml = items.map(item => `
+      <div class="slot">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="bottom-line"></div>
+        <div class="slot-icon">
+          <img src="equipment/${String(item).trim()}" alt="">
+        </div>
+      </div>
+    `).join('');
+
     html += `
-      <div class="equip-card">
-        <div class="title">${titles[type] || type}</div>
+      <div class="equip-build">
+        <div class="build-label">${titles[type] || type}</div>
         <div class="equip-items">
-          ${items.map(item => `<div class="equip-item"><img src="equipment/${String(item).trim()}" alt=""></div>`).join('')}
+          ${slotsHtml}
         </div>
       </div>`;
   });
