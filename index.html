@@ -710,6 +710,34 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 #tableWrapper::-webkit-scrollbar-corner {
     background: #1a1a1a;
 }
+
+.slot-icon.item-BonDosil img        { transform: translate(0px, 0px); }
+.slot-icon.item-BonKomponovka img   { transform: translate(0px, 0px); }
+.slot-icon.item-BonOptica img       { transform: translate(-5px, 0px); }
+.slot-icon.item-BonPricel img       { transform: translate(0px, 0px); }
+.slot-icon.item-BonPrivodi img      { transform: translate(0px, 0px); }
+.slot-icon.item-BonStab img         { transform: translate(-5px, 0px); }
+.slot-icon.item-BonTurbina img      { transform: translate(0px, 0px); }
+.slot-icon.item-BonVentil img       { transform: translate(-3px, 0px); }
+.slot-icon.item-BonZakalka img      { transform: translate(0px, 0px); }
+.slot-icon.item-Copi img            { transform: translate(0px, 0px); }
+.slot-icon.item-Grunti img          { transform: translate(0px, 0px); }
+.slot-icon.item-ExpKaretka img      { transform: translate(0px, 0px); }
+.slot-icon.item-ExpRastochka img    { transform: translate(0px, 0px); }
+.slot-icon.item-ExpStab img         { transform: translate(0px, 0px); }
+.slot-icon.item-ExpTurbina img      { transform: translate(-1px, 0px); }
+.slot-icon.item-ExpZakalka img      { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyComponovka img { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyDosil img      { transform: translate(0px, 0px) scale(1.05); }
+.slot-icon.item-TrophyMaloshymka img { transform: translate(0px, -5px); }
+.slot-icon.item-TrophyOptica img     { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyPricel img     { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyPrivodi img    { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyStabilizer img { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyTurbina img    { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyUMP img        { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyVentil img     { transform: translate(0px, 0px); }
+.slot-icon.item-TrophyZakalka img    { transform: translate(0px, 0px) scale(1.05); }
   
 </style>
 </head>
@@ -1507,18 +1535,21 @@ function renderEquipmentBuilds(builds) {
     let type = build.type || build["type "];
     let items = build.items || build["items "] || [];
 
-    const slotsHtml = items.map(item => `
+    const slotsHtml = items.map(item => {
+      const rawItem = String(item).trim();
+      const cleanName = rawItem.replace(/\.[^/.]+$/, ""); // Автоматически убирает .png
+      return `
       <div class="slot">
         <div class="corner tl"></div>
         <div class="corner tr"></div>
         <div class="corner bl"></div>
         <div class="corner br"></div>
         <div class="slot-bottom-line"></div>
-        <div class="slot-icon">
-          <img src="equipment/${String(item).trim()}" alt="">
+        <div class="slot-icon item-${cleanName}">
+          <img src="equipment/${rawItem}" alt="">
         </div>
       </div>
-    `).join('');
+    `}).join('');
 
     html += `
       <div class="equip-build">
