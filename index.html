@@ -1473,7 +1473,7 @@ function openTank(tankId) {
     let imgSrc = String(images[0]).trim();
     html += `<div class="tank-main-image">
       <img src="images/${imgSrc}" alt="${name}">
-      ${mods?.length === 5 ? renderFieldMods(mods) : ''}
+      ${mods?.length > 0 ? renderFieldMods(mods) : ''}
     </div>`;
   }
 
