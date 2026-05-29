@@ -567,7 +567,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 /* ==================== КАСТОМНЫЙ DROPDOWN С ИКОНКАМИ ==================== */
 .custom-dropdown {
     position: relative;
-    width: 210px;
+    width: 300px;
     user-select: none;
 }
 
@@ -716,39 +716,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 <div id="equipmentPage" style="display:none;">
   
   <!-- Фильтры -->
-  <div class="equip-filters">
-<div class="filter-group">
-  <label>Уровень</label>
-
-  <div class="custom-dropdown" id="filterLevelDropdown">
-    <div class="dropdown-selected">
-      <span class="dropdown-text">Все</span>
-      <span class="dropdown-arrow">▼</span>
-    </div>
-
-    <div class="dropdown-options">
-      <div class="dropdown-option active" data-value="all">
-        <span class="dropdown-text">Все</span>
-      </div>
-
-      <div class="dropdown-option" data-value="8">
-        <span class="dropdown-text">VIII</span>
-      </div>
-
-      <div class="dropdown-option" data-value="9">
-        <span class="dropdown-text">IX</span>
-      </div>
-
-      <div class="dropdown-option" data-value="10">
-        <span class="dropdown-text">X</span>
-      </div>
-
-      <div class="dropdown-option" data-value="11">
-        <span class="dropdown-text">XI</span>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="equip-filters">    
     
     <div class="filter-group">
       <label>Нация</label>
@@ -848,6 +816,126 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
       </div>
     </div>
   </div>
+
+  <div class="filter-group">
+  <label>Роль</label>
+
+  <div class="custom-dropdown" id="filterRoleDropdown">
+    <div class="dropdown-selected">
+      <span class="dropdown-text">Все</span>
+      <span class="dropdown-arrow">▼</span>
+    </div>
+
+    <div class="dropdown-options">
+
+      <div class="dropdown-option active" data-value="all">
+        <span class="dropdown-text">Все</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_LT_universal">
+        <span class="dropdown-text">Лёгкие танки универсальные</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_LT_wheeled">
+        <span class="dropdown-text">Лёгкие танки колёсные</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_MT_assault">
+        <span class="dropdown-text">Средние танки штурмовые</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_MT_universal">
+        <span class="dropdown-text">Средние танки универсальные</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_MT_sniper">
+        <span class="dropdown-text">Средние танки снайперские</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_MT_support">
+        <span class="dropdown-text">Средние танки поддержки</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_HT_assault">
+        <span class="dropdown-text">Тяжёлые танки штурмовые</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_HT_universal">
+        <span class="dropdown-text">Тяжёлые танки универсальные</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_HT_break">
+        <span class="dropdown-text">Тяжёлые танки прорыва</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_HT_support">
+        <span class="dropdown-text">Тяжёлые танки поддержки</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_ATSPG_assault">
+        <span class="dropdown-text">ПТ-САУ штурмовые</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_ATSPG_universal">
+        <span class="dropdown-text">ПТ-САУ универсальные</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_ATSPG_sniper">
+        <span class="dropdown-text">ПТ-САУ снайперские</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_ATSPG_support">
+        <span class="dropdown-text">ПТ-САУ поддержки</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_SPG_assault">
+        <span class="dropdown-text">САУ штурмовые</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_SPG">
+        <span class="dropdown-text">САУ поддержки</span>
+      </div>
+
+      <div class="dropdown-option" data-value="role_SPG_flame">
+        <span class="dropdown-text">САУ огнемётные</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <div class="filter-group">
+  <label>Уровень</label>
+
+  <div class="custom-dropdown" id="filterLevelDropdown">
+    <div class="dropdown-selected">
+      <span class="dropdown-text">Все</span>
+      <span class="dropdown-arrow">▼</span>
+    </div>
+
+    <div class="dropdown-options">
+      <div class="dropdown-option active" data-value="all">
+        <span class="dropdown-text">Все</span>
+      </div>
+
+      <div class="dropdown-option" data-value="8">
+        <span class="dropdown-text">VIII</span>
+      </div>
+
+      <div class="dropdown-option" data-value="9">
+        <span class="dropdown-text">IX</span>
+      </div>
+
+      <div class="dropdown-option" data-value="10">
+        <span class="dropdown-text">X</span>
+      </div>
+
+      <div class="dropdown-option" data-value="11">
+        <span class="dropdown-text">XI</span>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Кнопка возврата -->
   <div id="backButtonContainer" style="display:none; text-align:center;">
@@ -1190,9 +1278,10 @@ async function loadEquipmentDB() {
 function renderFilters() {
 
   /* ===== ИНИЦИАЛИЗАЦИЯ КАСТОМНЫХ DROPDOWN ===== */
-  initCustomDropdown('filterLevelDropdown', applyFilters);
   initCustomDropdown('filterNationDropdown', applyFilters);
   initCustomDropdown('filterClassDropdown', applyFilters);
+  initCustomDropdown('filterRoleDropdown', applyFilters);
+  initCustomDropdown('filterLevelDropdown', applyFilters);
 
   // Устанавливаем начальное состояние active
   document.querySelectorAll('.dropdown-option[data-value="all"]').forEach(opt => {
@@ -1262,19 +1351,22 @@ function getDropdownValue(dropdownId) {
 function applyFilters() {
   if (!EQUIPMENT_DB) return;
   
-  const level = getDropdownValue('filterLevelDropdown');
   const nation = getDropdownValue('filterNationDropdown');
   const cls = getDropdownValue('filterClassDropdown');
+  const role = getDropdownValue('filterRoleDropdown');
+  const level = getDropdownValue('filterLevelDropdown');
   
   const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
   const filtered = tanksList.filter(tank => {
-    const tankLevel = String(tank.level || tank["level "] || "").trim();
     const tankNation = String(tank.nation || tank["nation "] || "").trim();
     const tankClass = String(tank.class || tank["class "] || "").trim();
+    const tankRole = String(tank.role || tank["role "] || "").trim();
+    const tankLevel = String(tank.level || tank["level "] || "").trim();
     
-    if (level !== 'all' && tankLevel !== level) return false;
     if (nation !== 'all' && tankNation !== nation) return false;
     if (cls !== 'all' && tankClass !== cls) return false;
+    if (role !== 'all' && tankRole !== role) return false;
+    if (level !== 'all' && tankLevel !== level) return false;
     return true;
   });
   
