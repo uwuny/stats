@@ -785,6 +785,39 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     background: #00cc55;
     box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
 }
+
+
+/* ==================== СКРОЛЛБАР ТАБЛИЦЫ СТАТИСТИКИ ==================== */
+#tableWrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #00ff66 #1a1a1a;
+}
+
+#tableWrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+#tableWrapper::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 6px;
+}
+
+#tableWrapper::-webkit-scrollbar-thumb {
+    background: #00ff66;
+    border-radius: 6px;
+    transition: 0.15s;
+}
+
+#tableWrapper::-webkit-scrollbar-thumb:hover {
+    background: #00cc55;
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+#tableWrapper::-webkit-scrollbar-corner {
+    background: #1a1a1a;
+}
+
   
 </style>
 </head>
