@@ -320,21 +320,20 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   font-size: 15px;
 }
 
-/* Ширина столбца "Название" (узкая) */
+/* Ширина столбца "Название" (широкая) */
 .tank-table th:nth-child(1),
 .tank-table td:nth-child(1) {
-  width: 80px;
-  min-width: 80px;
-  max-width: 80px;
-}
-
-/* Ширина столбца "Уровень" (широкая) */
-.tank-table th:nth-child(4),
-.tank-table td:nth-child(4) {
   width: 200px;
   min-width: 200px;
+  max-width: 200px;
 }
 
+/* Ширина столбца "Уровень" (узкая) */
+.tank-table th:nth-child(4),
+.tank-table td:nth-child(4) {
+  width: 80px;
+  min-width: 80px;
+}
 /* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
 #equipmentContent {
   padding: 0 20px;
