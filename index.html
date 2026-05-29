@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
 <style>
-/* ==================== БАЗОВЫЕ СТИЛИ ==================== */
+  
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -16,17 +16,14 @@ body {
   background: url('backgrounds.png') center center no-repeat;
   background-size: cover;
 }
-
 @media (min-width: 768px) {
   body { background-attachment: fixed; }
 }
-
 .page {
   position: relative;
   z-index: 1;
   padding-top: 10px;
 }
-
 .matrix-title {
   text-align: center;
   font-size: 60px;
@@ -37,19 +34,16 @@ body {
   text-shadow: 0 0 20px #00ff66;
   margin-bottom: 5px;
 }
-
 .buttons, .date-buttons, .main-tabs, .sub-tabs {
   text-align: center;
   margin-bottom: 10px;
 }
-
 .equip-buttons, #tankButtons {
   text-align: center;
   margin: 0 !important;
   padding: 0 !important;
   min-height: 0;
 }
-
 button {
   background: #2b2b2b;
   color: #fff;
@@ -60,34 +54,28 @@ button {
   cursor: pointer;
   transition: 0.15s;
 }
-
 button:hover {
   border-color: #00ff66;
   box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
 }
-
 button.active {
   background: #4a6ed1;
 }
-
 .main-tabs button.active,
 .sub-tabs button.active,
 .equip-btn.active {
   background: #2e5e2e;
   border-color: #00ff66;
 }
-
 .sub-tabs button.current-campaign {
   border: 1px solid #63b3ff;
   box-shadow: 0 0 8px rgba(99, 179, 255, 0.45);
 }
 
-/* ==================== ТАБЛИЦА ==================== */
 #tableWrapper {
   width: 100%;
   overflow-x: auto;
 }
-
 table {
   border-collapse: collapse;
   background: #1a1a1a;
@@ -95,7 +83,6 @@ table {
   min-width: 100%;
   table-layout: fixed;
 }
-
 th, td {
   border: 1px solid #444;
   padding: 6px;
@@ -103,31 +90,26 @@ th, td {
   transition: 0.15s;
   vertical-align: top;
 }
-
 th:first-child, td:first-child {
   width: 180px;
   min-width: 180px;
   max-width: 180px;
 }
-
 .clan-header {
   padding: 4px 6px 2px 6px;
   font-size: 13px;
   min-width: 120px;
 }
-
 .clan-link {
   color: #57a9c2;
   text-decoration: none;
   font-weight: 700;
   transition: 0.15s;
 }
-
 .clan-link:hover {
   color: #9be8ff;
   text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
 }
-
 .clan-header .elo-value {
   display: block;
   font-size: 11px;
@@ -136,7 +118,6 @@ th:first-child, td:first-child {
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
 }
-
 tr.hover-row td { background: rgba(255, 255, 255, 0.05); }
 td.hover-col, th.hover-col { background: rgba(255, 255, 255, 0.05); }
 td.hover-cell { background: rgba(255, 255, 255, 0.12); }
@@ -157,7 +138,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   height: 20px;
   object-fit: contain;
 }
-
 .map-link {
   color: #f0f0f0;
   text-decoration: none;
@@ -170,7 +150,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
 }
 
-/* ==================== ПОДВАЛ ==================== */
 .bottom-line {
   width: 90%;
   height: 1px;
@@ -185,26 +164,21 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   margin-bottom: 20px;
 }
 
-/* ==================== ОБОРУДОВАНИЕ: ФИЛЬТРЫ ==================== */
 .equip-filters {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 15px;
-
   margin: 15px 0;
-
   position: relative;
   z-index: 500;
 }
-  
 .filter-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: fit-content;
 }
-
 .filter-group label {
   height: 16px;
   line-height: 16px;
@@ -216,7 +190,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   letter-spacing: 0.5px;
 }
 
-/* ==================== ОБОРУДОВАНИЕ: КНОПКА ВОЗВРАТА ==================== */
 #backToTableBtn {
   background: #2b2b2b;
   color: #00ff66;
@@ -230,31 +203,27 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   font-weight: 600;
   margin-bottom: 20px;
 }
-
 #backToTableBtn:hover {
   background: #2e5e2e;
   box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
 }
 
-/* ==================== ОБОРУДОВАНИЕ: ТАБЛИЦА ТАНКОВ ==================== */
 .tank-table {
   width: 95%;
   max-width: 1200px;
-  margin: 3px auto 20px !important; /* Уменьшили верхний отступ с 8px до 3px */
+  margin: 3px auto 20px !important;
   border-collapse: collapse;
   background: #1a1a1a;
   border: 1px solid #444;
   font-family: 'Sofia Sans', sans-serif;
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
-
 .tank-table th, .tank-table td {
   border: 1px solid #333;
   padding: 10px 15px;
   text-align: center;
   transition: 0.15s;
 }
-
 .tank-table th {
   background: #222;
   color: #00ff66;
@@ -266,27 +235,22 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   z-index: 1;
   border-bottom: 2px solid #00ff66;
 }
-
 .tank-table tbody tr {
   cursor: pointer;
 }
-
 .tank-table tbody tr:nth-child(even) {
   background: #1f1f1f;
 }
-
 .tank-table tbody tr:hover td {
   background: #2e5e2e;
   color: #fff;
 }
-
 .tank-table tbody tr.active td {
   background: #4a6ed1;
   color: #fff;
   font-weight: bold;
   box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
 }
-
 .tank-table td:first-child {
   text-align: left;
   font-weight: 600;
@@ -294,38 +258,31 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   font-size: 15px;
 }
 
-/* Распределение ширины столбцов в процентах */
 .tank-table th:nth-child(1),
 .tank-table td:nth-child(1) {
   width: 25%;
 }
-
 .tank-table th:nth-child(2),
 .tank-table td:nth-child(2) {
   width: 15%;
 }
-
 .tank-table th:nth-child(3),
 .tank-table td:nth-child(3) {
   width: 15%;
 }
-
 .tank-table th:nth-child(4),
 .tank-table td:nth-child(4) {
   width: 30%;
 }
-
 .tank-table th:nth-child(5),
 .tank-table td:nth-child(5) {
   width: 15%;
 }
-  
-/* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
+
 #equipmentContent {
   padding: 0;
   margin: 0;
 }
-
 .tank-name {
   text-align: center;
   font-size: 28px;
@@ -335,13 +292,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 700;
 }
-
 .tank-main-image {
   position: relative;
   width: fit-content;
   margin: 0 auto 40px;
 }
-
 .tank-main-image img {
   max-width: 100%;
   height: auto;
@@ -352,7 +307,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   background: transparent;
 }
 
-/* ==================== ОБОРУДОВАНИЕ: НОВЫЕ СЛОТЫ ==================== */
 .equip-build {
   display: flex;
   flex-direction: column;
@@ -360,7 +314,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   gap: 15px;
   padding: 1rem 0;
 }
-
 .build-label {
   font-size: 14px;
   color: #00ff66;
@@ -371,14 +324,12 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
   margin-bottom: 10px;
 }
-
 .equip-items {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .slot {
   width: 140px;
   height: 140px;
@@ -391,12 +342,10 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   border: 1px solid #444;
   transition: 0.2s;
 }
-
 .slot:hover {
   border-color: #00ff66;
   box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
 }
-
 .slot::before {
   content: '';
   position: absolute;
@@ -405,7 +354,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   background: radial-gradient(ellipse at 30% 30%, rgba(0,255,102,0.08) 0%, transparent 65%);
   pointer-events: none;
 }
-
 .slot-icon {
   position: relative;
   z-index: 1;
@@ -413,7 +361,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   align-items: center;
   justify-content: center;
 }
-
 .slot-icon img {
   max-width: 95%;
   max-height: 95%;
@@ -421,7 +368,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   height: auto;
   object-fit: contain;
 }
-
 .corner { 
   position: absolute; 
   width: 14px; 
@@ -443,19 +389,16 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   z-index: 2;
 }
 
-/* Layout: 1 блок */
 .equipment-builds[data-count="1"] .equip-build {
   margin: 0 auto;
 }
 
-/* Layout: 2 блока */
 .equipment-builds[data-count="2"] {
   flex-direction: row;
   justify-content: center;
   gap: 30px;
 }
 
-/* Layout: 3 блока */
 .equipment-builds[data-count="3"] {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -469,13 +412,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   grid-row: 1;
   justify-self: start;
 }
-
 .equipment-builds[data-count="3"] .equip-build:nth-child(2) {
   grid-column: 2;
   grid-row: 1;
   justify-self: end;
 }
-
 .equipment-builds[data-count="3"] .equip-build:nth-child(3) {
   grid-column: 1 / -1;
   grid-row: 2;
@@ -483,19 +424,16 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   margin-top: 10px;
 }
 
-/* ==================== ПОЛЕВАЯ МОДЕРНИЗАЦИЯ — НОВЫЙ ВИЗУАЛ ==================== */
 .mods-wrapper {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-
 .mod-block {
   position: absolute;
   width: 240px;
   height: 120px;
 }
-
 .mod-block:nth-child(1){ top: 20px; left: -260px; }
 .mod-block:nth-child(2){ top: 185px; left: -345px; }
 .mod-block:nth-child(3){ top: 350px; left: -270px; }
@@ -522,7 +460,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
-
 .mod-overlay.active {
   width: 142px;
   height: 142px;
@@ -531,7 +468,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 .mod-overlay.active.left  { left: -11px; top: -11px; }
 .mod-overlay.active.right { left: 109px; top: -11px; }
-
 .mod-overlay.disabled {
   width: 120px;
   height: 120px;
@@ -540,7 +476,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 .mod-overlay.disabled.left  { left: 0; top: 0; }
 .mod-overlay.disabled.right { left: 120px; top: 0; }
-
 .mod-level {
   position: absolute;
   width: 38px;
@@ -553,7 +488,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
-
 .mod-icon {
   position: absolute;
   pointer-events: none;
@@ -571,7 +505,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .mod-icon.blocked.left  { left: 53px; bottom: -7px; }
 .mod-icon.blocked.right { left: 173px; bottom: -7px; }
 
-/* ==================== АДАПТИВНОСТЬ ==================== */
 @media (max-width: 768px) {
   .dropdown-nation,
   .dropdown-class,
@@ -602,7 +535,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   }
 }
 
-/* ==================== ИКОНКИ В ТАБЛИЦЕ ТАНКОВ ==================== */
 .cell-content {
     display: flex;
     align-items: center;
@@ -610,7 +542,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     justify-content: center;
     width: 100%;
 }
-
 .cell-content .icon-img {
     height: 24px;
     width: auto;
@@ -619,12 +550,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
 }
-
 .cell-content span {
     text-align: left;
     white-space: nowrap;
 }
-/* ==================== КАСТОМНЫЙ DROPDOWN С ИКОНКАМИ ==================== */
+
 .custom-dropdown {
     position: relative;
     margin: 0;
@@ -639,22 +569,18 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     width: 200px;
     flex: none;
 }
-
 .dropdown-class {
     width: 150px;
     flex: none;
 }
-
 .dropdown-role {
     width: 320px;
     flex: none;
 }
-
 .dropdown-level {
     width: 90px;
     flex: none;
 }
-
 .dropdown-selected {
     background: #111;
     color: #fff;
@@ -662,65 +588,50 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     min-height: 42px;
     box-sizing: border-box;
-
     gap: 8px;
     transition: 0.15s;
-
-    margin: 0 !important; /* Добавляем эту строку */
+    margin: 0 !important;
 }
-
 .dropdown-selected:hover {
     border-color: #00ff66;
     box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
 }
-
 .dropdown-selected .dropdown-icon {
     width: 24px;
     height: 24px;
     object-fit: contain;
 }
-
 .dropdown-arrow {
     font-size: 10px;
     color: #888;
     transition: 0.15s;
 }
-
 .custom-dropdown.open .dropdown-arrow {
     transform: rotate(180deg);
 }
-
 .dropdown-options {
     position: absolute;
     top: calc(100% + 1px);
     left: 0;
     right: 0;
-
     display: none;
-
     margin: 0;
     padding: 0;
-
     background: #111;
     border: 1px solid #333;
     border-top: none;
-
     box-sizing: border-box;
     z-index: 9999;
 }
-
 .custom-dropdown.open .dropdown-options {
     display: block;
     position: absolute;
 }
-
 .dropdown-option {
     padding: 8px 12px;
     cursor: pointer;
@@ -729,95 +640,76 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     gap: 8px;
     transition: 0.15s;
 }
-
 .dropdown-option:hover {
     background: #1f1f1f;
 }
-
 .dropdown-option.active {
     background: #2e5e2e;
     color: #fff;
 }
-
 .dropdown-option .dropdown-icon {
     width: 24px;
     height: 24px;
     object-fit: contain;
 }
-
 .dropdown-option .dropdown-text {
     flex: 1;
 }
-
 .dropdown-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
 .dropdown-options {
     max-height: 350px;
     overflow-y: auto;
 }
-  
-/* ==================== СТИЛИЗАЦИЯ СКРОЛЛБАРА ==================== */
+
 .dropdown-options {
     scrollbar-width: thin;
     scrollbar-color: #00ff66 #1a1a1a;
 }
-
 .dropdown-options::-webkit-scrollbar {
     width: 8px;
 }
-
 .dropdown-options::-webkit-scrollbar-track {
     background: #1a1a1a;
     border-radius: 0 0 6px 0;
 }
-
 .dropdown-options::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 4px;
     transition: 0.15s;
 }
-
 .dropdown-options::-webkit-scrollbar-thumb:hover {
     background: #00cc55;
     box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
 }
 
-
-/* ==================== СКРОЛЛБАР ТАБЛИЦЫ СТАТИСТИКИ ==================== */
 #tableWrapper {
     scrollbar-width: thin;
     scrollbar-color: #00ff66 #1a1a1a;
 }
-
 #tableWrapper::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
-
 #tableWrapper::-webkit-scrollbar-track {
     background: #1a1a1a;
     border-radius: 6px;
 }
-
 #tableWrapper::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 6px;
     transition: 0.15s;
 }
-
 #tableWrapper::-webkit-scrollbar-thumb:hover {
     background: #00cc55;
     box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
 }
-
 #tableWrapper::-webkit-scrollbar-corner {
     background: #1a1a1a;
 }
-
   
 </style>
 </head>
@@ -832,7 +724,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   <button class="tab" onclick="switchTab('equipment', event)">Оборудование</button>
 </div>
 
-<!-- ==================== ВКЛАДКА СТАТИСТИКИ ==================== -->
 <div id="statsPage">
   <div class="buttons">
     <button class="mode" onclick="loadTable('damage',event)">Урон</button>
@@ -846,12 +737,9 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   <div id="tableWrapper"><div id="table"></div></div>
 </div>
 
-<!-- ==================== ВКЛАДКА ОБОРУДОВАНИЯ ==================== -->
 <div id="equipmentPage" style="display:none;">
   
-  <!-- Фильтры -->
   <div class="equip-filters">    
-    
     <div class="filter-group">
       <label>Нация</label>
       <div class="custom-dropdown dropdown-nation" id="filterNationDropdown">
@@ -952,116 +840,90 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
   <div class="filter-group">
   <label>Роль</label>
-
   <div class="custom-dropdown dropdown-role" id="filterRoleDropdown">
     <div class="dropdown-selected">
       <span class="dropdown-text">Все</span>
       <span class="dropdown-arrow">▼</span>
     </div>
-
     <div class="dropdown-options">
-
       <div class="dropdown-option active" data-value="all">
         <span class="dropdown-text">Все</span>
       </div>
-
       <div class="dropdown-option" data-value="role_LT_universal">
         <span class="dropdown-text">Лёгкие танки универсальные</span>
       </div>
-
       <div class="dropdown-option" data-value="role_LT_wheeled">
         <span class="dropdown-text">Лёгкие танки колёсные</span>
       </div>
-
       <div class="dropdown-option" data-value="role_MT_assault">
         <span class="dropdown-text">Средние танки штурмовые</span>
       </div>
-
       <div class="dropdown-option" data-value="role_MT_universal">
         <span class="dropdown-text">Средние танки универсальные</span>
       </div>
-
       <div class="dropdown-option" data-value="role_MT_sniper">
         <span class="dropdown-text">Средние танки снайперские</span>
       </div>
-
       <div class="dropdown-option" data-value="role_MT_support">
         <span class="dropdown-text">Средние танки поддержки</span>
       </div>
-
       <div class="dropdown-option" data-value="role_HT_assault">
         <span class="dropdown-text">Тяжёлые танки штурмовые</span>
       </div>
-
       <div class="dropdown-option" data-value="role_HT_universal">
         <span class="dropdown-text">Тяжёлые танки универсальные</span>
       </div>
-
       <div class="dropdown-option" data-value="role_HT_break">
         <span class="dropdown-text">Тяжёлые танки прорыва</span>
       </div>
-
       <div class="dropdown-option" data-value="role_HT_support">
         <span class="dropdown-text">Тяжёлые танки поддержки</span>
       </div>
-
       <div class="dropdown-option" data-value="role_ATSPG_assault">
         <span class="dropdown-text">ПТ-САУ штурмовые</span>
       </div>
-
       <div class="dropdown-option" data-value="role_ATSPG_universal">
         <span class="dropdown-text">ПТ-САУ универсальные</span>
       </div>
-
       <div class="dropdown-option" data-value="role_ATSPG_sniper">
         <span class="dropdown-text">ПТ-САУ снайперские</span>
       </div>
-
       <div class="dropdown-option" data-value="role_ATSPG_support">
         <span class="dropdown-text">ПТ-САУ поддержки</span>
       </div>
-
       <div class="dropdown-option" data-value="role_SPG_assault">
         <span class="dropdown-text">САУ штурмовые</span>
       </div>
-
       <div class="dropdown-option" data-value="role_SPG">
         <span class="dropdown-text">САУ поддержки</span>
       </div>
-
       <div class="dropdown-option" data-value="role_SPG_flame">
         <span class="dropdown-text">САУ огнемётные</span>
       </div>
-
     </div>
   </div>
 </div>
+    
   <div class="filter-group">
   <label>Уровень</label>
-
   <div class="custom-dropdown dropdown-level" id="filterLevelDropdown">
     <div class="dropdown-selected">
       <span class="dropdown-text">Все</span>
       <span class="dropdown-arrow">▼</span>
     </div>
-
     <div class="dropdown-options">
       <div class="dropdown-option active" data-value="all">
         <span class="dropdown-text">Все</span>
       </div>
-
       <div class="dropdown-option" data-value="8">
         <span class="dropdown-text">VIII</span>
       </div>
-
       <div class="dropdown-option" data-value="9">
         <span class="dropdown-text">IX</span>
       </div>
-
       <div class="dropdown-option" data-value="10">
         <span class="dropdown-text">X</span>
       </div>
-
       <div class="dropdown-option" data-value="11">
         <span class="dropdown-text">XI</span>
       </div>
@@ -1070,23 +932,19 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 </div>
 </div>
 
-  <!-- Кнопка возврата -->
   <div id="backButtonContainer" style="display:none !important; text-align:center; margin:0; padding:0;">
     <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
   </div>
 
-  <!-- Контейнер для таблицы танков -->
   <div class="equip-buttons" id="tankButtons"></div>
-  
-  <!-- Контейнер для деталей танка -->
+ 
   <div id="equipmentContent"></div>
 
-  <!-- ==================== ПОДВАЛ ==================== -->
   <div class="bottom-line"></div>
   <div class="footer-text">Created by McQueen</div>
 </div>
 
-<!-- ==================== СКРИПТ #1: СТАТИСТИКА ==================== -->
+
 <script>
 let DATA = null;
 
@@ -1391,13 +1249,10 @@ function enableHover(){
 }
 </script>
 
-<!-- ==================== СКРИПТ #2: ОБОРУДОВАНИЕ ==================== -->
 <script>
-/* === ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ === */
 let EQUIPMENT_DB = null;
 let currentTankId = null;
 
-/* === ЗАГРУЗКА БАЗЫ ОБОРУДОВАНИЯ === */
 async function loadEquipmentDB() {
   try {
     const response = await fetch('equipment.json');
@@ -1414,19 +1269,16 @@ async function loadEquipmentDB() {
 
 function renderFilters() {
 
-  /* ===== ИНИЦИАЛИЗАЦИЯ КАСТОМНЫХ DROPDOWN ===== */
   initCustomDropdown('filterNationDropdown', applyFilters);
   initCustomDropdown('filterClassDropdown', applyFilters);
   initCustomDropdown('filterRoleDropdown', applyFilters);
   initCustomDropdown('filterLevelDropdown', applyFilters);
 
-  // Устанавливаем начальное состояние active
   document.querySelectorAll('.dropdown-option[data-value="all"]').forEach(opt => {
     opt.classList.add('active');
   });
 }
 
-/* === ФУНКЦИЯ ДЛЯ РАБОТЫ С КАСТОМНЫМ DROPDOWN === */
 function initCustomDropdown(dropdownId, onChangeCallback) {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
@@ -1434,28 +1286,23 @@ function initCustomDropdown(dropdownId, onChangeCallback) {
   const selected = dropdown.querySelector('.dropdown-selected');
   const options = dropdown.querySelectorAll('.dropdown-option');
   
-  // Открытие/закрытие dropdown
   selected.addEventListener('click', (e) => {
     e.stopPropagation();
-    // Закрываем все другие dropdown
     document.querySelectorAll('.custom-dropdown.open').forEach(d => {
       if (d !== dropdown) d.classList.remove('open');
     });
     dropdown.classList.toggle('open');
   });
   
-  // Выбор опции
   options.forEach(option => {
     option.addEventListener('click', () => {
       const value = option.dataset.value;
       const text = option.querySelector('.dropdown-text').textContent;
       const icon = option.querySelector('.dropdown-icon');
       
-      // Обновляем выбранный элемент
       const selectedText = selected.querySelector('.dropdown-text');
       selectedText.textContent = text;
       
-      // Добавляем иконку если есть
       const existingIcon = selected.querySelector('.dropdown-icon');
       if (existingIcon) existingIcon.remove();
       if (icon) {
@@ -1463,20 +1310,16 @@ function initCustomDropdown(dropdownId, onChangeCallback) {
         selected.insertBefore(newIcon, selectedText);
       }
       
-      // Обновляем active состояние
       options.forEach(opt => opt.classList.remove('active'));
       option.classList.add('active');
       
-      // Закрываем dropdown
       dropdown.classList.remove('open');
       
-      // Вызываем callback
       if (onChangeCallback) onChangeCallback();
     });
   });
 }
 
-/* === ПОЛУЧЕНИЕ ЗНАЧЕНИЯ ИЗ КАСТОМНОГО DROPDOWN === */
 function getDropdownValue(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return 'all';
@@ -1484,7 +1327,6 @@ function getDropdownValue(dropdownId) {
   return activeOption ? activeOption.dataset.value : 'all';
 }
 
-/* === ПРИМЕНЕНИЕ ФИЛЬТРОВ === */
 function applyFilters() {
   if (!EQUIPMENT_DB) return;
   
@@ -1510,7 +1352,6 @@ function applyFilters() {
   renderTankTable(filtered);
 }
 
-/* === РЕНДЕР ТАБЛИЦЫ ТАНКОВ === */
 function renderTankTable(tanks = null) {
   const container = document.getElementById('tankButtons');
   container.innerHTML = '';
@@ -1587,7 +1428,6 @@ function renderTankTable(tanks = null) {
     const rawRole = String(tank.role || tank["role "] || "").trim();
     const role = roleNames[rawRole] || rawRole;
 
-    // Формируем пути к картинкам
     const tankIcon = `icons/${rawNation}-${id}.png`;
     const nationIcon = `flags/${rawNation}.png`;
     const classIcon = `classes/${rawClass}.png`;
@@ -1612,18 +1452,15 @@ function renderTankTable(tanks = null) {
   });
 }
 
-/* === ОТКРЫТИЕ ТАНКА === */
 function openTank(tankId) {
   currentTankId = tankId;
   const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
   const tank = tanksList.find(t => String(t.id || t["id "] || "").trim() === tankId);
   if (!tank) return;
   
-  // Скрываем фильтры и таблицу
   document.querySelector('.equip-filters').style.display = 'none';
   document.getElementById('tankButtons').style.display = 'none';
   
-  // Показываем кнопку возврата
   document.getElementById('backButtonContainer').style.display = 'block';
 
   let name = String(tank.name || tank["name "] || "").trim();
@@ -1649,24 +1486,19 @@ function openTank(tankId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* === ВОЗВРАТ К ТАБЛИЦЕ === */
 function backToTable() {
-  // Скрываем детали танка и кнопку возврата
   document.getElementById('equipmentContent').innerHTML = '';
   document.getElementById('backButtonContainer').style.display = 'none';
   
-  // Показываем фильтры и таблицу
   document.querySelector('.equip-filters').style.display = 'flex';
   document.getElementById('tankButtons').style.display = 'block';
-  
-  // Сбрасываем выбранный танк и перерисовываем таблицу
+
   currentTankId = null;
   applyFilters();
   
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* === РЕНДЕР БЛОКОВ ОБОРУДОВАНИЯ === */
 function renderEquipmentBuilds(builds) {
   const titles = { main: 'Основной', alternative: 'Альтернативный', situational: 'Ситуативный' };
   const count = builds.length;
@@ -1674,8 +1506,7 @@ function renderEquipmentBuilds(builds) {
   builds.forEach(build => {
     let type = build.type || build["type "];
     let items = build.items || build["items "] || [];
-    
-    // Генерируем HTML для каждого слота с уголками и нижней линией
+
     const slotsHtml = items.map(item => `
       <div class="slot">
         <div class="corner tl"></div>
@@ -1701,7 +1532,6 @@ function renderEquipmentBuilds(builds) {
   return html;
 }
 
-/* === РЕНДЕР ПОЛЕВОЙ МОДЕРНИЗАЦИИ === */
 function renderFieldMods(mods) {
   return `
     <div class="mods-wrapper">
@@ -1756,7 +1586,6 @@ function renderModBlock(mod) {
   return html;
 }
 
-/* === ИНИЦИАЛИЗАЦИЯ === */
 document.addEventListener('DOMContentLoaded', () => {
   const equipmentPage = document.getElementById('equipmentPage');
   if (equipmentPage?.style.display !== 'none') loadEquipmentDB();
@@ -1767,7 +1596,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 });
 
-/* === ЗАКРЫТИЕ DROPDOWN ПРИ КЛИКЕ ВНЕ === */
 document.addEventListener('click', () => {
   document.querySelectorAll('.custom-dropdown.open').forEach(d => {
     d.classList.remove('open');
