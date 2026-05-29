@@ -323,24 +323,29 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 /* Распределение ширины столбцов в процентах */
 .tank-table th:nth-child(1),
 .tank-table td:nth-child(1) {
-  width: 40%;
+  width: 25%;
 }
 
 .tank-table th:nth-child(2),
 .tank-table td:nth-child(2) {
-  width: 20%;
+  width: 15%;
 }
 
 .tank-table th:nth-child(3),
 .tank-table td:nth-child(3) {
-  width: 20%;
+  width: 15%;
 }
 
 .tank-table th:nth-child(4),
 .tank-table td:nth-child(4) {
-  width: 20%;
+  width: 30%;
 }
+
+.tank-table th:nth-child(5),
+.tank-table td:nth-child(5) {
+  width: 15%;
 }
+  
 /* ==================== ОБОРУДОВАНИЕ: КОНТЕНТ ==================== */
 #equipmentContent {
   padding: 0 20px;
@@ -1339,16 +1344,38 @@ function renderTankTable(tanks = null) {
     'SPG': 'САУ'
   };
 
+    const roleNames = {
+    'role_LT_universal': 'Лёгкие танки универсальные',
+    'role_LT_wheeled': 'Лёгкие танки колёсные',
+    'role_MT_assault': 'Средние танки штурмовые',
+    'role_MT_universal': 'Средние танки универсальные',
+    'role_MT_sniper': 'Средние танки снайперские',
+    'role_MT_support': 'Средние танки поддержки',
+    'role_HT_assault': 'Тяжёлые танки штурмовые',
+    'role_HT_universal': 'Тяжёлые танки универсальные',
+    'role_HT_break': 'Тяжёлые танки прорыва',
+    'role_HT_support': 'Тяжёлые танки поддержки',
+    'role_ATSPG_assault': 'ПТ-САУ штурмовые',
+    'role_ATSPG_universal': 'ПТ-САУ универсальные',
+    'role_ATSPG_sniper': 'ПТ-САУ снайперские',
+    'role_ATSPG_support': 'ПТ-САУ поддержки',
+    'role_SPG_assault': 'САУ штурмовые',
+    'role_SPG_support': 'САУ поддержки',
+    'role_SPG_flame': 'САУ огнемётные'
+  };
+
   let html = `<table class="tank-table">
     <thead>
       <tr>
         <th>Название</th>
         <th>Нация</th>
         <th>Класс</th>
+        <th>Роль</th>
         <th>Уровень</th>
       </tr>
     </thead>
     <tbody>`;
+  
   const romanLevels = {
     8: 'VIII',
     9: 'IX',
@@ -1364,6 +1391,8 @@ function renderTankTable(tanks = null) {
     const nation = nationNames[rawNation] || rawNation;
     const cls = classNames[rawClass] || rawClass;
     const name = String(tank.name || tank["name "] || "").trim();
+    const rawRole = String(tank.role || tank["role "] || "").trim();
+    const role = roleNames[rawRole] || rawRole;
 
     // Формируем пути к картинкам
     const tankIcon = `icons/${rawNation}-${id}.png`;
@@ -1376,9 +1405,9 @@ function renderTankTable(tanks = null) {
       <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${name}</span></div></td>
       <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${nation}</span></div></td>
       <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${cls}</span></div></td>
+      <td><div class="cell-content"><span>${role}</span></div></td>
       <td>${romanLevel}</td>
     </tr>`;
-  });
   
   html += `</tbody></table>`;
   container.innerHTML = html;
