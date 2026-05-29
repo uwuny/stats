@@ -43,10 +43,11 @@ body {
   margin-bottom: 10px;
 }
 
-.equip-buttons {
+.equip-buttons, #tankButtons {
   text-align: center;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0;
 }
 
 button {
@@ -233,7 +234,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .tank-table {
   width: 95%;
   max-width: 1200px;
-  margin: 15px auto 25px;
+  margin: 8px auto 20px !important; /* 8px сверху вместо 15px */
   border-collapse: collapse;
   background: #1a1a1a;
   border: 1px solid #444;
@@ -690,9 +691,10 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 .dropdown-options {
     position: absolute;
-    top: 100%;
+    top: calc(100% - 1px); /* Прижимаем вплотную, перекрывая нижнюю границу селектора */
     left: 0;
     right: 0;
+    margin-top: 0 !important; /* Жёстко убираем любые наследуемые отступы */
     background: #111;
     border: 1px solid #333;
     border-top: none;
