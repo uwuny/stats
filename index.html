@@ -182,9 +182,10 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 .equip-filters {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: flex-start;
+  gap: 15px;
   margin: 15px 0 25px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .filter-group {
@@ -576,19 +577,23 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 }
 
 .dropdown-nation {
-    width: 220px;
+    width: 200px;
+    flex: 0 0 200px;
 }
 
 .dropdown-class {
-    width: 200px;
+    width: 150px;
+    flex: 0 0 150px;
 }
 
 .dropdown-role {
-    width: 320px;
+    width: 300px;
+    flex: 0 0 300px;
 }
 
 .dropdown-level {
-    width: 110px;
+    width: 90px;
+    flex: 0 0 90px;
 }
 
 .dropdown-selected {
@@ -928,7 +933,6 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
     </div>
   </div>
-</div>
 
   <div class="filter-group">
   <label>Уровень</label>
@@ -963,6 +967,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   </div>
 </div>
 
+</div>
   <!-- Кнопка возврата -->
   <div id="backButtonContainer" style="display:none; text-align:center;">
     <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
