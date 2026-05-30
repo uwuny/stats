@@ -251,6 +251,11 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
   font-weight: bold;
   box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
 }
+.tank-table th.sortable:hover {
+  background: #2e5e2e;
+  color: #fff;
+  transition: 0.15s;
+}
 .tank-table td:first-child {
   text-align: left;
   font-weight: 600;
@@ -1280,6 +1285,8 @@ function enableHover(){
 <script>
 let EQUIPMENT_DB = null;
 let currentTankId = null;
+let currentSortColumn = null;
+let currentSortDirection = 'asc';
 
 async function loadEquipmentDB() {
   try {
@@ -1355,6 +1362,80 @@ function getDropdownValue(dropdownId) {
   return activeOption ? activeOption.dataset.value : 'all';
 }
 
+function sortTanks(list, column, direction) {
+  if (!column) return list;
+  
+  const nationNames = {
+    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
+    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
+    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
+    'italy': 'Италия', 'intunion': 'Сборная наций'
+  };
+  const classNames = {
+    'heavyTank': 'Тяжёлый танк', 'mediumTank': 'Средний танк', 'lightTank': 'Лёгкий танк',
+    'AT-SPG': 'ПТ-САУ', 'SPG': 'САУ'
+  };
+  const roleNames = {
+    'role_LT_universal': 'Лёгкие танки универсальные', 'role_LT_wheeled': 'Лёгкие танки колёсные',
+    'role_MT_assault': 'Средние танки штурмовые', 'role_MT_universal': 'Средние танки универсальные',
+    'role_MT_sniper': 'Средние танки снайперские', 'role_MT_support': 'Средние танки поддержки',
+    'role_HT_assault': 'Тяжёлые танки штурмовые', 'role_HT_universal': 'Тяжёлые танки универсальные',
+    'role_HT_break': 'Тяжёлые танки прорыва', 'role_HT_support': 'Тяжёлые танки поддержки',
+    'role_ATSPG_assault': 'ПТ-САУ штурмовые', 'role_ATSPG_universal': 'ПТ-САУ универсальные',
+    'role_ATSPG_sniper': 'ПТ-САУ снайперские', 'role_ATSPG_support': 'ПТ-САУ поддержки',
+    'role_SPG_assault': 'САУ штурмовые', 'role_SPG': 'САУ поддержки', 'role_SPG_flame': 'САУ огнемётные'
+  };
+
+  return [...list].sort((a, b) => {
+    let valA, valB;
+    const getRaw = (obj, key) => String(obj[key] || obj[key + " "] || "").trim();
+    
+    if (column === 'name') {
+      valA = getRaw(a, 'name').toLowerCase();
+      valB = getRaw(b, 'name').toLowerCase();
+    } else if (column === 'nation') {
+      const rawA = getRaw(a, 'nation');
+      const rawB = getRaw(b, 'nation');
+      valA = (nationNames[rawA] || rawA).toLowerCase();
+      valB = (nationNames[rawB] || rawB).toLowerCase();
+    } else if (column === 'class') {
+      const rawA = getRaw(a, 'class');
+      const rawB = getRaw(b, 'class');
+      valA = (classNames[rawA] || rawA).toLowerCase();
+      valB = (classNames[rawB] || rawB).toLowerCase();
+    } else if (column === 'role') {
+      const rawA = getRaw(a, 'role');
+      const rawB = getRaw(b, 'role');
+      valA = (roleNames[rawA] || rawA).toLowerCase();
+      valB = (roleNames[rawB] || rawB).toLowerCase();
+    } else if (column === 'level') {
+      valA = parseInt(getRaw(a, 'level') || "0", 10);
+      valB = parseInt(getRaw(b, 'level') || "0", 10);
+      if (valA < valB) return direction === 'asc' ? -1 : 1;
+      if (valA > valB) return direction === 'asc' ? 1 : -1;
+      return 0;
+    }
+    
+    if (typeof valA === 'string' && typeof valB === 'string') {
+      return direction === 'asc' ? valA.localeCompare(valB, 'ru') : valB.localeCompare(valA, 'ru');
+    }
+    return 0;
+  });
+}
+
+function updateSortArrows() {
+  ['name', 'nation', 'class', 'role', 'level'].forEach(col => {
+    const arrow = document.getElementById(`sort-${col}`);
+    if (arrow) {
+      if (currentSortColumn === col) {
+        arrow.textContent = currentSortDirection === 'asc' ? ' ▲' : ' ▼';
+      } else {
+        arrow.textContent = '';
+      }
+    }
+  });
+}
+
 function applyFilters() {
   if (!EQUIPMENT_DB) return;
   
@@ -1384,7 +1465,11 @@ function renderTankTable(tanks = null) {
   const container = document.getElementById('tankButtons');
   container.innerHTML = '';
   const tanksList = EQUIPMENT_DB?.tanks || EQUIPMENT_DB?.["tanks "] || [];
-  const list = tanks || tanksList;
+  let list = tanks || tanksList;
+
+  if (currentSortColumn) {
+    list = sortTanks(list, currentSortColumn, currentSortDirection);
+  }
   
   if (list.length === 0) {
     container.innerHTML = '<p style="text-align:center; color:#aaa; font-size:16px;">Танки не найдены</p>';
@@ -1429,11 +1514,11 @@ function renderTankTable(tanks = null) {
   let html = `<table class="tank-table">
     <thead>
       <tr>
-        <th>Название</th>
-        <th>Нация</th>
-        <th>Класс</th>
-        <th>Роль</th>
-        <th>Уровень</th>
+        <th class="sortable" data-sort="name" style="cursor:pointer;">Название <span id="sort-name"></span></th>
+        <th class="sortable" data-sort="nation" style="cursor:pointer;">Нация <span id="sort-nation"></span></th>
+        <th class="sortable" data-sort="class" style="cursor:pointer;">Класс <span id="sort-class"></span></th>
+        <th class="sortable" data-sort="role" style="cursor:pointer;">Роль <span id="sort-role"></span></th>
+        <th class="sortable" data-sort="level" style="cursor:pointer;">Уровень <span id="sort-level"></span></th>
       </tr>
     </thead>
     <tbody>`;
@@ -1472,6 +1557,21 @@ function renderTankTable(tanks = null) {
   });
   html += `</tbody></table>`;
   container.innerHTML = html;
+
+  container.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.sort;
+      if (currentSortColumn === col) {
+        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSortColumn = col;
+        currentSortDirection = 'asc';
+      }
+      applyFilters();
+    });
+  });
+
+  updateSortArrows();
   
   container.querySelectorAll('tr[data-id]').forEach(row => {
     row.addEventListener('click', () => {
