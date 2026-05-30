@@ -1428,7 +1428,7 @@ function updateSortArrows() {
     const arrow = document.getElementById(`sort-${col}`);
     if (arrow) {
       if (currentSortColumn === col) {
-        arrow.textContent = currentSortDirection === 'asc' ? ' ▲' : ' ▼';
+        arrow.textContent = currentSortDirection === 'asc' ? ' ↑' : ' ↓';
       } else {
         arrow.textContent = '';
       }
