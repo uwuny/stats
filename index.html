@@ -118,9 +118,9 @@ th:first-child, td:first-child {
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
 }
-tr.hover-row td { background: rgba(255, 255, 255, 0.05); }
+tr.hover-row td, tr.hover-row th { background: rgba(255, 255, 255, 0.05); }
 td.hover-col, th.hover-col { background: rgba(255, 255, 255, 0.05); }
-td.hover-cell { background: rgba(255, 255, 255, 0.12); }
+td.hover-cell, th.hover-cell { background: rgba(255, 255, 255, 0.12); }
 
 .win { background: #2e5e2e; }
 .lose { background: #5e2e2e; }
@@ -1307,7 +1307,7 @@ function loadTable(type, event){
 function enableHover(){
   const table = document.querySelector("table");
   if(!table) return;
-  const cells = table.querySelectorAll("td");
+  const cells = table.querySelectorAll("td, th");
   cells.forEach(cell => {
     cell.addEventListener("mouseenter", () => {
       const row = cell.parentElement;
