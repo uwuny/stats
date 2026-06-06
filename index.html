@@ -1220,7 +1220,7 @@ function loadTable(type, event){
   if(type === "hits")
     sorted.sort((a,b) => getPenRate(b, battles) - getPenRate(a, battles));
   else if(type === "survival")
-    sorted.sort((a,b) => survivalRates[a] - survivalRates[b]);
+    sorted.sort((a,b) => survivalRates[b] - survivalRates[a]);
   else
     sorted.sort((a,b) => averages[b] - averages[a]);
 
