@@ -1224,10 +1224,19 @@ function loadTable(type, event){
   else
     sorted.sort((a,b) => averages[b] - averages[a]);
 
+  let eloSum = 0, eloCount = 0;
+  battles.forEach(b => {
+    if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
+      eloSum += Number(b.elo);
+      eloCount++;
+    }
+  });
+  let avgElo = eloCount ? Math.round(eloSum / eloCount) : "-";
+  
   let html = "<table>";
   html += "<tr><th></th>";
-  if(type === "hits" && avgPosition === "left") html += "<th></th>";
-  if(type !== "hits" && avgPosition === "left") html += "<th></th>";
+  if(type === "hits" && avgPosition === "left") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
+  if(type !== "hits" && avgPosition === "left") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
   battles.forEach(b => {
     let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
     let clanCell = "";
@@ -1235,8 +1244,8 @@ function loadTable(type, event){
     if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
     html += `<th class="clan-header">${clanCell}</th>`;
   });
-  if(type === "hits" && avgPosition === "right") html += "<th></th>";
-  if(type !== "hits" && avgPosition === "right") html += "<th></th>";
+  if(type === "hits" && avgPosition === "right") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
+  if(type !== "hits" && avgPosition === "right") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
   html += "</tr>";
 
   html += "<tr><th>Ник</th>";
