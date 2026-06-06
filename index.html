@@ -1225,18 +1225,30 @@ function loadTable(type, event){
     sorted.sort((a,b) => averages[b] - averages[a]);
 
   let eloSum = 0, eloCount = 0;
+  let winCount = 0;
   battles.forEach(b => {
     if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
       eloSum += Number(b.elo);
       eloCount++;
     }
+    if(b.win) winCount++;
   });
   let avgElo = eloCount ? Math.round(eloSum / eloCount) : "-";
+  let winRate = battles.length ? Math.round((winCount / battles.length) * 100) : 0;
+  
+  let avgEloHtml = `
+    <div style="color: #00ff66; opacity: 0.7; font-size: 13px; font-weight: 700; text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);">
+      ${avgElo}
+    </div>
+    <div style="color: #aaa; font-size: 11px; margin-top: 2px;">
+      Побед: ${winRate}%
+    </div>
+  `;
   
   let html = "<table>";
   html += "<tr><th></th>";
-  if(type === "hits" && avgPosition === "left") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
-  if(type !== "hits" && avgPosition === "left") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
+  if(type === "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
+  if(type !== "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
   battles.forEach(b => {
     let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
     let clanCell = "";
@@ -1244,8 +1256,8 @@ function loadTable(type, event){
     if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
     html += `<th class="clan-header">${clanCell}</th>`;
   });
-  if(type === "hits" && avgPosition === "right") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
-  if(type !== "hits" && avgPosition === "right") html += `<th style="color:#88cc99; font-size:14px; text-shadow:none;">${avgElo}</th>`;
+  if(type === "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
+  if(type !== "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
   html += "</tr>";
 
   html += "<tr><th>Ник</th>";
