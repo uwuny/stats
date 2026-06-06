@@ -1253,7 +1253,10 @@ function loadTable(type, event){
     html += "<tr>";
     html += `<td>${escapeHtml(name)}</td>`;
     if(type === "hits" && avgPosition === "left") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "left") html += `<td>${averages[name]}${type === "survival" ? "%" : ""}</td>`;
+    if(type !== "hits" && avgPosition === "left"){
+      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
+      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
+    }
     battles.forEach((b, i) => {
       let cell = players[name][i];
       if(!cell){ html += "<td></td>"; return; }
@@ -1269,7 +1272,10 @@ function loadTable(type, event){
       }
     });
     if(type === "hits" && avgPosition === "right") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "right") html += `<td>${averages[name]}${type === "survival" ? "%" : ""}</td>`;
+    if(type !== "hits" && avgPosition === "right"){
+      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
+      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
+    }
     html += "</tr>";
   });
   html += "</table>";
