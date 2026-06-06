@@ -118,9 +118,18 @@ th:first-child, td:first-child {
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
 }
-tr.hover-row td, tr.hover-row th { background: rgba(255, 255, 255, 0.05); }
-td.hover-col, th.hover-col { background: rgba(255, 255, 255, 0.05); }
-td.hover-cell, th.hover-cell { background: rgba(255, 255, 255, 0.12); }
+tr.hover-row td:not(.win):not(.lose),
+tr.hover-row th:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.05); }
+td.hover-col:not(.win):not(.lose),
+th.hover-col:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.05); }
+
+td.hover-cell:not(.win):not(.lose),
+th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
+
+.win.hover-cell, .lose.hover-cell {
+  filter: brightness(1.35);
+  transition: filter 0.15s;
+}
 
 .win { background: #2e5e2e; }
 .lose { background: #5e2e2e; }
