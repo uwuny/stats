@@ -763,6 +763,7 @@ td.hover-cell { background: rgba(255, 255, 255, 0.12); }
     <button class="mode" onclick="loadTable('damage_received',event)">Получено</button>
     <button class="mode" onclick="loadTable('hits',event)">Попадания</button>
     <button class="mode" onclick="loadTable('assist',event)">Ассист</button>
+    <button class="mode" onclick="loadTable('survival',event)">Выживаемость</button>
     <button onclick="toggleAverage()">Среднее</button>
   </div>
   <div class="sub-tabs" id="campaignTabs"></div>
@@ -1078,7 +1079,7 @@ function renderCampaignTabs(){
     const btn = document.createElement("button");
     btn.textContent = campaign.label;
     if(campaign.key === currentCampaign) btn.classList.add("active");
-    if(campaign.key === "rain_wall") btn.classList.add("current-campaign");
+    if(campaign.key === "eternal_storm") btn.classList.add("current-campaign");
     btn.onclick = (event) => switchCampaign(campaign.key, event);
     wrap.appendChild(btn);
   });
@@ -1182,6 +1183,7 @@ function loadTable(type, event){
       if(type === "damage_received") value = p.damage_received;
       if(type === "hits") value = `${p.shots}/${p.hits}/${p.piercings}`;
       if(type === "assist") value = p.assist_track + p.assist_radio;
+      if(type === "survival") value = 0;
       players[name][idx] = {
         tank: p.tank,
         value: value,
@@ -1201,9 +1203,24 @@ function loadTable(type, event){
     });
     averages[name] = count ? Math.round(sum / count) : 0;
   }
+  let survivalRates = {};
+  if(type === "survival"){
+    for(let name in players){
+      let deaths = 0, total = 0;
+      battles.forEach((b, i) => {
+        let cell = players[name][i];
+        if(!cell) return;
+        total++;
+        if(!cell.alive) deaths++;
+      });
+      survivalRates[name] = total ? Math.round(((total - deaths) / total) * 100) : 0;
+    }
+  }
   let sorted = Object.keys(players);
   if(type === "hits")
     sorted.sort((a,b) => getPenRate(b, battles) - getPenRate(a, battles));
+  else if(type === "survival")
+    sorted.sort((a,b) => survivalRates[a] - survivalRates[b]);
   else
     sorted.sort((a,b) => averages[b] - averages[a]);
 
@@ -1236,7 +1253,7 @@ function loadTable(type, event){
     html += "<tr>";
     html += `<td>${escapeHtml(name)}</td>`;
     if(type === "hits" && avgPosition === "left") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "left") html += `<td>${averages[name]}</td>`;
+    if(type !== "hits" && avgPosition === "left") html += `<td>${averages[name]}${type === "survival" ? "%" : ""}</td>`;
     battles.forEach((b, i) => {
       let cell = players[name][i];
       if(!cell){ html += "<td></td>"; return; }
@@ -1245,10 +1262,14 @@ function loadTable(type, event){
       if(type === "assist"){
         displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png"> ${cell.assist_radio}</small>`;
       }
-      html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>${displayValue}</td>`;
+      if(type === "survival"){
+        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span></td>`;
+      } else {
+        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>${displayValue}</td>`;
+      }
     });
     if(type === "hits" && avgPosition === "right") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "right") html += `<td>${averages[name]}</td>`;
+    if(type !== "hits" && avgPosition === "right") html += `<td>${averages[name]}${type === "survival" ? "%" : ""}</td>`;
     html += "</tr>";
   });
   html += "</table>";
