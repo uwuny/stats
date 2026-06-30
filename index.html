@@ -5,9 +5,14 @@
 <title>Статистика</title>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="521x521" href="favicon.png">
-  
+
 <style>
-  
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -33,6 +38,7 @@ body {
   color: #00ff66;
   text-shadow: 0 0 20px #00ff66;
   margin-bottom: 5px;
+  text-wrap: balance;
 }
 .buttons, .date-buttons, .main-tabs, .sub-tabs {
   text-align: center;
@@ -52,11 +58,26 @@ button {
   margin: 4px;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.15s;
+  position: relative;
+  transition-property: border-color, box-shadow, background-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100%, 40px);
+  height: max(100%, 40px);
 }
 button:hover {
   border-color: #00ff66;
   box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+}
+button:active {
+  scale: 0.96;
 }
 button.active {
   background: #4a6ed1;
@@ -87,7 +108,9 @@ th, td {
   border: 1px solid #444;
   padding: 6px;
   text-align: center;
-  transition: 0.15s;
+  transition-property: background-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
   vertical-align: top;
 }
 th:first-child, td:first-child {
@@ -104,7 +127,9 @@ th:first-child, td:first-child {
   color: #57a9c2;
   text-decoration: none;
   font-weight: 700;
-  transition: 0.15s;
+  transition-property: color, text-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .clan-link:hover {
   color: #9be8ff;
@@ -117,6 +142,7 @@ th:first-child, td:first-child {
   font-weight: 700;
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+  font-variant-numeric: tabular-nums;
 }
 tr.hover-row td:not(.win):not(.lose),
 tr.hover-row th:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.05); }
@@ -128,7 +154,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 
 .win.hover-cell, .lose.hover-cell {
   filter: brightness(1.35);
-  transition: filter 0.15s;
+  transition-property: filter;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 
 .win { background: #2e5e2e; }
@@ -141,18 +169,23 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-variant-numeric: tabular-nums;
 }
 .assist-icons img {
   width: 20px;
   height: 20px;
   object-fit: contain;
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+  outline-offset: -1px;
 }
 .map-link {
   color: #f0f0f0;
   text-decoration: none;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.15s;
+  transition-property: color, text-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .map-link:hover {
   color: #fff;
@@ -207,7 +240,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.15s;
+  transition-property: background-color, box-shadow, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 600;
   margin-bottom: 20px;
@@ -216,6 +251,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   background: #2e5e2e;
   box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
 }
+#backToTableBtn:active {
+  scale: 0.96;
+}
 
 .tank-table {
   width: 95%;
@@ -223,15 +261,18 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   margin: 3px auto 20px !important;
   border-collapse: collapse;
   background: #1a1a1a;
-  border: 1px solid #444;
+  border-radius: 10px;
+  box-shadow: var(--shadow-border), 0 4px 15px rgba(0,0,0,0.5);
   font-family: 'Sofia Sans', sans-serif;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
 .tank-table th, .tank-table td {
   border: 1px solid #333;
   padding: 10px 15px;
   text-align: center;
-  transition: 0.15s;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .tank-table th {
   background: #222;
@@ -263,7 +304,6 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .tank-table th.sortable:hover {
   background: #2e5e2e;
   color: #fff;
-  transition: 0.15s;
 }
 .tank-table td:first-child {
   text-align: left;
@@ -305,6 +345,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   margin: 20px 0 30px;
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 700;
+  text-wrap: balance;
 }
 .tank-main-image {
   position: relative;
@@ -352,9 +393,11 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   align-items: center;
   justify-content: center;
   background: #1f1f1f;
-  border-radius: 3px;
+  border-radius: 8px;
   border: 1px solid #444;
-  transition: 0.2s;
+  transition-property: border-color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
 }
 .slot:hover {
   border-color: #00ff66;
@@ -364,7 +407,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 3px;
+  border-radius: 8px;
   background: radial-gradient(ellipse at 30% 30%, rgba(0,255,102,0.08) 0%, transparent 65%);
   pointer-events: none;
 }
@@ -382,17 +425,17 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   height: auto;
   object-fit: contain;
 }
-.corner { 
-  position: absolute; 
-  width: 14px; 
-  height: 14px; 
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
   pointer-events: none;
   z-index: 2;
 }
-.corner.tl { top:-1px; left:-1px;   border-top:2px solid #00ff66; border-left:2px solid #00ff66;   border-radius:2px 0 0 0; }
-.corner.tr { top:-1px; right:-1px;  border-top:2px solid #00ff66; border-right:2px solid #00ff66;  border-radius:0 2px 0 0; }
-.corner.bl { bottom:-1px; left:-1px;  border-bottom:2px solid #00ff66; border-left:2px solid #00ff66;  border-radius:0 0 0 2px; }
-.corner.br { bottom:-1px; right:-1px; border-bottom:2px solid #00ff66; border-right:2px solid #00ff66; border-radius:0 0 2px 0; }
+.corner.tl { top:-1px; left:-1px;   border-top:2px solid #00ff66; border-left:2px solid #00ff66;   border-radius:6px 0 0 0; }
+.corner.tr { top:-1px; right:-1px;  border-top:2px solid #00ff66; border-right:2px solid #00ff66;  border-radius:0 6px 0 0; }
+.corner.bl { bottom:-1px; left:-1px;  border-bottom:2px solid #00ff66; border-left:2px solid #00ff66;  border-radius:0 0 0 6px; }
+.corner.br { bottom:-1px; right:-1px; border-bottom:2px solid #00ff66; border-right:2px solid #00ff66; border-radius:0 0 6px 0; }
 
 .slot-bottom-line {
   position: absolute;
@@ -473,6 +516,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  transition-property: opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
 }
 .mod-overlay.active {
   width: 142px;
@@ -600,7 +646,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     color: #fff;
     border: 1px solid #333;
     padding: 8px 12px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -608,7 +654,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     min-height: 42px;
     box-sizing: border-box;
     gap: 8px;
-    transition: 0.15s;
+    transition-property: border-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
     margin: 0 !important;
 }
 .dropdown-selected:hover {
@@ -623,7 +671,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .dropdown-arrow {
     font-size: 10px;
     color: #888;
-    transition: 0.15s;
+    transition-property: transform;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
 }
 .custom-dropdown.open .dropdown-arrow {
     transform: rotate(180deg);
@@ -639,12 +689,20 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     background: #111;
     border: 1px solid #333;
     border-top: none;
+    border-radius: 0 0 8px 8px;
     box-sizing: border-box;
     z-index: 9999;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition-property: opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
 }
 .custom-dropdown.open .dropdown-options {
     display: block;
     position: absolute;
+    opacity: 1;
+    transform: translateY(0);
 }
 .dropdown-option {
     padding: 8px 12px;
@@ -652,7 +710,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: 0.15s;
+    transition-property: background-color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
 }
 .dropdown-option:hover {
     background: #1f1f1f;
@@ -693,7 +753,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .dropdown-options::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 4px;
-    transition: 0.15s;
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
 }
 .dropdown-options::-webkit-scrollbar-thumb:hover {
     background: #00cc55;
@@ -715,7 +777,9 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 #tableWrapper::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 6px;
-    transition: 0.15s;
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
 }
 #tableWrapper::-webkit-scrollbar-thumb:hover {
     background: #00cc55;
@@ -752,7 +816,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .slot-icon.item-TrophyUMP img        { transform: translate(0px, 0px); }
 .slot-icon.item-TrophyVentil img     { transform: translate(0px, 0px); }
 .slot-icon.item-TrophyZakalka img    { transform: translate(0px, 0px) scale(1.10); }
-  
+
 </style>
 </head>
 
@@ -781,8 +845,8 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 </div>
 
 <div id="equipmentPage" style="display:none;">
-  
-  <div class="equip-filters">    
+
+  <div class="equip-filters">
     <div class="filter-group">
       <label>Нация</label>
       <div class="custom-dropdown dropdown-nation" id="filterNationDropdown">
@@ -845,7 +909,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
         </div>
       </div>
     </div>
-    
+
     <div class="filter-group">
       <label>Класс</label>
       <div class="custom-dropdown dropdown-class" id="filterClassDropdown">
@@ -946,7 +1010,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     </div>
   </div>
 </div>
-    
+
   <div class="filter-group">
   <label>Уровень</label>
   <div class="custom-dropdown dropdown-level" id="filterLevelDropdown">
@@ -980,7 +1044,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   </div>
 
   <div class="equip-buttons" id="tankButtons"></div>
- 
+
   <div id="equipmentContent"></div>
 </div>
 
@@ -1244,16 +1308,16 @@ function loadTable(type, event){
   });
   let avgElo = eloCount ? Math.round(eloSum / eloCount) : "-";
   let winRate = battles.length ? Math.round((winCount / battles.length) * 100) : 0;
-  
+
   let avgEloHtml = `
-    <div style="color: #00ff66; opacity: 0.7; font-size: 13px; font-weight: 700; text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);">
+    <div style="color: #00ff66; opacity: 0.7; font-size: 13px; font-weight: 700; text-shadow: 0 0 4px rgba(0, 255, 102, 0.3); font-variant-numeric: tabular-nums;">
       Elo: ${avgElo}
     </div>
-    <div style="color: #aaa; font-size: 11px; margin-top: 2px;">
+    <div style="color: #aaa; font-size: 11px; margin-top: 2px; font-variant-numeric: tabular-nums;">
       Побед: ${winRate}%
     </div>
   `;
-  
+
   let html = "<table>";
   html += "<tr><th></th>";
   if(type === "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
@@ -1355,7 +1419,7 @@ async function loadEquipmentDB() {
     applyFilters();
   } catch (err) {
     console.error('Ошибка загрузки equipment.json:', err);
-    document.getElementById('equipmentContent').innerHTML = 
+    document.getElementById('equipmentContent').innerHTML =
       '<p style="color:#ff4444; text-align:center;">Не удалось загрузить данные оборудования</p>';
   }
 }
@@ -1375,10 +1439,10 @@ function renderFilters() {
 function initCustomDropdown(dropdownId, onChangeCallback) {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
-  
+
   const selected = dropdown.querySelector('.dropdown-selected');
   const options = dropdown.querySelectorAll('.dropdown-option');
-  
+
   selected.addEventListener('click', (e) => {
     e.stopPropagation();
     document.querySelectorAll('.custom-dropdown.open').forEach(d => {
@@ -1386,28 +1450,28 @@ function initCustomDropdown(dropdownId, onChangeCallback) {
     });
     dropdown.classList.toggle('open');
   });
-  
+
   options.forEach(option => {
     option.addEventListener('click', () => {
       const value = option.dataset.value;
       const text = option.querySelector('.dropdown-text').textContent;
       const icon = option.querySelector('.dropdown-icon');
-      
+
       const selectedText = selected.querySelector('.dropdown-text');
       selectedText.textContent = text;
-      
+
       const existingIcon = selected.querySelector('.dropdown-icon');
       if (existingIcon) existingIcon.remove();
       if (icon) {
         const newIcon = icon.cloneNode(true);
         selected.insertBefore(newIcon, selectedText);
       }
-      
+
       options.forEach(opt => opt.classList.remove('active'));
       option.classList.add('active');
-      
+
       dropdown.classList.remove('open');
-      
+
       if (onChangeCallback) onChangeCallback();
     });
   });
@@ -1422,7 +1486,7 @@ function getDropdownValue(dropdownId) {
 
 function sortTanks(list, column, direction) {
   if (!column) return list;
-  
+
   const nationNames = {
     'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
     'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
@@ -1447,7 +1511,7 @@ function sortTanks(list, column, direction) {
   return [...list].sort((a, b) => {
     let valA, valB;
     const getRaw = (obj, key) => String(obj[key] || obj[key + " "] || "").trim();
-    
+
     if (column === 'name') {
       valA = getRaw(a, 'name').toLowerCase();
       valB = getRaw(b, 'name').toLowerCase();
@@ -1473,7 +1537,7 @@ function sortTanks(list, column, direction) {
       if (valA > valB) return direction === 'asc' ? 1 : -1;
       return 0;
     }
-    
+
     if (typeof valA === 'string' && typeof valB === 'string') {
       return direction === 'asc' ? valA.localeCompare(valB, 'ru') : valB.localeCompare(valA, 'ru');
     }
@@ -1496,26 +1560,26 @@ function updateSortArrows() {
 
 function applyFilters() {
   if (!EQUIPMENT_DB) return;
-  
+
   const nation = getDropdownValue('filterNationDropdown');
   const cls = getDropdownValue('filterClassDropdown');
   const role = getDropdownValue('filterRoleDropdown');
   const level = getDropdownValue('filterLevelDropdown');
-  
+
   const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
   const filtered = tanksList.filter(tank => {
     const tankNation = String(tank.nation || tank["nation "] || "").trim();
     const tankClass = String(tank.class || tank["class "] || "").trim();
     const tankRole = String(tank.role || tank["role "] || "").trim();
     const tankLevel = String(tank.level || tank["level "] || "").trim();
-    
+
     if (nation !== 'all' && tankNation !== nation) return false;
     if (cls !== 'all' && tankClass !== cls) return false;
     if (role !== 'all' && tankRole !== role) return false;
     if (level !== 'all' && tankLevel !== level) return false;
     return true;
   });
-  
+
   renderTankTable(filtered);
 }
 
@@ -1528,7 +1592,7 @@ function renderTankTable(tanks = null) {
   if (currentSortColumn) {
     list = sortTanks(list, currentSortColumn, currentSortDirection);
   }
-  
+
   if (list.length === 0) {
     container.innerHTML = '<p style="text-align:center; color:#aaa; font-size:16px;">Танки не найдены</p>';
     return;
@@ -1540,7 +1604,7 @@ function renderTankTable(tanks = null) {
     'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
     'italy': 'Италия', 'intunion': 'Сборная наций'
   };
-  
+
   const classNames = {
     'heavyTank': 'Тяжёлый танк',
     'mediumTank': 'Средний танк',
@@ -1580,7 +1644,7 @@ function renderTankTable(tanks = null) {
       </tr>
     </thead>
     <tbody>`;
-  
+
   const romanLevels = {
     8: 'VIII',
     9: 'IX',
@@ -1591,7 +1655,7 @@ function renderTankTable(tanks = null) {
     const id = String(tank.id || tank["id "] || "").trim();
     const rawNation = String(tank.nation || tank["nation "] || "").trim();
     const rawClass = String(tank.class || tank["class "] || "").trim();
-    
+
     const isActive = id === currentTankId ? 'active' : '';
     const nation = nationNames[rawNation] || rawNation;
     const cls = classNames[rawClass] || rawClass;
@@ -1604,7 +1668,7 @@ function renderTankTable(tanks = null) {
     const classIcon = `classes/${rawClass}.png`;
     const level = tank.level || tank["level "];
     const romanLevel = romanLevels[level] || level;
-    
+
     html += `<tr class="${isActive}" data-id="${id}">
       <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${name}</span></div></td>
       <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${nation}</span></div></td>
@@ -1630,7 +1694,7 @@ function renderTankTable(tanks = null) {
   });
 
   updateSortArrows();
-  
+
   container.querySelectorAll('tr[data-id]').forEach(row => {
     row.addEventListener('click', () => {
       openTank(row.dataset.id);
@@ -1643,18 +1707,18 @@ function openTank(tankId) {
   const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
   const tank = tanksList.find(t => String(t.id || t["id "] || "").trim() === tankId);
   if (!tank) return;
-  
+
   document.querySelector('.equip-filters').style.display = 'none';
   document.getElementById('tankButtons').style.display = 'none';
-  
+
   document.getElementById('backButtonContainer').style.display = 'block';
 
   let name = String(tank.name || tank["name "] || "").trim();
   let html = `<div class="tank-name">${name}</div>`;
-  
+
   let images = tank.images || tank["images "];
   let mods = tank.mods || tank["mods "];
-  
+
   if (images && images[0]) {
     let imgSrc = String(images[0]).trim();
     html += `<div class="tank-main-image">
@@ -1667,7 +1731,7 @@ function openTank(tankId) {
   if (builds && builds.length) {
     html += renderEquipmentBuilds(builds);
   }
-  
+
   document.getElementById('equipmentContent').innerHTML = html;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1675,13 +1739,13 @@ function openTank(tankId) {
 function backToTable() {
   document.getElementById('equipmentContent').innerHTML = '';
   document.getElementById('backButtonContainer').style.display = 'none';
-  
+
   document.querySelector('.equip-filters').style.display = 'flex';
   document.getElementById('tankButtons').style.display = 'block';
 
   currentTankId = null;
   applyFilters();
-  
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1695,7 +1759,7 @@ function renderEquipmentBuilds(builds) {
 
     const slotsHtml = items.map(item => {
       const rawItem = String(item).trim();
-      const cleanName = rawItem.replace(/\.[^/.]+$/, ""); // Автоматически убирает .png
+      const cleanName = rawItem.replace(/\.[^/.]+$/, "");
       return `
       <div class="slot">
         <div class="corner tl"></div>
@@ -1728,7 +1792,7 @@ function renderFieldMods(mods) {
     </div>
   `;
 }
-  
+
 function renderModBlock(mod) {
   let left = String(mod.left || mod["left "] || "").trim();
   let right = String(mod.right || mod["right "] || "").trim();
