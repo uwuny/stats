@@ -304,12 +304,14 @@ button.active {
 .control-group--display {
   flex: 0 0 auto;
   min-width: 148px;
+  align-items: center;
 }
 
 .control-group--display .control-group__buttons {
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 8px;
+  width: 100%;
 }
 
 .stat-btn {
@@ -317,11 +319,11 @@ button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   width: 104px;
-  height: 66px;
+  height: 90px;
   margin: 0;
-  padding: 6px 4px;
+  padding: 8px 6px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   line-height: 1.2;
@@ -336,8 +338,9 @@ button.active {
 }
 
 .stat-btn__icon {
-  width: 24px;
-  height: 24px;
+  height: 36px;
+  width: auto;
+  max-width: 100%;
   object-fit: contain;
 }
 
@@ -365,7 +368,7 @@ button.active {
 
 .season-btn {
   margin: 0;
-  padding: 6px 12px;
+  padding: 12px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
@@ -376,7 +379,7 @@ button.active {
 .date-btn {
   margin: 0;
   min-width: 40px;
-  padding: 6px 4px;
+  padding: 12px 4px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
