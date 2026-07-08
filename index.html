@@ -1636,20 +1636,22 @@ const SEASONS = [
     key: "storm_birth",
     label: "Рождение бури",
     stages: [
-      { key: "global_map", label: "Глобальная карта", icon: "stat/stage3.png" },
-      { key: "thunder", label: "И грянул гром", icon: "stat/stage4.png" },
-      { key: "rain_wall", label: "Стена дождя", icon: "stat/stage5.png" },
-      { key: "eternal_storm", label: "Вечная гроза", icon: "stat/stage6.png" }
+      { key: "global_map", label: "Глобальная карта", icon: "stat/stage3.png", start: [3, 23], end: [4, 5] },
+      { key: "thunder", label: "И грянул гром", icon: "stat/stage4.png", start: [4, 20], end: [4, 26] },
+      { key: "rain_wall", label: "Стена дождя", icon: "stat/stage5.png", start: [5, 12], end: [5, 18] },
+      { key: "eternal_storm", label: "Вечная гроза", icon: "stat/stage6.png", start: [6, 1], end: [6, 7] }
     ]
   },
   {
     key: "new_season",
     label: "Новый сезон",
     stages: [
-      { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png" }
+      { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png", start: null, end: null }
     ]
   }
 ];
+
+const STAGE_DATE_BUFFER_DAYS = 1;
 
 let avgPosition = "left";
 let currentType = "damage";
@@ -1695,8 +1697,29 @@ function openBattleHtml(battle){
   window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
 }
 
+function addDays(date, days){
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
 function battleMatchesStage(battle){
-  return (battle.stage || battle.campaign) === currentStage;
+  const stage = getStage(currentSeason, currentStage);
+  if(!stage) return false;
+
+  if(!stage.start || !stage.end){
+    return (battle.stage || battle.campaign) === currentStage;
+  }
+
+  const battleDate = parseDate(battle.date);
+  const year = battleDate.getFullYear();
+
+  const [sm, sd] = stage.start;
+  const [em, ed] = stage.end;
+  const rangeStart = addDays(new Date(year, sm - 1, sd), -STAGE_DATE_BUFFER_DAYS);
+  const rangeEnd = addDays(new Date(year, em - 1, ed), STAGE_DATE_BUFFER_DAYS);
+
+  return battleDate >= rangeStart && battleDate <= rangeEnd;
 }
 
 function renderStatButtons(){
