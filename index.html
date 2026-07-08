@@ -2,167 +2,291 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Статистика</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="521x521" href="favicon.png">
 
 <style>
 
+:root {
+  --color-bg: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-alt: #1f1f1f;
+  --color-surface-raised: #222222;
+  --color-border: #3a3a3a;
+  --color-border-subtle: #333333;
+
+  --color-accent: #00ff66;
+  --color-accent-soft: #2e5e2e;
+  --color-accent-glow: rgba(0, 255, 102, 0.5);
+
+  --color-blue: #4a6ed1;
+  --color-blue-soft: #63b3ff;
+
+  --color-win: #2e5e2e;
+  --color-lose: #5e2e2e;
+  --color-alive: #00ff66;
+  --color-dead: #ff4444;
+
+  --color-link: #57a9c2;
+  --color-link-hover: #9be8ff;
+
+  --color-text: #f5f5f5;
+  --color-text-muted: #a6a6a6;
+  --color-text-faint: #808080;
+
+  --font-display: 'Sofia Sans', sans-serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+
+  --transition-fast: 150ms ease-out;
+  --transition-med: 200ms ease-out;
+
+  --shadow-panel: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: #fff;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-text);
   overflow-x: auto;
-  background: url('backgrounds.png') center center no-repeat;
-  background-size: cover;
+  background: var(--color-bg) url('backgrounds.png') center center / cover no-repeat;
 }
+
 @media (min-width: 768px) {
   body { background-attachment: fixed; }
 }
+
 .page {
   position: relative;
   z-index: 1;
-  padding-top: 10px;
+  padding: 10px clamp(10px, 3vw, 24px) 0;
 }
-.matrix-title {
+
+.page-title {
   text-align: center;
-  font-size: 60px;
-  font-family: 'Sofia Sans', sans-serif;
+  font-size: clamp(32px, 6vw, 60px);
+  font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: 2px;
-  color: #00ff66;
-  text-shadow: 0 0 20px #00ff66;
-  margin-bottom: 5px;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px var(--color-accent);
+  margin: 0 0 5px;
   text-wrap: balance;
 }
-.buttons, .date-buttons, .main-tabs, .sub-tabs {
-  text-align: center;
+
+.main-tabs,
+.buttons,
+.date-buttons,
+.sub-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   margin-bottom: 10px;
 }
-.equip-buttons, #tankButtons {
-  text-align: center;
-  margin: 0 !important;
-  padding: 0 !important;
+
+.equip-buttons {
+  margin: 0;
+  padding: 0;
   min-height: 0;
 }
+
 button {
+  font: inherit;
   background: #2b2b2b;
-  color: #fff;
-  border: 1px solid #444;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   padding: 6px 12px;
   margin: 4px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   position: relative;
-  transition-property: border-color, box-shadow, background-color, scale;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), scale var(--transition-fast);
 }
+
 button::after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 50%;
   width: max(100%, 40px);
   height: max(100%, 40px);
+  transform: translate(-50%, -50%);
 }
+
 button:hover {
-  border-color: #00ff66;
+  border-color: var(--color-accent);
   box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
 }
+
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 button:active {
   scale: 0.96;
 }
+
 button.active {
-  background: #4a6ed1;
+  background: var(--color-blue);
 }
+
 .main-tabs button.active,
 .sub-tabs button.active,
 .equip-btn.active {
-  background: #2e5e2e;
-  border-color: #00ff66;
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
 }
+
 .sub-tabs button.current-campaign {
-  border: 1px solid #63b3ff;
+  border: 1px solid var(--color-blue-soft);
   box-shadow: 0 0 8px rgba(99, 179, 255, 0.45);
 }
 
 #tableWrapper {
   width: 100%;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-surface);
 }
+
+#tableWrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#tableWrapper::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+}
+
+#tableWrapper::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #00cc55;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+#tableWrapper::-webkit-scrollbar-corner {
+  background: var(--color-surface);
+}
+
 table {
   border-collapse: collapse;
-  background: #1a1a1a;
+  background: var(--color-surface);
   width: max-content;
   min-width: 100%;
   table-layout: fixed;
 }
+
 th, td {
-  border: 1px solid #444;
+  border: 1px solid var(--color-border);
   padding: 6px;
   text-align: center;
-  transition-property: background-color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
   vertical-align: top;
+  transition: background-color var(--transition-fast);
 }
+
 th:first-child, td:first-child {
   width: 180px;
   min-width: 180px;
   max-width: 180px;
 }
+
 .clan-header {
-  padding: 4px 6px 2px 6px;
+  padding: 4px 6px 2px;
   font-size: 13px;
   min-width: 120px;
 }
+
 .clan-link {
-  color: #57a9c2;
+  color: var(--color-link);
   text-decoration: none;
   font-weight: 700;
-  transition-property: color, text-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+  transition: color var(--transition-fast), text-shadow var(--transition-fast);
 }
-.clan-link:hover {
-  color: #9be8ff;
+
+.clan-link:hover,
+.clan-link:focus-visible {
+  color: var(--color-link-hover);
   text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
 }
-.clan-header .elo-value {
+
+.elo-value {
   display: block;
   font-size: 11px;
-  color: #00ff66;
+  color: var(--color-accent);
   font-weight: 700;
   margin-top: 2px;
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
   font-variant-numeric: tabular-nums;
 }
-tr.hover-row td:not(.win):not(.lose),
-tr.hover-row th:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.05); }
-td.hover-col:not(.win):not(.lose),
-th.hover-col:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.05); }
 
-td.hover-cell:not(.win):not(.lose),
-th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
-
-.win.hover-cell, .lose.hover-cell {
-  filter: brightness(1.35);
-  transition-property: filter;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+.elo-summary {
+  color: var(--color-accent);
+  opacity: 0.7;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
+  font-variant-numeric: tabular-nums;
 }
 
-.win { background: #2e5e2e; }
-.lose { background: #5e2e2e; }
-.alive { color: #00ff66; font-weight: bold; }
-.dead { color: #ff4444; font-weight: bold; }
+.elo-summary__winrate {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+tr.hover-row td:not(.win):not(.lose),
+tr.hover-row th:not(.win):not(.lose) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+td.hover-col:not(.win):not(.lose),
+th.hover-col:not(.win):not(.lose) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+td.hover-cell:not(.win):not(.lose),
+th.hover-cell:not(.win):not(.lose) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.win.hover-cell,
+.lose.hover-cell {
+  filter: brightness(1.35);
+  transition: filter var(--transition-fast);
+}
+
+.win { background: var(--color-win); }
+.lose { background: var(--color-lose); }
+.alive { color: var(--color-alive); font-weight: bold; }
+.dead { color: var(--color-dead); font-weight: bold; }
 
 .assist-icons {
   opacity: 0.8;
@@ -171,6 +295,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   gap: 6px;
   font-variant-numeric: tabular-nums;
 }
+
 .assist-icons img {
   width: 20px;
   height: 20px;
@@ -178,36 +303,47 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   outline: 1px solid rgba(255, 255, 255, 0.1);
   outline-offset: -1px;
 }
+
 .map-link {
   color: #f0f0f0;
   text-decoration: none;
   cursor: pointer;
   font-weight: 600;
-  transition-property: color, text-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  transition: color var(--transition-fast), text-shadow var(--transition-fast);
 }
-.map-link:hover {
+
+.map-link:hover,
+.map-link:focus-visible {
   color: #fff;
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.site-footer {
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .bottom-line {
   width: 90%;
   height: 1px;
-  background: #00ff66;
+  background: var(--color-accent);
   margin: 40px auto 10px;
-  box-shadow: 0 0 8px #00ff66;
+  box-shadow: 0 0 8px var(--color-accent);
 }
+
 .footer-text {
-  text-align: center;
   color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .equip-filters {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
   gap: 15px;
@@ -215,42 +351,49 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   position: relative;
   z-index: 500;
 }
+
 .filter-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: fit-content;
 }
+
 .filter-group label {
   height: 16px;
   line-height: 16px;
   margin-bottom: 8px;
-
   font-size: 12px;
-  color: #aaa;
+  color: var(--color-text-faint);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
+.back-button-bar {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 #backToTableBtn {
   background: #2b2b2b;
-  color: #00ff66;
-  border: 1px solid #00ff66;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition-property: background-color, box-shadow, scale;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   margin-bottom: 20px;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), scale var(--transition-fast);
 }
+
 #backToTableBtn:hover {
-  background: #2e5e2e;
+  background: var(--color-accent-soft);
   box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
 }
+
 #backToTableBtn:active {
   scale: 0.96;
 }
@@ -258,53 +401,66 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .tank-table {
   width: 95%;
   max-width: 1200px;
-  margin: 3px auto 20px !important;
+  margin: 3px auto 20px;
   border-collapse: collapse;
-  background: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: var(--shadow-border), 0 4px 15px rgba(0,0,0,0.5);
-  font-family: 'Sofia Sans', sans-serif;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-display);
   overflow: hidden;
 }
-.tank-table th, .tank-table td {
-  border: 1px solid #333;
+
+.tank-table th,
+.tank-table td {
+  border: 1px solid var(--color-border-subtle);
   padding: 10px 15px;
   text-align: center;
-  transition-property: background-color, color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
+
 .tank-table th {
-  background: #222;
-  color: #00ff66;
+  background: var(--color-surface-raised);
+  color: var(--color-accent);
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 1px;
   position: sticky;
   top: 0;
   z-index: 1;
-  border-bottom: 2px solid #00ff66;
+  border-bottom: 2px solid var(--color-accent);
 }
+
 .tank-table tbody tr {
   cursor: pointer;
 }
+
 .tank-table tbody tr:nth-child(even) {
-  background: #1f1f1f;
+  background: var(--color-surface-alt);
 }
-.tank-table tbody tr:hover td {
-  background: #2e5e2e;
+
+.tank-table tbody tr:hover td,
+.tank-table tbody tr:focus-within td {
+  background: var(--color-accent-soft);
   color: #fff;
 }
+
 .tank-table tbody tr.active td {
-  background: #4a6ed1;
+  background: var(--color-blue);
   color: #fff;
   font-weight: bold;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
 }
-.tank-table th.sortable:hover {
-  background: #2e5e2e;
+
+.tank-table th.sortable {
+  cursor: pointer;
+}
+
+.tank-table th.sortable:hover,
+.tank-table th.sortable:focus-visible {
+  background: var(--color-accent-soft);
   color: #fff;
 }
+
 .tank-table td:first-child {
   text-align: left;
   font-weight: 600;
@@ -312,54 +468,50 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   font-size: 15px;
 }
 
-.tank-table th:nth-child(1),
-.tank-table td:nth-child(1) {
-  width: 25%;
+.tank-table th:nth-child(1), .tank-table td:nth-child(1) { width: 25%; }
+.tank-table th:nth-child(2), .tank-table td:nth-child(2) { width: 15%; }
+.tank-table th:nth-child(3), .tank-table td:nth-child(3) { width: 15%; }
+.tank-table th:nth-child(4), .tank-table td:nth-child(4) { width: 30%; }
+.tank-table th:nth-child(5), .tank-table td:nth-child(5) { width: 15%; }
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 16px;
 }
-.tank-table th:nth-child(2),
-.tank-table td:nth-child(2) {
-  width: 15%;
-}
-.tank-table th:nth-child(3),
-.tank-table td:nth-child(3) {
-  width: 15%;
-}
-.tank-table th:nth-child(4),
-.tank-table td:nth-child(4) {
-  width: 30%;
-}
-.tank-table th:nth-child(5),
-.tank-table td:nth-child(5) {
-  width: 15%;
+
+.error-state {
+  text-align: center;
+  color: var(--color-dead);
 }
 
 #equipmentContent {
   padding: 0;
   margin: 0;
 }
+
 .tank-name {
   text-align: center;
   font-size: 28px;
-  color: #00ff66;
-  text-shadow: 0 0 15px #00ff66;
+  color: var(--color-accent);
+  text-shadow: 0 0 15px var(--color-accent);
   margin: 20px 0 30px;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   text-wrap: balance;
 }
+
 .tank-main-image {
   position: relative;
   width: fit-content;
   margin: 0 auto 40px;
 }
+
 .tank-main-image img {
   max-width: 100%;
   height: auto;
   max-height: 450px;
   object-fit: contain;
-  border: none;
-  border-radius: 0;
-  background: transparent;
 }
 
 .equip-build {
@@ -369,22 +521,25 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   gap: 15px;
   padding: 1rem 0;
 }
+
 .build-label {
   font-size: 14px;
-  color: #00ff66;
+  color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
   margin-bottom: 10px;
 }
+
 .equip-items {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .slot {
   width: 140px;
   height: 140px;
@@ -392,25 +547,26 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1f1f1f;
-  border-radius: 8px;
-  border: 1px solid #444;
-  transition-property: border-color, box-shadow;
-  transition-duration: 200ms;
-  transition-timing-function: ease-out;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition-med), box-shadow var(--transition-med);
 }
+
 .slot:hover {
-  border-color: #00ff66;
+  border-color: var(--color-accent);
   box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
 }
+
 .slot::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 8px;
-  background: radial-gradient(ellipse at 30% 30%, rgba(0,255,102,0.08) 0%, transparent 65%);
+  border-radius: var(--radius-md);
+  background: radial-gradient(ellipse at 30% 30%, rgba(0, 255, 102, 0.08) 0%, transparent 65%);
   pointer-events: none;
 }
+
 .slot-icon {
   position: relative;
   z-index: 1;
@@ -418,6 +574,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   align-items: center;
   justify-content: center;
 }
+
 .slot-icon img {
   max-width: 95%;
   max-height: 95%;
@@ -425,6 +582,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   height: auto;
   object-fit: contain;
 }
+
 .corner {
   position: absolute;
   width: 14px;
@@ -432,14 +590,17 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   pointer-events: none;
   z-index: 2;
 }
-.corner.tl { top:-1px; left:-1px;   border-top:2px solid #00ff66; border-left:2px solid #00ff66;   border-radius:6px 0 0 0; }
-.corner.tr { top:-1px; right:-1px;  border-top:2px solid #00ff66; border-right:2px solid #00ff66;  border-radius:0 6px 0 0; }
-.corner.bl { bottom:-1px; left:-1px;  border-bottom:2px solid #00ff66; border-left:2px solid #00ff66;  border-radius:0 0 0 6px; }
-.corner.br { bottom:-1px; right:-1px; border-bottom:2px solid #00ff66; border-right:2px solid #00ff66; border-radius:0 0 6px 0; }
+
+.corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--color-accent); border-left: 2px solid var(--color-accent); border-radius: var(--radius-sm) 0 0 0; }
+.corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--color-accent); border-right: 2px solid var(--color-accent); border-radius: 0 var(--radius-sm) 0 0; }
+.corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--color-accent); border-left: 2px solid var(--color-accent); border-radius: 0 0 0 var(--radius-sm); }
+.corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--color-accent); border-right: 2px solid var(--color-accent); border-radius: 0 0 var(--radius-sm) 0; }
 
 .slot-bottom-line {
   position: absolute;
-  bottom: 0; left: 20px; right: 20px;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
   height: 1px;
   background: linear-gradient(90deg, transparent, #00ff6666, transparent);
   pointer-events: none;
@@ -451,6 +612,7 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 }
 
 .equipment-builds[data-count="2"] {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 30px;
@@ -464,38 +626,27 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   justify-items: center;
 }
 
-.equipment-builds[data-count="3"] .equip-build:nth-child(1) {
-  grid-column: 1;
-  grid-row: 1;
-  justify-self: start;
-}
-.equipment-builds[data-count="3"] .equip-build:nth-child(2) {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-}
-.equipment-builds[data-count="3"] .equip-build:nth-child(3) {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  justify-self: center;
-  margin-top: 10px;
-}
+.equipment-builds[data-count="3"] .equip-build:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: start; }
+.equipment-builds[data-count="3"] .equip-build:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: end; }
+.equipment-builds[data-count="3"] .equip-build:nth-child(3) { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: 10px; }
 
 .mods-wrapper {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
+
 .mod-block {
   position: absolute;
   width: 240px;
   height: 120px;
 }
-.mod-block:nth-child(1){ top: 20px; left: -260px; }
-.mod-block:nth-child(2){ top: 185px; left: -345px; }
-.mod-block:nth-child(3){ top: 350px; left: -270px; }
-.mod-block:nth-child(4){ top: 20px; right: -210px; }
-.mod-block:nth-child(5){ top: 185px; right: -320px; }
+
+.mod-block:nth-child(1) { top: 20px; left: -260px; }
+.mod-block:nth-child(2) { top: 185px; left: -345px; }
+.mod-block:nth-child(3) { top: 350px; left: -270px; }
+.mod-block:nth-child(4) { top: 20px; right: -210px; }
+.mod-block:nth-child(5) { top: 185px; right: -320px; }
 
 .mod-base {
   position: absolute;
@@ -504,38 +655,40 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   top: 0;
   z-index: 1;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
-.mod-base.left  { left: 0; }
+
+.mod-base.left { left: 0; }
 .mod-base.right { left: 120px; }
 
 .mod-overlay {
   position: absolute;
   pointer-events: none;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  transition-property: opacity;
-  transition-duration: 200ms;
-  transition-timing-function: ease-out;
+  transition: opacity var(--transition-med);
 }
+
 .mod-overlay.active {
   width: 142px;
   height: 142px;
   z-index: 3;
   opacity: 1;
 }
-.mod-overlay.active.left  { left: -11px; top: -11px; }
+
+.mod-overlay.active.left { left: -11px; top: -11px; }
 .mod-overlay.active.right { left: 109px; top: -11px; }
+
 .mod-overlay.disabled {
   width: 120px;
   height: 120px;
   z-index: 2;
   opacity: 0.75;
 }
-.mod-overlay.disabled.left  { left: 0; top: 0; }
+
+.mod-overlay.disabled.left { left: 0; top: 0; }
 .mod-overlay.disabled.right { left: 120px; top: 0; }
+
 .mod-level {
   position: absolute;
   width: 38px;
@@ -545,248 +698,179 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
   transform: translateX(-50%);
   z-index: 5;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
+
 .mod-icon {
   position: absolute;
   pointer-events: none;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   z-index: 6;
 }
 
 .mod-icon.checkmark { width: 64px; height: 32px; }
-.mod-icon.checkmark.left  { left: 28px; bottom: -16px; }
+.mod-icon.checkmark.left { left: 28px; bottom: -16px; }
 .mod-icon.checkmark.right { left: 148px; bottom: -16px; }
 
 .mod-icon.blocked { width: 14px; height: 14px; }
-.mod-icon.blocked.left  { left: 53px; bottom: -7px; }
+.mod-icon.blocked.left { left: 53px; bottom: -7px; }
 .mod-icon.blocked.right { left: 173px; bottom: -7px; }
 
-@media (max-width: 768px) {
-  .dropdown-nation,
-  .dropdown-class,
-  .dropdown-role,
-  .dropdown-level {
-    width: 100%;
-    max-width: 350px;
-    flex: none;
-  }
-  .custom-select {
-    width: 100%;
-    max-width: 200px;
-  }
-  .equipment-builds[data-count="2"],
-  .equipment-builds[data-count="3"] {
-    flex-direction: column;
-    display: flex;
-  }
-  .equipment-builds[data-count="3"] .equip-build {
-    justify-self: center !important;
-    grid-column: auto !important;
-    grid-row: auto !important;
-  }
-  .equip-build {
-    min-width: auto;
-    width: 100%;
-    max-width: 420px;
-  }
+.cell-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
 }
 
-.cell-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
-    width: 100%;
-}
 .cell-content .icon-img {
-    height: 24px;
-    width: auto;
-    flex-shrink: 0;
-    object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+  height: 24px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+  image-rendering: crisp-edges;
 }
+
 .cell-content span {
-    text-align: left;
-    white-space: nowrap;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .custom-dropdown {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    line-height: normal;
-    vertical-align: bottom;
-    display: inline-block;
-    z-index: 1000;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  vertical-align: bottom;
+  display: inline-block;
+  z-index: 1000;
 }
 
-.dropdown-nation {
-    width: 200px;
-    flex: none;
-}
-.dropdown-class {
-    width: 150px;
-    flex: none;
-}
-.dropdown-role {
-    width: 320px;
-    flex: none;
-}
-.dropdown-level {
-    width: 90px;
-    flex: none;
-}
+.dropdown-nation { width: 200px; flex: none; }
+.dropdown-class { width: 150px; flex: none; }
+.dropdown-role { width: 320px; flex: none; }
+.dropdown-level { width: 90px; flex: none; }
+
 .dropdown-selected {
-    background: #111;
-    color: #fff;
-    border: 1px solid #333;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 42px;
-    box-sizing: border-box;
-    gap: 8px;
-    transition-property: border-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
-    margin: 0 !important;
+  background: #111;
+  color: #fff;
+  border: 1px solid var(--color-border-subtle);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  gap: 8px;
+  margin: 0;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
+
 .dropdown-selected:hover {
-    border-color: #00ff66;
-    box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
 }
+
 .dropdown-selected .dropdown-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
+
 .dropdown-arrow {
-    font-size: 10px;
-    color: #888;
-    transition-property: transform;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
+  font-size: 10px;
+  color: #888;
+  transition: transform var(--transition-fast);
 }
+
 .custom-dropdown.open .dropdown-arrow {
-    transform: rotate(180deg);
-}
-.dropdown-options {
-    position: absolute;
-    top: calc(100% + 1px);
-    left: 0;
-    right: 0;
-    display: none;
-    margin: 0;
-    padding: 0;
-    background: #111;
-    border: 1px solid #333;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    box-sizing: border-box;
-    z-index: 9999;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition-property: opacity, transform;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
-}
-.custom-dropdown.open .dropdown-options {
-    display: block;
-    position: absolute;
-    opacity: 1;
-    transform: translateY(0);
-}
-.dropdown-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition-property: background-color;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
-}
-.dropdown-option:hover {
-    background: #1f1f1f;
-}
-.dropdown-option.active {
-    background: #2e5e2e;
-    color: #fff;
-}
-.dropdown-option .dropdown-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-.dropdown-option .dropdown-text {
-    flex: 1;
-}
-.dropdown-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.dropdown-options {
-    max-height: 350px;
-    overflow-y: auto;
+  transform: rotate(180deg);
 }
 
 .dropdown-options {
-    scrollbar-width: thin;
-    scrollbar-color: #00ff66 #1a1a1a;
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  right: 0;
+  display: none;
+  margin: 0;
+  padding: 0;
+  background: #111;
+  border: 1px solid var(--color-border-subtle);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 350px;
+  overflow-y: auto;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-surface);
 }
+
 .dropdown-options::-webkit-scrollbar {
-    width: 8px;
-}
-.dropdown-options::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    border-radius: 0 0 6px 0;
-}
-.dropdown-options::-webkit-scrollbar-thumb {
-    background: #00ff66;
-    border-radius: 4px;
-    transition-property: background-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
-}
-.dropdown-options::-webkit-scrollbar-thumb:hover {
-    background: #00cc55;
-    box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
+  width: 8px;
 }
 
-#tableWrapper {
-    scrollbar-width: thin;
-    scrollbar-color: #00ff66 #1a1a1a;
+.dropdown-options::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 0 0 var(--radius-sm) 0;
 }
-#tableWrapper::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+
+.dropdown-options::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
 }
-#tableWrapper::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    border-radius: 6px;
+
+.dropdown-options::-webkit-scrollbar-thumb:hover {
+  background: #00cc55;
+  box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
 }
-#tableWrapper::-webkit-scrollbar-thumb {
-    background: #00ff66;
-    border-radius: 6px;
-    transition-property: background-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
+
+.custom-dropdown.open .dropdown-options {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
-#tableWrapper::-webkit-scrollbar-thumb:hover {
-    background: #00cc55;
-    box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+
+.dropdown-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast);
 }
-#tableWrapper::-webkit-scrollbar-corner {
-    background: #1a1a1a;
+
+.dropdown-option:hover,
+.dropdown-option:focus-visible {
+  background: var(--color-surface-alt);
+}
+
+.dropdown-option.active {
+  background: var(--color-accent-soft);
+  color: #fff;
+}
+
+.dropdown-option .dropdown-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.dropdown-option .dropdown-text {
+  flex: 1;
+}
+
+.dropdown-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .slot-icon.item-BonDosil img        { transform: translate(-2px, 0px); }
@@ -817,92 +901,133 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
 .slot-icon.item-TrophyVentil img     { transform: translate(0px, 0px); }
 .slot-icon.item-TrophyZakalka img    { transform: translate(0px, 0px) scale(1.10); }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .dropdown-nation,
+  .dropdown-class,
+  .dropdown-role,
+  .dropdown-level {
+    width: 100%;
+    max-width: 350px;
+    flex: none;
+  }
+
+  .equipment-builds[data-count="2"],
+  .equipment-builds[data-count="3"] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .equipment-builds[data-count="3"] .equip-build {
+    justify-self: center;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .equip-build {
+    min-width: auto;
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 <div class="page">
 
-<h1 class="matrix-title">СТАТИСТИКА</h1>
+<h1 class="page-title">СТАТИСТИКА</h1>
 
-<div class="main-tabs">
-  <button class="tab active" onclick="switchTab('stats', event)">Статистика</button>
-  <button class="tab" onclick="switchTab('equipment', event)">Оборудование</button>
-</div>
+<nav class="main-tabs" aria-label="Разделы">
+  <button type="button" class="tab active" onclick="switchTab('stats', event)" aria-pressed="true">Статистика</button>
+  <button type="button" class="tab" onclick="switchTab('equipment', event)" aria-pressed="false">Оборудование</button>
+</nav>
 
-<div id="statsPage">
-  <div class="buttons">
-    <button class="mode" onclick="loadTable('damage',event)">Урон</button>
-    <button class="mode" onclick="loadTable('damage_received',event)">Получено</button>
-    <button class="mode" onclick="loadTable('hits',event)">Попадания</button>
-    <button class="mode" onclick="loadTable('assist',event)">Ассист</button>
-    <button class="mode" onclick="loadTable('survival',event)">Выживаемость</button>
-    <button onclick="toggleAverage()">Среднее</button>
+<section id="statsPage" aria-label="Статистика боёв">
+  <div class="buttons" role="group" aria-label="Тип статистики">
+    <button type="button" class="mode" onclick="loadTable('damage',event)">Урон</button>
+    <button type="button" class="mode" onclick="loadTable('damage_received',event)">Получено</button>
+    <button type="button" class="mode" onclick="loadTable('hits',event)">Попадания</button>
+    <button type="button" class="mode" onclick="loadTable('assist',event)">Ассист</button>
+    <button type="button" class="mode" onclick="loadTable('survival',event)">Выживаемость</button>
+    <button type="button" onclick="toggleAverage()">Среднее</button>
   </div>
-  <div class="sub-tabs" id="campaignTabs"></div>
-  <div class="date-buttons" id="dateButtons"></div>
+  <nav class="sub-tabs" id="campaignTabs" aria-label="Кампании"></nav>
+  <div class="date-buttons" id="dateButtons" role="group" aria-label="Дата боя"></div>
   <div id="tableWrapper"><div id="table"></div></div>
-</div>
+</section>
 
-<div id="equipmentPage" style="display:none;">
+<section id="equipmentPage" aria-label="Оборудование" style="display:none;">
 
   <div class="equip-filters">
     <div class="filter-group">
-      <label>Нация</label>
-      <div class="custom-dropdown dropdown-nation" id="filterNationDropdown">
-        <div class="dropdown-selected">
+      <label id="filterNationLabel">Нация</label>
+      <div class="custom-dropdown dropdown-nation" id="filterNationDropdown" role="listbox" aria-labelledby="filterNationLabel">
+        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
           <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow">▼</span>
+          <span class="dropdown-arrow" aria-hidden="true">▼</span>
         </div>
         <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all">
+          <div class="dropdown-option" data-value="all" role="option">
             <span class="dropdown-text">Все</span>
           </div>
-          <div class="dropdown-option" data-value="ussr">
+          <div class="dropdown-option" data-value="ussr" role="option">
             <img src="flags/ussr.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">СССР</span>
           </div>
-          <div class="dropdown-option" data-value="germany">
+          <div class="dropdown-option" data-value="germany" role="option">
             <img src="flags/germany.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Германия</span>
           </div>
-          <div class="dropdown-option" data-value="usa">
+          <div class="dropdown-option" data-value="usa" role="option">
             <img src="flags/usa.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">США</span>
           </div>
-          <div class="dropdown-option" data-value="china">
+          <div class="dropdown-option" data-value="china" role="option">
             <img src="flags/china.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Китай</span>
           </div>
-          <div class="dropdown-option" data-value="france">
+          <div class="dropdown-option" data-value="france" role="option">
             <img src="flags/france.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Франция</span>
           </div>
-          <div class="dropdown-option" data-value="uk">
+          <div class="dropdown-option" data-value="uk" role="option">
             <img src="flags/uk.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Великобритания</span>
           </div>
-          <div class="dropdown-option" data-value="japan">
+          <div class="dropdown-option" data-value="japan" role="option">
             <img src="flags/japan.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Япония</span>
           </div>
-          <div class="dropdown-option" data-value="czech">
+          <div class="dropdown-option" data-value="czech" role="option">
             <img src="flags/czech.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Чехословакия</span>
           </div>
-          <div class="dropdown-option" data-value="sweden">
+          <div class="dropdown-option" data-value="sweden" role="option">
             <img src="flags/sweden.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Швеция</span>
           </div>
-          <div class="dropdown-option" data-value="poland">
+          <div class="dropdown-option" data-value="poland" role="option">
             <img src="flags/poland.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Польша</span>
           </div>
-          <div class="dropdown-option" data-value="italy">
+          <div class="dropdown-option" data-value="italy" role="option">
             <img src="flags/italy.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Италия</span>
           </div>
-          <div class="dropdown-option" data-value="intunion">
+          <div class="dropdown-option" data-value="intunion" role="option">
             <img src="flags/intunion.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Сборная наций</span>
           </div>
@@ -911,33 +1036,33 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
     </div>
 
     <div class="filter-group">
-      <label>Класс</label>
-      <div class="custom-dropdown dropdown-class" id="filterClassDropdown">
-        <div class="dropdown-selected">
+      <label id="filterClassLabel">Класс</label>
+      <div class="custom-dropdown dropdown-class" id="filterClassDropdown" role="listbox" aria-labelledby="filterClassLabel">
+        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
           <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow">▼</span>
+          <span class="dropdown-arrow" aria-hidden="true">▼</span>
         </div>
         <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all">
+          <div class="dropdown-option" data-value="all" role="option">
             <span class="dropdown-text">Все</span>
           </div>
-          <div class="dropdown-option" data-value="heavyTank">
+          <div class="dropdown-option" data-value="heavyTank" role="option">
             <img src="classes/heavyTank.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Тяжёлые</span>
           </div>
-          <div class="dropdown-option" data-value="mediumTank">
+          <div class="dropdown-option" data-value="mediumTank" role="option">
             <img src="classes/mediumTank.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Средние</span>
           </div>
-          <div class="dropdown-option" data-value="lightTank">
+          <div class="dropdown-option" data-value="lightTank" role="option">
             <img src="classes/lightTank.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">Лёгкие</span>
           </div>
-          <div class="dropdown-option" data-value="AT-SPG">
+          <div class="dropdown-option" data-value="AT-SPG" role="option">
             <img src="classes/AT-SPG.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">ПТ-САУ</span>
           </div>
-          <div class="dropdown-option" data-value="SPG">
+          <div class="dropdown-option" data-value="SPG" role="option">
             <img src="classes/SPG.png" class="dropdown-icon" alt="">
             <span class="dropdown-text">САУ</span>
           </div>
@@ -945,112 +1070,115 @@ th.hover-cell:not(.win):not(.lose) { background: rgba(255, 255, 255, 0.12); }
       </div>
     </div>
 
-  <div class="filter-group">
-  <label>Роль</label>
-  <div class="custom-dropdown dropdown-role" id="filterRoleDropdown">
-    <div class="dropdown-selected">
-      <span class="dropdown-text">Все</span>
-      <span class="dropdown-arrow">▼</span>
+    <div class="filter-group">
+      <label id="filterRoleLabel">Роль</label>
+      <div class="custom-dropdown dropdown-role" id="filterRoleDropdown" role="listbox" aria-labelledby="filterRoleLabel">
+        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
+          <span class="dropdown-text">Все</span>
+          <span class="dropdown-arrow" aria-hidden="true">▼</span>
+        </div>
+        <div class="dropdown-options">
+          <div class="dropdown-option active" data-value="all" role="option">
+            <span class="dropdown-text">Все</span>
+          </div>
+          <div class="dropdown-option" data-value="role_LT_universal" role="option">
+            <span class="dropdown-text">Лёгкие танки универсальные</span>
+          </div>
+          <div class="dropdown-option" data-value="role_LT_wheeled" role="option">
+            <span class="dropdown-text">Лёгкие танки колёсные</span>
+          </div>
+          <div class="dropdown-option" data-value="role_MT_assault" role="option">
+            <span class="dropdown-text">Средние танки штурмовые</span>
+          </div>
+          <div class="dropdown-option" data-value="role_MT_universal" role="option">
+            <span class="dropdown-text">Средние танки универсальные</span>
+          </div>
+          <div class="dropdown-option" data-value="role_MT_sniper" role="option">
+            <span class="dropdown-text">Средние танки снайперские</span>
+          </div>
+          <div class="dropdown-option" data-value="role_MT_support" role="option">
+            <span class="dropdown-text">Средние танки поддержки</span>
+          </div>
+          <div class="dropdown-option" data-value="role_HT_assault" role="option">
+            <span class="dropdown-text">Тяжёлые танки штурмовые</span>
+          </div>
+          <div class="dropdown-option" data-value="role_HT_universal" role="option">
+            <span class="dropdown-text">Тяжёлые танки универсальные</span>
+          </div>
+          <div class="dropdown-option" data-value="role_HT_break" role="option">
+            <span class="dropdown-text">Тяжёлые танки прорыва</span>
+          </div>
+          <div class="dropdown-option" data-value="role_HT_support" role="option">
+            <span class="dropdown-text">Тяжёлые танки поддержки</span>
+          </div>
+          <div class="dropdown-option" data-value="role_ATSPG_assault" role="option">
+            <span class="dropdown-text">ПТ-САУ штурмовые</span>
+          </div>
+          <div class="dropdown-option" data-value="role_ATSPG_universal" role="option">
+            <span class="dropdown-text">ПТ-САУ универсальные</span>
+          </div>
+          <div class="dropdown-option" data-value="role_ATSPG_sniper" role="option">
+            <span class="dropdown-text">ПТ-САУ снайперские</span>
+          </div>
+          <div class="dropdown-option" data-value="role_ATSPG_support" role="option">
+            <span class="dropdown-text">ПТ-САУ поддержки</span>
+          </div>
+          <div class="dropdown-option" data-value="role_SPG_assault" role="option">
+            <span class="dropdown-text">САУ штурмовые</span>
+          </div>
+          <div class="dropdown-option" data-value="role_SPG" role="option">
+            <span class="dropdown-text">САУ поддержки</span>
+          </div>
+          <div class="dropdown-option" data-value="role_SPG_flame" role="option">
+            <span class="dropdown-text">САУ огнемётные</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="dropdown-options">
-      <div class="dropdown-option active" data-value="all">
-        <span class="dropdown-text">Все</span>
-      </div>
-      <div class="dropdown-option" data-value="role_LT_universal">
-        <span class="dropdown-text">Лёгкие танки универсальные</span>
-      </div>
-      <div class="dropdown-option" data-value="role_LT_wheeled">
-        <span class="dropdown-text">Лёгкие танки колёсные</span>
-      </div>
-      <div class="dropdown-option" data-value="role_MT_assault">
-        <span class="dropdown-text">Средние танки штурмовые</span>
-      </div>
-      <div class="dropdown-option" data-value="role_MT_universal">
-        <span class="dropdown-text">Средние танки универсальные</span>
-      </div>
-      <div class="dropdown-option" data-value="role_MT_sniper">
-        <span class="dropdown-text">Средние танки снайперские</span>
-      </div>
-      <div class="dropdown-option" data-value="role_MT_support">
-        <span class="dropdown-text">Средние танки поддержки</span>
-      </div>
-      <div class="dropdown-option" data-value="role_HT_assault">
-        <span class="dropdown-text">Тяжёлые танки штурмовые</span>
-      </div>
-      <div class="dropdown-option" data-value="role_HT_universal">
-        <span class="dropdown-text">Тяжёлые танки универсальные</span>
-      </div>
-      <div class="dropdown-option" data-value="role_HT_break">
-        <span class="dropdown-text">Тяжёлые танки прорыва</span>
-      </div>
-      <div class="dropdown-option" data-value="role_HT_support">
-        <span class="dropdown-text">Тяжёлые танки поддержки</span>
-      </div>
-      <div class="dropdown-option" data-value="role_ATSPG_assault">
-        <span class="dropdown-text">ПТ-САУ штурмовые</span>
-      </div>
-      <div class="dropdown-option" data-value="role_ATSPG_universal">
-        <span class="dropdown-text">ПТ-САУ универсальные</span>
-      </div>
-      <div class="dropdown-option" data-value="role_ATSPG_sniper">
-        <span class="dropdown-text">ПТ-САУ снайперские</span>
-      </div>
-      <div class="dropdown-option" data-value="role_ATSPG_support">
-        <span class="dropdown-text">ПТ-САУ поддержки</span>
-      </div>
-      <div class="dropdown-option" data-value="role_SPG_assault">
-        <span class="dropdown-text">САУ штурмовые</span>
-      </div>
-      <div class="dropdown-option" data-value="role_SPG">
-        <span class="dropdown-text">САУ поддержки</span>
-      </div>
-      <div class="dropdown-option" data-value="role_SPG_flame">
-        <span class="dropdown-text">САУ огнемётные</span>
+
+    <div class="filter-group">
+      <label id="filterLevelLabel">Уровень</label>
+      <div class="custom-dropdown dropdown-level" id="filterLevelDropdown" role="listbox" aria-labelledby="filterLevelLabel">
+        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
+          <span class="dropdown-text">Все</span>
+          <span class="dropdown-arrow" aria-hidden="true">▼</span>
+        </div>
+        <div class="dropdown-options">
+          <div class="dropdown-option active" data-value="all" role="option">
+            <span class="dropdown-text">Все</span>
+          </div>
+          <div class="dropdown-option" data-value="8" role="option">
+            <span class="dropdown-text">VIII</span>
+          </div>
+          <div class="dropdown-option" data-value="9" role="option">
+            <span class="dropdown-text">IX</span>
+          </div>
+          <div class="dropdown-option" data-value="10" role="option">
+            <span class="dropdown-text">X</span>
+          </div>
+          <div class="dropdown-option" data-value="11" role="option">
+            <span class="dropdown-text">XI</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <div class="filter-group">
-  <label>Уровень</label>
-  <div class="custom-dropdown dropdown-level" id="filterLevelDropdown">
-    <div class="dropdown-selected">
-      <span class="dropdown-text">Все</span>
-      <span class="dropdown-arrow">▼</span>
-    </div>
-    <div class="dropdown-options">
-      <div class="dropdown-option active" data-value="all">
-        <span class="dropdown-text">Все</span>
-      </div>
-      <div class="dropdown-option" data-value="8">
-        <span class="dropdown-text">VIII</span>
-      </div>
-      <div class="dropdown-option" data-value="9">
-        <span class="dropdown-text">IX</span>
-      </div>
-      <div class="dropdown-option" data-value="10">
-        <span class="dropdown-text">X</span>
-      </div>
-      <div class="dropdown-option" data-value="11">
-        <span class="dropdown-text">XI</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-  <div id="backButtonContainer" style="display:none !important; text-align:center; margin:0; padding:0;">
-    <button id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
+  <div id="backButtonContainer" class="back-button-bar" style="display:none;">
+    <button type="button" id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
   </div>
 
   <div class="equip-buttons" id="tankButtons"></div>
 
   <div id="equipmentContent"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="bottom-line" aria-hidden="true"></div>
+  <p class="footer-text">Created by McQueen</p>
+</footer>
+
 </div>
-
-<div class="bottom-line"></div>
-<div class="footer-text">Created by McQueen</div>
-
 
 <script>
 let DATA = null;
@@ -1071,8 +1199,12 @@ function parseDate(str){
 }
 
 function switchTab(tab, event){
-  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(b => {
+    b.classList.remove("active");
+    b.setAttribute("aria-pressed", "false");
+  });
   event.target.classList.add("active");
+  event.target.setAttribute("aria-pressed", "true");
   if(tab === "stats"){
     document.getElementById("statsPage").style.display = "block";
     document.getElementById("equipmentPage").style.display = "none";
@@ -1150,6 +1282,7 @@ function renderCampaignTabs(){
   wrap.innerHTML = "";
   CAMPAIGNS.forEach(campaign => {
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.textContent = campaign.label;
     if(campaign.key === currentCampaign) btn.classList.add("active");
     if(campaign.key === "eternal_storm") btn.classList.add("current-campaign");
@@ -1170,7 +1303,7 @@ Promise.all(DATA_FILES.map(async file => {
   loadTable(currentType);
 })
 .catch(error => {
-  document.getElementById("table").textContent = `Ошибка загрузки данных: ${error.message}`;
+  document.getElementById("table").innerHTML = `<p class="error-state">Ошибка загрузки данных: ${escapeHtml(error.message)}</p>`;
 });
 
 function openBattleHtmlByIndex(index){
@@ -1192,13 +1325,14 @@ function initDates(){
     .map(b => b.date))];
   dates.sort((a,b) => parseDate(a) - parseDate(b));
   if(!dates.length){
-    box.innerHTML = "<p>Для этого блока пока нет данных.</p>";
+    box.innerHTML = "<p class=\"empty-state\">Для этого блока пока нет данных.</p>";
     currentDate = null;
     loadTable(currentType);
     return;
   }
   dates.forEach((date, index) => {
     let btn = document.createElement("button");
+    btn.type = "button";
     btn.innerText = date;
     btn.onclick = () => {
       currentDate = date;
@@ -1210,6 +1344,7 @@ function initDates(){
     if(index === 0){ btn.classList.add("active"); currentDate = date; }
   });
   let allBtn = document.createElement("button");
+  allBtn.type = "button";
   allBtn.innerText = "ВСЕ БОИ";
   allBtn.onclick = () => {
     currentDate = null;
@@ -1241,7 +1376,7 @@ function loadTable(type, event){
     b => getCampaignByDate(b.date) === currentCampaign && (!currentDate || b.date === currentDate)
   );
   if(!battles.length){
-    document.getElementById("table").innerHTML = "Нет боёв";
+    document.getElementById("table").innerHTML = "<p class=\"empty-state\">Нет боёв</p>";
     visibleBattles = [];
     return;
   }
@@ -1310,12 +1445,8 @@ function loadTable(type, event){
   let winRate = battles.length ? Math.round((winCount / battles.length) * 100) : 0;
 
   let avgEloHtml = `
-    <div style="color: #00ff66; opacity: 0.7; font-size: 13px; font-weight: 700; text-shadow: 0 0 4px rgba(0, 255, 102, 0.3); font-variant-numeric: tabular-nums;">
-      Elo: ${avgElo}
-    </div>
-    <div style="color: #aaa; font-size: 11px; margin-top: 2px; font-variant-numeric: tabular-nums;">
-      Побед: ${winRate}%
-    </div>
+    <div class="elo-summary">Elo: ${avgElo}</div>
+    <div class="elo-summary__winrate">Побед: ${winRate}%</div>
   `;
 
   let html = "<table>";
@@ -1325,7 +1456,7 @@ function loadTable(type, event){
   battles.forEach(b => {
     let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
     let clanCell = "";
-    if(clanTag) clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank">${escapeHtml(clanTag.toUpperCase())}</a>`;
+    if(clanTag) clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank" rel="noopener">${escapeHtml(clanTag.toUpperCase())}</a>`;
     if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
     html += `<th class="clan-header">${clanCell}</th>`;
   });
@@ -1357,7 +1488,7 @@ function loadTable(type, event){
       let tankClass = cell.alive ? "alive" : "dead";
       let displayValue = cell.value;
       if(type === "assist"){
-        displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png"> ${cell.assist_radio}</small>`;
+        displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png" alt="Засвет с гусеницы"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png" alt="Засвет по рации"> ${cell.assist_radio}</small>`;
       }
       if(type === "survival"){
         html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span></td>`;
@@ -1420,7 +1551,7 @@ async function loadEquipmentDB() {
   } catch (err) {
     console.error('Ошибка загрузки equipment.json:', err);
     document.getElementById('equipmentContent').innerHTML =
-      '<p style="color:#ff4444; text-align:center;">Не удалось загрузить данные оборудования</p>';
+      '<p class="error-state">Не удалось загрузить данные оборудования</p>';
   }
 }
 
@@ -1443,12 +1574,22 @@ function initCustomDropdown(dropdownId, onChangeCallback) {
   const selected = dropdown.querySelector('.dropdown-selected');
   const options = dropdown.querySelectorAll('.dropdown-option');
 
-  selected.addEventListener('click', (e) => {
+  const toggleDropdown = (e) => {
     e.stopPropagation();
     document.querySelectorAll('.custom-dropdown.open').forEach(d => {
       if (d !== dropdown) d.classList.remove('open');
     });
     dropdown.classList.toggle('open');
+  };
+
+  selected.addEventListener('click', toggleDropdown);
+  selected.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleDropdown(e);
+    } else if (e.key === 'Escape') {
+      dropdown.classList.remove('open');
+    }
   });
 
   options.forEach(option => {
@@ -1594,7 +1735,7 @@ function renderTankTable(tanks = null) {
   }
 
   if (list.length === 0) {
-    container.innerHTML = '<p style="text-align:center; color:#aaa; font-size:16px;">Танки не найдены</p>';
+    container.innerHTML = '<p class="empty-state">Танки не найдены</p>';
     return;
   }
 
@@ -1613,7 +1754,7 @@ function renderTankTable(tanks = null) {
     'SPG': 'САУ'
   };
 
-    const roleNames = {
+  const roleNames = {
     'role_LT_universal': 'Лёгкие танки универсальные',
     'role_LT_wheeled': 'Лёгкие танки колёсные',
     'role_MT_assault': 'Средние танки штурмовые',
@@ -1636,11 +1777,11 @@ function renderTankTable(tanks = null) {
   let html = `<table class="tank-table">
     <thead>
       <tr>
-        <th class="sortable" data-sort="name" style="cursor:pointer;">Название <span id="sort-name"></span></th>
-        <th class="sortable" data-sort="nation" style="cursor:pointer;">Нация <span id="sort-nation"></span></th>
-        <th class="sortable" data-sort="class" style="cursor:pointer;">Класс <span id="sort-class"></span></th>
-        <th class="sortable" data-sort="role" style="cursor:pointer;">Роль <span id="sort-role"></span></th>
-        <th class="sortable" data-sort="level" style="cursor:pointer;">Уровень <span id="sort-level"></span></th>
+        <th class="sortable" data-sort="name">Название <span id="sort-name"></span></th>
+        <th class="sortable" data-sort="nation">Нация <span id="sort-nation"></span></th>
+        <th class="sortable" data-sort="class">Класс <span id="sort-class"></span></th>
+        <th class="sortable" data-sort="role">Роль <span id="sort-role"></span></th>
+        <th class="sortable" data-sort="level">Уровень <span id="sort-level"></span></th>
       </tr>
     </thead>
     <tbody>`;
@@ -1670,11 +1811,11 @@ function renderTankTable(tanks = null) {
     const romanLevel = romanLevels[level] || level;
 
     html += `<tr class="${isActive}" data-id="${id}">
-      <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${name}</span></div></td>
-      <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${nation}</span></div></td>
-      <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${cls}</span></div></td>
-      <td><div class="cell-content"><span>${role}</span></div></td>
-      <td>${romanLevel}</td>
+      <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${escapeHtml(name)}</span></div></td>
+      <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${escapeHtml(nation)}</span></div></td>
+      <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${escapeHtml(cls)}</span></div></td>
+      <td><div class="cell-content"><span>${escapeHtml(role)}</span></div></td>
+      <td>${escapeHtml(String(romanLevel))}</td>
     </tr>`;
   });
   html += `</tbody></table>`;
@@ -1714,7 +1855,7 @@ function openTank(tankId) {
   document.getElementById('backButtonContainer').style.display = 'block';
 
   let name = String(tank.name || tank["name "] || "").trim();
-  let html = `<div class="tank-name">${name}</div>`;
+  let html = `<div class="tank-name">${escapeHtml(name)}</div>`;
 
   let images = tank.images || tank["images "];
   let mods = tank.mods || tank["mods "];
@@ -1722,7 +1863,7 @@ function openTank(tankId) {
   if (images && images[0]) {
     let imgSrc = String(images[0]).trim();
     html += `<div class="tank-main-image">
-      <img src="images/${imgSrc}" alt="${name}">
+      <img src="images/${imgSrc}" alt="${escapeHtml(name)}">
       ${mods?.length > 0 ? renderFieldMods(mods) : ''}
     </div>`;
   }
@@ -1775,7 +1916,7 @@ function renderEquipmentBuilds(builds) {
 
     html += `
       <div class="equip-build">
-        <div class="build-label">${titles[type] || type}</div>
+        <div class="build-label">${escapeHtml(titles[type] || type)}</div>
         <div class="equip-items">
           ${slotsHtml}
         </div>
