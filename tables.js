@@ -1,1552 +1,7 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Статистика</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" sizes="521x521" href="favicon.png">
-
-<style>
-
-:root {
-  --color-bg: #0d0d0d;
-  --color-surface: #1a1a1a;
-  --color-surface-alt: #1f1f1f;
-  --color-surface-raised: #222222;
-  --color-border: #3a3a3a;
-  --color-border-subtle: #333333;
-
-  --color-accent: #00ff66;
-  --color-accent-soft: #2e5e2e;
-  --color-accent-glow: rgba(0, 255, 102, 0.5);
-
-  --color-blue: #4a6ed1;
-  --color-blue-soft: #63b3ff;
-
-  --color-win: #2e5e2e;
-  --color-lose: #5e2e2e;
-  --color-alive: #00ff66;
-  --color-dead: #ff4444;
-
-  --color-link: #57a9c2;
-  --color-link-hover: #9be8ff;
-
-  --color-btn-border: #979695;
-  --color-btn-hover: #dd6395;
-
-  --color-text: #f5f5f5;
-  --color-text-muted: #a6a6a6;
-  --color-text-faint: #808080;
-
-  --font-display: 'Sofia Sans', sans-serif;
-  --font-body: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-
-  --transition-fast: 150ms ease-out;
-  --transition-med: 200ms ease-out;
-
-  --shadow-panel: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: var(--font-body);
-  color: var(--color-text);
-  overflow-x: auto;
-  background: var(--color-bg) url('backgrounds.png') center center / cover no-repeat;
-}
-
-@media (min-width: 768px) {
-  body { background-attachment: fixed; }
-}
-
-.page {
-  position: relative;
-  z-index: 1;
-  padding: 10px clamp(10px, 3vw, 24px) 0;
-}
-
-.page-title {
-  text-align: center;
-  font-size: clamp(32px, 6vw, 60px);
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--color-accent);
-  text-shadow: 0 0 20px var(--color-accent);
-  margin: 0 0 5px;
-  text-wrap: balance;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.brand-icon {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  color: var(--color-accent);
-  filter: drop-shadow(0 0 6px rgba(0, 255, 102, 0.5));
-}
-
-.page-title {
-  margin: 0;
-}
-
-.main-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.main-tabs .tab {
-  min-width: 110px;
-  padding: 6px 14px;
-  font-size: 13px;
-}
-
-.equip-buttons {
-  margin: 0;
-  padding: 0;
-  min-height: 0;
-}
-
-button {
-  font: inherit;
-  background: #2b2b2b;
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  padding: 6px 12px;
-  margin: 4px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  position: relative;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), scale var(--transition-fast);
-}
-
-button:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-button:active {
-  scale: 0.96;
-}
-
-button.active {
-  background: var(--color-blue);
-}
-
-/* ---- Running-border hover animation (applied to all control buttons) ---- */
-
-.btn-runborder {
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-  border-color: var(--color-btn-border);
-  color: var(--color-text-muted);
-  box-shadow: none !important;
-}
-
-.btn-runborder::before,
-.btn-runborder::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-color: var(--color-accent);
-  border-radius: inherit;
-  border-style: solid;
-  transition: all 0.35s;
-  content: "";
-  z-index: 1;
-  pointer-events: none;
-}
-
-.btn-runborder::before {
-  width: 0;
-  height: 100%;
-  border-width: 1px 0;
-}
-
-.btn-runborder::after {
-  width: 100%;
-  height: 0;
-  border-width: 0 1px;
-}
-
-.btn-runborder:hover {
-  border-color: var(--color-btn-border);
-  color: var(--color-accent);
-  box-shadow: none !important;
-}
-
-.btn-runborder:hover::before {
-  width: 100%;
-}
-
-.btn-runborder:hover::after {
-  height: 100%;
-}
-
-.btn-runborder.active {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: rgba(0, 255, 102, 0.08);
-}
-
-.btn-runborder.active::before {
-  width: 100%;
-}
-
-.btn-runborder.active::after {
-  height: 100%;
-}
-
-/* ---- Control panel (Показатели / Сезон / Этап / Дата) ---- */
-
-.control-panel {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: 0;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  margin-bottom: 14px;
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-  border-right: 1px solid var(--color-border-subtle);
-}
-
-.control-group:first-child {
-  padding-left: 0;
-}
-
-.control-group:last-child {
-  border-right: none;
-}
-
-.control-group__label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--color-text-faint);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-
-.control-group__buttons {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.control-group--dates {
-  flex: 1 1 220px;
-}
-
-.control-group--season .control-group__buttons {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 6px;
-}
-
-.control-group--display {
-  flex: 0 0 auto;
-  min-width: 150px;
-}
-
-.control-group--display .control-group__buttons {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-}
-
-.stat-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 62px;
-  height: 50px;
-  margin: 0;
-  padding: 4px;
-  border-radius: var(--radius-sm);
-  font-size: 10px;
-  line-height: 1.1;
-  text-align: center;
-}
-
-.stat-btn__icon {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
-
-.stage-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 68px;
-  height: 50px;
-  margin: 0;
-  padding: 4px;
-  border-radius: var(--radius-sm);
-  font-size: 10px;
-  line-height: 1.1;
-  text-align: center;
-}
-
-.stage-btn__icon {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
-
-.season-btn {
-  margin: 0;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-align: left;
-}
-
-.date-btn {
-  margin: 0;
-  min-width: 46px;
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.date-btn--all {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 4px;
-}
-
-/* ---- Secondary row: average toggle + all-battles ---- */
-
-.table-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.avg-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 4px 4px 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.avg-toggle__label {
-  font-size: 11px;
-  color: var(--color-text-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.avg-toggle__track {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  background: #0f0f0f;
-  border-radius: 999px;
-  padding: 3px;
-  flex-shrink: 0;
-}
-
-.avg-toggle__option {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 24px;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 999px;
-  color: var(--color-text-faint);
-  font-size: 12px;
-  transition: color var(--transition-fast);
-}
-
-.avg-toggle__option.active {
-  color: #0d0d0d;
-}
-
-.avg-toggle__thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 26px;
-  height: 24px;
-  background: var(--color-accent);
-  border-radius: 999px;
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
-  transition: transform var(--transition-med);
-  pointer-events: none;
-}
-
-.avg-toggle__track[data-position="right"] .avg-toggle__thumb {
-  transform: translateX(26px);
-}
-
-.btn-all-battles {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 34px;
-  margin: 0;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 600;
-  box-sizing: border-box;
-}
-
-@media (max-width: 900px) {
-  .control-panel {
-    flex-direction: column;
-  }
-
-  .control-group {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border-subtle);
-    padding: 14px 0;
-  }
-
-  .control-group:first-child {
-    padding-top: 0;
-  }
-
-  .control-group:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .control-group__buttons {
-    justify-content: center;
-  }
-
-  .control-group--season .control-group__buttons,
-  .control-group--display .control-group__buttons {
-    align-items: center;
-    max-width: 260px;
-    margin: 0 auto;
-  }
-
-  .table-toolbar {
-    justify-content: center;
-  }
-}
-
-#tableWrapper {
-  width: 100%;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-surface);
-}
-
-#tableWrapper::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-#tableWrapper::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: var(--radius-sm);
-}
-
-#tableWrapper::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-#tableWrapper::-webkit-scrollbar-thumb:hover {
-  background: #00cc55;
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
-}
-
-#tableWrapper::-webkit-scrollbar-corner {
-  background: var(--color-surface);
-}
-
-table {
-  border-collapse: collapse;
-  background: var(--color-surface);
-  width: max-content;
-  min-width: 100%;
-  table-layout: fixed;
-}
-
-th, td {
-  border: 1px solid var(--color-border);
-  padding: 6px;
-  text-align: center;
-  vertical-align: top;
-  transition: background-color var(--transition-fast);
-}
-
-th:first-child, td:first-child {
-  width: 180px;
-  min-width: 180px;
-  max-width: 180px;
-}
-
-.clan-header {
-  padding: 4px 6px 2px;
-  font-size: 13px;
-  min-width: 120px;
-}
-
-.clan-link {
-  color: var(--color-link);
-  text-decoration: none;
-  font-weight: 700;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
-}
-
-.clan-link:hover,
-.clan-link:focus-visible {
-  color: var(--color-link-hover);
-  text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
-}
-
-.elo-value {
-  display: block;
-  font-size: 11px;
-  color: var(--color-accent);
-  font-weight: 700;
-  margin-top: 2px;
-  text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
-  font-variant-numeric: tabular-nums;
-}
-
-.elo-summary {
-  color: var(--color-accent);
-  opacity: 0.7;
-  font-size: 13px;
-  font-weight: 700;
-  text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
-  font-variant-numeric: tabular-nums;
-}
-
-.elo-summary__winrate {
-  color: var(--color-text-muted);
-  font-size: 11px;
-  margin-top: 2px;
-  font-variant-numeric: tabular-nums;
-}
-
-tr.hover-row td:not(.win):not(.lose),
-tr.hover-row th:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-td.hover-col:not(.win):not(.lose),
-th.hover-col:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-td.hover-cell:not(.win):not(.lose),
-th.hover-cell:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.win.hover-cell,
-.lose.hover-cell {
-  filter: brightness(1.35);
-  transition: filter var(--transition-fast);
-}
-
-.win { background: var(--color-win); }
-.lose { background: var(--color-lose); }
-.alive { color: var(--color-alive); font-weight: bold; }
-.dead { color: var(--color-dead); font-weight: bold; }
-
-.assist-icons {
-  opacity: 0.8;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-variant-numeric: tabular-nums;
-}
-
-.assist-icons img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  outline: 1px solid rgba(255, 255, 255, 0.1);
-  outline-offset: -1px;
-}
-
-.map-link {
-  color: #f0f0f0;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
-}
-
-.map-link:hover,
-.map-link:focus-visible {
-  color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-}
-
-.site-footer {
-  text-align: center;
-  padding-bottom: 20px;
-}
-
-.bottom-line {
-  width: 90%;
-  height: 1px;
-  background: var(--color-accent);
-  margin: 40px auto 10px;
-  box-shadow: 0 0 8px var(--color-accent);
-}
-
-.footer-text {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-  margin: 0;
-}
-
-.equip-filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 15px;
-  margin: 15px 0;
-  position: relative;
-  z-index: 500;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: fit-content;
-}
-
-.filter-group label {
-  height: 16px;
-  line-height: 16px;
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: var(--color-text-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.back-button-bar {
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-#backToTableBtn {
-  background: #2b2b2b;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-weight: 600;
-  margin-bottom: 20px;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), scale var(--transition-fast);
-}
-
-#backToTableBtn:hover {
-  background: var(--color-accent-soft);
-  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
-}
-
-#backToTableBtn:active {
-  scale: 0.96;
-}
-
-.tank-table {
-  width: 95%;
-  max-width: 1200px;
-  margin: 3px auto 20px;
-  border-collapse: collapse;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-panel);
-  font-family: var(--font-display);
-  overflow: hidden;
-}
-
-.tank-table th,
-.tank-table td {
-  border: 1px solid var(--color-border-subtle);
-  padding: 10px 15px;
-  text-align: center;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.tank-table th {
-  background: var(--color-surface-raised);
-  color: var(--color-accent);
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 1px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  border-bottom: 2px solid var(--color-accent);
-}
-
-.tank-table tbody tr {
-  cursor: pointer;
-}
-
-.tank-table tbody tr:nth-child(even) {
-  background: var(--color-surface-alt);
-}
-
-.tank-table tbody tr:hover td,
-.tank-table tbody tr:focus-within td {
-  background: var(--color-accent-soft);
-  color: #fff;
-}
-
-.tank-table tbody tr.active td {
-  background: var(--color-blue);
-  color: #fff;
-  font-weight: bold;
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.tank-table th.sortable {
-  cursor: pointer;
-}
-
-.tank-table th.sortable:hover,
-.tank-table th.sortable:focus-visible {
-  background: var(--color-accent-soft);
-  color: #fff;
-}
-
-.tank-table td:first-child {
-  text-align: left;
-  font-weight: 600;
-  color: #fff;
-  font-size: 15px;
-}
-
-.tank-table th:nth-child(1), .tank-table td:nth-child(1) { width: 25%; }
-.tank-table th:nth-child(2), .tank-table td:nth-child(2) { width: 15%; }
-.tank-table th:nth-child(3), .tank-table td:nth-child(3) { width: 15%; }
-.tank-table th:nth-child(4), .tank-table td:nth-child(4) { width: 30%; }
-.tank-table th:nth-child(5), .tank-table td:nth-child(5) { width: 15%; }
-
-.empty-state {
-  text-align: center;
-  color: var(--color-text-muted);
-  font-size: 16px;
-}
-
-.error-state {
-  text-align: center;
-  color: var(--color-dead);
-}
-
-#equipmentContent {
-  padding: 0;
-  margin: 0;
-}
-
-.tank-name {
-  text-align: center;
-  font-size: 28px;
-  color: var(--color-accent);
-  text-shadow: 0 0 15px var(--color-accent);
-  margin: 20px 0 30px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-wrap: balance;
-}
-
-.tank-main-image {
-  position: relative;
-  width: fit-content;
-  margin: 0 auto 40px;
-}
-
-.tank-main-image img {
-  max-width: 100%;
-  height: auto;
-  max-height: 450px;
-  object-fit: contain;
-}
-
-.equip-build {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding: 1rem 0;
-}
-
-.build-label {
-  font-size: 14px;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-  margin-bottom: 10px;
-}
-
-.equip-items {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.slot {
-  width: 140px;
-  height: 140px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-surface-alt);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  transition: border-color var(--transition-med), box-shadow var(--transition-med);
-}
-
-.slot:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
-}
-
-.slot::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-md);
-  background: radial-gradient(ellipse at 30% 30%, rgba(0, 255, 102, 0.08) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.slot-icon {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slot-icon img {
-  max-width: 95%;
-  max-height: 95%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--color-accent); border-left: 2px solid var(--color-accent); border-radius: var(--radius-sm) 0 0 0; }
-.corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--color-accent); border-right: 2px solid var(--color-accent); border-radius: 0 var(--radius-sm) 0 0; }
-.corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--color-accent); border-left: 2px solid var(--color-accent); border-radius: 0 0 0 var(--radius-sm); }
-.corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--color-accent); border-right: 2px solid var(--color-accent); border-radius: 0 0 var(--radius-sm) 0; }
-
-.slot-bottom-line {
-  position: absolute;
-  bottom: 0;
-  left: 20px;
-  right: 20px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #00ff6666, transparent);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.equipment-builds[data-count="1"] .equip-build {
-  margin: 0 auto;
-}
-
-.equipment-builds[data-count="2"] {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 30px;
-}
-
-.equipment-builds[data-count="3"] {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 20px;
-  justify-items: center;
-}
-
-.equipment-builds[data-count="3"] .equip-build:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: start; }
-.equipment-builds[data-count="3"] .equip-build:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: end; }
-.equipment-builds[data-count="3"] .equip-build:nth-child(3) { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: 10px; }
-
-.mods-wrapper {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.mod-block {
-  position: absolute;
-  width: 240px;
-  height: 120px;
-}
-
-.mod-block:nth-child(1) { top: 20px; left: -260px; }
-.mod-block:nth-child(2) { top: 185px; left: -345px; }
-.mod-block:nth-child(3) { top: 350px; left: -270px; }
-.mod-block:nth-child(4) { top: 20px; right: -210px; }
-.mod-block:nth-child(5) { top: 185px; right: -320px; }
-
-.mod-base {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  top: 0;
-  z-index: 1;
-  object-fit: contain;
-  image-rendering: crisp-edges;
-}
-
-.mod-base.left { left: 0; }
-.mod-base.right { left: 120px; }
-
-.mod-overlay {
-  position: absolute;
-  pointer-events: none;
-  object-fit: contain;
-  image-rendering: crisp-edges;
-  transition: opacity var(--transition-med);
-}
-
-.mod-overlay.active {
-  width: 142px;
-  height: 142px;
-  z-index: 3;
-  opacity: 1;
-}
-
-.mod-overlay.active.left { left: -11px; top: -11px; }
-.mod-overlay.active.right { left: 109px; top: -11px; }
-
-.mod-overlay.disabled {
-  width: 120px;
-  height: 120px;
-  z-index: 2;
-  opacity: 0.75;
-}
-
-.mod-overlay.disabled.left { left: 0; top: 0; }
-.mod-overlay.disabled.right { left: 120px; top: 0; }
-
-.mod-level {
-  position: absolute;
-  width: 38px;
-  height: 36px;
-  left: 50%;
-  top: -18px;
-  transform: translateX(-50%);
-  z-index: 5;
-  object-fit: contain;
-  image-rendering: crisp-edges;
-}
-
-.mod-icon {
-  position: absolute;
-  pointer-events: none;
-  object-fit: contain;
-  image-rendering: crisp-edges;
-  z-index: 6;
-}
-
-.mod-icon.checkmark { width: 64px; height: 32px; }
-.mod-icon.checkmark.left { left: 28px; bottom: -16px; }
-.mod-icon.checkmark.right { left: 148px; bottom: -16px; }
-
-.mod-icon.blocked { width: 14px; height: 14px; }
-.mod-icon.blocked.left { left: 53px; bottom: -7px; }
-.mod-icon.blocked.right { left: 173px; bottom: -7px; }
-
-.cell-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  width: 100%;
-}
-
-.cell-content .icon-img {
-  height: 24px;
-  width: auto;
-  flex-shrink: 0;
-  object-fit: contain;
-  image-rendering: crisp-edges;
-}
-
-.cell-content span {
-  text-align: left;
-  white-space: nowrap;
-}
-
-.custom-dropdown {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  line-height: normal;
-  vertical-align: bottom;
-  display: inline-block;
-  z-index: 1000;
-}
-
-.dropdown-nation { width: 200px; flex: none; }
-.dropdown-class { width: 150px; flex: none; }
-.dropdown-role { width: 320px; flex: none; }
-.dropdown-level { width: 90px; flex: none; }
-
-.dropdown-selected {
-  background: #111;
-  color: #fff;
-  border: 1px solid var(--color-border-subtle);
-  padding: 8px 12px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 42px;
-  gap: 8px;
-  margin: 0;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.dropdown-selected:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
-}
-
-.dropdown-selected .dropdown-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.dropdown-arrow {
-  font-size: 10px;
-  color: #888;
-  transition: transform var(--transition-fast);
-}
-
-.custom-dropdown.open .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-.dropdown-options {
-  position: absolute;
-  top: calc(100% + 1px);
-  left: 0;
-  right: 0;
-  display: none;
-  margin: 0;
-  padding: 0;
-  background: #111;
-  border: 1px solid var(--color-border-subtle);
-  border-top: none;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(-6px);
-  max-height: 350px;
-  overflow-y: auto;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-surface);
-}
-
-.dropdown-options::-webkit-scrollbar {
-  width: 8px;
-}
-
-.dropdown-options::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: 0 0 var(--radius-sm) 0;
-}
-
-.dropdown-options::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 4px;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.dropdown-options::-webkit-scrollbar-thumb:hover {
-  background: #00cc55;
-  box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
-}
-
-.custom-dropdown.open .dropdown-options {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dropdown-option {
-  padding: 8px 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color var(--transition-fast);
-}
-
-.dropdown-option:hover,
-.dropdown-option:focus-visible {
-  background: var(--color-surface-alt);
-}
-
-.dropdown-option.active {
-  background: var(--color-accent-soft);
-  color: #fff;
-}
-
-.dropdown-option .dropdown-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.dropdown-option .dropdown-text {
-  flex: 1;
-}
-
-.dropdown-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.slot-icon.item-BonDosil img        { transform: translate(-2px, 0px); }
-.slot-icon.item-BonKomponovka img   { transform: translate(0px, 0px); }
-.slot-icon.item-BonOptica img       { transform: translate(-5px, 0px); }
-.slot-icon.item-BonPricel img       { transform: translate(0px, 0px); }
-.slot-icon.item-BonPrivodi img      { transform: translate(0px, 0px); }
-.slot-icon.item-BonStab img         { transform: translate(-6px, 0px); }
-.slot-icon.item-BonTurbina img      { transform: translate(0px, 0px); }
-.slot-icon.item-BonVentil img       { transform: translate(-3px, 0px); }
-.slot-icon.item-BonZakalka img      { transform: translate(0px, 0px); }
-.slot-icon.item-Copi img            { transform: translate(0px, 0px); }
-.slot-icon.item-Grunti img          { transform: translate(0px, 0px); }
-.slot-icon.item-ExpKaretka img      { transform: translate(0px, 0px); }
-.slot-icon.item-ExpRastochka img    { transform: translate(0px, 0px); }
-.slot-icon.item-ExpStab img         { transform: translate(0px, 0px); }
-.slot-icon.item-ExpTurbina img      { transform: translate(-2px, 0px); }
-.slot-icon.item-ExpZakalka img      { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyComponovka img { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyDosil img      { transform: translate(0px, 0px) scale(1.10); }
-.slot-icon.item-TrophyMaloshymka img { transform: translate(0px, -5px); }
-.slot-icon.item-TrophyOptica img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyPricel img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyPrivodi img    { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyStabilizer img { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyTurbina img    { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyUMP img        { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyVentil img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyZakalka img    { transform: translate(0px, 0px) scale(1.10); }
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-@media (max-width: 768px) {
-  .dropdown-nation,
-  .dropdown-class,
-  .dropdown-role,
-  .dropdown-level {
-    width: 100%;
-    max-width: 350px;
-    flex: none;
-  }
-
-  .equipment-builds[data-count="2"],
-  .equipment-builds[data-count="3"] {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .equipment-builds[data-count="3"] .equip-build {
-    justify-self: center;
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .equip-build {
-    min-width: auto;
-    width: 100%;
-    max-width: 420px;
-  }
-}
-
-</style>
-</head>
-
-<body>
-<div class="page">
-
-<div class="brand">
-  <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor"/>
-    <rect x="10" y="7" width="4" height="14" rx="1" fill="currentColor"/>
-    <rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/>
-  </svg>
-  <h1 class="page-title">СТАТИСТИКА</h1>
-</div>
-
-<nav class="main-tabs" aria-label="Разделы">
-  <button type="button" class="tab btn-runborder" onclick="switchTab('stats', event)" aria-pressed="false">Статистика</button>
-  <button type="button" class="tab btn-runborder" onclick="switchTab('equipment', event)" aria-pressed="false">Оборудование</button>
-</nav>
-
-<section id="statsPage" aria-label="Статистика боёв" style="display:none;">
-
-  <div class="control-panel">
-    <div class="control-group">
-      <span class="control-group__label">Показатели</span>
-      <div class="control-group__buttons" id="statButtons" role="group" aria-label="Тип статистики"></div>
-    </div>
-
-    <div class="control-group control-group--season">
-      <span class="control-group__label">Сезон</span>
-      <div class="control-group__buttons" id="seasonButtons" role="group" aria-label="Сезон"></div>
-    </div>
-
-    <div class="control-group">
-      <span class="control-group__label">Этап</span>
-      <div class="control-group__buttons" id="stageButtons" role="group" aria-label="Этап"></div>
-    </div>
-
-    <div class="control-group control-group--dates">
-      <span class="control-group__label">Дата</span>
-      <div class="control-group__buttons" id="dateButtons" role="group" aria-label="Дата боя"></div>
-    </div>
-
-    <div class="control-group control-group--display">
-      <span class="control-group__label">Отображение</span>
-      <div class="control-group__buttons">
-        <div class="avg-toggle">
-          <span class="avg-toggle__label">Среднее</span>
-          <div class="avg-toggle__track" id="avgToggleTrack" data-position="left">
-            <div class="avg-toggle__thumb" aria-hidden="true"></div>
-            <button type="button" class="avg-toggle__option active" id="avgToggleLeft" onclick="setAveragePosition('left')" aria-label="Среднее слева">◀</button>
-            <button type="button" class="avg-toggle__option" id="avgToggleRight" onclick="setAveragePosition('right')" aria-label="Среднее справа">▶</button>
-          </div>
-        </div>
-        <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn" onclick="showAllBattles()">Все бои</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="tableWrapper"><div id="table"></div></div>
-</section>
-
-<section id="equipmentPage" aria-label="Оборудование" style="display:none;">
-
-  <div class="equip-filters">
-    <div class="filter-group">
-      <label id="filterNationLabel">Нация</label>
-      <div class="custom-dropdown dropdown-nation" id="filterNationDropdown" role="listbox" aria-labelledby="filterNationLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all" role="option">
-            <span class="dropdown-text">Все</span>
-          </div>
-          <div class="dropdown-option" data-value="ussr" role="option">
-            <img src="flags/ussr.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">СССР</span>
-          </div>
-          <div class="dropdown-option" data-value="germany" role="option">
-            <img src="flags/germany.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Германия</span>
-          </div>
-          <div class="dropdown-option" data-value="usa" role="option">
-            <img src="flags/usa.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">США</span>
-          </div>
-          <div class="dropdown-option" data-value="china" role="option">
-            <img src="flags/china.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Китай</span>
-          </div>
-          <div class="dropdown-option" data-value="france" role="option">
-            <img src="flags/france.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Франция</span>
-          </div>
-          <div class="dropdown-option" data-value="uk" role="option">
-            <img src="flags/uk.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Великобритания</span>
-          </div>
-          <div class="dropdown-option" data-value="japan" role="option">
-            <img src="flags/japan.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Япония</span>
-          </div>
-          <div class="dropdown-option" data-value="czech" role="option">
-            <img src="flags/czech.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Чехословакия</span>
-          </div>
-          <div class="dropdown-option" data-value="sweden" role="option">
-            <img src="flags/sweden.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Швеция</span>
-          </div>
-          <div class="dropdown-option" data-value="poland" role="option">
-            <img src="flags/poland.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Польша</span>
-          </div>
-          <div class="dropdown-option" data-value="italy" role="option">
-            <img src="flags/italy.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Италия</span>
-          </div>
-          <div class="dropdown-option" data-value="intunion" role="option">
-            <img src="flags/intunion.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Сборная наций</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="filter-group">
-      <label id="filterClassLabel">Класс</label>
-      <div class="custom-dropdown dropdown-class" id="filterClassDropdown" role="listbox" aria-labelledby="filterClassLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all" role="option">
-            <span class="dropdown-text">Все</span>
-          </div>
-          <div class="dropdown-option" data-value="heavyTank" role="option">
-            <img src="classes/heavyTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Тяжёлые</span>
-          </div>
-          <div class="dropdown-option" data-value="mediumTank" role="option">
-            <img src="classes/mediumTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Средние</span>
-          </div>
-          <div class="dropdown-option" data-value="lightTank" role="option">
-            <img src="classes/lightTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Лёгкие</span>
-          </div>
-          <div class="dropdown-option" data-value="AT-SPG" role="option">
-            <img src="classes/AT-SPG.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">ПТ-САУ</span>
-          </div>
-          <div class="dropdown-option" data-value="SPG" role="option">
-            <img src="classes/SPG.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">САУ</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="filter-group">
-      <label id="filterRoleLabel">Роль</label>
-      <div class="custom-dropdown dropdown-role" id="filterRoleDropdown" role="listbox" aria-labelledby="filterRoleLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option active" data-value="all" role="option">
-            <span class="dropdown-text">Все</span>
-          </div>
-          <div class="dropdown-option" data-value="role_LT_universal" role="option">
-            <span class="dropdown-text">Лёгкие танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_LT_wheeled" role="option">
-            <span class="dropdown-text">Лёгкие танки колёсные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_assault" role="option">
-            <span class="dropdown-text">Средние танки штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_universal" role="option">
-            <span class="dropdown-text">Средние танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_sniper" role="option">
-            <span class="dropdown-text">Средние танки снайперские</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_support" role="option">
-            <span class="dropdown-text">Средние танки поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_assault" role="option">
-            <span class="dropdown-text">Тяжёлые танки штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_universal" role="option">
-            <span class="dropdown-text">Тяжёлые танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_break" role="option">
-            <span class="dropdown-text">Тяжёлые танки прорыва</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_support" role="option">
-            <span class="dropdown-text">Тяжёлые танки поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_assault" role="option">
-            <span class="dropdown-text">ПТ-САУ штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_universal" role="option">
-            <span class="dropdown-text">ПТ-САУ универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_sniper" role="option">
-            <span class="dropdown-text">ПТ-САУ снайперские</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_support" role="option">
-            <span class="dropdown-text">ПТ-САУ поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG_assault" role="option">
-            <span class="dropdown-text">САУ штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG" role="option">
-            <span class="dropdown-text">САУ поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG_flame" role="option">
-            <span class="dropdown-text">САУ огнемётные</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="filter-group">
-      <label id="filterLevelLabel">Уровень</label>
-      <div class="custom-dropdown dropdown-level" id="filterLevelDropdown" role="listbox" aria-labelledby="filterLevelLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option active" data-value="all" role="option">
-            <span class="dropdown-text">Все</span>
-          </div>
-          <div class="dropdown-option" data-value="8" role="option">
-            <span class="dropdown-text">VIII</span>
-          </div>
-          <div class="dropdown-option" data-value="9" role="option">
-            <span class="dropdown-text">IX</span>
-          </div>
-          <div class="dropdown-option" data-value="10" role="option">
-            <span class="dropdown-text">X</span>
-          </div>
-          <div class="dropdown-option" data-value="11" role="option">
-            <span class="dropdown-text">XI</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="backButtonContainer" class="back-button-bar" style="display:none;">
-    <button type="button" id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
-  </div>
-
-  <div class="equip-buttons" id="tankButtons"></div>
-
-  <div id="equipmentContent"></div>
-</section>
-
-<footer class="site-footer">
-  <div class="bottom-line" aria-hidden="true"></div>
-  <p class="footer-text">Created by McQueen</p>
-</footer>
-
-</div>
-
-<script>
 let DATA = null;
+let avgPosition = "right";
+let currentType = "damage";
+let currentDate = null;
 
 function escapeHtml(value){
   return String(value)
@@ -1557,898 +12,257 @@ function escapeHtml(value){
     .replace(/'/g, "&#39;");
 }
 
-function parseDate(str){
-  const [d,m,y] = str.split(".").map(Number);
-  const year = Number.isFinite(y) ? y : new Date().getFullYear();
-  return new Date(year, (m||1)-1, d||1);
-}
-
-function switchTab(tab, event){
-  document.querySelectorAll(".tab").forEach(b => {
-    b.classList.remove("active");
-    b.setAttribute("aria-pressed", "false");
-  });
-  event.target.classList.add("active");
-  event.target.setAttribute("aria-pressed", "true");
-  if(tab === "stats"){
-    document.getElementById("statsPage").style.display = "block";
-    document.getElementById("equipmentPage").style.display = "none";
-  } else {
-    document.getElementById("statsPage").style.display = "none";
-    document.getElementById("equipmentPage").style.display = "block";
-  }
-}
-
-const STAT_TYPES = [
-  { key: "damage", label: "Урон", icon: "stat/damage.png" },
-  { key: "damage_received", label: "Получено", icon: "stat/damage_received.png" },
-  { key: "hits", label: "Попадания", icon: "stat/hits.png" },
-  { key: "assist", label: "Ассист", icon: "stat/assist.png" },
-  { key: "survival", label: "Выживаемость", icon: "stat/survival.png" }
-];
-
-const SEASONS = [
-  {
-    key: "storm_birth",
-    label: "Рождение бури",
-    stages: [
-      { key: "global_map", label: "Глобальная карта", icon: "stat/stage3.png", start: [3, 23], end: [4, 5] },
-      { key: "thunder", label: "И грянул гром", icon: "stat/stage4.png", start: [4, 20], end: [4, 26] },
-      { key: "rain_wall", label: "Стена дождя", icon: "stat/stage5.png", start: [5, 12], end: [5, 18] },
-      { key: "eternal_storm", label: "Вечная гроза", icon: "stat/stage6.png", start: [6, 1], end: [6, 7] }
-    ]
-  },
-  {
-    key: "new_season",
-    label: "Новый сезон",
-    stages: [
-      { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png", start: null, end: null }
-    ]
-  }
-];
-
-const STAGE_DATE_BUFFER_DAYS = 1;
-
-let avgPosition = "left";
-let currentType = "damage";
-let currentDate = null;
-let visibleBattles = [];
-
-const DATA_FILES = [
-  "data/battle_data.json", "data/2.json", "data/3.json", "data/4.json",
-  "data/5.json", "data/6.json", "data/7.json", "data/8.json",
-  "data/9.json", "data/10.json", "data/11.json", "data/12.json",
-  "data/13.json", "data/14.json", "data/15.json", "data/16.json", "data/17.json",
-  "data/18.json", "data/19.json", "data/20.json", "data/21.json"
-];
-
-let currentSeason = SEASONS[0].key;
-let currentStage = SEASONS[0].stages[0].key;
-const HTML_REPLAYS_DIR = "replays_html";
-
-function getSeason(key){
-  return SEASONS.find(s => s.key === key) || SEASONS[0];
-}
-
-function getStage(seasonKey, stageKey){
-  const season = getSeason(seasonKey);
-  return season.stages.find(s => s.key === stageKey) || season.stages[0];
-}
-
-function normalizeReplayFilename(rawName){
-  if(!rawName) return null;
-  const name = String(rawName).trim();
-  if(!name) return null;
-  return name.toLowerCase().endsWith(".html") ? name : `${name}.html`;
-}
-
-function openBattleHtml(battle){
-  const fileFromFilename = normalizeReplayFilename(battle.filename);
-  const fileFromHtmlFile = normalizeReplayFilename(battle.html_file);
-  const replayFile = fileFromFilename || fileFromHtmlFile;
-  if(!replayFile){
-    alert("У этого боя нет поля filename/html_file в JSON.");
-    return;
-  }
-  window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
-}
-
-function addDays(date, days){
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
-function battleMatchesStage(battle){
-  const stage = getStage(currentSeason, currentStage);
-  if(!stage) return false;
-
-  if(!stage.start || !stage.end){
-    return (battle.stage || battle.campaign) === currentStage;
-  }
-
-  const battleDate = parseDate(battle.date);
-  const year = battleDate.getFullYear();
-
-  const [sm, sd] = stage.start;
-  const [em, ed] = stage.end;
-  const rangeStart = addDays(new Date(year, sm - 1, sd), -STAGE_DATE_BUFFER_DAYS);
-  const rangeEnd = addDays(new Date(year, em - 1, ed), STAGE_DATE_BUFFER_DAYS);
-
-  return battleDate >= rangeStart && battleDate <= rangeEnd;
-}
-
-function renderStatButtons(){
-  const wrap = document.getElementById("statButtons");
-  wrap.innerHTML = "";
-  STAT_TYPES.forEach(stat => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "stat-btn btn-runborder" + (stat.key === currentType ? " active" : "");
-    btn.innerHTML = `<img class="stat-btn__icon" src="${stat.icon}" alt=""><span>${escapeHtml(stat.label)}</span>`;
-    btn.onclick = (event) => loadTable(stat.key, event);
-    wrap.appendChild(btn);
-  });
-}
-
-function renderSeasonButtons(){
-  const wrap = document.getElementById("seasonButtons");
-  wrap.innerHTML = "";
-  SEASONS.forEach(season => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "season-btn btn-runborder" + (season.key === currentSeason ? " active" : "");
-    btn.textContent = season.label;
-    btn.onclick = () => switchSeason(season.key);
-    wrap.appendChild(btn);
-  });
-}
-
-function switchSeason(seasonKey){
-  currentSeason = seasonKey;
-  const season = getSeason(seasonKey);
-  currentStage = season.stages[0].key;
-  renderSeasonButtons();
-  renderStageButtons();
-  initDates();
-  loadTable(currentType);
-}
-
-function renderStageButtons(){
-  const wrap = document.getElementById("stageButtons");
-  wrap.innerHTML = "";
-  const season = getSeason(currentSeason);
-  season.stages.forEach(stage => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "stage-btn btn-runborder" + (stage.key === currentStage ? " active" : "");
-    btn.innerHTML = `<img class="stage-btn__icon" src="${stage.icon}" alt=""><span>${escapeHtml(stage.label)}</span>`;
-    btn.onclick = () => switchStage(stage.key);
-    wrap.appendChild(btn);
-  });
-}
-
-function switchStage(stageKey){
-  currentStage = stageKey;
-  renderStageButtons();
-  initDates();
-  loadTable(currentType);
-}
-
-Promise.all(DATA_FILES.map(async file => {
-  const response = await fetch(file);
-  if(!response.ok) throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
-  return response.json();
-}))
-.then(allData => {
-  DATA = { battles: allData.flatMap(d => d.battles || []) };
-  renderStatButtons();
-  renderSeasonButtons();
-  renderStageButtons();
+fetch("battle_data.json")
+.then(r=>{
+  if(!r.ok) throw new Error(`Не удалось загрузить battle_data.json: ${r.status}`);
+  return r.json();
+})
+.then(data=>{
+  DATA=data;
   initDates();
   loadTable(currentType);
 })
-.catch(error => {
-  document.getElementById("table").innerHTML = `<p class="error-state">Ошибка загрузки данных: ${escapeHtml(error.message)}</p>`;
+.catch(error=>{
+  document.getElementById("table").textContent = `Ошибка загрузки данных: ${error.message}`;
 });
 
-function openBattleHtmlByIndex(index){
-  const battle = visibleBattles[index];
-  if(!battle) return;
-  openBattleHtml(battle);
-}
-
-function setAveragePosition(position){
-  avgPosition = position;
-  const track = document.getElementById("avgToggleTrack");
-  track.dataset.position = position;
-  document.getElementById("avgToggleLeft").classList.toggle("active", position === "left");
-  document.getElementById("avgToggleRight").classList.toggle("active", position === "right");
+function toggleAverage(){
+  avgPosition = avgPosition==="right" ? "left" : "right";
   loadTable(currentType);
 }
 
-function showAllBattles(){
-  currentDate = null;
-  document.querySelectorAll("#dateButtons .date-btn").forEach(b => b.classList.remove("active"));
-  document.getElementById("allBattlesBtn").classList.add("active");
-  loadTable(currentType);
+function parseDate(str){
+  const [d,m,y] = str.split(".").map(Number);
+  const year = Number.isFinite(y) ? y : new Date().getFullYear();
+  return new Date(year,(m||1)-1,d||1);
 }
 
 function initDates(){
-  const box = document.getElementById("dateButtons");
-  box.innerHTML = "";
-  let dates = [...new Set(DATA.battles
-    .filter(battleMatchesStage)
-    .map(b => b.date))];
-  dates.sort((a,b) => parseDate(a) - parseDate(b));
+  const box=document.getElementById("dateButtons");
+  box.innerHTML="";
 
-  const allBattlesBtn = document.getElementById("allBattlesBtn");
+  let dates=[...new Set(DATA.battles.map(b=>b.date))];
+  dates.sort((a,b)=>parseDate(a)-parseDate(b));
 
-  if(!dates.length){
-    box.innerHTML = "<p class=\"empty-state\">Для этого этапа пока нет данных.</p>";
-    currentDate = null;
-    if(allBattlesBtn) allBattlesBtn.classList.remove("active");
-    return;
-  }
+  dates.forEach((date,index)=>{
+    let btn=document.createElement("button");
+    btn.innerText=date;
 
-  dates.forEach((date, index) => {
-    let btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "date-btn btn-runborder";
-    btn.innerText = date;
-    btn.onclick = () => {
-      currentDate = date;
-      document.querySelectorAll("#dateButtons .date-btn").forEach(b => b.classList.remove("active"));
+    btn.onclick=()=>{
+      currentDate=date;
+      document.querySelectorAll(".date-buttons button")
+        .forEach(b=>b.classList.remove("active"));
       btn.classList.add("active");
-      if(allBattlesBtn) allBattlesBtn.classList.remove("active");
       loadTable(currentType);
     };
+
     box.appendChild(btn);
-    if(index === 0){ btn.classList.add("active"); currentDate = date; }
+
+    if(index===0){
+      btn.classList.add("active");
+      currentDate=date;
+    }
   });
 
-  if(allBattlesBtn) allBattlesBtn.classList.remove("active");
+  let allBtn=document.createElement("button");
+  allBtn.innerText="ВСЕ БОИ";
+
+  allBtn.onclick=()=>{
+    currentDate=null;
+    document.querySelectorAll(".date-buttons button")
+      .forEach(b=>b.classList.remove("active"));
+    allBtn.classList.add("active");
+    loadTable(currentType);
+  };
+
+  box.appendChild(allBtn);
 }
 
-function getPenRate(name, battles){
-  let hits = 0, pen = 0;
-  battles.forEach(b => {
-    let p = b.players[name];
+function getPenRate(name,battles){
+  let hits=0,pen=0;
+
+  battles.forEach(b=>{
+    let p=b.players[name];
     if(!p) return;
-    hits += p.hits;
-    pen += p.piercings;
+    hits+=p.hits;
+    pen+=p.piercings;
   });
-  return hits ? pen / hits : 0;
+
+  return hits ? pen/hits : 0;
 }
 
-function loadTable(type, event){
-  currentType = type;
-  renderStatButtons();
-  let battles = DATA.battles.filter(
-    b => battleMatchesStage(b) && (!currentDate || b.date === currentDate)
+function loadTable(type,event){
+
+  currentType=type;
+
+  if(event){
+    document.querySelectorAll(".mode")
+      .forEach(b=>b.classList.remove("active"));
+    event.target.classList.add("active");
+  }
+
+  let battles=DATA.battles.filter(
+    b=>!currentDate || b.date===currentDate
   );
-  if(!battles.length){
-    document.getElementById("table").innerHTML = "<p class=\"empty-state\">Нет боёв</p>";
-    visibleBattles = [];
+
+  if(battles.length===0){
+    document.getElementById("table").innerHTML="<p>Нет боёв</p>";
     return;
   }
-  visibleBattles = battles;
-  let players = {};
-  battles.forEach((battle, idx) => {
+
+  let players={};
+
+  battles.forEach((battle,idx)=>{
     for(let name in battle.players){
-      let p = battle.players[name];
-      if(!players[name]) players[name] = {};
-      let value = 0;
-      if(type === "damage") value = p.damage;
-      if(type === "damage_received") value = p.damage_received;
-      if(type === "hits") value = `${p.shots}/${p.hits}/${p.piercings}`;
-      if(type === "assist") value = p.assist_track + p.assist_radio;
-      if(type === "survival") value = 0;
-      players[name][idx] = {
-        tank: p.tank,
-        value: value,
-        assist_track: p.assist_track,
-        assist_radio: p.assist_radio,
-        alive: p.alive
+
+      let p=battle.players[name];
+
+      if(!players[name]) players[name]={};
+
+      let value=0;
+
+      if(type==="damage") value=p.damage;
+      if(type==="damage_received") value=p.damage_received;
+      if(type==="hits") value=`${p.shots}/${p.hits}/${p.piercings}`;
+      if(type==="assist") value=p.assist_track+p.assist_radio;
+
+      players[name][idx]={
+        tank:p.tank,
+        value:value,
+        assist_track:p.assist_track,
+        assist_radio:p.assist_radio,
+        alive:p.alive
       };
     }
   });
-  let averages = {};
+
+  let averages={};
+
   for(let name in players){
-    let sum = 0, count = 0;
-    battles.forEach((b, i) => {
-      let cell = players[name][i];
+    let sum=0,count=0;
+
+    battles.forEach((b,i)=>{
+      let cell=players[name][i];
       if(!cell) return;
-      if(typeof cell.value === "number"){ sum += cell.value; count++; }
+
+      if(typeof cell.value==="number"){
+        sum+=cell.value;
+        count++;
+      }
     });
-    averages[name] = count ? Math.round(sum / count) : 0;
+
+    averages[name]=count ? Math.round(sum/count) : 0;
   }
-  let survivalRates = {};
-  if(type === "survival"){
-    for(let name in players){
-      let deaths = 0, total = 0;
-      battles.forEach((b, i) => {
-        let cell = players[name][i];
-        if(!cell) return;
-        total++;
-        if(!cell.alive) deaths++;
-      });
-      survivalRates[name] = total ? Math.round(((total - deaths) / total) * 100) : 0;
-    }
-  }
-  let sorted = Object.keys(players);
-  if(type === "hits")
-    sorted.sort((a,b) => getPenRate(b, battles) - getPenRate(a, battles));
-  else if(type === "survival")
-    sorted.sort((a,b) => survivalRates[b] - survivalRates[a]);
+
+  let sorted=Object.keys(players);
+
+  if(type==="hits")
+    sorted.sort((a,b)=>getPenRate(b,battles)-getPenRate(a,battles));
   else
-    sorted.sort((a,b) => averages[b] - averages[a]);
+    sorted.sort((a,b)=>averages[b]-averages[a]);
 
-  let eloSum = 0, eloCount = 0;
-  let winCount = 0;
-  battles.forEach(b => {
-    if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
-      eloSum += Number(b.elo);
-      eloCount++;
-    }
-    if(b.win) winCount++;
+  let html="<table>";
+
+  html+="<tr><th>Ник</th>";
+
+  if(type==="hits" && avgPosition==="left")
+    html+="<th>%</th>";
+
+  if(type!=="hits" && avgPosition==="left")
+    html+="<th>Ср</th>";
+
+  battles.forEach(b=>{
+    html+=`<th class="${b.win ? "win":"lose"}">${escapeHtml(b.map)}</th>`;
   });
-  let avgElo = eloCount ? Math.round(eloSum / eloCount) : "-";
-  let winRate = battles.length ? Math.round((winCount / battles.length) * 100) : 0;
 
-  let avgEloHtml = `
-    <div class="elo-summary">Elo: ${avgElo}</div>
-    <div class="elo-summary__winrate">Побед: ${winRate}%</div>
-  `;
+  if(type==="hits" && avgPosition==="right")
+    html+="<th>%</th>";
 
-  let html = "<table>";
-  html += "<tr><th></th>";
-  if(type === "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
-  if(type !== "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
-  battles.forEach(b => {
-    let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
-    let clanCell = "";
-    if(clanTag) clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank" rel="noopener">${escapeHtml(clanTag.toUpperCase())}</a>`;
-    if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
-    html += `<th class="clan-header">${clanCell}</th>`;
-  });
-  if(type === "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
-  if(type !== "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
-  html += "</tr>";
+  if(type!=="hits" && avgPosition==="right")
+    html+="<th>Ср</th>";
 
-  html += "<tr><th>Ник</th>";
-  if(type === "hits" && avgPosition === "left") html += "<th>%</th>";
-  if(type !== "hits" && avgPosition === "left") html += "<th>Среднее</th>";
-  battles.forEach((b, battleIndex) => {
-    html += `<th class="${b.win ? 'win' : 'lose'}"><a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a></th>`;
-  });
-  if(type === "hits" && avgPosition === "right") html += "<th>%</th>";
-  if(type !== "hits" && avgPosition === "right") html += "<th>Среднее</th>";
-  html += "</tr>";
+  html+="</tr>";
 
-  sorted.forEach(name => {
-    html += "<tr>";
-    html += `<td>${escapeHtml(name)}</td>`;
-    if(type === "hits" && avgPosition === "left") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "left"){
-      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
-      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
-    }
-    battles.forEach((b, i) => {
-      let cell = players[name][i];
-      if(!cell){ html += "<td></td>"; return; }
-      let tankClass = cell.alive ? "alive" : "dead";
-      let displayValue = cell.value;
-      if(type === "assist"){
-        displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png" alt="Засвет с гусеницы"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png" alt="Засвет по рации"> ${cell.assist_radio}</small>`;
+  sorted.forEach(name=>{
+    html+="<tr>";
+    html+=`<td>${escapeHtml(name)}</td>`;
+
+    if(type==="hits" && avgPosition==="left")
+      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
+
+    if(type!=="hits" && avgPosition==="left")
+      html+=`<td>${averages[name]}</td>`;
+
+    battles.forEach((b,i)=>{
+      let cell=players[name][i];
+
+      if(!cell){
+        html+="<td></td>";
+        return;
       }
-      if(type === "survival"){
-        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span></td>`;
-      } else {
-        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>${displayValue}</td>`;
-      }
+
+      let tankClass = cell.alive ? "alive":"dead";
+
+      html+=`<td>
+        <span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>
+        <span>${cell.value}</span>
+      </td>`;
     });
-    if(type === "hits" && avgPosition === "right") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "right"){
-      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
-      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
-    }
-    html += "</tr>";
+
+    if(type==="hits" && avgPosition==="right")
+      html+=`<td>${Math.round(getPenRate(name,battles)*100)}%</td>`;
+
+    if(type!=="hits" && avgPosition==="right")
+      html+=`<td>${averages[name]}</td>`;
+
+    html+="</tr>";
   });
-  html += "</table>";
-  document.getElementById("table").innerHTML = html;
+
+  html+="</table>";
+
+  document.getElementById("table").innerHTML=html;
+
   enableHover();
 }
 
+/* 🔥 HOVER ЛОГИКА */
 function enableHover(){
-  const table = document.querySelector("table");
+  const table=document.querySelector("table");
   if(!table) return;
-  const cells = table.querySelectorAll("td, th");
-  cells.forEach(cell => {
-    cell.addEventListener("mouseenter", () => {
-      const row = cell.parentElement;
-      const index = cell.cellIndex;
+
+  const cells=table.querySelectorAll("td");
+
+  cells.forEach(cell=>{
+
+    cell.addEventListener("mouseenter",()=>{
+      const row=cell.parentElement;
+      const index=cell.cellIndex;
+
       row.classList.add("hover-row");
-      table.querySelectorAll("tr").forEach(tr => {
-        if(tr.children[index]) tr.children[index].classList.add("hover-col");
+
+      table.querySelectorAll("tr").forEach(tr=>{
+        if(tr.children[index]){
+          tr.children[index].classList.add("hover-col");
+        }
       });
+
       cell.classList.add("hover-cell");
     });
-    cell.addEventListener("mouseleave", () => {
-      const row = cell.parentElement;
-      const index = cell.cellIndex;
+
+    cell.addEventListener("mouseleave",()=>{
+      const row=cell.parentElement;
+      const index=cell.cellIndex;
+
       row.classList.remove("hover-row");
-      table.querySelectorAll("tr").forEach(tr => {
-        if(tr.children[index]) tr.children[index].classList.remove("hover-col");
+
+      table.querySelectorAll("tr").forEach(tr=>{
+        if(tr.children[index]){
+          tr.children[index].classList.remove("hover-col");
+        }
       });
+
       cell.classList.remove("hover-cell");
     });
+
   });
 }
-</script>
-
-<script>
-let EQUIPMENT_DB = null;
-let currentTankId = null;
-let currentSortColumn = null;
-let currentSortDirection = 'asc';
-
-async function loadEquipmentDB() {
-  try {
-    const response = await fetch('equipment.json');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    EQUIPMENT_DB = await response.json();
-    renderFilters();
-    applyFilters();
-  } catch (err) {
-    console.error('Ошибка загрузки equipment.json:', err);
-    document.getElementById('equipmentContent').innerHTML =
-      '<p class="error-state">Не удалось загрузить данные оборудования</p>';
-  }
-}
-
-function renderFilters() {
-
-  initCustomDropdown('filterNationDropdown', applyFilters);
-  initCustomDropdown('filterClassDropdown', applyFilters);
-  initCustomDropdown('filterRoleDropdown', applyFilters);
-  initCustomDropdown('filterLevelDropdown', applyFilters);
-
-  document.querySelectorAll('.dropdown-option[data-value="all"]').forEach(opt => {
-    opt.classList.add('active');
-  });
-}
-
-function initCustomDropdown(dropdownId, onChangeCallback) {
-  const dropdown = document.getElementById(dropdownId);
-  if (!dropdown) return;
-
-  const selected = dropdown.querySelector('.dropdown-selected');
-  const options = dropdown.querySelectorAll('.dropdown-option');
-
-  const toggleDropdown = (e) => {
-    e.stopPropagation();
-    document.querySelectorAll('.custom-dropdown.open').forEach(d => {
-      if (d !== dropdown) d.classList.remove('open');
-    });
-    dropdown.classList.toggle('open');
-  };
-
-  selected.addEventListener('click', toggleDropdown);
-  selected.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleDropdown(e);
-    } else if (e.key === 'Escape') {
-      dropdown.classList.remove('open');
-    }
-  });
-
-  options.forEach(option => {
-    option.addEventListener('click', () => {
-      const value = option.dataset.value;
-      const text = option.querySelector('.dropdown-text').textContent;
-      const icon = option.querySelector('.dropdown-icon');
-
-      const selectedText = selected.querySelector('.dropdown-text');
-      selectedText.textContent = text;
-
-      const existingIcon = selected.querySelector('.dropdown-icon');
-      if (existingIcon) existingIcon.remove();
-      if (icon) {
-        const newIcon = icon.cloneNode(true);
-        selected.insertBefore(newIcon, selectedText);
-      }
-
-      options.forEach(opt => opt.classList.remove('active'));
-      option.classList.add('active');
-
-      dropdown.classList.remove('open');
-
-      if (onChangeCallback) onChangeCallback();
-    });
-  });
-}
-
-function getDropdownValue(dropdownId) {
-  const dropdown = document.getElementById(dropdownId);
-  if (!dropdown) return 'all';
-  const activeOption = dropdown.querySelector('.dropdown-option.active');
-  return activeOption ? activeOption.dataset.value : 'all';
-}
-
-function sortTanks(list, column, direction) {
-  if (!column) return list;
-
-  const nationNames = {
-    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
-    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
-    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
-    'italy': 'Италия', 'intunion': 'Сборная наций'
-  };
-  const classNames = {
-    'heavyTank': 'Тяжёлый танк', 'mediumTank': 'Средний танк', 'lightTank': 'Лёгкий танк',
-    'AT-SPG': 'ПТ-САУ', 'SPG': 'САУ'
-  };
-  const roleNames = {
-    'role_LT_universal': 'Лёгкие танки универсальные', 'role_LT_wheeled': 'Лёгкие танки колёсные',
-    'role_MT_assault': 'Средние танки штурмовые', 'role_MT_universal': 'Средние танки универсальные',
-    'role_MT_sniper': 'Средние танки снайперские', 'role_MT_support': 'Средние танки поддержки',
-    'role_HT_assault': 'Тяжёлые танки штурмовые', 'role_HT_universal': 'Тяжёлые танки универсальные',
-    'role_HT_break': 'Тяжёлые танки прорыва', 'role_HT_support': 'Тяжёлые танки поддержки',
-    'role_ATSPG_assault': 'ПТ-САУ штурмовые', 'role_ATSPG_universal': 'ПТ-САУ универсальные',
-    'role_ATSPG_sniper': 'ПТ-САУ снайперские', 'role_ATSPG_support': 'ПТ-САУ поддержки',
-    'role_SPG_assault': 'САУ штурмовые', 'role_SPG': 'САУ поддержки', 'role_SPG_flame': 'САУ огнемётные'
-  };
-
-  return [...list].sort((a, b) => {
-    let valA, valB;
-    const getRaw = (obj, key) => String(obj[key] || obj[key + " "] || "").trim();
-
-    if (column === 'name') {
-      valA = getRaw(a, 'name').toLowerCase();
-      valB = getRaw(b, 'name').toLowerCase();
-    } else if (column === 'nation') {
-      const rawA = getRaw(a, 'nation');
-      const rawB = getRaw(b, 'nation');
-      valA = (nationNames[rawA] || rawA).toLowerCase();
-      valB = (nationNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'class') {
-      const rawA = getRaw(a, 'class');
-      const rawB = getRaw(b, 'class');
-      valA = (classNames[rawA] || rawA).toLowerCase();
-      valB = (classNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'role') {
-      const rawA = getRaw(a, 'role');
-      const rawB = getRaw(b, 'role');
-      valA = (roleNames[rawA] || rawA).toLowerCase();
-      valB = (roleNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'level') {
-      valA = parseInt(getRaw(a, 'level') || "0", 10);
-      valB = parseInt(getRaw(b, 'level') || "0", 10);
-      if (valA < valB) return direction === 'asc' ? -1 : 1;
-      if (valA > valB) return direction === 'asc' ? 1 : -1;
-      return 0;
-    }
-
-    if (typeof valA === 'string' && typeof valB === 'string') {
-      return direction === 'asc' ? valA.localeCompare(valB, 'ru') : valB.localeCompare(valA, 'ru');
-    }
-    return 0;
-  });
-}
-
-function updateSortArrows() {
-  ['name', 'nation', 'class', 'role', 'level'].forEach(col => {
-    const arrow = document.getElementById(`sort-${col}`);
-    if (arrow) {
-      if (currentSortColumn === col) {
-        arrow.textContent = currentSortDirection === 'asc' ? ' ↑' : ' ↓';
-      } else {
-        arrow.textContent = '';
-      }
-    }
-  });
-}
-
-function applyFilters() {
-  if (!EQUIPMENT_DB) return;
-
-  const nation = getDropdownValue('filterNationDropdown');
-  const cls = getDropdownValue('filterClassDropdown');
-  const role = getDropdownValue('filterRoleDropdown');
-  const level = getDropdownValue('filterLevelDropdown');
-
-  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
-  const filtered = tanksList.filter(tank => {
-    const tankNation = String(tank.nation || tank["nation "] || "").trim();
-    const tankClass = String(tank.class || tank["class "] || "").trim();
-    const tankRole = String(tank.role || tank["role "] || "").trim();
-    const tankLevel = String(tank.level || tank["level "] || "").trim();
-
-    if (nation !== 'all' && tankNation !== nation) return false;
-    if (cls !== 'all' && tankClass !== cls) return false;
-    if (role !== 'all' && tankRole !== role) return false;
-    if (level !== 'all' && tankLevel !== level) return false;
-    return true;
-  });
-
-  renderTankTable(filtered);
-}
-
-function renderTankTable(tanks = null) {
-  const container = document.getElementById('tankButtons');
-  container.innerHTML = '';
-  const tanksList = EQUIPMENT_DB?.tanks || EQUIPMENT_DB?.["tanks "] || [];
-  let list = tanks || tanksList;
-
-  if (currentSortColumn) {
-    list = sortTanks(list, currentSortColumn, currentSortDirection);
-  }
-
-  if (list.length === 0) {
-    container.innerHTML = '<p class="empty-state">Танки не найдены</p>';
-    return;
-  }
-
-  const nationNames = {
-    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
-    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
-    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
-    'italy': 'Италия', 'intunion': 'Сборная наций'
-  };
-
-  const classNames = {
-    'heavyTank': 'Тяжёлый танк',
-    'mediumTank': 'Средний танк',
-    'lightTank': 'Лёгкий танк',
-    'AT-SPG': 'ПТ-САУ',
-    'SPG': 'САУ'
-  };
-
-  const roleNames = {
-    'role_LT_universal': 'Лёгкие танки универсальные',
-    'role_LT_wheeled': 'Лёгкие танки колёсные',
-    'role_MT_assault': 'Средние танки штурмовые',
-    'role_MT_universal': 'Средние танки универсальные',
-    'role_MT_sniper': 'Средние танки снайперские',
-    'role_MT_support': 'Средние танки поддержки',
-    'role_HT_assault': 'Тяжёлые танки штурмовые',
-    'role_HT_universal': 'Тяжёлые танки универсальные',
-    'role_HT_break': 'Тяжёлые танки прорыва',
-    'role_HT_support': 'Тяжёлые танки поддержки',
-    'role_ATSPG_assault': 'ПТ-САУ штурмовые',
-    'role_ATSPG_universal': 'ПТ-САУ универсальные',
-    'role_ATSPG_sniper': 'ПТ-САУ снайперские',
-    'role_ATSPG_support': 'ПТ-САУ поддержки',
-    'role_SPG_assault': 'САУ штурмовые',
-    'role_SPG': 'САУ поддержки',
-    'role_SPG_flame': 'САУ огнемётные'
-  };
-
-  let html = `<table class="tank-table">
-    <thead>
-      <tr>
-        <th class="sortable" data-sort="name">Название <span id="sort-name"></span></th>
-        <th class="sortable" data-sort="nation">Нация <span id="sort-nation"></span></th>
-        <th class="sortable" data-sort="class">Класс <span id="sort-class"></span></th>
-        <th class="sortable" data-sort="role">Роль <span id="sort-role"></span></th>
-        <th class="sortable" data-sort="level">Уровень <span id="sort-level"></span></th>
-      </tr>
-    </thead>
-    <tbody>`;
-
-  const romanLevels = {
-    8: 'VIII',
-    9: 'IX',
-    10: 'X',
-    11: 'XI'
-  };
-  list.forEach(tank => {
-    const id = String(tank.id || tank["id "] || "").trim();
-    const rawNation = String(tank.nation || tank["nation "] || "").trim();
-    const rawClass = String(tank.class || tank["class "] || "").trim();
-
-    const isActive = id === currentTankId ? 'active' : '';
-    const nation = nationNames[rawNation] || rawNation;
-    const cls = classNames[rawClass] || rawClass;
-    const name = String(tank.name || tank["name "] || "").trim();
-    const rawRole = String(tank.role || tank["role "] || "").trim();
-    const role = roleNames[rawRole] || rawRole;
-
-    const tankIcon = `icons/${rawNation}-${id}.png`;
-    const nationIcon = `flags/${rawNation}.png`;
-    const classIcon = `classes/${rawClass}.png`;
-    const level = tank.level || tank["level "];
-    const romanLevel = romanLevels[level] || level;
-
-    html += `<tr class="${isActive}" data-id="${id}">
-      <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${escapeHtml(name)}</span></div></td>
-      <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${escapeHtml(nation)}</span></div></td>
-      <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${escapeHtml(cls)}</span></div></td>
-      <td><div class="cell-content"><span>${escapeHtml(role)}</span></div></td>
-      <td>${escapeHtml(String(romanLevel))}</td>
-    </tr>`;
-  });
-  html += `</tbody></table>`;
-  container.innerHTML = html;
-
-  container.querySelectorAll('th.sortable').forEach(th => {
-    th.addEventListener('click', () => {
-      const col = th.dataset.sort;
-      if (currentSortColumn === col) {
-        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-      } else {
-        currentSortColumn = col;
-        currentSortDirection = 'asc';
-      }
-      applyFilters();
-    });
-  });
-
-  updateSortArrows();
-
-  container.querySelectorAll('tr[data-id]').forEach(row => {
-    row.addEventListener('click', () => {
-      openTank(row.dataset.id);
-    });
-  });
-}
-
-function openTank(tankId) {
-  currentTankId = tankId;
-  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
-  const tank = tanksList.find(t => String(t.id || t["id "] || "").trim() === tankId);
-  if (!tank) return;
-
-  document.querySelector('.equip-filters').style.display = 'none';
-  document.getElementById('tankButtons').style.display = 'none';
-
-  document.getElementById('backButtonContainer').style.display = 'block';
-
-  let name = String(tank.name || tank["name "] || "").trim();
-  let html = `<div class="tank-name">${escapeHtml(name)}</div>`;
-
-  let images = tank.images || tank["images "];
-  let mods = tank.mods || tank["mods "];
-
-  if (images && images[0]) {
-    let imgSrc = String(images[0]).trim();
-    html += `<div class="tank-main-image">
-      <img src="images/${imgSrc}" alt="${escapeHtml(name)}">
-      ${mods?.length > 0 ? renderFieldMods(mods) : ''}
-    </div>`;
-  }
-
-  let builds = tank.equipmentBuilds || tank["equipmentBuilds "];
-  if (builds && builds.length) {
-    html += renderEquipmentBuilds(builds);
-  }
-
-  document.getElementById('equipmentContent').innerHTML = html;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function backToTable() {
-  document.getElementById('equipmentContent').innerHTML = '';
-  document.getElementById('backButtonContainer').style.display = 'none';
-
-  document.querySelector('.equip-filters').style.display = 'flex';
-  document.getElementById('tankButtons').style.display = 'block';
-
-  currentTankId = null;
-  applyFilters();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function renderEquipmentBuilds(builds) {
-  const titles = { main: 'Основной', alternative: 'Альтернативный', situational: 'Ситуативный' };
-  const count = builds.length;
-  let html = `<div class="equipment-builds" data-count="${count}">`;
-  builds.forEach(build => {
-    let type = build.type || build["type "];
-    let items = build.items || build["items "] || [];
-
-    const slotsHtml = items.map(item => {
-      const rawItem = String(item).trim();
-      const cleanName = rawItem.replace(/\.[^/.]+$/, "");
-      return `
-      <div class="slot">
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-        <div class="slot-bottom-line"></div>
-        <div class="slot-icon item-${cleanName}">
-          <img src="equipment/${rawItem}" alt="">
-        </div>
-      </div>
-    `}).join('');
-
-    html += `
-      <div class="equip-build">
-        <div class="build-label">${escapeHtml(titles[type] || type)}</div>
-        <div class="equip-items">
-          ${slotsHtml}
-        </div>
-      </div>`;
-  });
-  html += `</div>`;
-  return html;
-}
-
-function renderFieldMods(mods) {
-  return `
-    <div class="mods-wrapper">
-      ${mods.map(mod => renderModBlock(mod)).join('')}
-    </div>
-  `;
-}
-
-function renderModBlock(mod) {
-  let left = String(mod.left || mod["left "] || "").trim();
-  let right = String(mod.right || mod["right "] || "").trim();
-  let level = String(mod.level || mod["level "] || "").trim();
-  let activeSide = String(mod.activeSide || mod["activeSide "] || "").trim();
-
-  const isNone = activeSide === 'none';
-  const isLeftActive = activeSide === 'left';
-  const isRightActive = activeSide === 'right';
-
-  let html = `
-    <div class="mod-block">
-      <img src="Modernization/${left}" class="mod-base left" alt="">
-      <img src="Modernization/${right}" class="mod-base right" alt="">
-  `;
-
-  if (isLeftActive) {
-    html += `
-      <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
-      <img src="Modernization/active.png" class="mod-overlay active left" alt="">
-      <img src="Modernization/checkmark.png" class="mod-icon checkmark left" alt="">
-      <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
-    `;
-  } else if (isRightActive) {
-    html += `
-      <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
-      <img src="Modernization/active.png" class="mod-overlay active right" alt="">
-      <img src="Modernization/checkmark.png" class="mod-icon checkmark right" alt="">
-      <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
-    `;
-  } else if (isNone) {
-    html += `
-      <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
-      <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
-      <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
-      <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
-    `;
-  }
-
-  html += `
-      <img src="Modernization/${level}" class="mod-level" alt="">
-    </div>
-  `;
-  return html;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const equipmentPage = document.getElementById('equipmentPage');
-  if (equipmentPage?.style.display !== 'none') loadEquipmentDB();
-  const originalSwitchTab = window.switchTab;
-  window.switchTab = function(tab, event) {
-    if (originalSwitchTab) originalSwitchTab(tab, event);
-    if (tab === 'equipment' && !EQUIPMENT_DB) loadEquipmentDB();
-  };
-});
-
-document.addEventListener('click', () => {
-  document.querySelectorAll('.custom-dropdown.open').forEach(d => {
-    d.classList.remove('open');
-  });
-});
-
-</script>
-
-</body>
-</html>
