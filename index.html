@@ -34,6 +34,9 @@
   --color-link: #57a9c2;
   --color-link-hover: #9be8ff;
 
+  --color-btn-border: #979695;
+  --color-btn-hover: #dd6395;
+
   --color-text: #f5f5f5;
   --color-text-muted: #a6a6a6;
   --color-text-faint: #808080;
@@ -122,7 +125,9 @@ body {
 }
 
 .main-tabs .tab {
-  min-width: 160px;
+  min-width: 110px;
+  padding: 6px 14px;
+  font-size: 13px;
 }
 
 .equip-buttons {
@@ -145,20 +150,6 @@ button {
     background-color var(--transition-fast), scale var(--transition-fast);
 }
 
-button::after {
-  content: "";
-  position: absolute;
-  inset: 50%;
-  width: max(100%, 40px);
-  height: max(100%, 40px);
-  transform: translate(-50%, -50%);
-}
-
-button:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
-}
-
 button:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -172,9 +163,69 @@ button.active {
   background: var(--color-blue);
 }
 
-.main-tabs button.active {
-  background: var(--color-accent-soft);
+/* ---- Running-border hover animation (applied to all control buttons) ---- */
+
+.btn-runborder {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border-color: var(--color-btn-border);
+  color: var(--color-text-muted);
+  box-shadow: none !important;
+}
+
+.btn-runborder::before,
+.btn-runborder::after {
+  position: absolute;
+  top: 0;
+  left: 0;
   border-color: var(--color-accent);
+  border-radius: inherit;
+  border-style: solid;
+  transition: all 0.35s;
+  content: "";
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn-runborder::before {
+  width: 0;
+  height: 100%;
+  border-width: 1px 0;
+}
+
+.btn-runborder::after {
+  width: 100%;
+  height: 0;
+  border-width: 0 1px;
+}
+
+.btn-runborder:hover {
+  border-color: var(--color-btn-border);
+  color: var(--color-accent);
+  box-shadow: none !important;
+}
+
+.btn-runborder:hover::before {
+  width: 100%;
+}
+
+.btn-runborder:hover::after {
+  height: 100%;
+}
+
+.btn-runborder.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(0, 255, 102, 0.08);
+}
+
+.btn-runborder.active::before {
+  width: 100%;
+}
+
+.btn-runborder.active::after {
+  height: 100%;
 }
 
 /* ---- Control panel (Показатели / Сезон / Этап / Дата) ---- */
@@ -223,7 +274,24 @@ button.active {
 }
 
 .control-group--dates {
-  flex: 1 1 260px;
+  flex: 1 1 220px;
+}
+
+.control-group--season .control-group__buttons {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.control-group--display {
+  flex: 0 0 auto;
+  min-width: 150px;
+}
+
+.control-group--display .control-group__buttons {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
 }
 
 .stat-btn {
@@ -231,39 +299,21 @@ button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 84px;
-  height: 68px;
+  gap: 4px;
+  width: 62px;
+  height: 50px;
   margin: 0;
-  padding: 8px 6px;
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  font-size: 12px;
-  line-height: 1.2;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  line-height: 1.1;
   text-align: center;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .stat-btn__icon {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   object-fit: contain;
-}
-
-.stat-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.25);
-}
-
-.stat-btn.active {
-  background: rgba(0, 255, 102, 0.08);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
 }
 
 .stage-btn {
@@ -271,91 +321,40 @@ button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 92px;
-  height: 68px;
+  gap: 4px;
+  width: 68px;
+  height: 50px;
   margin: 0;
-  padding: 8px 6px;
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  font-size: 12px;
-  line-height: 1.2;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  line-height: 1.1;
   text-align: center;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .stage-btn__icon {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   object-fit: contain;
-}
-
-.stage-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.25);
-}
-
-.stage-btn.active {
-  background: rgba(0, 255, 102, 0.08);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
 }
 
 .season-btn {
   margin: 0;
-  padding: 10px 16px;
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.season-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-}
-
-.season-btn.active {
-  background: rgba(0, 255, 102, 0.08);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
+  text-align: left;
 }
 
 .date-btn {
   margin: 0;
-  min-width: 58px;
-  padding: 10px 12px;
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  font-size: 13px;
+  min-width: 46px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
   font-weight: 600;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.date-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-}
-
-.date-btn.active {
-  background: rgba(0, 255, 102, 0.1);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
 }
 
 .date-btn--all {
@@ -377,21 +376,23 @@ button.active {
 }
 
 .avg-toggle {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 8px;
   background: #161616;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 4px;
+  border-radius: var(--radius-sm);
+  padding: 4px 4px 4px 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .avg-toggle__label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--color-text-faint);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding-left: 10px;
 }
 
 .avg-toggle__track {
@@ -401,6 +402,7 @@ button.active {
   background: #0f0f0f;
   border-radius: 999px;
   padding: 3px;
+  flex-shrink: 0;
 }
 
 .avg-toggle__option {
@@ -409,20 +411,16 @@ button.active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 30px;
+  width: 26px;
+  height: 24px;
   margin: 0;
   padding: 0;
   background: transparent;
   border: none;
   border-radius: 999px;
   color: var(--color-text-faint);
-  font-size: 15px;
+  font-size: 12px;
   transition: color var(--transition-fast);
-}
-
-.avg-toggle__option::after {
-  content: none;
 }
 
 .avg-toggle__option.active {
@@ -433,8 +431,8 @@ button.active {
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 34px;
-  height: 30px;
+  width: 26px;
+  height: 24px;
   background: var(--color-accent);
   border-radius: 999px;
   box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
@@ -443,72 +441,20 @@ button.active {
 }
 
 .avg-toggle__track[data-position="right"] .avg-toggle__thumb {
-  transform: translateX(34px);
+  transform: translateX(26px);
 }
 
 .btn-all-battles {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 40px;
+  width: 100%;
+  height: 34px;
   margin: 0;
-  position: relative;
-  background: transparent;
-  border: 1px solid #979695;
-  border-radius: 5px;
-  color: #979695;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  transition: all 0.35s;
   box-sizing: border-box;
-  overflow: hidden;
-}
-
-.btn-all-battles::before,
-.btn-all-battles::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-color: var(--color-accent);
-  border-radius: 5px;
-  border-style: solid;
-  transition: all 0.35s;
-  content: "";
-  z-index: 1;
-  pointer-events: none;
-}
-
-.btn-all-battles::before {
-  width: 0;
-  height: 100%;
-  border-width: 1px 0;
-}
-
-.btn-all-battles::after {
-  width: 100%;
-  height: 0;
-  border-width: 0 1px;
-}
-
-.btn-all-battles:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-.btn-all-battles:hover::before {
-  width: 100%;
-}
-
-.btn-all-battles:hover::after {
-  height: 100%;
-}
-
-.btn-all-battles.active {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: rgba(0, 255, 102, 0.08);
 }
 
 @media (max-width: 900px) {
@@ -533,6 +479,13 @@ button.active {
 
   .control-group__buttons {
     justify-content: center;
+  }
+
+  .control-group--season .control-group__buttons,
+  .control-group--display .control-group__buttons {
+    align-items: center;
+    max-width: 260px;
+    margin: 0 auto;
   }
 
   .table-toolbar {
@@ -1335,8 +1288,8 @@ th.hover-cell:not(.win):not(.lose) {
 </div>
 
 <nav class="main-tabs" aria-label="Разделы">
-  <button type="button" class="tab" onclick="switchTab('stats', event)" aria-pressed="false">Статистика</button>
-  <button type="button" class="tab" onclick="switchTab('equipment', event)" aria-pressed="false">Оборудование</button>
+  <button type="button" class="tab btn-runborder" onclick="switchTab('stats', event)" aria-pressed="false">Статистика</button>
+  <button type="button" class="tab btn-runborder" onclick="switchTab('equipment', event)" aria-pressed="false">Оборудование</button>
 </nav>
 
 <section id="statsPage" aria-label="Статистика боёв" style="display:none;">
@@ -1347,7 +1300,7 @@ th.hover-cell:not(.win):not(.lose) {
       <div class="control-group__buttons" id="statButtons" role="group" aria-label="Тип статистики"></div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group control-group--season">
       <span class="control-group__label">Сезон</span>
       <div class="control-group__buttons" id="seasonButtons" role="group" aria-label="Сезон"></div>
     </div>
@@ -1361,18 +1314,21 @@ th.hover-cell:not(.win):not(.lose) {
       <span class="control-group__label">Дата</span>
       <div class="control-group__buttons" id="dateButtons" role="group" aria-label="Дата боя"></div>
     </div>
-  </div>
 
-  <div class="table-toolbar">
-    <div class="avg-toggle">
-      <span class="avg-toggle__label">Среднее</span>
-      <div class="avg-toggle__track" id="avgToggleTrack" data-position="left">
-        <div class="avg-toggle__thumb" aria-hidden="true"></div>
-        <button type="button" class="avg-toggle__option active" id="avgToggleLeft" onclick="setAveragePosition('left')" aria-label="Среднее слева">◀</button>
-        <button type="button" class="avg-toggle__option" id="avgToggleRight" onclick="setAveragePosition('right')" aria-label="Среднее справа">▶</button>
+    <div class="control-group control-group--display">
+      <span class="control-group__label">Отображение</span>
+      <div class="control-group__buttons">
+        <div class="avg-toggle">
+          <span class="avg-toggle__label">Среднее</span>
+          <div class="avg-toggle__track" id="avgToggleTrack" data-position="left">
+            <div class="avg-toggle__thumb" aria-hidden="true"></div>
+            <button type="button" class="avg-toggle__option active" id="avgToggleLeft" onclick="setAveragePosition('left')" aria-label="Среднее слева">◀</button>
+            <button type="button" class="avg-toggle__option" id="avgToggleRight" onclick="setAveragePosition('right')" aria-label="Среднее справа">▶</button>
+          </div>
+        </div>
+        <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn" onclick="showAllBattles()">Все бои</button>
       </div>
     </div>
-    <button type="button" class="btn-all-battles" id="allBattlesBtn" onclick="showAllBattles()">Все бои</button>
   </div>
 
   <div id="tableWrapper"><div id="table"></div></div>
@@ -1728,7 +1684,7 @@ function renderStatButtons(){
   STAT_TYPES.forEach(stat => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "stat-btn" + (stat.key === currentType ? " active" : "");
+    btn.className = "stat-btn btn-runborder" + (stat.key === currentType ? " active" : "");
     btn.innerHTML = `<img class="stat-btn__icon" src="${stat.icon}" alt=""><span>${escapeHtml(stat.label)}</span>`;
     btn.onclick = (event) => loadTable(stat.key, event);
     wrap.appendChild(btn);
@@ -1741,7 +1697,7 @@ function renderSeasonButtons(){
   SEASONS.forEach(season => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "season-btn" + (season.key === currentSeason ? " active" : "");
+    btn.className = "season-btn btn-runborder" + (season.key === currentSeason ? " active" : "");
     btn.textContent = season.label;
     btn.onclick = () => switchSeason(season.key);
     wrap.appendChild(btn);
@@ -1765,7 +1721,7 @@ function renderStageButtons(){
   season.stages.forEach(stage => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "stage-btn" + (stage.key === currentStage ? " active" : "");
+    btn.className = "stage-btn btn-runborder" + (stage.key === currentStage ? " active" : "");
     btn.innerHTML = `<img class="stage-btn__icon" src="${stage.icon}" alt=""><span>${escapeHtml(stage.label)}</span>`;
     btn.onclick = () => switchStage(stage.key);
     wrap.appendChild(btn);
@@ -1838,7 +1794,7 @@ function initDates(){
   dates.forEach((date, index) => {
     let btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "date-btn";
+    btn.className = "date-btn btn-runborder";
     btn.innerText = date;
     btn.onclick = () => {
       currentDate = date;
