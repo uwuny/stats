@@ -11,21 +11,33 @@
 
 <style>
 
+/* ============================================================
+   Design tokens
+   ============================================================ */
+
 :root {
+  /* Surfaces */
   --color-bg: #0d0d0d;
   --color-surface: #1a1a1a;
   --color-surface-alt: #1f1f1f;
   --color-surface-raised: #222222;
+  --color-surface-hover: rgb(255 255 255 / 5%);
+  --color-surface-hover-strong: rgb(255 255 255 / 12%);
+
+  /* Borders */
   --color-border: #3a3a3a;
   --color-border-subtle: #333333;
+  --color-border-faint: rgb(255 255 255 / 8%);
 
+  /* Brand accent */
   --color-accent: #00ff66;
+  --color-accent-rgb: 0 255 102;
   --color-accent-soft: #2e5e2e;
-  --color-accent-glow: rgba(0, 255, 102, 0.5);
+  --color-accent-wash: rgb(var(--color-accent-rgb) / 8%);
 
   --color-blue: #4a6ed1;
-  --color-blue-soft: #63b3ff;
 
+  /* Semantic */
   --color-win: #2e5e2e;
   --color-lose: #5e2e2e;
   --color-alive: #00ff66;
@@ -33,26 +45,49 @@
 
   --color-link: #57a9c2;
   --color-link-hover: #9be8ff;
-
   --color-btn-border: #979695;
-  --color-btn-hover: #dd6395;
 
+  /* Text */
   --color-text: #f5f5f5;
   --color-text-muted: #a6a6a6;
   --color-text-faint: #808080;
 
+  /* Type */
   --font-display: 'Sofia Sans', sans-serif;
   --font-body: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
 
+  /* Radius */
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
+  --radius-full: 999px;
 
-  --transition-fast: 150ms ease-out;
-  --transition-med: 200ms ease-out;
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
 
-  --shadow-panel: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Motion: durations */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-med: 250ms;
+  --duration-slow: 350ms;
+
+  /* Motion: easing (see emil-design-eng: strong, intentional curves) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shadow-panel: 0 4px 20px rgb(0 0 0 / 45%);
+  --shadow-glow-accent: 0 0 12px rgb(var(--color-accent-rgb) / 45%);
 }
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -77,30 +112,43 @@ body {
   body { background-attachment: fixed; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Page shell & brand
+   ============================================================ */
+
 .page {
   position: relative;
   z-index: 1;
   padding: 10px clamp(10px, 3vw, 24px) 0;
 }
 
-.page-title {
-  text-align: center;
-  font-size: clamp(32px, 6vw, 60px);
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--color-accent);
-  text-shadow: 0 0 20px var(--color-accent);
-  margin: 0 0 5px;
-  text-wrap: balance;
-}
-
 .brand {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
 }
 
 .brand-icon {
@@ -108,26 +156,38 @@ body {
   height: 34px;
   flex-shrink: 0;
   color: var(--color-accent);
-  filter: drop-shadow(0 0 6px rgba(0, 255, 102, 0.5));
+  filter: drop-shadow(0 0 6px rgb(var(--color-accent-rgb) / 50%));
 }
 
 .page-title {
   margin: 0;
+  text-align: center;
+  font-size: clamp(32px, 6vw, 60px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px var(--color-accent);
+  text-wrap: balance;
 }
+
+/* ============================================================
+   Navigation tabs
+   ============================================================ */
 
 .main-tabs {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .main-tabs .tab {
   min-width: 130px;
   height: 34px;
-  padding: 0 16px;
+  padding: 0 var(--space-4);
   font-size: 18px;
   font-weight: 700;
   display: inline-flex;
@@ -135,24 +195,25 @@ body {
   justify-content: center;
 }
 
-.equip-buttons {
-  margin: 0;
-  padding: 0;
-  min-height: 0;
-}
+/* ============================================================
+   Buttons
+   ============================================================ */
 
 button {
   font: inherit;
   background: #2b2b2b;
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  padding: 6px 12px;
-  margin: 4px;
+  padding: 6px var(--space-3);
+  margin: var(--space-1);
   border-radius: var(--radius-sm);
   cursor: pointer;
   position: relative;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), scale var(--transition-fast);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 button:focus-visible {
@@ -161,14 +222,14 @@ button:focus-visible {
 }
 
 button:active {
-  scale: 0.96;
+  transform: scale(0.96);
 }
 
 button.active {
   background: var(--color-blue);
 }
 
-/* ---- Running-border hover animation (applied to all control buttons) ---- */
+/* ---- Running-border hover treatment, shared by all control buttons ---- */
 
 .btn-runborder {
   position: relative;
@@ -176,18 +237,17 @@ button.active {
   background: transparent;
   border-color: var(--color-btn-border);
   color: var(--color-text-muted);
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .btn-runborder::before,
 .btn-runborder::after {
   position: absolute;
-  top: -1px;
-  left: -1px;
+  inset: -1px auto auto -1px;
   border-color: var(--color-accent);
   border-radius: inherit;
   border-style: solid;
-  transition: all 0.35s;
+  transition: width var(--duration-slow) var(--ease-out), height var(--duration-slow) var(--ease-out);
   content: "";
   z-index: 1;
   pointer-events: none;
@@ -205,24 +265,24 @@ button.active {
   border-width: 0 2px;
 }
 
-.btn-runborder:hover {
-  border-color: var(--color-btn-border);
-  color: var(--color-accent);
-  box-shadow: none !important;
-}
+@media (hover: hover) and (pointer: fine) {
+  .btn-runborder:hover {
+    color: var(--color-accent);
+  }
 
-.btn-runborder:hover::before {
-  width: 100%;
-}
+  .btn-runborder:hover::before {
+    width: 100%;
+  }
 
-.btn-runborder:hover::after {
-  height: 100%;
+  .btn-runborder:hover::after {
+    height: 100%;
+  }
 }
 
 .btn-runborder.active {
   border-color: var(--color-accent);
   color: var(--color-accent);
-  background: rgba(0, 255, 102, 0.08);
+  background: var(--color-accent-wash);
 }
 
 .btn-runborder.active::before {
@@ -233,24 +293,25 @@ button.active {
   height: 100%;
 }
 
-/* ---- Control panel (Показатели / Сезон / Этап / Дата) ---- */
+/* ============================================================
+   Control panel (Показатели / Сезон / Этап / Дата / Отображение)
+   ============================================================ */
 
 .control-panel {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  gap: 0;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgb(255 255 255 / 2%);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px 20px;
-  margin-bottom: 14px;
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-3);
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 0 var(--space-5);
   border-right: 1px solid var(--color-border-subtle);
 }
 
@@ -267,8 +328,8 @@ button.active {
   font-weight: 700;
   color: var(--color-text-faint);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
   text-align: center;
 }
 
@@ -276,7 +337,7 @@ button.active {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .control-group--dates {
@@ -310,7 +371,7 @@ button.active {
 .control-group--display .control-group__buttons {
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   width: 100%;
 }
 
@@ -319,11 +380,11 @@ button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-2);
   width: 104px;
   height: 90px;
   margin: 0;
-  padding: 8px 6px;
+  padding: var(--space-2) 6px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   line-height: 1.2;
@@ -349,11 +410,11 @@ button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-2);
   width: 100px;
   height: 90px;
   margin: 0;
-  padding: 8px 6px;
+  padding: var(--space-2) 6px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   line-height: 1.2;
@@ -368,7 +429,7 @@ button.active {
 
 .season-btn {
   margin: 0;
-  padding: 12px;
+  padding: var(--space-3);
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
@@ -379,116 +440,10 @@ button.active {
 .date-btn {
   margin: 0;
   min-width: 40px;
-  padding: 12px 4px;
+  padding: var(--space-3) 4px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
-}
-
-.date-btn--all {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 4px;
-}
-
-/* ---- Secondary row: average toggle + all-battles ---- */
-
-.table-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.avg-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: transparent;
-  border: none;
-  padding: 4px 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.avg-toggle__label {
-  font-size: 11px;
-  color: var(--color-text-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-}
-
-.avg-toggle__track {
-  display: flex;
-  align-items: center;
-  position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 999px;
-  padding: 3px;
-  width: 60px;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.avg-toggle__option {
-  position: relative;
-  z-index: 2;
-  flex: 1 1 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: 22px;
-  margin: 0;
-  padding: 0;
-  background: transparent !important;
-  border: none;
-  border-radius: 999px;
-  color: var(--color-text-faint);
-  font-size: 11px;
-  line-height: 1;
-  transition: color 0.3s ease;
-}
-
-.avg-toggle__option.active {
-  color: #0d0d0d;
-  text-shadow: none;
-}
-
-.avg-toggle__thumb {
-  position: absolute;
-  z-index: 1;
-  top: 3px;
-  left: 3px;
-  width: 27px;
-  height: 22px;
-  background: var(--color-accent);
-  border-radius: 999px;
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-}
-
-.avg-toggle__track[data-position="right"] .avg-toggle__thumb {
-  transform: translateX(27px);
-}
-
-.btn-all-battles {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 34px;
-  margin: 0;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 600;
-  box-sizing: border-box;
 }
 
 @media (max-width: 900px) {
@@ -521,11 +476,111 @@ button.active {
     max-width: 260px;
     margin: 0 auto;
   }
+}
 
+/* ============================================================
+   Table toolbar: average-position toggle + "all battles"
+   ============================================================ */
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.avg-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.avg-toggle__label {
+  font-size: 11px;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.avg-toggle__track {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: rgb(255 255 255 / 3%);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.avg-toggle__option {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--color-text-faint);
+  font-size: 11px;
+  line-height: 1;
+  transition: color var(--duration-med) var(--ease-out);
+}
+
+.avg-toggle__option.active {
+  color: #0d0d0d;
+  text-shadow: none;
+}
+
+.avg-toggle__thumb {
+  position: absolute;
+  z-index: 1;
+  top: 3px;
+  left: 3px;
+  width: 27px;
+  height: 22px;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-glow-accent);
+  transition: transform var(--duration-slow) var(--ease-spring);
+  pointer-events: none;
+}
+
+.avg-toggle__track[data-position="right"] .avg-toggle__thumb {
+  transform: translateX(27px);
+}
+
+.btn-all-battles {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 34px;
+  margin: 0;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
   .table-toolbar {
     justify-content: center;
   }
 }
+
+/* ============================================================
+   Stats table
+   ============================================================ */
 
 #tableWrapper {
   width: 100%;
@@ -547,12 +602,12 @@ button.active {
 #tableWrapper::-webkit-scrollbar-thumb {
   background: var(--color-accent);
   border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 #tableWrapper::-webkit-scrollbar-thumb:hover {
   background: #00cc55;
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+  box-shadow: 0 0 8px rgb(var(--color-accent-rgb) / 60%);
 }
 
 #tableWrapper::-webkit-scrollbar-corner {
@@ -572,7 +627,7 @@ th, td {
   padding: 6px;
   text-align: center;
   vertical-align: top;
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--duration-fast) var(--ease-out);
 }
 
 th:first-child, td:first-child {
@@ -591,13 +646,13 @@ th:first-child, td:first-child {
   color: var(--color-link);
   text-decoration: none;
   font-weight: 700;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+  transition: color var(--duration-fast) var(--ease-out), text-shadow var(--duration-fast) var(--ease-out);
 }
 
 .clan-link:hover,
 .clan-link:focus-visible {
   color: var(--color-link-hover);
-  text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
+  text-shadow: 0 0 6px rgb(var(--color-accent-rgb) / 60%);
 }
 
 .elo-value {
@@ -606,7 +661,7 @@ th:first-child, td:first-child {
   color: var(--color-accent);
   font-weight: 700;
   margin-top: 2px;
-  text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+  text-shadow: 0 0 4px rgb(var(--color-accent-rgb) / 50%);
   font-variant-numeric: tabular-nums;
 }
 
@@ -615,7 +670,7 @@ th:first-child, td:first-child {
   opacity: 0.7;
   font-size: 13px;
   font-weight: 700;
-  text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
+  text-shadow: 0 0 4px rgb(var(--color-accent-rgb) / 30%);
   font-variant-numeric: tabular-nums;
 }
 
@@ -628,23 +683,23 @@ th:first-child, td:first-child {
 
 tr.hover-row td:not(.win):not(.lose),
 tr.hover-row th:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
 }
 
 td.hover-col:not(.win):not(.lose),
 th.hover-col:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
 }
 
 td.hover-cell:not(.win):not(.lose),
 th.hover-cell:not(.win):not(.lose) {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--color-surface-hover-strong);
 }
 
 .win.hover-cell,
 .lose.hover-cell {
   filter: brightness(1.35);
-  transition: filter var(--transition-fast);
+  transition: filter var(--duration-fast) var(--ease-out);
 }
 
 .win { background: var(--color-win); }
@@ -664,7 +719,7 @@ th.hover-cell:not(.win):not(.lose) {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  outline: 1px solid rgba(255, 255, 255, 0.1);
+  outline: 1px solid var(--color-border-faint);
   outline-offset: -1px;
 }
 
@@ -677,18 +732,22 @@ th.hover-cell:not(.win):not(.lose) {
   border: none;
   padding: 0;
   font: inherit;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+  transition: color var(--duration-fast) var(--ease-out), text-shadow var(--duration-fast) var(--ease-out);
 }
 
 .map-link:hover,
 .map-link:focus-visible {
   color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 4px rgb(255 255 255 / 40%);
 }
+
+/* ============================================================
+   Footer
+   ============================================================ */
 
 .site-footer {
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: var(--space-5);
 }
 
 .bottom-line {
@@ -700,10 +759,14 @@ th.hover-cell:not(.win):not(.lose) {
 }
 
 .footer-text {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   font-size: 14px;
   margin: 0;
 }
+
+/* ============================================================
+   Equipment page: filters
+   ============================================================ */
 
 .equip-filters {
   display: flex;
@@ -726,11 +789,11 @@ th.hover-cell:not(.win):not(.lose) {
 .filter-group label {
   height: 16px;
   line-height: 16px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
   font-size: 12px;
   color: var(--color-text-faint);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
 
 .back-button-bar {
@@ -749,18 +812,25 @@ th.hover-cell:not(.win):not(.lose) {
   cursor: pointer;
   font-family: var(--font-display);
   font-weight: 600;
-  margin-bottom: 20px;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), scale var(--transition-fast);
+  margin-bottom: var(--space-5);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 #backToTableBtn:hover {
   background: var(--color-accent-soft);
-  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+  box-shadow: var(--shadow-glow-accent);
 }
 
 #backToTableBtn:active {
-  scale: 0.96;
+  transform: scale(0.96);
 }
+
+/* ============================================================
+   Tank table
+   ============================================================ */
 
 .tank-table {
   width: 95%;
@@ -779,7 +849,7 @@ th.hover-cell:not(.win):not(.lose) {
   border: 1px solid var(--color-border-subtle);
   padding: 10px 15px;
   text-align: center;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 
 .tank-table th {
@@ -787,7 +857,7 @@ th.hover-cell:not(.win):not(.lose) {
   color: var(--color-accent);
   text-transform: uppercase;
   font-size: 14px;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -812,7 +882,7 @@ th.hover-cell:not(.win):not(.lose) {
   background: var(--color-blue);
   color: #fff;
   font-weight: bold;
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 10px rgb(255 255 255 / 20%);
 }
 
 .tank-table th.sortable {
@@ -849,6 +919,10 @@ th.hover-cell:not(.win):not(.lose) {
   color: var(--color-dead);
 }
 
+/* ============================================================
+   Tank detail view
+   ============================================================ */
+
 #equipmentContent {
   padding: 0;
   margin: 0;
@@ -863,12 +937,16 @@ th.hover-cell:not(.win):not(.lose) {
   font-family: var(--font-display);
   font-weight: 700;
   text-wrap: balance;
+  opacity: 0;
+  animation: fade-in-up var(--duration-slow) var(--ease-out) forwards;
 }
 
 .tank-main-image {
   position: relative;
   width: fit-content;
   margin: 0 auto 40px;
+  opacity: 0;
+  animation: fade-in-up var(--duration-slow) var(--ease-out) 60ms forwards;
 }
 
 .tank-main-image img {
@@ -884,17 +962,23 @@ th.hover-cell:not(.win):not(.lose) {
   align-items: center;
   gap: 15px;
   padding: 1rem 0;
+  opacity: 0;
+  animation: fade-in-up var(--duration-slow) var(--ease-out) forwards;
 }
+
+.equipment-builds .equip-build:nth-child(1) { animation-delay: 100ms; }
+.equipment-builds .equip-build:nth-child(2) { animation-delay: 140ms; }
+.equipment-builds .equip-build:nth-child(3) { animation-delay: 180ms; }
 
 .build-label {
   font-size: 14px;
   color: var(--color-accent);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.1em;
   font-family: var(--font-display);
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgb(var(--color-accent-rgb) / 40%);
+  margin-bottom: var(--space-2);
 }
 
 .equip-items {
@@ -914,12 +998,14 @@ th.hover-cell:not(.win):not(.lose) {
   background: var(--color-surface-alt);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  transition: border-color var(--transition-med), box-shadow var(--transition-med);
+  transition: border-color var(--duration-med) var(--ease-out), box-shadow var(--duration-med) var(--ease-out);
 }
 
-.slot:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+@media (hover: hover) and (pointer: fine) {
+  .slot:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgb(var(--color-accent-rgb) / 30%);
+  }
 }
 
 .slot::before {
@@ -927,7 +1013,7 @@ th.hover-cell:not(.win):not(.lose) {
   position: absolute;
   inset: 0;
   border-radius: var(--radius-md);
-  background: radial-gradient(ellipse at 30% 30%, rgba(0, 255, 102, 0.08) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 30% 30%, rgb(var(--color-accent-rgb) / 8%) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -966,7 +1052,7 @@ th.hover-cell:not(.win):not(.lose) {
   left: 20px;
   right: 20px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #00ff6666, transparent);
+  background: linear-gradient(90deg, transparent, rgb(var(--color-accent-rgb) / 40%), transparent);
   pointer-events: none;
   z-index: 2;
 }
@@ -993,6 +1079,21 @@ th.hover-cell:not(.win):not(.lose) {
 .equipment-builds[data-count="3"] .equip-build:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: start; }
 .equipment-builds[data-count="3"] .equip-build:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: end; }
 .equipment-builds[data-count="3"] .equip-build:nth-child(3) { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: 10px; }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Field modernization overlay diagram
+   ============================================================ */
 
 .mods-wrapper {
   position: absolute;
@@ -1030,7 +1131,7 @@ th.hover-cell:not(.win):not(.lose) {
   pointer-events: none;
   object-fit: contain;
   image-rendering: crisp-edges;
-  transition: opacity var(--transition-med);
+  transition: opacity var(--duration-med) var(--ease-out);
 }
 
 .mod-overlay.active {
@@ -1084,7 +1185,7 @@ th.hover-cell:not(.win):not(.lose) {
 .cell-content {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   justify-content: center;
   width: 100%;
 }
@@ -1101,6 +1202,10 @@ th.hover-cell:not(.win):not(.lose) {
   text-align: left;
   white-space: nowrap;
 }
+
+/* ============================================================
+   Custom dropdown
+   ============================================================ */
 
 .custom-dropdown {
   position: relative;
@@ -1121,21 +1226,21 @@ th.hover-cell:not(.win):not(.lose) {
   background: #111;
   color: #fff;
   border: 1px solid var(--color-border-subtle);
-  padding: 8px 12px;
+  padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 42px;
-  gap: 8px;
+  gap: var(--space-2);
   margin: 0;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .dropdown-selected:hover {
   border-color: var(--color-accent);
-  box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+  box-shadow: 0 0 8px rgb(var(--color-accent-rgb) / 30%);
 }
 
 .dropdown-selected .dropdown-icon {
@@ -1147,7 +1252,7 @@ th.hover-cell:not(.win):not(.lose) {
 .dropdown-arrow {
   font-size: 10px;
   color: #888;
-  transition: transform var(--transition-fast);
+  transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .custom-dropdown.open .dropdown-arrow {
@@ -1159,7 +1264,6 @@ th.hover-cell:not(.win):not(.lose) {
   top: calc(100% + 1px);
   left: 0;
   right: 0;
-  display: none;
   margin: 0;
   padding: 0;
   background: #111;
@@ -1167,13 +1271,19 @@ th.hover-cell:not(.win):not(.lose) {
   border-top: none;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   z-index: 9999;
-  opacity: 0;
-  transform: translateY(-6px);
   max-height: 350px;
   overflow-y: auto;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-surface);
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top center;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    visibility 0s linear var(--duration-base);
 }
 
 .dropdown-options::-webkit-scrollbar {
@@ -1188,27 +1298,31 @@ th.hover-cell:not(.win):not(.lose) {
 .dropdown-options::-webkit-scrollbar-thumb {
   background: var(--color-accent);
   border-radius: 4px;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .dropdown-options::-webkit-scrollbar-thumb:hover {
   background: #00cc55;
-  box-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
+  box-shadow: 0 0 6px rgb(var(--color-accent-rgb) / 50%);
 }
 
 .custom-dropdown.open .dropdown-options {
-  display: block;
+  visibility: visible;
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    visibility 0s linear;
 }
 
 .dropdown-option {
-  padding: 8px 12px;
+  padding: var(--space-2) var(--space-3);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: background-color var(--transition-fast);
+  gap: var(--space-2);
+  transition: background-color var(--duration-fast) var(--ease-out);
 }
 
 .dropdown-option:hover,
@@ -1237,45 +1351,15 @@ th.hover-cell:not(.win):not(.lose) {
   white-space: nowrap;
 }
 
-.slot-icon.item-BonDosil img        { transform: translate(-2px, 0px); }
-.slot-icon.item-BonKomponovka img   { transform: translate(0px, 0px); }
-.slot-icon.item-BonOptica img       { transform: translate(-5px, 0px); }
-.slot-icon.item-BonPricel img       { transform: translate(0px, 0px); }
-.slot-icon.item-BonPrivodi img      { transform: translate(0px, 0px); }
-.slot-icon.item-BonStab img         { transform: translate(-6px, 0px); }
-.slot-icon.item-BonTurbina img      { transform: translate(0px, 0px); }
-.slot-icon.item-BonVentil img       { transform: translate(-3px, 0px); }
-.slot-icon.item-BonZakalka img      { transform: translate(0px, 0px); }
-.slot-icon.item-Copi img            { transform: translate(0px, 0px); }
-.slot-icon.item-Grunti img          { transform: translate(0px, 0px); }
-.slot-icon.item-ExpKaretka img      { transform: translate(0px, 0px); }
-.slot-icon.item-ExpRastochka img    { transform: translate(0px, 0px); }
-.slot-icon.item-ExpStab img         { transform: translate(0px, 0px); }
-.slot-icon.item-ExpTurbina img      { transform: translate(-2px, 0px); }
-.slot-icon.item-ExpZakalka img      { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyComponovka img { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyDosil img      { transform: translate(0px, 0px) scale(1.10); }
-.slot-icon.item-TrophyMaloshymka img { transform: translate(0px, -5px); }
-.slot-icon.item-TrophyOptica img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyPricel img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyPrivodi img    { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyStabilizer img { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyTurbina img    { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyUMP img        { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyVentil img     { transform: translate(0px, 0px); }
-.slot-icon.item-TrophyZakalka img    { transform: translate(0px, 0px) scale(1.10); }
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+/* Per-item optical alignment fixes for irregular equipment icon art */
+.slot-icon.item-BonDosil img        { transform: translate(-2px, 0); }
+.slot-icon.item-BonOptica img       { transform: translate(-5px, 0); }
+.slot-icon.item-BonStab img         { transform: translate(-6px, 0); }
+.slot-icon.item-BonVentil img       { transform: translate(-3px, 0); }
+.slot-icon.item-ExpTurbina img      { transform: translate(-2px, 0); }
+.slot-icon.item-TrophyDosil img      { transform: translate(0, 0) scale(1.10); }
+.slot-icon.item-TrophyMaloshymka img { transform: translate(0, -5px); }
+.slot-icon.item-TrophyZakalka img    { transform: translate(0, 0) scale(1.10); }
 
 @media (max-width: 768px) {
   .dropdown-nation,
@@ -1307,318 +1391,348 @@ th.hover-cell:not(.win):not(.lose) {
 }
 
 </style>
-</head>
 
 <body>
 <div class="page">
 
-<div class="brand">
-  <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor"/>
-    <rect x="10" y="7" width="4" height="14" rx="1" fill="currentColor"/>
-    <rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/>
-  </svg>
-  <h1 class="page-title">СТАТИСТИКА</h1>
-</div>
+  <header class="brand">
+    <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor"/>
+      <rect x="10" y="7" width="4" height="14" rx="1" fill="currentColor"/>
+      <rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/>
+    </svg>
+    <h1 class="page-title">СТАТИСТИКА</h1>
+  </header>
 
-<nav class="main-tabs" aria-label="Разделы">
-  <button type="button" class="tab btn-runborder" onclick="switchTab('stats', event)" aria-pressed="false">Статистика</button>
-  <button type="button" class="tab btn-runborder" onclick="switchTab('equipment', event)" aria-pressed="false">Оборудование</button>
-</nav>
+  <nav class="main-tabs" aria-label="Разделы">
+    <button type="button" class="tab btn-runborder" data-tab="stats" aria-pressed="false">Статистика</button>
+    <button type="button" class="tab btn-runborder" data-tab="equipment" aria-pressed="false">Оборудование</button>
+  </nav>
 
-<section id="statsPage" aria-label="Статистика боёв" style="display:none;">
+  <section id="statsPage" aria-label="Статистика боёв" hidden>
 
-  <div class="control-panel">
-    <div class="control-group">
-      <span class="control-group__label">Показатели</span>
-      <div class="control-group__buttons" id="statButtons" role="group" aria-label="Тип статистики"></div>
-    </div>
+    <div class="control-panel">
+      <div class="control-group">
+        <span class="control-group__label" id="statsGroupLabel">Показатели</span>
+        <div class="control-group__buttons" id="statButtons" role="group" aria-labelledby="statsGroupLabel"></div>
+      </div>
 
-    <div class="control-group control-group--season">
-      <span class="control-group__label">Сезон</span>
-      <div class="control-group__buttons" id="seasonButtons" role="group" aria-label="Сезон"></div>
-    </div>
+      <div class="control-group control-group--season">
+        <span class="control-group__label" id="seasonGroupLabel">Сезон</span>
+        <div class="control-group__buttons" id="seasonButtons" role="group" aria-labelledby="seasonGroupLabel"></div>
+      </div>
 
-    <div class="control-group">
-      <span class="control-group__label">Этап</span>
-      <div class="control-group__buttons" id="stageButtons" role="group" aria-label="Этап"></div>
-    </div>
+      <div class="control-group">
+        <span class="control-group__label" id="stageGroupLabel">Этап</span>
+        <div class="control-group__buttons" id="stageButtons" role="group" aria-labelledby="stageGroupLabel"></div>
+      </div>
 
-    <div class="control-group control-group--dates">
-      <span class="control-group__label">Дата</span>
-      <div class="control-group__buttons" id="dateButtons" role="group" aria-label="Дата боя"></div>
-    </div>
+      <div class="control-group control-group--dates">
+        <span class="control-group__label" id="dateGroupLabel">Дата</span>
+        <div class="control-group__buttons" id="dateButtons" role="group" aria-labelledby="dateGroupLabel"></div>
+      </div>
 
-    <div class="control-group control-group--display">
-      <span class="control-group__label">Отображение</span>
-      <div class="control-group__buttons">
-        <div class="avg-toggle">
-          <span class="avg-toggle__label">Среднее</span>
-          <div class="avg-toggle__track" id="avgToggleTrack" data-position="left">
-            <div class="avg-toggle__thumb" aria-hidden="true"></div>
-            <button type="button" class="avg-toggle__option active" id="avgToggleLeft" onclick="setAveragePosition('left')" aria-label="Среднее слева">◀</button>
-            <button type="button" class="avg-toggle__option" id="avgToggleRight" onclick="setAveragePosition('right')" aria-label="Среднее справа">▶</button>
+      <div class="control-group control-group--display">
+        <span class="control-group__label">Отображение</span>
+        <div class="control-group__buttons">
+          <div class="avg-toggle">
+            <span class="avg-toggle__label" id="avgToggleLabel">Среднее</span>
+            <div class="avg-toggle__track" id="avgToggleTrack" data-position="left" role="group" aria-labelledby="avgToggleLabel">
+              <div class="avg-toggle__thumb" aria-hidden="true"></div>
+              <button type="button" class="avg-toggle__option active" id="avgToggleLeft" data-position="left" aria-label="Среднее слева">◀</button>
+              <button type="button" class="avg-toggle__option" id="avgToggleRight" data-position="right" aria-label="Среднее справа">▶</button>
+            </div>
           </div>
+          <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn">Все бои</button>
         </div>
-        <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn" onclick="showAllBattles()">Все бои</button>
       </div>
     </div>
-  </div>
 
-  <div id="tableWrapper"><div id="table"></div></div>
-</section>
+    <div id="tableWrapper"><div id="table"></div></div>
+  </section>
 
-<section id="equipmentPage" aria-label="Оборудование" style="display:none;">
+  <section id="equipmentPage" aria-label="Оборудование" hidden>
 
-  <div class="equip-filters">
-    <div class="filter-group">
-      <label id="filterNationLabel">Нация</label>
-      <div class="custom-dropdown dropdown-nation" id="filterNationDropdown" role="listbox" aria-labelledby="filterNationLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all" role="option">
+    <div class="equip-filters">
+      <div class="filter-group">
+        <label id="filterNationLabel">Нация</label>
+        <div class="custom-dropdown dropdown-nation" id="filterNationDropdown" role="listbox" aria-labelledby="filterNationLabel">
+          <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
             <span class="dropdown-text">Все</span>
+            <span class="dropdown-arrow" aria-hidden="true">▼</span>
           </div>
-          <div class="dropdown-option" data-value="ussr" role="option">
-            <img src="flags/ussr.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">СССР</span>
-          </div>
-          <div class="dropdown-option" data-value="germany" role="option">
-            <img src="flags/germany.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Германия</span>
-          </div>
-          <div class="dropdown-option" data-value="usa" role="option">
-            <img src="flags/usa.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">США</span>
-          </div>
-          <div class="dropdown-option" data-value="china" role="option">
-            <img src="flags/china.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Китай</span>
-          </div>
-          <div class="dropdown-option" data-value="france" role="option">
-            <img src="flags/france.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Франция</span>
-          </div>
-          <div class="dropdown-option" data-value="uk" role="option">
-            <img src="flags/uk.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Великобритания</span>
-          </div>
-          <div class="dropdown-option" data-value="japan" role="option">
-            <img src="flags/japan.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Япония</span>
-          </div>
-          <div class="dropdown-option" data-value="czech" role="option">
-            <img src="flags/czech.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Чехословакия</span>
-          </div>
-          <div class="dropdown-option" data-value="sweden" role="option">
-            <img src="flags/sweden.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Швеция</span>
-          </div>
-          <div class="dropdown-option" data-value="poland" role="option">
-            <img src="flags/poland.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Польша</span>
-          </div>
-          <div class="dropdown-option" data-value="italy" role="option">
-            <img src="flags/italy.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Италия</span>
-          </div>
-          <div class="dropdown-option" data-value="intunion" role="option">
-            <img src="flags/intunion.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Сборная наций</span>
+          <div class="dropdown-options">
+            <div class="dropdown-option active" data-value="all" role="option" aria-selected="true">
+              <span class="dropdown-text">Все</span>
+            </div>
+            <div class="dropdown-option" data-value="ussr" role="option" aria-selected="false">
+              <img src="flags/ussr.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">СССР</span>
+            </div>
+            <div class="dropdown-option" data-value="germany" role="option" aria-selected="false">
+              <img src="flags/germany.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Германия</span>
+            </div>
+            <div class="dropdown-option" data-value="usa" role="option" aria-selected="false">
+              <img src="flags/usa.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">США</span>
+            </div>
+            <div class="dropdown-option" data-value="china" role="option" aria-selected="false">
+              <img src="flags/china.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Китай</span>
+            </div>
+            <div class="dropdown-option" data-value="france" role="option" aria-selected="false">
+              <img src="flags/france.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Франция</span>
+            </div>
+            <div class="dropdown-option" data-value="uk" role="option" aria-selected="false">
+              <img src="flags/uk.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Великобритания</span>
+            </div>
+            <div class="dropdown-option" data-value="japan" role="option" aria-selected="false">
+              <img src="flags/japan.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Япония</span>
+            </div>
+            <div class="dropdown-option" data-value="czech" role="option" aria-selected="false">
+              <img src="flags/czech.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Чехословакия</span>
+            </div>
+            <div class="dropdown-option" data-value="sweden" role="option" aria-selected="false">
+              <img src="flags/sweden.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Швеция</span>
+            </div>
+            <div class="dropdown-option" data-value="poland" role="option" aria-selected="false">
+              <img src="flags/poland.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Польша</span>
+            </div>
+            <div class="dropdown-option" data-value="italy" role="option" aria-selected="false">
+              <img src="flags/italy.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Италия</span>
+            </div>
+            <div class="dropdown-option" data-value="intunion" role="option" aria-selected="false">
+              <img src="flags/intunion.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Сборная наций</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="filter-group">
-      <label id="filterClassLabel">Класс</label>
-      <div class="custom-dropdown dropdown-class" id="filterClassDropdown" role="listbox" aria-labelledby="filterClassLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option" data-value="all" role="option">
+      <div class="filter-group">
+        <label id="filterClassLabel">Класс</label>
+        <div class="custom-dropdown dropdown-class" id="filterClassDropdown" role="listbox" aria-labelledby="filterClassLabel">
+          <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
             <span class="dropdown-text">Все</span>
+            <span class="dropdown-arrow" aria-hidden="true">▼</span>
           </div>
-          <div class="dropdown-option" data-value="heavyTank" role="option">
-            <img src="classes/heavyTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Тяжёлые</span>
-          </div>
-          <div class="dropdown-option" data-value="mediumTank" role="option">
-            <img src="classes/mediumTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Средние</span>
-          </div>
-          <div class="dropdown-option" data-value="lightTank" role="option">
-            <img src="classes/lightTank.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">Лёгкие</span>
-          </div>
-          <div class="dropdown-option" data-value="AT-SPG" role="option">
-            <img src="classes/AT-SPG.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">ПТ-САУ</span>
-          </div>
-          <div class="dropdown-option" data-value="SPG" role="option">
-            <img src="classes/SPG.png" class="dropdown-icon" alt="">
-            <span class="dropdown-text">САУ</span>
+          <div class="dropdown-options">
+            <div class="dropdown-option active" data-value="all" role="option" aria-selected="true">
+              <span class="dropdown-text">Все</span>
+            </div>
+            <div class="dropdown-option" data-value="heavyTank" role="option" aria-selected="false">
+              <img src="classes/heavyTank.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Тяжёлые</span>
+            </div>
+            <div class="dropdown-option" data-value="mediumTank" role="option" aria-selected="false">
+              <img src="classes/mediumTank.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Средние</span>
+            </div>
+            <div class="dropdown-option" data-value="lightTank" role="option" aria-selected="false">
+              <img src="classes/lightTank.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">Лёгкие</span>
+            </div>
+            <div class="dropdown-option" data-value="AT-SPG" role="option" aria-selected="false">
+              <img src="classes/AT-SPG.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">ПТ-САУ</span>
+            </div>
+            <div class="dropdown-option" data-value="SPG" role="option" aria-selected="false">
+              <img src="classes/SPG.png" class="dropdown-icon" alt="">
+              <span class="dropdown-text">САУ</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="filter-group">
-      <label id="filterRoleLabel">Роль</label>
-      <div class="custom-dropdown dropdown-role" id="filterRoleDropdown" role="listbox" aria-labelledby="filterRoleLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option active" data-value="all" role="option">
+      <div class="filter-group">
+        <label id="filterRoleLabel">Роль</label>
+        <div class="custom-dropdown dropdown-role" id="filterRoleDropdown" role="listbox" aria-labelledby="filterRoleLabel">
+          <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
             <span class="dropdown-text">Все</span>
+            <span class="dropdown-arrow" aria-hidden="true">▼</span>
           </div>
-          <div class="dropdown-option" data-value="role_LT_universal" role="option">
-            <span class="dropdown-text">Лёгкие танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_LT_wheeled" role="option">
-            <span class="dropdown-text">Лёгкие танки колёсные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_assault" role="option">
-            <span class="dropdown-text">Средние танки штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_universal" role="option">
-            <span class="dropdown-text">Средние танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_sniper" role="option">
-            <span class="dropdown-text">Средние танки снайперские</span>
-          </div>
-          <div class="dropdown-option" data-value="role_MT_support" role="option">
-            <span class="dropdown-text">Средние танки поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_assault" role="option">
-            <span class="dropdown-text">Тяжёлые танки штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_universal" role="option">
-            <span class="dropdown-text">Тяжёлые танки универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_break" role="option">
-            <span class="dropdown-text">Тяжёлые танки прорыва</span>
-          </div>
-          <div class="dropdown-option" data-value="role_HT_support" role="option">
-            <span class="dropdown-text">Тяжёлые танки поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_assault" role="option">
-            <span class="dropdown-text">ПТ-САУ штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_universal" role="option">
-            <span class="dropdown-text">ПТ-САУ универсальные</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_sniper" role="option">
-            <span class="dropdown-text">ПТ-САУ снайперские</span>
-          </div>
-          <div class="dropdown-option" data-value="role_ATSPG_support" role="option">
-            <span class="dropdown-text">ПТ-САУ поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG_assault" role="option">
-            <span class="dropdown-text">САУ штурмовые</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG" role="option">
-            <span class="dropdown-text">САУ поддержки</span>
-          </div>
-          <div class="dropdown-option" data-value="role_SPG_flame" role="option">
-            <span class="dropdown-text">САУ огнемётные</span>
+          <div class="dropdown-options">
+            <div class="dropdown-option active" data-value="all" role="option" aria-selected="true">
+              <span class="dropdown-text">Все</span>
+            </div>
+            <div class="dropdown-option" data-value="role_LT_universal" role="option" aria-selected="false">
+              <span class="dropdown-text">Лёгкие танки универсальные</span>
+            </div>
+            <div class="dropdown-option" data-value="role_LT_wheeled" role="option" aria-selected="false">
+              <span class="dropdown-text">Лёгкие танки колёсные</span>
+            </div>
+            <div class="dropdown-option" data-value="role_MT_assault" role="option" aria-selected="false">
+              <span class="dropdown-text">Средние танки штурмовые</span>
+            </div>
+            <div class="dropdown-option" data-value="role_MT_universal" role="option" aria-selected="false">
+              <span class="dropdown-text">Средние танки универсальные</span>
+            </div>
+            <div class="dropdown-option" data-value="role_MT_sniper" role="option" aria-selected="false">
+              <span class="dropdown-text">Средние танки снайперские</span>
+            </div>
+            <div class="dropdown-option" data-value="role_MT_support" role="option" aria-selected="false">
+              <span class="dropdown-text">Средние танки поддержки</span>
+            </div>
+            <div class="dropdown-option" data-value="role_HT_assault" role="option" aria-selected="false">
+              <span class="dropdown-text">Тяжёлые танки штурмовые</span>
+            </div>
+            <div class="dropdown-option" data-value="role_HT_universal" role="option" aria-selected="false">
+              <span class="dropdown-text">Тяжёлые танки универсальные</span>
+            </div>
+            <div class="dropdown-option" data-value="role_HT_break" role="option" aria-selected="false">
+              <span class="dropdown-text">Тяжёлые танки прорыва</span>
+            </div>
+            <div class="dropdown-option" data-value="role_HT_support" role="option" aria-selected="false">
+              <span class="dropdown-text">Тяжёлые танки поддержки</span>
+            </div>
+            <div class="dropdown-option" data-value="role_ATSPG_assault" role="option" aria-selected="false">
+              <span class="dropdown-text">ПТ-САУ штурмовые</span>
+            </div>
+            <div class="dropdown-option" data-value="role_ATSPG_universal" role="option" aria-selected="false">
+              <span class="dropdown-text">ПТ-САУ универсальные</span>
+            </div>
+            <div class="dropdown-option" data-value="role_ATSPG_sniper" role="option" aria-selected="false">
+              <span class="dropdown-text">ПТ-САУ снайперские</span>
+            </div>
+            <div class="dropdown-option" data-value="role_ATSPG_support" role="option" aria-selected="false">
+              <span class="dropdown-text">ПТ-САУ поддержки</span>
+            </div>
+            <div class="dropdown-option" data-value="role_SPG_assault" role="option" aria-selected="false">
+              <span class="dropdown-text">САУ штурмовые</span>
+            </div>
+            <div class="dropdown-option" data-value="role_SPG" role="option" aria-selected="false">
+              <span class="dropdown-text">САУ поддержки</span>
+            </div>
+            <div class="dropdown-option" data-value="role_SPG_flame" role="option" aria-selected="false">
+              <span class="dropdown-text">САУ огнемётные</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="filter-group">
-      <label id="filterLevelLabel">Уровень</label>
-      <div class="custom-dropdown dropdown-level" id="filterLevelDropdown" role="listbox" aria-labelledby="filterLevelLabel">
-        <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
-          <span class="dropdown-text">Все</span>
-          <span class="dropdown-arrow" aria-hidden="true">▼</span>
-        </div>
-        <div class="dropdown-options">
-          <div class="dropdown-option active" data-value="all" role="option">
+      <div class="filter-group">
+        <label id="filterLevelLabel">Уровень</label>
+        <div class="custom-dropdown dropdown-level" id="filterLevelDropdown" role="listbox" aria-labelledby="filterLevelLabel">
+          <div class="dropdown-selected" tabindex="0" role="button" aria-haspopup="listbox">
             <span class="dropdown-text">Все</span>
+            <span class="dropdown-arrow" aria-hidden="true">▼</span>
           </div>
-          <div class="dropdown-option" data-value="8" role="option">
-            <span class="dropdown-text">VIII</span>
-          </div>
-          <div class="dropdown-option" data-value="9" role="option">
-            <span class="dropdown-text">IX</span>
-          </div>
-          <div class="dropdown-option" data-value="10" role="option">
-            <span class="dropdown-text">X</span>
-          </div>
-          <div class="dropdown-option" data-value="11" role="option">
-            <span class="dropdown-text">XI</span>
+          <div class="dropdown-options">
+            <div class="dropdown-option active" data-value="all" role="option" aria-selected="true">
+              <span class="dropdown-text">Все</span>
+            </div>
+            <div class="dropdown-option" data-value="8" role="option" aria-selected="false">
+              <span class="dropdown-text">VIII</span>
+            </div>
+            <div class="dropdown-option" data-value="9" role="option" aria-selected="false">
+              <span class="dropdown-text">IX</span>
+            </div>
+            <div class="dropdown-option" data-value="10" role="option" aria-selected="false">
+              <span class="dropdown-text">X</span>
+            </div>
+            <div class="dropdown-option" data-value="11" role="option" aria-selected="false">
+              <span class="dropdown-text">XI</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="backButtonContainer" class="back-button-bar" style="display:none;">
-    <button type="button" id="backToTableBtn" onclick="backToTable()">← К выбору танка</button>
-  </div>
+    <div id="backButtonContainer" class="back-button-bar" hidden>
+      <button type="button" id="backToTableBtn">← К выбору танка</button>
+    </div>
 
-  <div class="equip-buttons" id="tankButtons"></div>
+    <div class="equip-buttons" id="tankButtons"></div>
 
-  <div id="equipmentContent"></div>
-</section>
+    <div id="equipmentContent"></div>
+  </section>
 
-<footer class="site-footer">
-  <div class="bottom-line" aria-hidden="true"></div>
-  <p class="footer-text">Created by McQueen</p>
-</footer>
+  <footer class="site-footer">
+    <div class="bottom-line" aria-hidden="true"></div>
+    <p class="footer-text">Created by McQueen</p>
+  </footer>
 
 </div>
 
 <script>
-let DATA = null;
+"use strict";
 
-function escapeHtml(value){
-  return String(value)
+/* ============================================================
+   Shared utilities
+   ============================================================ */
+
+const escapeHtml = (value) =>
+  String(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
-}
 
-function parseDate(str){
-  const [d,m,y] = str.split(".").map(Number);
+const parseDate = (str) => {
+  const [d, m, y] = str.split(".").map(Number);
   const year = Number.isFinite(y) ? y : new Date().getFullYear();
-  return new Date(year, (m||1)-1, d||1);
+  return new Date(year, (m || 1) - 1, d || 1);
+};
+
+const addDays = (date, days) => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};
+
+/**
+ * Some upstream JSON exports contain trailing-space keys (e.g. "name ").
+ * This reads a field under its clean key first, falling back to the
+ * trailing-space variant, and always returns a trimmed string.
+ */
+const readField = (obj, key) => String(obj?.[key] ?? obj?.[`${key} `] ?? "").trim();
+
+/* ============================================================
+   Tab navigation
+   ============================================================ */
+
+const tabPanels = {
+  stats: document.getElementById("statsPage"),
+  equipment: document.getElementById("equipmentPage"),
+};
+
+function switchTab(tab) {
+  document.querySelectorAll(".tab").forEach((btn) => {
+    const isActive = btn.dataset.tab === tab;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-pressed", String(isActive));
+  });
+
+  for (const [name, panel] of Object.entries(tabPanels)) {
+    panel.hidden = name !== tab;
+  }
+
+  if (tab === "equipment" && !EQUIPMENT_DB) loadEquipmentDB();
 }
 
-function switchTab(tab, event){
-  document.querySelectorAll(".tab").forEach(b => {
-    b.classList.remove("active");
-    b.setAttribute("aria-pressed", "false");
-  });
-  event.target.classList.add("active");
-  event.target.setAttribute("aria-pressed", "true");
-  if(tab === "stats"){
-    document.getElementById("statsPage").style.display = "block";
-    document.getElementById("equipmentPage").style.display = "none";
-  } else {
-    document.getElementById("statsPage").style.display = "none";
-    document.getElementById("equipmentPage").style.display = "block";
-  }
-}
+document.querySelectorAll(".tab").forEach((btn) => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+
+/* ============================================================
+   Stats page: configuration
+   ============================================================ */
 
 const STAT_TYPES = [
   { key: "damage", label: "Урон", icon: "stat/damage.png" },
   { key: "damage_received", label: "Получено", icon: "stat/damage_received.png" },
   { key: "hits", label: "Попадания", icon: "stat/hits.png" },
   { key: "assist", label: "Ассист", icon: "stat/assist.png" },
-  { key: "survival", label: "Выживаемость", icon: "stat/survival.png" }
+  { key: "survival", label: "Выживаемость", icon: "stat/survival.png" },
 ];
 
 const SEASONS = [
@@ -1629,859 +1743,883 @@ const SEASONS = [
       { key: "global_map", label: "Глобальная карта", icon: "stat/stage3.png", start: [3, 23], end: [4, 5] },
       { key: "thunder", label: "И грянул гром", icon: "stat/stage4.png", start: [4, 20], end: [4, 26] },
       { key: "rain_wall", label: "Стена дождя", icon: "stat/stage5.png", start: [5, 12], end: [5, 18] },
-      { key: "eternal_storm", label: "Вечная гроза", icon: "stat/stage6.png", start: [6, 1], end: [6, 7] }
-    ]
+      { key: "eternal_storm", label: "Вечная гроза", icon: "stat/stage6.png", start: [6, 1], end: [6, 7] },
+    ],
   },
   {
     key: "new_season",
     label: "Новый сезон",
     stages: [
-      { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png", start: null, end: null }
-    ]
-  }
+      { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png", start: null, end: null },
+    ],
+  },
 ];
 
 const STAGE_DATE_BUFFER_DAYS = 1;
-
-let avgPosition = "left";
-let currentType = "damage";
-let currentDate = null;
-let visibleBattles = [];
+const HTML_REPLAYS_DIR = "replays_html";
 
 const DATA_FILES = [
   "data/battle_data.json", "data/2.json", "data/3.json", "data/4.json",
   "data/5.json", "data/6.json", "data/7.json", "data/8.json",
   "data/9.json", "data/10.json", "data/11.json", "data/12.json",
   "data/13.json", "data/14.json", "data/15.json", "data/16.json", "data/17.json",
-  "data/18.json", "data/19.json", "data/20.json", "data/21.json"
+  "data/18.json", "data/19.json", "data/20.json", "data/21.json",
 ];
 
+/* ============================================================
+   Stats page: state
+   ============================================================ */
+
+let DATA = null;
+let avgPosition = "left";
+let currentType = "damage";
 let currentSeason = SEASONS[0].key;
 let currentStage = SEASONS[0].stages[0].key;
-const HTML_REPLAYS_DIR = "replays_html";
+let currentDate = null;
+let visibleBattles = [];
 
-function getSeason(key){
-  return SEASONS.find(s => s.key === key) || SEASONS[0];
-}
-
-function getStage(seasonKey, stageKey){
+const getSeason = (key) => SEASONS.find((s) => s.key === key) ?? SEASONS[0];
+const getStage = (seasonKey, stageKey) => {
   const season = getSeason(seasonKey);
-  return season.stages.find(s => s.key === stageKey) || season.stages[0];
+  return season.stages.find((s) => s.key === stageKey) ?? season.stages[0];
+};
+
+function battleMatchesStage(battle) {
+  const stage = getStage(currentSeason, currentStage);
+  if (!stage) return false;
+
+  if (!stage.start || !stage.end) {
+    return (battle.stage || battle.campaign) === currentStage;
+  }
+
+  const battleDate = parseDate(battle.date);
+  const year = battleDate.getFullYear();
+  const [startMonth, startDay] = stage.start;
+  const [endMonth, endDay] = stage.end;
+  const rangeStart = addDays(new Date(year, startMonth - 1, startDay), -STAGE_DATE_BUFFER_DAYS);
+  const rangeEnd = addDays(new Date(year, endMonth - 1, endDay), STAGE_DATE_BUFFER_DAYS);
+
+  return battleDate >= rangeStart && battleDate <= rangeEnd;
 }
 
-function normalizeReplayFilename(rawName){
-  if(!rawName) return null;
-  const name = String(rawName).trim();
-  if(!name) return null;
+function normalizeReplayFilename(rawName) {
+  const name = String(rawName ?? "").trim();
+  if (!name) return null;
   return name.toLowerCase().endsWith(".html") ? name : `${name}.html`;
 }
 
-function openBattleHtml(battle){
-  const fileFromFilename = normalizeReplayFilename(battle.filename);
-  const fileFromHtmlFile = normalizeReplayFilename(battle.html_file);
-  const replayFile = fileFromFilename || fileFromHtmlFile;
-  if(!replayFile){
+function openBattleHtml(battle) {
+  const replayFile =
+    normalizeReplayFilename(battle.filename) ?? normalizeReplayFilename(battle.html_file);
+  if (!replayFile) {
     alert("У этого боя нет поля filename/html_file в JSON.");
     return;
   }
   window.open(`${HTML_REPLAYS_DIR}/${encodeURIComponent(replayFile)}`, "_blank");
 }
 
-function addDays(date, days){
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
+function openBattleHtmlByIndex(index) {
+  const battle = visibleBattles[index];
+  if (battle) openBattleHtml(battle);
 }
 
-function battleMatchesStage(battle){
-  const stage = getStage(currentSeason, currentStage);
-  if(!stage) return false;
+/* ============================================================
+   Stats page: control panel rendering
+   ============================================================ */
 
-  if(!stage.start || !stage.end){
-    return (battle.stage || battle.campaign) === currentStage;
-  }
-
-  const battleDate = parseDate(battle.date);
-  const year = battleDate.getFullYear();
-
-  const [sm, sd] = stage.start;
-  const [em, ed] = stage.end;
-  const rangeStart = addDays(new Date(year, sm - 1, sd), -STAGE_DATE_BUFFER_DAYS);
-  const rangeEnd = addDays(new Date(year, em - 1, ed), STAGE_DATE_BUFFER_DAYS);
-
-  return battleDate >= rangeStart && battleDate <= rangeEnd;
-}
-
-function renderStatButtons(){
+function renderStatButtons() {
   const wrap = document.getElementById("statButtons");
-  wrap.innerHTML = "";
-  STAT_TYPES.forEach(stat => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "stat-btn btn-runborder" + (stat.key === currentType ? " active" : "");
-    btn.innerHTML = `<img class="stat-btn__icon" src="${stat.icon}" alt=""><span>${escapeHtml(stat.label)}</span>`;
-    btn.onclick = (event) => loadTable(stat.key, event);
-    wrap.appendChild(btn);
+  wrap.innerHTML = STAT_TYPES.map((stat) => `
+    <button type="button" class="stat-btn btn-runborder${stat.key === currentType ? " active" : ""}" data-stat="${stat.key}">
+      <img class="stat-btn__icon" src="${stat.icon}" alt="">
+      <span>${escapeHtml(stat.label)}</span>
+    </button>
+  `).join("");
+
+  wrap.querySelectorAll("[data-stat]").forEach((btn) => {
+    btn.addEventListener("click", () => loadTable(btn.dataset.stat));
   });
 }
 
-function renderSeasonButtons(){
+function renderSeasonButtons() {
   const wrap = document.getElementById("seasonButtons");
-  wrap.innerHTML = "";
-  SEASONS.forEach(season => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "season-btn btn-runborder" + (season.key === currentSeason ? " active" : "");
-    btn.textContent = season.label;
-    btn.onclick = () => switchSeason(season.key);
-    wrap.appendChild(btn);
+  wrap.innerHTML = SEASONS.map((season) => `
+    <button type="button" class="season-btn btn-runborder${season.key === currentSeason ? " active" : ""}" data-season="${season.key}">
+      ${escapeHtml(season.label)}
+    </button>
+  `).join("");
+
+  wrap.querySelectorAll("[data-season]").forEach((btn) => {
+    btn.addEventListener("click", () => switchSeason(btn.dataset.season));
   });
 }
 
-function switchSeason(seasonKey){
+function switchSeason(seasonKey) {
   currentSeason = seasonKey;
-  const season = getSeason(seasonKey);
-  currentStage = season.stages[0].key;
+  currentStage = getSeason(seasonKey).stages[0].key;
   renderSeasonButtons();
   renderStageButtons();
   initDates();
   loadTable(currentType);
 }
 
-function renderStageButtons(){
+function renderStageButtons() {
   const wrap = document.getElementById("stageButtons");
-  wrap.innerHTML = "";
   const season = getSeason(currentSeason);
-  season.stages.forEach(stage => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "stage-btn btn-runborder" + (stage.key === currentStage ? " active" : "");
-    btn.innerHTML = `<img class="stage-btn__icon" src="${stage.icon}" alt=""><span>${escapeHtml(stage.label)}</span>`;
-    btn.onclick = () => switchStage(stage.key);
-    wrap.appendChild(btn);
+  wrap.innerHTML = season.stages.map((stage) => `
+    <button type="button" class="stage-btn btn-runborder${stage.key === currentStage ? " active" : ""}" data-stage="${stage.key}">
+      <img class="stage-btn__icon" src="${stage.icon}" alt="">
+      <span>${escapeHtml(stage.label)}</span>
+    </button>
+  `).join("");
+
+  wrap.querySelectorAll("[data-stage]").forEach((btn) => {
+    btn.addEventListener("click", () => switchStage(btn.dataset.stage));
   });
 }
 
-function switchStage(stageKey){
+function switchStage(stageKey) {
   currentStage = stageKey;
   renderStageButtons();
   initDates();
   loadTable(currentType);
 }
 
-Promise.all(DATA_FILES.map(async file => {
-  const response = await fetch(file);
-  if(!response.ok) throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
-  return response.json();
-}))
-.then(allData => {
-  DATA = { battles: allData.flatMap(d => d.battles || []) };
-  renderStatButtons();
-  renderSeasonButtons();
-  renderStageButtons();
-  initDates();
-  loadTable(currentType);
-})
-.catch(error => {
-  document.getElementById("table").innerHTML = `<p class="error-state">Ошибка загрузки данных: ${escapeHtml(error.message)}</p>`;
-});
+function initDates() {
+  const box = document.getElementById("dateButtons");
+  const allBattlesBtn = document.getElementById("allBattlesBtn");
 
-function openBattleHtmlByIndex(index){
-  const battle = visibleBattles[index];
-  if(!battle) return;
-  openBattleHtml(battle);
+  const dates = [...new Set(DATA.battles.filter(battleMatchesStage).map((b) => b.date))]
+    .sort((a, b) => parseDate(a) - parseDate(b));
+
+  if (!dates.length) {
+    box.innerHTML = `<p class="empty-state">Для этого этапа пока нет данных.</p>`;
+    currentDate = null;
+    allBattlesBtn?.classList.remove("active");
+    return;
+  }
+
+  box.innerHTML = dates.map((date, index) =>
+    `<button type="button" class="date-btn btn-runborder${index === 0 ? " active" : ""}" data-date="${escapeHtml(date)}">${escapeHtml(date)}</button>`
+  ).join("");
+
+  currentDate = dates[0];
+  allBattlesBtn?.classList.remove("active");
+
+  box.querySelectorAll("[data-date]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentDate = btn.dataset.date;
+      box.querySelectorAll(".date-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      allBattlesBtn?.classList.remove("active");
+      loadTable(currentType);
+    });
+  });
 }
 
-function setAveragePosition(position){
+function showAllBattles() {
+  currentDate = null;
+  document.querySelectorAll("#dateButtons .date-btn").forEach((b) => b.classList.remove("active"));
+  document.getElementById("allBattlesBtn").classList.add("active");
+  loadTable(currentType);
+}
+
+function setAveragePosition(position) {
   avgPosition = position;
-  const track = document.getElementById("avgToggleTrack");
-  track.dataset.position = position;
+  document.getElementById("avgToggleTrack").dataset.position = position;
   document.getElementById("avgToggleLeft").classList.toggle("active", position === "left");
   document.getElementById("avgToggleRight").classList.toggle("active", position === "right");
   loadTable(currentType);
 }
 
-function showAllBattles(){
-  currentDate = null;
-  document.querySelectorAll("#dateButtons .date-btn").forEach(b => b.classList.remove("active"));
-  document.getElementById("allBattlesBtn").classList.add("active");
-  loadTable(currentType);
-}
+document.getElementById("allBattlesBtn").addEventListener("click", showAllBattles);
+document.getElementById("avgToggleLeft").addEventListener("click", () => setAveragePosition("left"));
+document.getElementById("avgToggleRight").addEventListener("click", () => setAveragePosition("right"));
 
-function initDates(){
-  const box = document.getElementById("dateButtons");
-  box.innerHTML = "";
-  let dates = [...new Set(DATA.battles
-    .filter(battleMatchesStage)
-    .map(b => b.date))];
-  dates.sort((a,b) => parseDate(a) - parseDate(b));
+/* ============================================================
+   Stats page: table data pipeline
+   ============================================================ */
 
-  const allBattlesBtn = document.getElementById("allBattlesBtn");
-
-  if(!dates.length){
-    box.innerHTML = "<p class=\"empty-state\">Для этого этапа пока нет данных.</p>";
-    currentDate = null;
-    if(allBattlesBtn) allBattlesBtn.classList.remove("active");
-    return;
-  }
-
-  dates.forEach((date, index) => {
-    let btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "date-btn btn-runborder";
-    btn.innerText = date;
-    btn.onclick = () => {
-      currentDate = date;
-      document.querySelectorAll("#dateButtons .date-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      if(allBattlesBtn) allBattlesBtn.classList.remove("active");
-      loadTable(currentType);
-    };
-    box.appendChild(btn);
-    if(index === 0){ btn.classList.add("active"); currentDate = date; }
+function getPenetrationRate(playerName, battles) {
+  let hits = 0;
+  let pierces = 0;
+  battles.forEach((battle) => {
+    const player = battle.players[playerName];
+    if (!player) return;
+    hits += player.hits;
+    pierces += player.piercings;
   });
-
-  if(allBattlesBtn) allBattlesBtn.classList.remove("active");
+  return hits ? pierces / hits : 0;
 }
 
-function getPenRate(name, battles){
-  let hits = 0, pen = 0;
-  battles.forEach(b => {
-    let p = b.players[name];
-    if(!p) return;
-    hits += p.hits;
-    pen += p.piercings;
-  });
-  return hits ? pen / hits : 0;
-}
-
-function loadTable(type, event){
-  currentType = type;
-  renderStatButtons();
-  let battles = DATA.battles.filter(
-    b => battleMatchesStage(b) && (!currentDate || b.date === currentDate)
-  );
-  if(!battles.length){
-    document.getElementById("table").innerHTML = "<p class=\"empty-state\">Нет боёв</p>";
-    visibleBattles = [];
-    return;
+function extractCellValue(type, player) {
+  switch (type) {
+    case "damage": return player.damage;
+    case "damage_received": return player.damage_received;
+    case "hits": return `${player.shots}/${player.hits}/${player.piercings}`;
+    case "assist": return player.assist_track + player.assist_radio;
+    case "survival": return 0;
+    default: return 0;
   }
-  visibleBattles = battles;
-  let players = {};
-  battles.forEach((battle, idx) => {
-    for(let name in battle.players){
-      let p = battle.players[name];
-      if(!players[name]) players[name] = {};
-      let value = 0;
-      if(type === "damage") value = p.damage;
-      if(type === "damage_received") value = p.damage_received;
-      if(type === "hits") value = `${p.shots}/${p.hits}/${p.piercings}`;
-      if(type === "assist") value = p.assist_track + p.assist_radio;
-      if(type === "survival") value = 0;
-      players[name][idx] = {
-        tank: p.tank,
-        value: value,
-        assist_track: p.assist_track,
-        assist_radio: p.assist_radio,
-        alive: p.alive
+}
+
+/** Builds a { playerName: { battleIndex: cell } } grid for the given battles/stat type. */
+function buildPlayerGrid(type, battles) {
+  const players = {};
+  battles.forEach((battle, index) => {
+    for (const name in battle.players) {
+      const player = battle.players[name];
+      players[name] ??= {};
+      players[name][index] = {
+        tank: player.tank,
+        value: extractCellValue(type, player),
+        assist_track: player.assist_track,
+        assist_radio: player.assist_radio,
+        alive: player.alive,
       };
     }
   });
-  let averages = {};
-  for(let name in players){
-    let sum = 0, count = 0;
-    battles.forEach((b, i) => {
-      let cell = players[name][i];
-      if(!cell) return;
-      if(typeof cell.value === "number"){ sum += cell.value; count++; }
+  return players;
+}
+
+function computeAverages(players, battles) {
+  const averages = {};
+  for (const name in players) {
+    let sum = 0;
+    let count = 0;
+    battles.forEach((_, i) => {
+      const cell = players[name][i];
+      if (cell && typeof cell.value === "number") {
+        sum += cell.value;
+        count++;
+      }
     });
     averages[name] = count ? Math.round(sum / count) : 0;
   }
-  let survivalRates = {};
-  if(type === "survival"){
-    for(let name in players){
-      let deaths = 0, total = 0;
-      battles.forEach((b, i) => {
-        let cell = players[name][i];
-        if(!cell) return;
-        total++;
-        if(!cell.alive) deaths++;
-      });
-      survivalRates[name] = total ? Math.round(((total - deaths) / total) * 100) : 0;
-    }
-  }
-  let sorted = Object.keys(players);
-  if(type === "hits")
-    sorted.sort((a,b) => getPenRate(b, battles) - getPenRate(a, battles));
-  else if(type === "survival")
-    sorted.sort((a,b) => survivalRates[b] - survivalRates[a]);
-  else
-    sorted.sort((a,b) => averages[b] - averages[a]);
+  return averages;
+}
 
-  let eloSum = 0, eloCount = 0;
+function computeSurvivalRates(players, battles) {
+  const rates = {};
+  for (const name in players) {
+    let deaths = 0;
+    let total = 0;
+    battles.forEach((_, i) => {
+      const cell = players[name][i];
+      if (!cell) return;
+      total++;
+      if (!cell.alive) deaths++;
+    });
+    rates[name] = total ? Math.round(((total - deaths) / total) * 100) : 0;
+  }
+  return rates;
+}
+
+function sortPlayerNames(type, players, battles, averages, survivalRates) {
+  const names = Object.keys(players);
+  if (type === "hits") {
+    return names.sort((a, b) => getPenetrationRate(b, battles) - getPenetrationRate(a, battles));
+  }
+  if (type === "survival") {
+    return names.sort((a, b) => survivalRates[b] - survivalRates[a]);
+  }
+  return names.sort((a, b) => averages[b] - averages[a]);
+}
+
+function computeBattleSummary(battles) {
+  let eloSum = 0;
+  let eloCount = 0;
   let winCount = 0;
-  battles.forEach(b => {
-    if(b.elo !== null && b.elo !== undefined && b.elo !== ""){
+  battles.forEach((b) => {
+    if (b.elo !== null && b.elo !== undefined && b.elo !== "") {
       eloSum += Number(b.elo);
       eloCount++;
     }
-    if(b.win) winCount++;
+    if (b.win) winCount++;
   });
-  let avgElo = eloCount ? Math.round(eloSum / eloCount) : "-";
-  let winRate = battles.length ? Math.round((winCount / battles.length) * 100) : 0;
+  return {
+    avgElo: eloCount ? Math.round(eloSum / eloCount) : "-",
+    winRate: battles.length ? Math.round((winCount / battles.length) * 100) : 0,
+  };
+}
 
-  let avgEloHtml = `
+/* ============================================================
+   Stats page: table rendering
+   ============================================================ */
+
+function renderSummaryCell({ avgElo, winRate }) {
+  return `
     <div class="elo-summary">Elo: ${avgElo}</div>
     <div class="elo-summary__winrate">Побед: ${winRate}%</div>
   `;
-
-  let html = "<table>";
-  html += "<tr><th></th>";
-  if(type === "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
-  if(type !== "hits" && avgPosition === "left") html += `<th>${avgEloHtml}</th>`;
-  battles.forEach(b => {
-    let clanTag = (b.enemy_clan_abbrev || b.enemy_clan_tag || "").toString().trim();
-    let clanCell = "";
-    if(clanTag) clanCell += `<a class="clan-link" href="https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}" target="_blank" rel="noopener">${escapeHtml(clanTag.toUpperCase())}</a>`;
-    if(b.elo !== null && b.elo !== undefined && b.elo !== "") clanCell += `<br><span class="elo-value">${b.elo}</span>`;
-    html += `<th class="clan-header">${clanCell}</th>`;
-  });
-  if(type === "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
-  if(type !== "hits" && avgPosition === "right") html += `<th>${avgEloHtml}</th>`;
-  html += "</tr>";
-
-  html += "<tr><th>Ник</th>";
-  if(type === "hits" && avgPosition === "left") html += "<th>%</th>";
-  if(type !== "hits" && avgPosition === "left") html += "<th>Среднее</th>";
-  battles.forEach((b, battleIndex) => {
-    html += `<th class="${b.win ? 'win' : 'lose'}"><a class="map-link" onclick="openBattleHtmlByIndex(${battleIndex}); return false;" href="#">${escapeHtml(b.map)}</a></th>`;
-  });
-  if(type === "hits" && avgPosition === "right") html += "<th>%</th>";
-  if(type !== "hits" && avgPosition === "right") html += "<th>Среднее</th>";
-  html += "</tr>";
-
-  sorted.forEach(name => {
-    html += "<tr>";
-    html += `<td>${escapeHtml(name)}</td>`;
-    if(type === "hits" && avgPosition === "left") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "left"){
-      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
-      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
-    }
-    battles.forEach((b, i) => {
-      let cell = players[name][i];
-      if(!cell){ html += "<td></td>"; return; }
-      let tankClass = cell.alive ? "alive" : "dead";
-      let displayValue = cell.value;
-      if(type === "assist"){
-        displayValue = `${cell.value}<br><small class="assist-icons"><img src="icons/track.png" alt="Засвет с гусеницы"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png" alt="Засвет по рации"> ${cell.assist_radio}</small>`;
-      }
-      if(type === "survival"){
-        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span></td>`;
-      } else {
-        html += `<td><span class="${tankClass}">${escapeHtml(cell.tank)}</span><br>${displayValue}</td>`;
-      }
-    });
-    if(type === "hits" && avgPosition === "right") html += `<td>${Math.round(getPenRate(name, battles) * 100)}%</td>`;
-    if(type !== "hits" && avgPosition === "right"){
-      let avgCell = type === "survival" ? survivalRates[name] : averages[name];
-      html += `<td>${avgCell}${type === "survival" ? "%" : ""}</td>`;
-    }
-    html += "</tr>";
-  });
-  html += "</table>";
-  document.getElementById("table").innerHTML = html;
-  enableHover();
 }
 
-function enableHover(){
+function renderClanHeaderRow(battles, summary) {
+  const cells = battles.map((battle) => {
+    const clanTag = String(battle.enemy_clan_abbrev || battle.enemy_clan_tag || "").trim();
+    let cell = "";
+    if (clanTag) {
+      const href = `https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}`;
+      cell += `<a class="clan-link" href="${href}" target="_blank" rel="noopener">${escapeHtml(clanTag.toUpperCase())}</a>`;
+    }
+    if (battle.elo !== null && battle.elo !== undefined && battle.elo !== "") {
+      cell += `<br><span class="elo-value">${battle.elo}</span>`;
+    }
+    return `<th class="clan-header">${cell}</th>`;
+  }).join("");
+
+  const avgCell = `<th>${renderSummaryCell(summary)}</th>`;
+  return `<tr><th></th>${avgPosition === "left" ? avgCell : ""}${cells}${avgPosition === "right" ? avgCell : ""}</tr>`;
+}
+
+function renderMapHeaderRow(type, battles) {
+  const label = type === "hits" ? "%" : "Среднее";
+  const avgCell = `<th>${label}</th>`;
+  const mapCells = battles.map((battle, index) =>
+    `<th class="${battle.win ? "win" : "lose"}"><a class="map-link" href="#" data-battle-index="${index}">${escapeHtml(battle.map)}</a></th>`
+  ).join("");
+  return `<tr><th>Ник</th>${avgPosition === "left" ? avgCell : ""}${mapCells}${avgPosition === "right" ? avgCell : ""}</tr>`;
+}
+
+function renderAverageDataCell(type, name, battles, averages, survivalRates) {
+  if (type === "hits") {
+    return `<td>${Math.round(getPenetrationRate(name, battles) * 100)}%</td>`;
+  }
+  const value = type === "survival" ? survivalRates[name] : averages[name];
+  return `<td>${value}${type === "survival" ? "%" : ""}</td>`;
+}
+
+function renderPlayerCell(type, cell) {
+  if (!cell) return "<td></td>";
+
+  const statusClass = cell.alive ? "alive" : "dead";
+  const tankLabel = `<span class="${statusClass}">${escapeHtml(cell.tank)}</span>`;
+
+  if (type === "survival") return `<td>${tankLabel}</td>`;
+
+  const value = type === "assist"
+    ? `${cell.value}<br><small class="assist-icons"><img src="icons/track.png" alt="Засвет с гусеницы"> ${cell.assist_track} &nbsp;|&nbsp; <img src="icons/spot.png" alt="Засвет по рации"> ${cell.assist_radio}</small>`
+    : cell.value;
+
+  return `<td>${tankLabel}<br>${value}</td>`;
+}
+
+function renderPlayerRow(type, name, players, battles, averages, survivalRates) {
+  const avgCell = renderAverageDataCell(type, name, battles, averages, survivalRates);
+  const dataCells = battles.map((_, i) => renderPlayerCell(type, players[name][i])).join("");
+  return `<tr><td>${escapeHtml(name)}</td>${avgPosition === "left" ? avgCell : ""}${dataCells}${avgPosition === "right" ? avgCell : ""}</tr>`;
+}
+
+function loadTable(type) {
+  currentType = type;
+  renderStatButtons();
+
+  const battles = DATA.battles.filter(
+    (b) => battleMatchesStage(b) && (!currentDate || b.date === currentDate)
+  );
+
+  if (!battles.length) {
+    document.getElementById("table").innerHTML = `<p class="empty-state">Нет боёв</p>`;
+    visibleBattles = [];
+    return;
+  }
+
+  visibleBattles = battles;
+
+  const players = buildPlayerGrid(type, battles);
+  const averages = computeAverages(players, battles);
+  const survivalRates = type === "survival" ? computeSurvivalRates(players, battles) : {};
+  const sortedNames = sortPlayerNames(type, players, battles, averages, survivalRates);
+  const summary = computeBattleSummary(battles);
+
+  const rows = sortedNames
+    .map((name) => renderPlayerRow(type, name, players, battles, averages, survivalRates))
+    .join("");
+
+  document.getElementById("table").innerHTML = `
+    <table>
+      ${renderClanHeaderRow(battles, summary)}
+      ${renderMapHeaderRow(type, battles)}
+      ${rows}
+    </table>
+  `;
+
+  attachTableInteractions();
+}
+
+function attachTableInteractions() {
   const table = document.querySelector("table");
-  if(!table) return;
-  const cells = table.querySelectorAll("td, th");
-  cells.forEach(cell => {
+  if (!table) return;
+
+  table.querySelectorAll("[data-battle-index]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openBattleHtmlByIndex(Number(link.dataset.battleIndex));
+    });
+  });
+
+  enableHover(table);
+}
+
+function enableHover(table) {
+  table.querySelectorAll("td, th").forEach((cell) => {
     cell.addEventListener("mouseenter", () => {
-      const row = cell.parentElement;
-      const index = cell.cellIndex;
+      const { parentElement: row, cellIndex: index } = cell;
       row.classList.add("hover-row");
-      table.querySelectorAll("tr").forEach(tr => {
-        if(tr.children[index]) tr.children[index].classList.add("hover-col");
+      table.querySelectorAll("tr").forEach((tr) => {
+        tr.children[index]?.classList.add("hover-col");
       });
       cell.classList.add("hover-cell");
     });
     cell.addEventListener("mouseleave", () => {
-      const row = cell.parentElement;
-      const index = cell.cellIndex;
+      const { parentElement: row, cellIndex: index } = cell;
       row.classList.remove("hover-row");
-      table.querySelectorAll("tr").forEach(tr => {
-        if(tr.children[index]) tr.children[index].classList.remove("hover-col");
+      table.querySelectorAll("tr").forEach((tr) => {
+        tr.children[index]?.classList.remove("hover-col");
       });
       cell.classList.remove("hover-cell");
     });
   });
 }
+
+/* ============================================================
+   Stats page: bootstrap
+   ============================================================ */
+
+Promise.all(
+  DATA_FILES.map(async (file) => {
+    const response = await fetch(file);
+    if (!response.ok) throw new Error(`Не удалось загрузить ${file}: ${response.status}`);
+    return response.json();
+  })
+)
+  .then((allData) => {
+    DATA = { battles: allData.flatMap((d) => d.battles || []) };
+    renderStatButtons();
+    renderSeasonButtons();
+    renderStageButtons();
+    initDates();
+    loadTable(currentType);
+  })
+  .catch((error) => {
+    document.getElementById("table").innerHTML =
+      `<p class="error-state">Ошибка загрузки данных: ${escapeHtml(error.message)}</p>`;
+  });
 </script>
 
 <script>
+"use strict";
+
+/* ============================================================
+   Equipment page: reference data
+   ============================================================ */
+
+const NATION_NAMES = {
+  ussr: "СССР", germany: "Германия", usa: "США", china: "Китай",
+  france: "Франция", uk: "Великобритания", japan: "Япония",
+  czech: "Чехословакия", sweden: "Швеция", poland: "Польша",
+  italy: "Италия", intunion: "Сборная наций",
+};
+
+const CLASS_NAMES = {
+  heavyTank: "Тяжёлый танк",
+  mediumTank: "Средний танк",
+  lightTank: "Лёгкий танк",
+  "AT-SPG": "ПТ-САУ",
+  SPG: "САУ",
+};
+
+const ROLE_NAMES = {
+  role_LT_universal: "Лёгкие танки универсальные",
+  role_LT_wheeled: "Лёгкие танки колёсные",
+  role_MT_assault: "Средние танки штурмовые",
+  role_MT_universal: "Средние танки универсальные",
+  role_MT_sniper: "Средние танки снайперские",
+  role_MT_support: "Средние танки поддержки",
+  role_HT_assault: "Тяжёлые танки штурмовые",
+  role_HT_universal: "Тяжёлые танки универсальные",
+  role_HT_break: "Тяжёлые танки прорыва",
+  role_HT_support: "Тяжёлые танки поддержки",
+  role_ATSPG_assault: "ПТ-САУ штурмовые",
+  role_ATSPG_universal: "ПТ-САУ универсальные",
+  role_ATSPG_sniper: "ПТ-САУ снайперские",
+  role_ATSPG_support: "ПТ-САУ поддержки",
+  role_SPG_assault: "САУ штурмовые",
+  role_SPG: "САУ поддержки",
+  role_SPG_flame: "САУ огнемётные",
+};
+
+const ROMAN_LEVELS = { 8: "VIII", 9: "IX", 10: "X", 11: "XI" };
+
+const BUILD_TITLES = { main: "Основной", alternative: "Альтернативный", situational: "Ситуативный" };
+
+const SORT_COLUMNS = ["name", "nation", "class", "role", "level"];
+
+/* ============================================================
+   Equipment page: state
+   ============================================================ */
+
 let EQUIPMENT_DB = null;
 let currentTankId = null;
 let currentSortColumn = null;
-let currentSortDirection = 'asc';
+let currentSortDirection = "asc";
+
+function getTanksList() {
+  return EQUIPMENT_DB?.tanks ?? EQUIPMENT_DB?.["tanks "] ?? [];
+}
 
 async function loadEquipmentDB() {
   try {
-    const response = await fetch('equipment.json');
+    const response = await fetch("equipment.json");
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     EQUIPMENT_DB = await response.json();
-    renderFilters();
+    initEquipmentFilters();
     applyFilters();
   } catch (err) {
-    console.error('Ошибка загрузки equipment.json:', err);
-    document.getElementById('equipmentContent').innerHTML =
-      '<p class="error-state">Не удалось загрузить данные оборудования</p>';
+    console.error("Ошибка загрузки equipment.json:", err);
+    document.getElementById("equipmentContent").innerHTML =
+      `<p class="error-state">Не удалось загрузить данные оборудования</p>`;
   }
 }
 
-function renderFilters() {
+/* ============================================================
+   Custom dropdown component
+   ============================================================ */
 
-  initCustomDropdown('filterNationDropdown', applyFilters);
-  initCustomDropdown('filterClassDropdown', applyFilters);
-  initCustomDropdown('filterRoleDropdown', applyFilters);
-  initCustomDropdown('filterLevelDropdown', applyFilters);
-
-  document.querySelectorAll('.dropdown-option[data-value="all"]').forEach(opt => {
-    opt.classList.add('active');
-  });
+function initEquipmentFilters() {
+  ["filterNationDropdown", "filterClassDropdown", "filterRoleDropdown", "filterLevelDropdown"]
+    .forEach((id) => initCustomDropdown(id, applyFilters));
 }
 
-function initCustomDropdown(dropdownId, onChangeCallback) {
+function initCustomDropdown(dropdownId, onChange) {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
 
-  const selected = dropdown.querySelector('.dropdown-selected');
-  const options = dropdown.querySelectorAll('.dropdown-option');
+  const selected = dropdown.querySelector(".dropdown-selected");
+  const options = dropdown.querySelectorAll(".dropdown-option");
 
-  const toggleDropdown = (e) => {
-    e.stopPropagation();
-    document.querySelectorAll('.custom-dropdown.open').forEach(d => {
-      if (d !== dropdown) d.classList.remove('open');
+  const toggleDropdown = (event) => {
+    event.stopPropagation();
+    document.querySelectorAll(".custom-dropdown.open").forEach((other) => {
+      if (other !== dropdown) other.classList.remove("open");
     });
-    dropdown.classList.toggle('open');
+    dropdown.classList.toggle("open");
   };
 
-  selected.addEventListener('click', toggleDropdown);
-  selected.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleDropdown(e);
-    } else if (e.key === 'Escape') {
-      dropdown.classList.remove('open');
+  selected.addEventListener("click", toggleDropdown);
+  selected.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleDropdown(event);
+    } else if (event.key === "Escape") {
+      dropdown.classList.remove("open");
     }
   });
 
-  options.forEach(option => {
-    option.addEventListener('click', () => {
-      const value = option.dataset.value;
-      const text = option.querySelector('.dropdown-text').textContent;
-      const icon = option.querySelector('.dropdown-icon');
-
-      const selectedText = selected.querySelector('.dropdown-text');
-      selectedText.textContent = text;
-
-      const existingIcon = selected.querySelector('.dropdown-icon');
-      if (existingIcon) existingIcon.remove();
-      if (icon) {
-        const newIcon = icon.cloneNode(true);
-        selected.insertBefore(newIcon, selectedText);
-      }
-
-      options.forEach(opt => opt.classList.remove('active'));
-      option.classList.add('active');
-
-      dropdown.classList.remove('open');
-
-      if (onChangeCallback) onChangeCallback();
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      selectDropdownOption(dropdown, selected, options, option);
+      dropdown.classList.remove("open");
+      onChange?.();
     });
+  });
+}
+
+function selectDropdownOption(dropdown, selected, options, chosenOption) {
+  const text = chosenOption.querySelector(".dropdown-text").textContent;
+  const icon = chosenOption.querySelector(".dropdown-icon");
+
+  const selectedText = selected.querySelector(".dropdown-text");
+  selectedText.textContent = text;
+
+  selected.querySelector(".dropdown-icon")?.remove();
+  if (icon) selected.insertBefore(icon.cloneNode(true), selectedText);
+
+  options.forEach((opt) => {
+    const isChosen = opt === chosenOption;
+    opt.classList.toggle("active", isChosen);
+    opt.setAttribute("aria-selected", String(isChosen));
   });
 }
 
 function getDropdownValue(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
-  if (!dropdown) return 'all';
-  const activeOption = dropdown.querySelector('.dropdown-option.active');
-  return activeOption ? activeOption.dataset.value : 'all';
+  return dropdown?.querySelector(".dropdown-option.active")?.dataset.value ?? "all";
+}
+
+document.addEventListener("click", () => {
+  document.querySelectorAll(".custom-dropdown.open").forEach((d) => d.classList.remove("open"));
+});
+
+/* ============================================================
+   Tank table: sorting & filtering
+   ============================================================ */
+
+function getSortValue(tank, column) {
+  const raw = readField(tank, column);
+  switch (column) {
+    case "nation": return (NATION_NAMES[raw] ?? raw).toLowerCase();
+    case "class": return (CLASS_NAMES[raw] ?? raw).toLowerCase();
+    case "role": return (ROLE_NAMES[raw] ?? raw).toLowerCase();
+    case "level": return parseInt(raw || "0", 10);
+    default: return raw.toLowerCase();
+  }
 }
 
 function sortTanks(list, column, direction) {
   if (!column) return list;
 
-  const nationNames = {
-    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
-    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
-    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
-    'italy': 'Италия', 'intunion': 'Сборная наций'
-  };
-  const classNames = {
-    'heavyTank': 'Тяжёлый танк', 'mediumTank': 'Средний танк', 'lightTank': 'Лёгкий танк',
-    'AT-SPG': 'ПТ-САУ', 'SPG': 'САУ'
-  };
-  const roleNames = {
-    'role_LT_universal': 'Лёгкие танки универсальные', 'role_LT_wheeled': 'Лёгкие танки колёсные',
-    'role_MT_assault': 'Средние танки штурмовые', 'role_MT_universal': 'Средние танки универсальные',
-    'role_MT_sniper': 'Средние танки снайперские', 'role_MT_support': 'Средние танки поддержки',
-    'role_HT_assault': 'Тяжёлые танки штурмовые', 'role_HT_universal': 'Тяжёлые танки универсальные',
-    'role_HT_break': 'Тяжёлые танки прорыва', 'role_HT_support': 'Тяжёлые танки поддержки',
-    'role_ATSPG_assault': 'ПТ-САУ штурмовые', 'role_ATSPG_universal': 'ПТ-САУ универсальные',
-    'role_ATSPG_sniper': 'ПТ-САУ снайперские', 'role_ATSPG_support': 'ПТ-САУ поддержки',
-    'role_SPG_assault': 'САУ штурмовые', 'role_SPG': 'САУ поддержки', 'role_SPG_flame': 'САУ огнемётные'
-  };
-
   return [...list].sort((a, b) => {
-    let valA, valB;
-    const getRaw = (obj, key) => String(obj[key] || obj[key + " "] || "").trim();
+    const valA = getSortValue(a, column);
+    const valB = getSortValue(b, column);
 
-    if (column === 'name') {
-      valA = getRaw(a, 'name').toLowerCase();
-      valB = getRaw(b, 'name').toLowerCase();
-    } else if (column === 'nation') {
-      const rawA = getRaw(a, 'nation');
-      const rawB = getRaw(b, 'nation');
-      valA = (nationNames[rawA] || rawA).toLowerCase();
-      valB = (nationNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'class') {
-      const rawA = getRaw(a, 'class');
-      const rawB = getRaw(b, 'class');
-      valA = (classNames[rawA] || rawA).toLowerCase();
-      valB = (classNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'role') {
-      const rawA = getRaw(a, 'role');
-      const rawB = getRaw(b, 'role');
-      valA = (roleNames[rawA] || rawA).toLowerCase();
-      valB = (roleNames[rawB] || rawB).toLowerCase();
-    } else if (column === 'level') {
-      valA = parseInt(getRaw(a, 'level') || "0", 10);
-      valB = parseInt(getRaw(b, 'level') || "0", 10);
-      if (valA < valB) return direction === 'asc' ? -1 : 1;
-      if (valA > valB) return direction === 'asc' ? 1 : -1;
-      return 0;
+    if (typeof valA === "number") {
+      return direction === "asc" ? valA - valB : valB - valA;
     }
-
-    if (typeof valA === 'string' && typeof valB === 'string') {
-      return direction === 'asc' ? valA.localeCompare(valB, 'ru') : valB.localeCompare(valA, 'ru');
-    }
-    return 0;
+    return direction === "asc" ? valA.localeCompare(valB, "ru") : valB.localeCompare(valA, "ru");
   });
 }
 
 function updateSortArrows() {
-  ['name', 'nation', 'class', 'role', 'level'].forEach(col => {
+  SORT_COLUMNS.forEach((col) => {
     const arrow = document.getElementById(`sort-${col}`);
-    if (arrow) {
-      if (currentSortColumn === col) {
-        arrow.textContent = currentSortDirection === 'asc' ? ' ↑' : ' ↓';
-      } else {
-        arrow.textContent = '';
-      }
-    }
+    if (!arrow) return;
+    arrow.textContent =
+      currentSortColumn === col ? (currentSortDirection === "asc" ? " ↑" : " ↓") : "";
   });
 }
 
 function applyFilters() {
   if (!EQUIPMENT_DB) return;
 
-  const nation = getDropdownValue('filterNationDropdown');
-  const cls = getDropdownValue('filterClassDropdown');
-  const role = getDropdownValue('filterRoleDropdown');
-  const level = getDropdownValue('filterLevelDropdown');
+  const nation = getDropdownValue("filterNationDropdown");
+  const cls = getDropdownValue("filterClassDropdown");
+  const role = getDropdownValue("filterRoleDropdown");
+  const level = getDropdownValue("filterLevelDropdown");
 
-  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
-  const filtered = tanksList.filter(tank => {
-    const tankNation = String(tank.nation || tank["nation "] || "").trim();
-    const tankClass = String(tank.class || tank["class "] || "").trim();
-    const tankRole = String(tank.role || tank["role "] || "").trim();
-    const tankLevel = String(tank.level || tank["level "] || "").trim();
-
-    if (nation !== 'all' && tankNation !== nation) return false;
-    if (cls !== 'all' && tankClass !== cls) return false;
-    if (role !== 'all' && tankRole !== role) return false;
-    if (level !== 'all' && tankLevel !== level) return false;
+  const filtered = getTanksList().filter((tank) => {
+    if (nation !== "all" && readField(tank, "nation") !== nation) return false;
+    if (cls !== "all" && readField(tank, "class") !== cls) return false;
+    if (role !== "all" && readField(tank, "role") !== role) return false;
+    if (level !== "all" && readField(tank, "level") !== level) return false;
     return true;
   });
 
   renderTankTable(filtered);
 }
 
-function renderTankTable(tanks = null) {
-  const container = document.getElementById('tankButtons');
-  container.innerHTML = '';
-  const tanksList = EQUIPMENT_DB?.tanks || EQUIPMENT_DB?.["tanks "] || [];
-  let list = tanks || tanksList;
+/* ============================================================
+   Tank table: rendering
+   ============================================================ */
 
-  if (currentSortColumn) {
-    list = sortTanks(list, currentSortColumn, currentSortDirection);
-  }
+function renderTankRow(tank) {
+  const id = readField(tank, "id");
+  const rawNation = readField(tank, "nation");
+  const rawClass = readField(tank, "class");
+  const name = readField(tank, "name");
+  const rawRole = readField(tank, "role");
+  const level = readField(tank, "level");
 
-  if (list.length === 0) {
-    container.innerHTML = '<p class="empty-state">Танки не найдены</p>';
-    return;
-  }
+  const isActive = id === currentTankId ? "active" : "";
+  const nation = NATION_NAMES[rawNation] ?? rawNation;
+  const cls = CLASS_NAMES[rawClass] ?? rawClass;
+  const role = ROLE_NAMES[rawRole] ?? rawRole;
+  const romanLevel = ROMAN_LEVELS[level] ?? level;
 
-  const nationNames = {
-    'ussr': 'СССР', 'germany': 'Германия', 'usa': 'США', 'china': 'Китай',
-    'france': 'Франция', 'uk': 'Великобритания', 'japan': 'Япония',
-    'czech': 'Чехословакия', 'sweden': 'Швеция', 'poland': 'Польша',
-    'italy': 'Италия', 'intunion': 'Сборная наций'
-  };
+  const tankIcon = `icons/${rawNation}-${id}.png`;
+  const nationIcon = `flags/${rawNation}.png`;
+  const classIcon = `classes/${rawClass}.png`;
 
-  const classNames = {
-    'heavyTank': 'Тяжёлый танк',
-    'mediumTank': 'Средний танк',
-    'lightTank': 'Лёгкий танк',
-    'AT-SPG': 'ПТ-САУ',
-    'SPG': 'САУ'
-  };
-
-  const roleNames = {
-    'role_LT_universal': 'Лёгкие танки универсальные',
-    'role_LT_wheeled': 'Лёгкие танки колёсные',
-    'role_MT_assault': 'Средние танки штурмовые',
-    'role_MT_universal': 'Средние танки универсальные',
-    'role_MT_sniper': 'Средние танки снайперские',
-    'role_MT_support': 'Средние танки поддержки',
-    'role_HT_assault': 'Тяжёлые танки штурмовые',
-    'role_HT_universal': 'Тяжёлые танки универсальные',
-    'role_HT_break': 'Тяжёлые танки прорыва',
-    'role_HT_support': 'Тяжёлые танки поддержки',
-    'role_ATSPG_assault': 'ПТ-САУ штурмовые',
-    'role_ATSPG_universal': 'ПТ-САУ универсальные',
-    'role_ATSPG_sniper': 'ПТ-САУ снайперские',
-    'role_ATSPG_support': 'ПТ-САУ поддержки',
-    'role_SPG_assault': 'САУ штурмовые',
-    'role_SPG': 'САУ поддержки',
-    'role_SPG_flame': 'САУ огнемётные'
-  };
-
-  let html = `<table class="tank-table">
-    <thead>
-      <tr>
-        <th class="sortable" data-sort="name">Название <span id="sort-name"></span></th>
-        <th class="sortable" data-sort="nation">Нация <span id="sort-nation"></span></th>
-        <th class="sortable" data-sort="class">Класс <span id="sort-class"></span></th>
-        <th class="sortable" data-sort="role">Роль <span id="sort-role"></span></th>
-        <th class="sortable" data-sort="level">Уровень <span id="sort-level"></span></th>
-      </tr>
-    </thead>
-    <tbody>`;
-
-  const romanLevels = {
-    8: 'VIII',
-    9: 'IX',
-    10: 'X',
-    11: 'XI'
-  };
-  list.forEach(tank => {
-    const id = String(tank.id || tank["id "] || "").trim();
-    const rawNation = String(tank.nation || tank["nation "] || "").trim();
-    const rawClass = String(tank.class || tank["class "] || "").trim();
-
-    const isActive = id === currentTankId ? 'active' : '';
-    const nation = nationNames[rawNation] || rawNation;
-    const cls = classNames[rawClass] || rawClass;
-    const name = String(tank.name || tank["name "] || "").trim();
-    const rawRole = String(tank.role || tank["role "] || "").trim();
-    const role = roleNames[rawRole] || rawRole;
-
-    const tankIcon = `icons/${rawNation}-${id}.png`;
-    const nationIcon = `flags/${rawNation}.png`;
-    const classIcon = `classes/${rawClass}.png`;
-    const level = tank.level || tank["level "];
-    const romanLevel = romanLevels[level] || level;
-
-    html += `<tr class="${isActive}" data-id="${id}">
+  return `
+    <tr class="${isActive}" data-id="${id}">
       <td><div class="cell-content"><img src="${tankIcon}" class="icon-img" alt=""><span>${escapeHtml(name)}</span></div></td>
       <td><div class="cell-content"><img src="${nationIcon}" class="icon-img" alt=""><span>${escapeHtml(nation)}</span></div></td>
       <td><div class="cell-content"><img src="${classIcon}" class="icon-img" alt=""><span>${escapeHtml(cls)}</span></div></td>
       <td><div class="cell-content"><span>${escapeHtml(role)}</span></div></td>
       <td>${escapeHtml(String(romanLevel))}</td>
-    </tr>`;
-  });
-  html += `</tbody></table>`;
-  container.innerHTML = html;
+    </tr>
+  `;
+}
 
-  container.querySelectorAll('th.sortable').forEach(th => {
-    th.addEventListener('click', () => {
+function renderTankTable(tanks = null) {
+  const container = document.getElementById("tankButtons");
+  let list = tanks ?? getTanksList();
+
+  if (currentSortColumn) list = sortTanks(list, currentSortColumn, currentSortDirection);
+
+  if (!list.length) {
+    container.innerHTML = `<p class="empty-state">Танки не найдены</p>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <table class="tank-table">
+      <thead>
+        <tr>
+          <th class="sortable" data-sort="name">Название <span id="sort-name"></span></th>
+          <th class="sortable" data-sort="nation">Нация <span id="sort-nation"></span></th>
+          <th class="sortable" data-sort="class">Класс <span id="sort-class"></span></th>
+          <th class="sortable" data-sort="role">Роль <span id="sort-role"></span></th>
+          <th class="sortable" data-sort="level">Уровень <span id="sort-level"></span></th>
+        </tr>
+      </thead>
+      <tbody>${list.map(renderTankRow).join("")}</tbody>
+    </table>
+  `;
+
+  container.querySelectorAll("th.sortable").forEach((th) => {
+    th.addEventListener("click", () => {
       const col = th.dataset.sort;
-      if (currentSortColumn === col) {
-        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-      } else {
-        currentSortColumn = col;
-        currentSortDirection = 'asc';
-      }
+      currentSortDirection = currentSortColumn === col
+        ? (currentSortDirection === "asc" ? "desc" : "asc")
+        : "asc";
+      currentSortColumn = col;
       applyFilters();
     });
   });
 
   updateSortArrows();
 
-  container.querySelectorAll('tr[data-id]').forEach(row => {
-    row.addEventListener('click', () => {
-      openTank(row.dataset.id);
-    });
+  container.querySelectorAll("tr[data-id]").forEach((row) => {
+    row.addEventListener("click", () => openTank(row.dataset.id));
   });
 }
+
+/* ============================================================
+   Tank detail view
+   ============================================================ */
 
 function openTank(tankId) {
   currentTankId = tankId;
-  const tanksList = EQUIPMENT_DB.tanks || EQUIPMENT_DB["tanks "] || [];
-  const tank = tanksList.find(t => String(t.id || t["id "] || "").trim() === tankId);
+  const tank = getTanksList().find((t) => readField(t, "id") === tankId);
   if (!tank) return;
 
-  document.querySelector('.equip-filters').style.display = 'none';
-  document.getElementById('tankButtons').style.display = 'none';
+  document.querySelector(".equip-filters").hidden = true;
+  document.getElementById("tankButtons").hidden = true;
+  document.getElementById("backButtonContainer").hidden = false;
 
-  document.getElementById('backButtonContainer').style.display = 'block';
+  const name = readField(tank, "name");
+  const images = tank.images ?? tank["images "];
+  const mods = tank.mods ?? tank["mods "];
+  const builds = tank.equipmentBuilds ?? tank["equipmentBuilds "];
 
-  let name = String(tank.name || tank["name "] || "").trim();
   let html = `<div class="tank-name">${escapeHtml(name)}</div>`;
 
-  let images = tank.images || tank["images "];
-  let mods = tank.mods || tank["mods "];
-
-  if (images && images[0]) {
-    let imgSrc = String(images[0]).trim();
-    html += `<div class="tank-main-image">
-      <img src="images/${imgSrc}" alt="${escapeHtml(name)}">
-      ${mods?.length > 0 ? renderFieldMods(mods) : ''}
-    </div>`;
+  if (images?.[0]) {
+    const imgSrc = String(images[0]).trim();
+    html += `
+      <div class="tank-main-image">
+        <img src="images/${imgSrc}" alt="${escapeHtml(name)}">
+        ${mods?.length ? renderFieldMods(mods) : ""}
+      </div>
+    `;
   }
 
-  let builds = tank.equipmentBuilds || tank["equipmentBuilds "];
-  if (builds && builds.length) {
-    html += renderEquipmentBuilds(builds);
-  }
+  if (builds?.length) html += renderEquipmentBuilds(builds);
 
-  document.getElementById('equipmentContent').innerHTML = html;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById("equipmentContent").innerHTML = html;
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function backToTable() {
-  document.getElementById('equipmentContent').innerHTML = '';
-  document.getElementById('backButtonContainer').style.display = 'none';
-
-  document.querySelector('.equip-filters').style.display = 'flex';
-  document.getElementById('tankButtons').style.display = 'block';
+  document.getElementById("equipmentContent").innerHTML = "";
+  document.getElementById("backButtonContainer").hidden = true;
+  document.querySelector(".equip-filters").hidden = false;
+  document.getElementById("tankButtons").hidden = false;
 
   currentTankId = null;
   applyFilters();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function renderEquipmentBuilds(builds) {
-  const titles = { main: 'Основной', alternative: 'Альтернативный', situational: 'Ситуативный' };
-  const count = builds.length;
-  let html = `<div class="equipment-builds" data-count="${count}">`;
-  builds.forEach(build => {
-    let type = build.type || build["type "];
-    let items = build.items || build["items "] || [];
+document.getElementById("backToTableBtn").addEventListener("click", backToTable);
 
-    const slotsHtml = items.map(item => {
-      const rawItem = String(item).trim();
-      const cleanName = rawItem.replace(/\.[^/.]+$/, "");
-      return `
-      <div class="slot">
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-        <div class="slot-bottom-line"></div>
-        <div class="slot-icon item-${cleanName}">
-          <img src="equipment/${rawItem}" alt="">
-        </div>
-      </div>
-    `}).join('');
+/* ============================================================
+   Equipment builds & field modernization diagram
+   ============================================================ */
 
-    html += `
-      <div class="equip-build">
-        <div class="build-label">${escapeHtml(titles[type] || type)}</div>
-        <div class="equip-items">
-          ${slotsHtml}
-        </div>
-      </div>`;
-  });
-  html += `</div>`;
-  return html;
-}
-
-function renderFieldMods(mods) {
+function renderEquipmentSlot(item) {
+  const rawItem = String(item).trim();
+  const cleanName = rawItem.replace(/\.[^/.]+$/, "");
   return `
-    <div class="mods-wrapper">
-      ${mods.map(mod => renderModBlock(mod)).join('')}
+    <div class="slot">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="slot-bottom-line"></div>
+      <div class="slot-icon item-${cleanName}">
+        <img src="equipment/${rawItem}" alt="">
+      </div>
     </div>
   `;
 }
 
+function renderEquipmentBuilds(builds) {
+  const slotsMarkup = (items) => (items ?? []).map(renderEquipmentSlot).join("");
+
+  const buildsMarkup = builds.map((build) => {
+    const type = build.type ?? build["type "];
+    const items = build.items ?? build["items "] ?? [];
+    return `
+      <div class="equip-build">
+        <div class="build-label">${escapeHtml(BUILD_TITLES[type] ?? type)}</div>
+        <div class="equip-items">${slotsMarkup(items)}</div>
+      </div>
+    `;
+  }).join("");
+
+  return `<div class="equipment-builds" data-count="${builds.length}">${buildsMarkup}</div>`;
+}
+
+function renderFieldMods(mods) {
+  return `<div class="mods-wrapper">${mods.map(renderModBlock).join("")}</div>`;
+}
+
 function renderModBlock(mod) {
-  let left = String(mod.left || mod["left "] || "").trim();
-  let right = String(mod.right || mod["right "] || "").trim();
-  let level = String(mod.level || mod["level "] || "").trim();
-  let activeSide = String(mod.activeSide || mod["activeSide "] || "").trim();
+  const left = readField(mod, "left");
+  const right = readField(mod, "right");
+  const level = readField(mod, "level");
+  const activeSide = readField(mod, "activeSide");
 
-  const isNone = activeSide === 'none';
-  const isLeftActive = activeSide === 'left';
-  const isRightActive = activeSide === 'right';
-
-  let html = `
-    <div class="mod-block">
-      <img src="Modernization/${left}" class="mod-base left" alt="">
-      <img src="Modernization/${right}" class="mod-base right" alt="">
-  `;
-
-  if (isLeftActive) {
-    html += `
+  const overlaysBySide = {
+    left: `
       <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
       <img src="Modernization/active.png" class="mod-overlay active left" alt="">
       <img src="Modernization/checkmark.png" class="mod-icon checkmark left" alt="">
       <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
-    `;
-  } else if (isRightActive) {
-    html += `
+    `,
+    right: `
       <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
       <img src="Modernization/active.png" class="mod-overlay active right" alt="">
       <img src="Modernization/checkmark.png" class="mod-icon checkmark right" alt="">
       <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
-    `;
-  } else if (isNone) {
-    html += `
+    `,
+    none: `
       <img src="Modernization/disabled.png" class="mod-overlay disabled left" alt="">
       <img src="Modernization/disabled.png" class="mod-overlay disabled right" alt="">
       <img src="Modernization/marker_blocked.png" class="mod-icon blocked left" alt="">
       <img src="Modernization/marker_blocked.png" class="mod-icon blocked right" alt="">
-    `;
-  }
+    `,
+  };
 
-  html += `
+  return `
+    <div class="mod-block">
+      <img src="Modernization/${left}" class="mod-base left" alt="">
+      <img src="Modernization/${right}" class="mod-base right" alt="">
+      ${overlaysBySide[activeSide] ?? ""}
       <img src="Modernization/${level}" class="mod-level" alt="">
     </div>
   `;
-  return html;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const equipmentPage = document.getElementById('equipmentPage');
-  if (equipmentPage?.style.display !== 'none') loadEquipmentDB();
-  const originalSwitchTab = window.switchTab;
-  window.switchTab = function(tab, event) {
-    if (originalSwitchTab) originalSwitchTab(tab, event);
-    if (tab === 'equipment' && !EQUIPMENT_DB) loadEquipmentDB();
-  };
-});
+/* ============================================================
+   Bootstrap
+   ============================================================ */
 
-document.addEventListener('click', () => {
-  document.querySelectorAll('.custom-dropdown.open').forEach(d => {
-    d.classList.remove('open');
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  switchTab("stats");
 });
-
 </script>
 
 </body>
