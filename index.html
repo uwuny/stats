@@ -18,15 +18,15 @@
 :root {
   /* Surfaces */
   --color-bg: #0d0d0d;
-  --color-surface: #1a1a1a;
-  --color-surface-alt: #1f1f1f;
-  --color-surface-raised: #222222;
-  --color-surface-hover: rgb(255 255 255 / 5%);
-  --color-surface-hover-strong: rgb(255 255 255 / 12%);
+  --color-surface: rgb(255 255 255 / 5%);
+  --color-surface-alt: rgb(255 255 255 / 3.5%);
+  --color-surface-raised: rgb(255 255 255 / 9%);
+  --color-surface-hover: rgb(255 255 255 / 8%);
+  --color-surface-hover-strong: rgb(255 255 255 / 16%);
 
   /* Borders */
-  --color-border: #3a3a3a;
-  --color-border-subtle: #333333;
+  --color-border: rgb(255 255 255 / 14%);
+  --color-border-subtle: rgb(255 255 255 / 10%);
   --color-border-faint: rgb(255 255 255 / 8%);
 
   /* Brand accent */
@@ -36,6 +36,18 @@
   --color-accent-wash: rgb(var(--color-accent-rgb) / 8%);
 
   --color-blue: #4a6ed1;
+
+  /* Liquid Glass */
+  --glass-blur: 22px;
+  --glass-blur-sm: 12px;
+  --glass-bg: rgb(255 255 255 / 6%);
+  --glass-bg-strong: rgb(255 255 255 / 12%);
+  --glass-bg-active: rgb(255 255 255 / 16%);
+  --glass-border: rgb(255 255 255 / 16%);
+  --glass-border-strong: rgb(255 255 255 / 30%);
+  --glass-highlight: rgb(255 255 255 / 30%);
+  --glass-shadow: 0 8px 32px rgb(0 0 0 / 35%);
+  --glass-shadow-sm: 0 4px 16px rgb(0 0 0 / 30%);
 
   /* Semantic */
   --color-win: #2e5e2e;
@@ -181,7 +193,15 @@ body {
   justify-content: center;
   align-items: center;
   gap: var(--space-2);
-  margin-bottom: var(--space-4);
+  margin: 0 auto var(--space-4);
+  width: fit-content;
+  padding: 6px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 10%);
 }
 
 .main-tabs .tab {
@@ -201,18 +221,22 @@ body {
 
 button {
   font: inherit;
-  background: #2b2b2b;
+  background: var(--glass-bg);
   color: var(--color-text);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--glass-border);
   padding: 6px var(--space-3);
   margin: var(--space-1);
   border-radius: var(--radius-sm);
   cursor: pointer;
   position: relative;
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
   transition:
-    border-color var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-med) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-out),
+    background-color var(--duration-med) var(--ease-out),
+    color var(--duration-med) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
@@ -226,71 +250,54 @@ button:active {
 }
 
 button.active {
-  background: var(--color-blue);
+  background: var(--glass-bg-active);
+  color: var(--color-accent);
 }
 
-/* ---- Running-border hover treatment, shared by all control buttons ---- */
+/* ---- Liquid Glass treatment, shared by all control buttons ---- */
 
 .btn-runborder {
   position: relative;
-  overflow: visible;
-  background: transparent;
-  border-color: var(--color-btn-border);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%));
+  border-color: var(--glass-border);
   color: var(--color-text-muted);
-  box-shadow: none;
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 12%);
 }
 
-.btn-runborder::before,
-.btn-runborder::after {
+.btn-runborder::before {
   position: absolute;
-  inset: -1px auto auto -1px;
-  border-color: var(--color-accent);
+  inset: 0;
   border-radius: inherit;
-  border-style: solid;
-  transition: width var(--duration-slow) var(--ease-out), height var(--duration-slow) var(--ease-out);
+  background: linear-gradient(135deg, rgb(255 255 255 / 18%) 0%, rgb(255 255 255 / 0%) 45%);
+  opacity: 0;
+  transition: opacity var(--duration-med) var(--ease-out);
   content: "";
   z-index: 1;
   pointer-events: none;
 }
 
-.btn-runborder::before {
-  width: 0;
-  height: calc(100% + 2px);
-  border-width: 2px 0;
-}
-
-.btn-runborder::after {
-  width: calc(100% + 2px);
-  height: 0;
-  border-width: 0 2px;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .btn-runborder:hover {
-    color: var(--color-accent);
+    color: var(--color-text);
+    background: linear-gradient(180deg, rgb(255 255 255 / 14%), rgb(255 255 255 / 4%));
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 18%);
+    transform: translateY(-1px);
   }
 
   .btn-runborder:hover::before {
-    width: 100%;
-  }
-
-  .btn-runborder:hover::after {
-    height: 100%;
+    opacity: 1;
   }
 }
 
 .btn-runborder.active {
-  border-color: var(--color-accent);
   color: var(--color-accent);
-  background: var(--color-accent-wash);
-}
-
-.btn-runborder.active::before {
-  width: 100%;
-}
-
-.btn-runborder.active::after {
-  height: 100%;
+  background: linear-gradient(180deg, rgb(var(--color-accent-rgb) / 20%), rgb(var(--color-accent-rgb) / 6%));
+  border-color: var(--glass-border-strong);
+  box-shadow: 0 4px 22px rgb(var(--color-accent-rgb) / 25%), inset 0 1px 0 rgb(255 255 255 / 20%);
 }
 
 /* ============================================================
@@ -301,11 +308,14 @@ button.active {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  background: rgb(255 255 255 / 2%);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-3);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 10%);
 }
 
 .control-group {
@@ -403,6 +413,12 @@ button.active {
   width: auto;
   max-width: 100%;
   object-fit: contain;
+}
+
+svg.stat-btn__icon {
+  height: 36px;
+  width: 36px;
+  transition: color var(--duration-med) var(--ease-out);
 }
 
 .stage-btn {
@@ -511,7 +527,11 @@ button.active {
   display: flex;
   align-items: center;
   position: relative;
-  background: rgb(255 255 255 / 3%);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), inset 0 1px 0 rgb(255 255 255 / 10%);
   border-radius: var(--radius-full);
   padding: 3px;
   width: 60px;
@@ -549,9 +569,10 @@ button.active {
   left: 3px;
   width: 27px;
   height: 22px;
-  background: var(--color-accent);
+  background: linear-gradient(180deg, rgb(var(--color-accent-rgb) / 95%), rgb(var(--color-accent-rgb) / 70%));
+  border: 1px solid rgb(255 255 255 / 30%);
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-glow-accent);
+  box-shadow: var(--shadow-glow-accent), inset 0 1px 0 rgb(255 255 255 / 40%);
   transition: transform var(--duration-slow) var(--ease-spring);
   pointer-events: none;
 }
@@ -587,6 +608,12 @@ button.active {
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-surface);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 #tableWrapper::-webkit-scrollbar {
@@ -616,7 +643,7 @@ button.active {
 
 table {
   border-collapse: collapse;
-  background: var(--color-surface);
+  background: transparent;
   width: max-content;
   min-width: 100%;
   table-layout: fixed;
@@ -803,9 +830,9 @@ th.hover-cell:not(.win):not(.lose) {
 }
 
 #backToTableBtn {
-  background: #2b2b2b;
+  background: linear-gradient(180deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 3%));
   color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--glass-border);
   padding: 10px 20px;
   font-size: 16px;
   border-radius: var(--radius-sm);
@@ -813,15 +840,20 @@ th.hover-cell:not(.win):not(.lose) {
   font-family: var(--font-display);
   font-weight: 600;
   margin-bottom: var(--space-5);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 12%);
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-med) var(--ease-out),
+    border-color var(--duration-med) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
 #backToTableBtn:hover {
-  background: var(--color-accent-soft);
-  box-shadow: var(--shadow-glow-accent);
+  background: linear-gradient(180deg, rgb(255 255 255 / 16%), rgb(255 255 255 / 6%));
+  border-color: var(--glass-border-strong);
+  box-shadow: 0 6px 22px rgb(var(--color-accent-rgb) / 22%), inset 0 1px 0 rgb(255 255 255 / 18%);
 }
 
 #backToTableBtn:active {
@@ -837,9 +869,12 @@ th.hover-cell:not(.win):not(.lose) {
   max-width: 1200px;
   margin: 3px auto 20px;
   border-collapse: collapse;
-  background: var(--color-surface);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 10%);
   font-family: var(--font-display);
   overflow: hidden;
 }
@@ -995,16 +1030,20 @@ th.hover-cell:not(.win):not(.lose) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-surface-alt);
+  background: var(--glass-bg);
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  transition: border-color var(--duration-med) var(--ease-out), box-shadow var(--duration-med) var(--ease-out);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
+  transition: border-color var(--duration-med) var(--ease-out), box-shadow var(--duration-med) var(--ease-out), background-color var(--duration-med) var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .slot:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 15px rgb(var(--color-accent-rgb) / 30%);
+    border-color: var(--glass-border-strong);
+    background: var(--glass-bg-strong);
+    box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 18%);
   }
 }
 
@@ -1223,9 +1262,9 @@ th.hover-cell:not(.win):not(.lose) {
 .dropdown-level { width: 90px; flex: none; }
 
 .dropdown-selected {
-  background: #111;
+  background: var(--glass-bg);
   color: #fff;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--glass-border);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -1235,12 +1274,16 @@ th.hover-cell:not(.win):not(.lose) {
   min-height: 42px;
   gap: var(--space-2);
   margin: 0;
-  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
+  transition: border-color var(--duration-med) var(--ease-out), box-shadow var(--duration-med) var(--ease-out), background-color var(--duration-med) var(--ease-out);
 }
 
 .dropdown-selected:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 8px rgb(var(--color-accent-rgb) / 30%);
+  background: var(--glass-bg-strong);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 16%);
 }
 
 .dropdown-selected .dropdown-icon {
@@ -1266,8 +1309,8 @@ th.hover-cell:not(.win):not(.lose) {
   right: 0;
   margin: 0;
   padding: 0;
-  background: #111;
-  border: 1px solid var(--color-border-subtle);
+  background: rgb(20 20 20 / 70%);
+  border: 1px solid var(--glass-border);
   border-top: none;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   z-index: 9999;
@@ -1275,6 +1318,9 @@ th.hover-cell:not(.win):not(.lose) {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-shadow);
 
   visibility: hidden;
   opacity: 0;
@@ -1393,6 +1439,96 @@ th.hover-cell:not(.win):not(.lose) {
 </style>
 
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<defs>
+  <path id="tank-hull" d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z"/>
+
+  <mask id="mask-received" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
+    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
+    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
+    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
+    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
+    <circle cx="28" cy="26" r="3" fill="black"/>
+    <circle cx="14" cy="35" r="2.6" fill="black"/>
+    <circle cx="44" cy="35" r="2.2" fill="black"/>
+    <line x1="25" y1="24" x2="27" y2="22" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+    <line x1="10" y1="31" x2="8" y2="29" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+    <line x1="47" y1="32" x2="49" y2="30" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+  </mask>
+
+  <mask id="mask-hits" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
+    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
+    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
+    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
+    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
+    <g transform="translate(28,30)" fill="black">
+      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(45)"/>
+      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(135)"/>
+      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(225)"/>
+      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(315)"/>
+    </g>
+  </mask>
+
+  <mask id="mask-survival" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
+    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
+    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
+    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
+    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
+    <path d="M23 29 L28 34 L35 24" fill="none" stroke="black" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="miter"/>
+  </mask>
+
+  <mask id="mask-assist-back" maskUnits="userSpaceOnUse" x="-40" y="-40" width="160" height="160">
+    <rect x="-40" y="-40" width="160" height="160" fill="white"/>
+    <circle cx="20" cy="36" r="22.5" fill="black"/>
+  </mask>
+</defs>
+
+<!-- Урон -->
+<symbol id="icon-damage" viewBox="0 0 56 56">
+  <g transform="translate(28,28)" fill="currentColor">
+    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(45)"/>
+    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(135)"/>
+    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(225)"/>
+    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(315)"/>
+  </g>
+</symbol>
+
+<!-- Получено -->
+<symbol id="icon-received" viewBox="0 0 56 56">
+  <rect width="56" height="56" fill="currentColor" mask="url(#mask-received)"/>
+</symbol>
+
+<!-- Попадания -->
+<symbol id="icon-hits" viewBox="0 0 56 56">
+  <rect width="56" height="56" fill="currentColor" mask="url(#mask-hits)"/>
+</symbol>
+
+<!-- Ассист -->
+<symbol id="icon-assist" viewBox="0 0 56 56">
+  <path d="M42.37,33.51 A13,13 0 1,0 25.09,14.08" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+  <g mask="url(#mask-assist-back)" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+    <line x1="33.5" y1="7" x2="33.5" y2="12"/>
+    <line x1="45.5" y1="24" x2="50.5" y2="24"/>
+    <line x1="33.5" y1="36" x2="33.5" y2="41"/>
+    <line x1="16.5" y1="24" x2="21.5" y2="24"/>
+  </g>
+  <circle cx="33.5" cy="24" r="2" fill="currentColor"/>
+  <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+    <circle cx="20" cy="36" r="13"/>
+    <circle cx="20" cy="36" r="2" fill="currentColor" stroke="none"/>
+    <line x1="20" y1="19" x2="20" y2="24"/>
+    <line x1="20" y1="48" x2="20" y2="53"/>
+    <line x1="3" y1="36" x2="8" y2="36"/>
+    <line x1="32" y1="36" x2="37" y2="36"/>
+  </g>
+</symbol>
+
+<!-- Выживаемость -->
+<symbol id="icon-survival" viewBox="0 0 56 56">
+  <rect width="56" height="56" fill="currentColor" mask="url(#mask-survival)"/>
+</symbol>
+
+</svg>
 <div class="page">
 
   <header class="brand">
@@ -1728,10 +1864,10 @@ document.querySelectorAll(".tab").forEach((btn) => {
    ============================================================ */
 
 const STAT_TYPES = [
-  { key: "damage", label: "Урон", icon: "stat/damage.png" },
-  { key: "damage_received", label: "Получено", icon: "stat/damage_received.png" },
-  { key: "hits", label: "Попадания", icon: "stat/hits.png" },
-  { key: "assist", label: "Ассист", icon: "stat/assist.png" },
+  { key: "damage", label: "Урон", svgIcon: "icon-damage" },
+  { key: "damage_received", label: "Получено", svgIcon: "icon-received" },
+  { key: "hits", label: "Попадания", svgIcon: "icon-hits" },
+  { key: "assist", label: "Ассист", svgIcon: "icon-assist" },
   { key: "survival", label: "Выживаемость", icon: "stat/survival.png" },
 ];
 
@@ -1831,7 +1967,9 @@ function renderStatButtons() {
   const wrap = document.getElementById("statButtons");
   wrap.innerHTML = STAT_TYPES.map((stat) => `
     <button type="button" class="stat-btn btn-runborder${stat.key === currentType ? " active" : ""}" data-stat="${stat.key}">
-      <img class="stat-btn__icon" src="${stat.icon}" alt="">
+      ${stat.svgIcon
+        ? `<svg class="stat-btn__icon" viewBox="0 0 56 56" aria-hidden="true"><use href="#${stat.svgIcon}"></use></svg>`
+        : `<img class="stat-btn__icon" src="${stat.icon}" alt="">`}
       <span>${escapeHtml(stat.label)}</span>
     </button>
   `).join("");
