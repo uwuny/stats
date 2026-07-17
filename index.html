@@ -1439,96 +1439,6 @@ th.hover-cell:not(.win):not(.lose) {
 </style>
 
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-<defs>
-  <path id="tank-hull" d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z"/>
-
-  <mask id="mask-received" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
-    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
-    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
-    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
-    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
-    <circle cx="28" cy="26" r="3" fill="black"/>
-    <circle cx="14" cy="35" r="2.6" fill="black"/>
-    <circle cx="44" cy="35" r="2.2" fill="black"/>
-    <line x1="25" y1="24" x2="27" y2="22" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
-    <line x1="10" y1="31" x2="8" y2="29" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
-    <line x1="47" y1="32" x2="49" y2="30" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
-  </mask>
-
-  <mask id="mask-hits" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
-    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
-    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
-    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
-    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
-    <g transform="translate(28,30)" fill="black">
-      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(45)"/>
-      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(135)"/>
-      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(225)"/>
-      <rect x="2.5" y="-1.7" width="9.5" height="3.4" rx="1.7" transform="rotate(315)"/>
-    </g>
-  </mask>
-
-  <mask id="mask-survival" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
-    <path d="M8,30 L42,30 A2.7,2.7 0 0 1 44.7,27.3 L48.7,27.3 A3.3,3.3 0 0 1 52,30.6 L52,38 L48,42 L8,42 L4,38 L4,34 A4,4 0 0 1 8,30 Z" fill="white"/>
-    <rect x="17.5" y="19.3" width="21" height="14.7" rx="6.3" fill="white"/>
-    <rect x="29.7" y="18.3" width="6.7" height="4" rx="1.5" fill="white"/>
-    <rect x="0" y="22.2" width="20.9" height="3.6" rx="1.8" fill="white"/>
-    <path d="M23 29 L28 34 L35 24" fill="none" stroke="black" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="miter"/>
-  </mask>
-
-  <mask id="mask-assist-back" maskUnits="userSpaceOnUse" x="-40" y="-40" width="160" height="160">
-    <rect x="-40" y="-40" width="160" height="160" fill="white"/>
-    <circle cx="20" cy="36" r="22.5" fill="black"/>
-  </mask>
-</defs>
-
-<!-- Урон -->
-<symbol id="icon-damage" viewBox="0 0 56 56">
-  <g transform="translate(28,28)" fill="currentColor">
-    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(45)"/>
-    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(135)"/>
-    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(225)"/>
-    <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(315)"/>
-  </g>
-</symbol>
-
-<!-- Получено -->
-<symbol id="icon-received" viewBox="0 0 56 56">
-  <rect width="56" height="56" fill="currentColor" mask="url(#mask-received)"/>
-</symbol>
-
-<!-- Попадания -->
-<symbol id="icon-hits" viewBox="0 0 56 56">
-  <rect width="56" height="56" fill="currentColor" mask="url(#mask-hits)"/>
-</symbol>
-
-<!-- Ассист -->
-<symbol id="icon-assist" viewBox="0 0 56 56">
-  <path d="M42.37,33.51 A13,13 0 1,0 25.09,14.08" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
-  <g mask="url(#mask-assist-back)" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
-    <line x1="33.5" y1="7" x2="33.5" y2="12"/>
-    <line x1="45.5" y1="24" x2="50.5" y2="24"/>
-    <line x1="33.5" y1="36" x2="33.5" y2="41"/>
-    <line x1="16.5" y1="24" x2="21.5" y2="24"/>
-  </g>
-  <circle cx="33.5" cy="24" r="2" fill="currentColor"/>
-  <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
-    <circle cx="20" cy="36" r="13"/>
-    <circle cx="20" cy="36" r="2" fill="currentColor" stroke="none"/>
-    <line x1="20" y1="19" x2="20" y2="24"/>
-    <line x1="20" y1="48" x2="20" y2="53"/>
-    <line x1="3" y1="36" x2="8" y2="36"/>
-    <line x1="32" y1="36" x2="37" y2="36"/>
-  </g>
-</symbol>
-
-<!-- Выживаемость -->
-<symbol id="icon-survival" viewBox="0 0 56 56">
-  <rect width="56" height="56" fill="currentColor" mask="url(#mask-survival)"/>
-</symbol>
-
-</svg>
 <div class="page">
 
   <header class="brand">
@@ -1863,12 +1773,57 @@ document.querySelectorAll(".tab").forEach((btn) => {
    Stats page: configuration
    ============================================================ */
 
+const STAT_ICON_MARKUP = {
+  damage: `
+    <g transform="translate(28,28)" fill="currentColor">
+      <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(45)"/>
+      <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(135)"/>
+      <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(225)"/>
+      <rect x="6" y="-3.325" width="16" height="6.65" rx="3.325" transform="rotate(315)"/>
+    </g>
+  `,
+  received: `
+    <path d="M28,10 C21,10 15,12.5 15,12.5 L15,25 C15,35.5 20.5,43.5 28,47.5 C35.5,43.5 41,35.5 41,25 L41,12.5 C41,12.5 35,10 28,10 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M28,18 L28,32 M21,26 L28,33 L35,26" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  `,
+  hits: `
+    <circle cx="28" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="3.2"/>
+    <circle cx="28" cy="28" r="3" fill="currentColor"/>
+    <line x1="28" y1="5" x2="28" y2="13" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <line x1="28" y1="43" x2="28" y2="51" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <line x1="5" y1="28" x2="13" y2="28" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <line x1="43" y1="28" x2="51" y2="28" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+  `,
+  assist: `
+    <path d="M42.37,33.51 A13,13 0 1,0 25.09,14.08" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+    <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+      <line x1="33.5" y1="7" x2="33.5" y2="12"/>
+      <line x1="45.5" y1="24" x2="50.5" y2="24"/>
+      <line x1="33.5" y1="36" x2="33.5" y2="41"/>
+      <line x1="16.5" y1="24" x2="21.5" y2="24"/>
+    </g>
+    <circle cx="33.5" cy="24" r="2" fill="currentColor"/>
+    <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+      <circle cx="20" cy="36" r="13"/>
+      <circle cx="20" cy="36" r="2" fill="currentColor" stroke="none"/>
+      <line x1="20" y1="19" x2="20" y2="24"/>
+      <line x1="20" y1="48" x2="20" y2="53"/>
+      <line x1="3" y1="36" x2="8" y2="36"/>
+      <line x1="32" y1="36" x2="37" y2="36"/>
+    </g>
+  `,
+  survival: `
+    <path d="M28,10 C21,10 15,12.5 15,12.5 L15,25 C15,35.5 20.5,43.5 28,47.5 C35.5,43.5 41,35.5 41,25 L41,12.5 C41,12.5 35,10 28,10 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M20,27 L26,33 L37,20" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  `,
+};
+
 const STAT_TYPES = [
-  { key: "damage", label: "Урон", svgIcon: "icon-damage" },
-  { key: "damage_received", label: "Получено", svgIcon: "icon-received" },
-  { key: "hits", label: "Попадания", svgIcon: "icon-hits" },
-  { key: "assist", label: "Ассист", svgIcon: "icon-assist" },
-  { key: "survival", label: "Выживаемость", icon: "stat/survival.png" },
+  { key: "damage", label: "Урон", svgIcon: "damage" },
+  { key: "damage_received", label: "Получено", svgIcon: "received" },
+  { key: "hits", label: "Попадания", svgIcon: "hits" },
+  { key: "assist", label: "Ассист", svgIcon: "assist" },
+  { key: "survival", label: "Выживаемость", svgIcon: "survival" },
 ];
 
 const SEASONS = [
@@ -1967,9 +1922,7 @@ function renderStatButtons() {
   const wrap = document.getElementById("statButtons");
   wrap.innerHTML = STAT_TYPES.map((stat) => `
     <button type="button" class="stat-btn btn-runborder${stat.key === currentType ? " active" : ""}" data-stat="${stat.key}">
-      ${stat.svgIcon
-        ? `<svg class="stat-btn__icon" viewBox="0 0 56 56" aria-hidden="true"><use href="#${stat.svgIcon}"></use></svg>`
-        : `<img class="stat-btn__icon" src="${stat.icon}" alt="">`}
+      <svg class="stat-btn__icon" viewBox="0 0 56 56" aria-hidden="true">${STAT_ICON_MARKUP[stat.svgIcon] ?? ""}</svg>
       <span>${escapeHtml(stat.label)}</span>
     </button>
   `).join("");
