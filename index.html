@@ -11,12 +11,7 @@
 
 <style>
 
-/* ============================================================
-   Design tokens
-   ============================================================ */
-
 :root {
-  /* Surfaces */
   --color-bg: #0d0d0d;
   --color-surface: rgb(255 255 255 / 5%);
   --color-surface-alt: rgb(255 255 255 / 3.5%);
@@ -24,12 +19,10 @@
   --color-surface-hover: rgb(255 255 255 / 8%);
   --color-surface-hover-strong: rgb(255 255 255 / 16%);
 
-  /* Borders */
   --color-border: rgb(255 255 255 / 14%);
   --color-border-subtle: rgb(255 255 255 / 10%);
   --color-border-faint: rgb(255 255 255 / 8%);
 
-  /* Brand accent */
   --color-accent: #00ff66;
   --color-accent-rgb: 0 255 102;
   --color-accent-soft: #2e5e2e;
@@ -37,7 +30,6 @@
 
   --color-blue: #4a6ed1;
 
-  /* Liquid Glass */
   --glass-blur: 22px;
   --glass-blur-sm: 12px;
   --glass-bg: rgb(255 255 255 / 6%);
@@ -49,7 +41,6 @@
   --glass-shadow: 0 8px 32px rgb(0 0 0 / 35%);
   --glass-shadow-sm: 0 4px 16px rgb(0 0 0 / 30%);
 
-  /* Semantic */
   --color-win: #2e5e2e;
   --color-lose: #5e2e2e;
   --color-alive: #00ff66;
@@ -59,22 +50,18 @@
   --color-link-hover: #9be8ff;
   --color-btn-border: #979695;
 
-  /* Text */
   --color-text: #f5f5f5;
   --color-text-muted: #a6a6a6;
   --color-text-faint: #808080;
 
-  /* Type */
   --font-display: 'Sofia Sans', sans-serif;
   --font-body: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
 
-  /* Radius */
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-full: 999px;
 
-  /* Spacing scale */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -82,13 +69,11 @@
   --space-5: 20px;
   --space-6: 24px;
 
-  /* Motion: durations */
   --duration-fast: 120ms;
   --duration-base: 180ms;
   --duration-med: 250ms;
   --duration-slow: 350ms;
 
-  /* Motion: easing (see emil-design-eng: strong, intentional curves) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -96,10 +81,6 @@
   --shadow-panel: 0 4px 20px rgb(0 0 0 / 45%);
   --shadow-glow-accent: 0 0 12px rgb(var(--color-accent-rgb) / 45%);
 }
-
-/* ============================================================
-   Reset & base
-   ============================================================ */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -109,6 +90,35 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 35%) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(255 255 255 / 45%), rgb(255 255 255 / 22%));
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 32%));
+  background-clip: padding-box;
+  box-shadow: 0 0 8px rgb(255 255 255 / 25%);
+}
+
+html::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 body {
@@ -145,10 +155,6 @@ body {
   border: 0;
 }
 
-/* ============================================================
-   Page shell & brand
-   ============================================================ */
-
 .page {
   position: relative;
   z-index: 1;
@@ -183,10 +189,6 @@ body {
   text-wrap: balance;
 }
 
-/* ============================================================
-   Navigation tabs
-   ============================================================ */
-
 .main-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -214,10 +216,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-/* ============================================================
-   Buttons
-   ============================================================ */
 
 button {
   font: inherit;
@@ -253,8 +251,6 @@ button.active {
   background: var(--glass-bg-active);
   color: var(--color-accent);
 }
-
-/* ---- Liquid Glass treatment, shared by all control buttons ---- */
 
 .btn-runborder {
   position: relative;
@@ -299,10 +295,6 @@ button.active {
   border-color: var(--glass-border-strong);
   box-shadow: 0 4px 22px rgb(var(--color-accent-rgb) / 25%), inset 0 1px 0 rgb(255 255 255 / 20%);
 }
-
-/* ============================================================
-   Control panel (Показатели / Сезон / Этап / Дата / Отображение)
-   ============================================================ */
 
 .control-panel {
   display: flex;
@@ -494,10 +486,6 @@ svg.stat-btn__icon {
   }
 }
 
-/* ============================================================
-   Table toolbar: average-position toggle + "all battles"
-   ============================================================ */
-
 .table-toolbar {
   display: flex;
   align-items: center;
@@ -599,15 +587,11 @@ svg.stat-btn__icon {
   }
 }
 
-/* ============================================================
-   Stats table
-   ============================================================ */
-
 #tableWrapper {
   width: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-surface);
+  scrollbar-color: rgb(255 255 255 / 35%) transparent;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
@@ -622,23 +606,25 @@ svg.stat-btn__icon {
 }
 
 #tableWrapper::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: var(--radius-sm);
+  background: transparent;
 }
 
 #tableWrapper::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
+  background: linear-gradient(180deg, rgb(255 255 255 / 45%), rgb(255 255 255 / 22%));
+  border: 2px solid transparent;
+  background-clip: padding-box;
   border-radius: var(--radius-sm);
   transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 #tableWrapper::-webkit-scrollbar-thumb:hover {
-  background: #00cc55;
-  box-shadow: 0 0 8px rgb(var(--color-accent-rgb) / 60%);
+  background: linear-gradient(180deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 32%));
+  background-clip: padding-box;
+  box-shadow: 0 0 8px rgb(255 255 255 / 25%);
 }
 
 #tableWrapper::-webkit-scrollbar-corner {
-  background: var(--color-surface);
+  background: transparent;
 }
 
 table {
@@ -746,8 +732,6 @@ th.hover-cell:not(.win):not(.lose) {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  outline: 1px solid var(--color-border-faint);
-  outline-offset: -1px;
 }
 
 .map-link {
@@ -768,10 +752,6 @@ th.hover-cell:not(.win):not(.lose) {
   text-shadow: 0 0 4px rgb(255 255 255 / 40%);
 }
 
-/* ============================================================
-   Footer
-   ============================================================ */
-
 .site-footer {
   text-align: center;
   padding-bottom: var(--space-5);
@@ -790,10 +770,6 @@ th.hover-cell:not(.win):not(.lose) {
   font-size: 14px;
   margin: 0;
 }
-
-/* ============================================================
-   Equipment page: filters
-   ============================================================ */
 
 .equip-filters {
   display: flex;
@@ -859,10 +835,6 @@ th.hover-cell:not(.win):not(.lose) {
 #backToTableBtn:active {
   transform: scale(0.96);
 }
-
-/* ============================================================
-   Tank table
-   ============================================================ */
 
 .tank-table {
   width: 95%;
@@ -953,10 +925,6 @@ th.hover-cell:not(.win):not(.lose) {
   text-align: center;
   color: var(--color-dead);
 }
-
-/* ============================================================
-   Tank detail view
-   ============================================================ */
 
 #equipmentContent {
   padding: 0;
@@ -1130,10 +1098,6 @@ th.hover-cell:not(.win):not(.lose) {
   }
 }
 
-/* ============================================================
-   Field modernization overlay diagram
-   ============================================================ */
-
 .mods-wrapper {
   position: absolute;
   inset: 0;
@@ -1242,10 +1206,6 @@ th.hover-cell:not(.win):not(.lose) {
   white-space: nowrap;
 }
 
-/* ============================================================
-   Custom dropdown
-   ============================================================ */
-
 .custom-dropdown {
   position: relative;
   margin: 0;
@@ -1317,7 +1277,7 @@ th.hover-cell:not(.win):not(.lose) {
   max-height: 350px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-surface);
+  scrollbar-color: rgb(255 255 255 / 35%) transparent;
   backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   box-shadow: var(--glass-shadow);
@@ -1337,19 +1297,18 @@ th.hover-cell:not(.win):not(.lose) {
 }
 
 .dropdown-options::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: 0 0 var(--radius-sm) 0;
+  background: transparent;
 }
 
 .dropdown-options::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
+  background: linear-gradient(180deg, rgb(255 255 255 / 45%), rgb(255 255 255 / 22%));
   border-radius: 4px;
   transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .dropdown-options::-webkit-scrollbar-thumb:hover {
-  background: #00cc55;
-  box-shadow: 0 0 6px rgb(var(--color-accent-rgb) / 50%);
+  background: linear-gradient(180deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 32%));
+  box-shadow: 0 0 6px rgb(255 255 255 / 25%);
 }
 
 .custom-dropdown.open .dropdown-options {
@@ -1397,7 +1356,6 @@ th.hover-cell:not(.win):not(.lose) {
   white-space: nowrap;
 }
 
-/* Per-item optical alignment fixes for irregular equipment icon art */
 .slot-icon.item-BonDosil img        { transform: translate(-2px, 0); }
 .slot-icon.item-BonOptica img       { transform: translate(-5px, 0); }
 .slot-icon.item-BonStab img         { transform: translate(-6px, 0); }
@@ -1711,10 +1669,6 @@ th.hover-cell:not(.win):not(.lose) {
 <script>
 "use strict";
 
-/* ============================================================
-   Shared utilities
-   ============================================================ */
-
 const escapeHtml = (value) =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -1735,16 +1689,7 @@ const addDays = (date, days) => {
   return result;
 };
 
-/**
- * Some upstream JSON exports contain trailing-space keys (e.g. "name ").
- * This reads a field under its clean key first, falling back to the
- * trailing-space variant, and always returns a trimmed string.
- */
 const readField = (obj, key) => String(obj?.[key] ?? obj?.[`${key} `] ?? "").trim();
-
-/* ============================================================
-   Tab navigation
-   ============================================================ */
 
 const tabPanels = {
   stats: document.getElementById("statsPage"),
@@ -1768,10 +1713,6 @@ function switchTab(tab) {
 document.querySelectorAll(".tab").forEach((btn) => {
   btn.addEventListener("click", () => switchTab(btn.dataset.tab));
 });
-
-/* ============================================================
-   Stats page: configuration
-   ============================================================ */
 
 const STAT_ICON_MARKUP = {
   damage: `
@@ -1839,10 +1780,6 @@ const DATA_FILES = [
   "data/18.json", "data/19.json", "data/20.json", "data/21.json",
 ];
 
-/* ============================================================
-   Stats page: state
-   ============================================================ */
-
 let DATA = null;
 let avgPosition = "left";
 let currentType = "damage";
@@ -1895,10 +1832,6 @@ function openBattleHtmlByIndex(index) {
   const battle = visibleBattles[index];
   if (battle) openBattleHtml(battle);
 }
-
-/* ============================================================
-   Stats page: control panel rendering
-   ============================================================ */
 
 function renderStatButtons() {
   const wrap = document.getElementById("statButtons");
@@ -2009,10 +1942,6 @@ document.getElementById("allBattlesBtn").addEventListener("click", showAllBattle
 document.getElementById("avgToggleLeft").addEventListener("click", () => setAveragePosition("left"));
 document.getElementById("avgToggleRight").addEventListener("click", () => setAveragePosition("right"));
 
-/* ============================================================
-   Stats page: table data pipeline
-   ============================================================ */
-
 function getPenetrationRate(playerName, battles) {
   let hits = 0;
   let pierces = 0;
@@ -2036,7 +1965,6 @@ function extractCellValue(type, player) {
   }
 }
 
-/** Builds a { playerName: { battleIndex: cell } } grid for the given battles/stat type. */
 function buildPlayerGrid(type, battles) {
   const players = {};
   battles.forEach((battle, index) => {
@@ -2115,10 +2043,6 @@ function computeBattleSummary(battles) {
     winRate: battles.length ? Math.round((winCount / battles.length) * 100) : 0,
   };
 }
-
-/* ============================================================
-   Stats page: table rendering
-   ============================================================ */
 
 function renderSummaryCell({ avgElo, winRate }) {
   return `
@@ -2255,10 +2179,6 @@ function enableHover(table) {
   });
 }
 
-/* ============================================================
-   Stats page: bootstrap
-   ============================================================ */
-
 Promise.all(
   DATA_FILES.map(async (file) => {
     const response = await fetch(file);
@@ -2282,10 +2202,6 @@ Promise.all(
 
 <script>
 "use strict";
-
-/* ============================================================
-   Equipment page: reference data
-   ============================================================ */
 
 const NATION_NAMES = {
   ussr: "СССР", germany: "Германия", usa: "США", china: "Китай",
@@ -2328,10 +2244,6 @@ const BUILD_TITLES = { main: "Основной", alternative: "Альтерна�
 
 const SORT_COLUMNS = ["name", "nation", "class", "role", "level"];
 
-/* ============================================================
-   Equipment page: state
-   ============================================================ */
-
 let EQUIPMENT_DB = null;
 let currentTankId = null;
 let currentSortColumn = null;
@@ -2354,10 +2266,6 @@ async function loadEquipmentDB() {
       `<p class="error-state">Не удалось загрузить данные оборудования</p>`;
   }
 }
-
-/* ============================================================
-   Custom dropdown component
-   ============================================================ */
 
 function initEquipmentFilters() {
   ["filterNationDropdown", "filterClassDropdown", "filterRoleDropdown", "filterLevelDropdown"]
@@ -2424,10 +2332,6 @@ document.addEventListener("click", () => {
   document.querySelectorAll(".custom-dropdown.open").forEach((d) => d.classList.remove("open"));
 });
 
-/* ============================================================
-   Tank table: sorting & filtering
-   ============================================================ */
-
 function getSortValue(tank, column) {
   const raw = readField(tank, column);
   switch (column) {
@@ -2480,10 +2384,6 @@ function applyFilters() {
 
   renderTankTable(filtered);
 }
-
-/* ============================================================
-   Tank table: rendering
-   ============================================================ */
 
 function renderTankRow(tank) {
   const id = readField(tank, "id");
@@ -2558,10 +2458,6 @@ function renderTankTable(tanks = null) {
   });
 }
 
-/* ============================================================
-   Tank detail view
-   ============================================================ */
-
 function openTank(tankId) {
   currentTankId = tankId;
   const tank = getTanksList().find((t) => readField(t, "id") === tankId);
@@ -2606,10 +2502,6 @@ function backToTable() {
 }
 
 document.getElementById("backToTableBtn").addEventListener("click", backToTable);
-
-/* ============================================================
-   Equipment builds & field modernization diagram
-   ============================================================ */
 
 function renderEquipmentSlot(item) {
   const rawItem = String(item).trim();
@@ -2685,10 +2577,6 @@ function renderModBlock(mod) {
     </div>
   `;
 }
-
-/* ============================================================
-   Bootstrap
-   ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
   switchTab("stats");
