@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="521x521" href="favicon.png">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
 
@@ -436,6 +437,40 @@ button.active {
   width: 100%;
 }
 
+.control-group--export {
+  flex: 0 0 auto;
+  min-width: 148px;
+  align-items: center;
+}
+
+.control-group--export .control-group__buttons {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0 var(--space-3);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.export-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
 .stat-btn {
   display: flex;
   flex-direction: column;
@@ -542,7 +577,8 @@ svg.stage-btn__icon {
   }
 
   .control-group--season .control-group__buttons,
-  .control-group--display .control-group__buttons {
+  .control-group--display .control-group__buttons,
+  .control-group--export .control-group__buttons {
     align-items: center;
     max-width: 260px;
     margin: 0 auto;
@@ -1482,6 +1518,32 @@ th:has(> .map-link) {
   }
 }
 
+@media print {
+  @page {
+    size: landscape;
+    margin: 10mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #tableWrapper,
+  #tableWrapper * {
+    visibility: visible;
+  }
+
+  #tableWrapper {
+    position: absolute;
+    inset: 0;
+    max-height: none;
+    overflow: visible;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
 </style>
 
 <body>
@@ -1542,6 +1604,24 @@ th:has(> .map-link) {
             </div>
           </div>
           <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn">Все бои</button>
+        </div>
+      </div>
+
+      <div class="control-group control-group--export">
+        <span class="control-group__label">Скачать</span>
+        <div class="control-group__buttons">
+          <button type="button" class="export-btn btn-runborder" id="exportCsvBtn" title="Скачать таблицу в формате CSV">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            CSV
+          </button>
+          <button type="button" class="export-btn btn-runborder" id="exportXlsxBtn" title="Скачать таблицу в формате Excel">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Excel
+          </button>
+          <button type="button" class="export-btn btn-runborder" id="exportPdfBtn" title="Скачать таблицу в формате PDF">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            PDF
+          </button>
         </div>
       </div>
     </div>
@@ -2311,6 +2391,75 @@ function enableHover(table) {
     });
   });
 }
+
+function getVisibleStatsTable() {
+  return document.querySelector("#table table");
+}
+
+function buildExportFilename(ext) {
+  const stat = STAT_TYPES.find((s) => s.key === currentType);
+  const parts = ["statistika", stat ? stat.key : currentType];
+  if (currentDate) parts.push(currentDate.replace(/\./g, "-"));
+  return `${parts.join("_")}.${ext}`;
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function tableCellText(cell) {
+  return (cell.innerText || cell.textContent || "").replace(/\s+/g, " ").trim();
+}
+
+function exportTableCsv() {
+  const table = getVisibleStatsTable();
+  if (!table) return;
+
+  const rows = Array.from(table.rows).map((row) =>
+    Array.from(row.cells)
+      .map((cell) => {
+        const text = tableCellText(cell);
+        return /[";\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      })
+      .join(";")
+  );
+
+  const csv = "\uFEFF" + rows.join("\r\n");
+  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8;" }), buildExportFilename("csv"));
+}
+
+function exportTableXlsx() {
+  const table = getVisibleStatsTable();
+  if (!table) return;
+
+  if (typeof XLSX === "undefined") {
+    alert("Не удалось загрузить модуль экспорта в Excel. Проверьте подключение к интернету и попробуйте снова.");
+    return;
+  }
+
+  const wb = XLSX.utils.table_to_book(table, { sheet: "Статистика" });
+  XLSX.writeFile(wb, buildExportFilename("xlsx"));
+}
+
+function exportTablePdf() {
+  if (!getVisibleStatsTable()) return;
+  window.print();
+}
+
+function initExportButtons() {
+  document.getElementById("exportCsvBtn")?.addEventListener("click", exportTableCsv);
+  document.getElementById("exportXlsxBtn")?.addEventListener("click", exportTableXlsx);
+  document.getElementById("exportPdfBtn")?.addEventListener("click", exportTablePdf);
+}
+
+initExportButtons();
 
 Promise.all(
   DATA_FILES.map(async (file) => {
