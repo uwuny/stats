@@ -43,11 +43,11 @@
 
   --color-win: #2e5e2e;
   --color-lose: #5e2e2e;
-  --color-alive: #00ff66;
-  --color-dead: #ff4444;
+  --color-alive: #4cc172;
+  --color-dead: #e5484d;
 
-  --color-win-rgb: 0 230 120;
-  --color-lose-rgb: 255 70 90;
+  --color-win-rgb: 76 193 114;
+  --color-lose-rgb: 229 72 77;
 
   --color-link: #57a9c2;
   --color-link-hover: #9be8ff;
@@ -131,6 +131,24 @@ body {
   color: var(--color-text);
   overflow-x: auto;
   background: var(--color-bg) url('backgrounds.png') center center / cover no-repeat;
+}
+
+/* Типографика в стиле Liquid Glass — только для вкладки "Статистика".
+   Системный стек San Francisco/SF Pro (тот же шрифт, что использует сам iOS/macOS
+   на стеклянных поверхностях) вместо декоративного Sofia Sans, и текстовая
+   иерархия на белом с переменной прозрачностью (как label/secondaryLabel/
+   tertiaryLabel в Liquid Glass) вместо сплошных серых — так текст естественно
+   ведёт себя поверх размытого стекла. Вкладка "Оборудование" эти переменные
+   не наследует и остаётся без изменений. */
+#statsPage {
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI Variable", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI Variable", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --color-text: rgb(255 255 255 / 92%);
+  --color-text-muted: rgb(255 255 255 / 58%);
+  --color-text-faint: rgb(255 255 255 / 40%);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
 }
 
 @media (min-width: 768px) {
@@ -319,6 +337,18 @@ button.active {
   backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 10%);
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* .control-panel уже создаёт стеклянную подложку под "Показатели / Сезон /
+   Этап / Дата / Отображение"; повторный backdrop-filter на кнопках и на
+   тумблере "Среднее" внутри неё — тот же вложенный блюр, что вызывал
+   баг с "протекающим" цветом на вкладках при hover. Убираем дублирование. */
+.control-panel button,
+.control-panel .avg-toggle__track {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .control-group {
@@ -730,25 +760,25 @@ th.hover-cell:not(.win):not(.lose) {
 }
 
 .win {
-  background: linear-gradient(180deg, rgb(var(--color-win-rgb) / 26%), rgb(var(--color-win-rgb) / 9%));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 14px rgb(var(--color-win-rgb) / 14%);
+  background: linear-gradient(180deg, rgb(var(--color-win-rgb) / 38%), rgb(var(--color-win-rgb) / 14%));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 16px rgb(var(--color-win-rgb) / 20%);
 }
 
 .lose {
-  background: linear-gradient(180deg, rgb(var(--color-lose-rgb) / 26%), rgb(var(--color-lose-rgb) / 9%));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 14px rgb(var(--color-lose-rgb) / 14%);
+  background: linear-gradient(180deg, rgb(var(--color-lose-rgb) / 38%), rgb(var(--color-lose-rgb) / 14%));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 16px rgb(var(--color-lose-rgb) / 20%);
 }
 
 .alive {
   color: var(--color-alive);
   font-weight: bold;
-  text-shadow: 0 0 8px rgb(var(--color-win-rgb) / 55%);
+  text-shadow: 0 0 8px rgb(var(--color-win-rgb) / 45%);
 }
 
 .dead {
   color: var(--color-dead);
   font-weight: bold;
-  text-shadow: 0 0 8px rgb(var(--color-lose-rgb) / 55%);
+  text-shadow: 0 0 8px rgb(var(--color-lose-rgb) / 45%);
 }
 
 .assist-icons {
