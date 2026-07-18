@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="521x521" href="favicon.png">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
 
@@ -426,40 +425,6 @@ button.active {
   width: 100%;
 }
 
-.control-group--export {
-  flex: 0 0 auto;
-  min-width: 126px;
-  align-items: center;
-}
-
-.control-group--export .control-group__buttons {
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--space-2);
-  width: 100%;
-}
-
-.export-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  width: 100%;
-  height: 30px;
-  margin: 0;
-  padding: 0 var(--space-3);
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-}
-
-.export-btn svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-}
-
 .stat-btn {
   display: flex;
   flex-direction: column;
@@ -566,8 +531,7 @@ svg.stage-btn__icon {
   }
 
   .control-group--season .control-group__buttons,
-  .control-group--display .control-group__buttons,
-  .control-group--export .control-group__buttons {
+  .control-group--display .control-group__buttons {
     align-items: center;
     max-width: 260px;
     margin: 0 auto;
@@ -866,21 +830,28 @@ th:has(> .map-link) {
 }
 
 .site-footer {
-  text-align: center;
-  padding-bottom: var(--space-5);
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) 0 var(--space-5);
 }
 
-.bottom-line {
-  width: 90%;
-  height: 1px;
-  background: var(--color-accent);
-  margin: 40px auto 10px;
-  box-shadow: 0 0 8px var(--color-accent);
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 22px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(160%);
+  box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 10%);
 }
 
 .footer-text {
-  color: rgb(255 255 255 / 90%);
-  font-size: 14px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   margin: 0;
 }
 
@@ -1507,32 +1478,6 @@ th:has(> .map-link) {
   }
 }
 
-@media print {
-  @page {
-    size: landscape;
-    margin: 10mm;
-  }
-
-  body * {
-    visibility: hidden;
-  }
-
-  #tableWrapper,
-  #tableWrapper * {
-    visibility: visible;
-  }
-
-  #tableWrapper {
-    position: absolute;
-    inset: 0;
-    max-height: none;
-    overflow: visible;
-    background: none;
-    border: none;
-    box-shadow: none;
-  }
-}
-
 </style>
 
 <body>
@@ -1593,24 +1538,6 @@ th:has(> .map-link) {
             </div>
           </div>
           <button type="button" class="btn-all-battles btn-runborder" id="allBattlesBtn">Все бои</button>
-        </div>
-      </div>
-
-      <div class="control-group control-group--export">
-        <span class="control-group__label">Скачать</span>
-        <div class="control-group__buttons">
-          <button type="button" class="export-btn btn-runborder" id="exportCsvBtn" title="Скачать таблицу в формате CSV">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            CSV
-          </button>
-          <button type="button" class="export-btn btn-runborder" id="exportXlsxBtn" title="Скачать таблицу в формате Excel">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Excel
-          </button>
-          <button type="button" class="export-btn btn-runborder" id="exportPdfBtn" title="Скачать таблицу в формате PDF">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            PDF
-          </button>
         </div>
       </div>
     </div>
@@ -1823,8 +1750,9 @@ th:has(> .map-link) {
   </section>
 
   <footer class="site-footer">
-    <div class="bottom-line" aria-hidden="true"></div>
-    <p class="footer-text">Created by McQueen</p>
+    <div class="footer-badge">
+      <p class="footer-text">Created by McQueen</p>
+    </div>
   </footer>
 
 </div>
@@ -1949,6 +1877,8 @@ const STAGE_ICON_MARKUP = {
   ` },
 };
 
+STAGE_ICON_MARKUP.new_global_map = STAGE_ICON_MARKUP.global_map;
+
 const SEASONS = [
   {
     key: "storm_birth",
@@ -1965,6 +1895,10 @@ const SEASONS = [
     label: "Новый сезон",
     stages: [
       { key: "stage_1", label: "Первый этап", icon: "stat/stage1.png", start: null, end: null },
+      { key: "stage_2", label: "Второй этап", icon: "stat/stage2.png", start: null, end: null },
+      { key: "stage_3", label: "Третий этап", icon: "stat/stage7.png", start: null, end: null },
+      { key: "stage_4", label: "Четвёртый этап", icon: "stat/stage8.png", start: null, end: null },
+      { key: "new_global_map", label: "Глобальная карта", icon: "stat/stage9.png", start: null, end: null },
     ],
   },
 ];
@@ -2380,103 +2314,6 @@ function enableHover(table) {
     });
   });
 }
-
-function getVisibleStatsTable() {
-  return document.querySelector("#table table");
-}
-
-function buildExportFilename(ext) {
-  const stat = STAT_TYPES.find((s) => s.key === currentType);
-  const parts = ["statistika", stat ? stat.key : currentType];
-  if (currentDate) parts.push(currentDate.replace(/\./g, "-"));
-  return `${parts.join("_")}.${ext}`;
-}
-
-function downloadBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
-
-function tableCellText(cell) {
-  return (cell.innerText || cell.textContent || "")
-    .split("\n")
-    .map((line) => line.replace(/\s+/g, " ").trim())
-    .filter((line) => line.length > 0)
-    .join("\n");
-}
-
-function buildExportGrid(table) {
-  return Array.from(table.rows).map((row) => Array.from(row.cells).map(tableCellText));
-}
-
-function exportTableCsv() {
-  const table = getVisibleStatsTable();
-  if (!table) return;
-
-  const grid = buildExportGrid(table);
-  const rows = grid.map((cells) =>
-    cells
-      .map((text) => (/[";\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text))
-      .join(";")
-  );
-
-  const csv = "\uFEFF" + rows.join("\r\n");
-  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8;" }), buildExportFilename("csv"));
-}
-
-function exportTableXlsx() {
-  const table = getVisibleStatsTable();
-  if (!table) return;
-
-  if (typeof XLSX === "undefined") {
-    alert("Не удалось загрузить модуль экспорта в Excel. Проверьте подключение к интернету и попробуйте снова.");
-    return;
-  }
-
-  const grid = buildExportGrid(table);
-  const colCount = grid[0]?.length || 0;
-  const avgCol = avgPosition === "left" ? 1 : colCount - 1;
-
-  const ws = XLSX.utils.aoa_to_sheet(grid);
-  ws["!rows"] = grid.map((cells) => ({ hpx: cells.some((c) => c.includes("\n")) ? 32 : 18 }));
-
-  grid.forEach((cells, r) => {
-    cells.forEach((_, c) => {
-      const cellRef = ws[XLSX.utils.encode_cell({ r, c })];
-      if (!cellRef) return;
-      cellRef.s = {
-        alignment: {
-          wrapText: true,
-          vertical: c === avgCol ? "center" : "top",
-          horizontal: c === avgCol ? "center" : undefined,
-        },
-      };
-    });
-  });
-
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Статистика");
-  XLSX.writeFile(wb, buildExportFilename("xlsx"), { cellStyles: true });
-}
-
-function exportTablePdf() {
-  if (!getVisibleStatsTable()) return;
-  window.print();
-}
-
-function initExportButtons() {
-  document.getElementById("exportCsvBtn")?.addEventListener("click", exportTableCsv);
-  document.getElementById("exportXlsxBtn")?.addEventListener("click", exportTableXlsx);
-  document.getElementById("exportPdfBtn")?.addEventListener("click", exportTablePdf);
-}
-
-initExportButtons();
 
 Promise.all(
   DATA_FILES.map(async (file) => {
