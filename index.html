@@ -46,6 +46,9 @@
   --color-alive: #00ff66;
   --color-dead: #ff4444;
 
+  --color-win-rgb: 0 230 120;
+  --color-lose-rgb: 255 70 90;
+
   --color-link: #57a9c2;
   --color-link-hover: #9be8ff;
   --color-btn-border: #979695;
@@ -204,6 +207,8 @@ body {
   backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   box-shadow: var(--glass-shadow-sm), inset 0 1px 0 rgb(255 255 255 / 10%);
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .main-tabs .tab {
@@ -215,6 +220,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* контейнер .main-tabs уже размыт (glass-эффект); повторный backdrop-filter
+     на дочерних кнопках создавал вложенный блюр, который при перерисовке
+     где-либо на странице (например, при hover по таблице) на кадр
+     "протекал" неверным цветом в нижней части кнопки */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 button {
@@ -598,6 +609,8 @@ svg.stat-btn__icon {
   backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   box-shadow: var(--glass-shadow), inset 0 1px 0 rgb(255 255 255 / 8%);
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 #tableWrapper::-webkit-scrollbar {
@@ -716,10 +729,27 @@ th.hover-cell:not(.win):not(.lose) {
   transition: filter var(--duration-fast) var(--ease-out);
 }
 
-.win { background: var(--color-win); }
-.lose { background: var(--color-lose); }
-.alive { color: var(--color-alive); font-weight: bold; }
-.dead { color: var(--color-dead); font-weight: bold; }
+.win {
+  background: linear-gradient(180deg, rgb(var(--color-win-rgb) / 26%), rgb(var(--color-win-rgb) / 9%));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 14px rgb(var(--color-win-rgb) / 14%);
+}
+
+.lose {
+  background: linear-gradient(180deg, rgb(var(--color-lose-rgb) / 26%), rgb(var(--color-lose-rgb) / 9%));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), inset 0 0 14px rgb(var(--color-lose-rgb) / 14%);
+}
+
+.alive {
+  color: var(--color-alive);
+  font-weight: bold;
+  text-shadow: 0 0 8px rgb(var(--color-win-rgb) / 55%);
+}
+
+.dead {
+  color: var(--color-dead);
+  font-weight: bold;
+  text-shadow: 0 0 8px rgb(var(--color-lose-rgb) / 55%);
+}
 
 .assist-icons {
   opacity: 0.8;
