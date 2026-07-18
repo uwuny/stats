@@ -476,6 +476,10 @@ svg.stat-btn__icon {
   object-fit: contain;
 }
 
+svg.stage-btn__icon {
+  transition: color var(--duration-med) var(--ease-out);
+}
+
 .season-btn {
   margin: 0;
   padding: var(--space-3);
@@ -1810,6 +1814,53 @@ const STAT_TYPES = [
   { key: "survival", label: "Выживаемость", svgIcon: "survival" },
 ];
 
+const STAGE_ICON_MARKUP = {
+  global_map: `
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <circle cx="28" cy="28" r="20"/>
+      <ellipse cx="28" cy="28" rx="8" ry="20"/>
+      <line x1="8" y1="28" x2="48" y2="28"/>
+      <line x1="11" y1="18" x2="45" y2="18"/>
+      <line x1="11" y1="38" x2="45" y2="38"/>
+    </g>
+  `,
+  thunder: `
+    <g fill="currentColor">
+      <circle cx="20" cy="24" r="8"/>
+      <circle cx="30" cy="18" r="10"/>
+      <circle cx="39" cy="24" r="7"/>
+      <rect x="13" y="22" width="33" height="12" rx="6"/>
+    </g>
+    <polygon points="32,32 22,46 27,46 24,54 38,38 29,38" fill="currentColor"/>
+  `,
+  rain_wall: `
+    <g fill="currentColor">
+      <circle cx="20" cy="24" r="8"/>
+      <circle cx="30" cy="18" r="10"/>
+      <circle cx="39" cy="24" r="7"/>
+      <rect x="13" y="22" width="33" height="12" rx="6"/>
+    </g>
+    <g fill="currentColor">
+      <rect x="14" y="38" width="4" height="14" rx="2"/>
+      <rect x="21" y="34" width="4" height="18" rx="2"/>
+      <rect x="28" y="38" width="4" height="14" rx="2"/>
+      <rect x="35" y="34" width="4" height="18" rx="2"/>
+      <rect x="42" y="38" width="4" height="14" rx="2"/>
+    </g>
+  `,
+  eternal_storm: `
+    <path d="M28,4 A24,24 0 1,1 6.2,20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="6.2,20 4,11.5 12.5,14.5" fill="currentColor"/>
+    <g fill="currentColor">
+      <circle cx="22" cy="26" r="6"/>
+      <circle cx="29" cy="21" r="7.5"/>
+      <circle cx="35" cy="26" r="5.5"/>
+      <rect x="17" y="24" width="24" height="9" rx="4.5"/>
+    </g>
+    <polygon points="31,33 24,43 28,43 26,49 36,37 29,37" fill="currentColor"/>
+  `,
+};
+
 const SEASONS = [
   {
     key: "storm_birth",
@@ -1935,7 +1986,9 @@ function renderStageButtons() {
   const season = getSeason(currentSeason);
   wrap.innerHTML = season.stages.map((stage) => `
     <button type="button" class="stage-btn btn-runborder${stage.key === currentStage ? " active" : ""}" data-stage="${stage.key}">
-      <img class="stage-btn__icon" src="${stage.icon}" alt="">
+      ${STAGE_ICON_MARKUP[stage.key]
+        ? `<svg class="stage-btn__icon" viewBox="0 0 56 56" aria-hidden="true">${STAGE_ICON_MARKUP[stage.key]}</svg>`
+        : `<img class="stage-btn__icon" src="${stage.icon}" alt="">`}
       <span>${escapeHtml(stage.label)}</span>
     </button>
   `).join("");
