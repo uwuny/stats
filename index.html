@@ -21,12 +21,10 @@
 
   --color-border: rgb(255 255 255 / 14%);
   --color-border-subtle: rgb(255 255 255 / 10%);
-  --color-border-faint: rgb(255 255 255 / 8%);
 
   --color-accent: #00ff66;
   --color-accent-rgb: 0 255 102;
   --color-accent-soft: #2e5e2e;
-  --color-accent-wash: rgb(var(--color-accent-rgb) / 8%);
 
   --color-blue: #4a6ed1;
 
@@ -37,7 +35,6 @@
   --glass-bg-active: rgb(255 255 255 / 16%);
   --glass-border: rgb(255 255 255 / 16%);
   --glass-border-strong: rgb(255 255 255 / 30%);
-  --glass-highlight: rgb(255 255 255 / 30%);
   --glass-shadow: 0 8px 32px rgb(0 0 0 / 35%);
   --glass-shadow-sm: 0 4px 16px rgb(0 0 0 / 30%);
 
@@ -51,7 +48,6 @@
 
   --color-link: #57a9c2;
   --color-link-hover: #9be8ff;
-  --color-btn-border: #979695;
 
   --color-text: #f5f5f5;
   --color-text-muted: #a6a6a6;
@@ -78,10 +74,8 @@
   --duration-slow: 350ms;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --shadow-panel: 0 4px 20px rgb(0 0 0 / 45%);
   --shadow-glow-accent: 0 0 12px rgb(var(--color-accent-rgb) / 45%);
 }
 
@@ -155,18 +149,6 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .page {
@@ -538,15 +520,6 @@ svg.stage-btn__icon {
   }
 }
 
-.table-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
-}
-
 .avg-toggle {
   display: flex;
   align-items: center;
@@ -631,12 +604,6 @@ svg.stage-btn__icon {
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-}
-
-@media (max-width: 900px) {
-  .table-toolbar {
-    justify-content: center;
-  }
 }
 
 #tableWrapper {
@@ -1780,7 +1747,10 @@ const addDays = (date, days) => {
   return result;
 };
 
-const readField = (obj, key) => String(obj?.[key] ?? obj?.[`${key} `] ?? "").trim();
+// В части JSON-файлов встречаются ключи с завершающим пробелом (например "tanks ").
+// getField достаёт значение по «чистому» или «пробельному» варианту ключа.
+const getField = (obj, key) => obj?.[key] ?? obj?.[`${key} `];
+const readField = (obj, key) => String(getField(obj, key) ?? "").trim();
 
 const tabPanels = {
   stats: document.getElementById("statsPage"),
@@ -2160,12 +2130,14 @@ function sortPlayerNames(type, players, battles, averages, survivalRates) {
   return names.sort((a, b) => averages[b] - averages[a]);
 }
 
+const hasElo = (value) => value !== null && value !== undefined && value !== "";
+
 function computeBattleSummary(battles) {
   let eloSum = 0;
   let eloCount = 0;
   let winCount = 0;
   battles.forEach((b) => {
-    if (b.elo !== null && b.elo !== undefined && b.elo !== "") {
+    if (hasElo(b.elo)) {
       eloSum += Number(b.elo);
       eloCount++;
     }
@@ -2192,7 +2164,7 @@ function renderClanHeaderRow(battles, summary) {
       const href = `https://hemero.ru/ru/ru2026may/personal.php?tag=${encodeURIComponent(clanTag.toUpperCase())}`;
       cell += `<a class="clan-link" href="${href}" target="_blank" rel="noopener">${escapeHtml(clanTag.toUpperCase())}</a>`;
     }
-    if (battle.elo !== null && battle.elo !== undefined && battle.elo !== "") {
+    if (hasElo(battle.elo)) {
       cell += `<br><span class="elo-value">${battle.elo}</span>`;
     }
     return `<th class="clan-header">${cell}</th>`;
@@ -2383,7 +2355,7 @@ let currentSortColumn = null;
 let currentSortDirection = "asc";
 
 function getTanksList() {
-  return EQUIPMENT_DB?.tanks ?? EQUIPMENT_DB?.["tanks "] ?? [];
+  return getField(EQUIPMENT_DB, "tanks") ?? [];
 }
 
 async function loadEquipmentDB() {
@@ -2601,9 +2573,9 @@ function openTank(tankId) {
   document.getElementById("backButtonContainer").hidden = false;
 
   const name = readField(tank, "name");
-  const images = tank.images ?? tank["images "];
-  const mods = tank.mods ?? tank["mods "];
-  const builds = tank.equipmentBuilds ?? tank["equipmentBuilds "];
+  const images = getField(tank, "images");
+  const mods = getField(tank, "mods");
+  const builds = getField(tank, "equipmentBuilds");
 
   let html = `<div class="tank-name">${escapeHtml(name)}</div>`;
 
@@ -2657,8 +2629,8 @@ function renderEquipmentBuilds(builds) {
   const slotsMarkup = (items) => (items ?? []).map(renderEquipmentSlot).join("");
 
   const buildsMarkup = builds.map((build) => {
-    const type = build.type ?? build["type "];
-    const items = build.items ?? build["items "] ?? [];
+    const type = getField(build, "type");
+    const items = getField(build, "items") ?? [];
     return `
       <div class="equip-build">
         <div class="build-label">${escapeHtml(BUILD_TITLES[type] ?? type)}</div>
