@@ -2032,7 +2032,7 @@ function initDates() {
     .sort((a, b) => parseDate(a) - parseDate(b));
 
   if (!dates.length) {
-    box.innerHTML = `<p class="empty-state">Для этого этапа пока нет данных.</p>`;
+    box.innerHTML = `<p class="empty-state">Нет данных</p>`;
     currentDate = null;
     allBattlesBtn?.classList.remove("active");
     return;
