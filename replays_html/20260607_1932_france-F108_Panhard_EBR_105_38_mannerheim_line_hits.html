@@ -251,7 +251,7 @@ transform: translateY(0) scale(1);
 transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out), visibility 0s linear;
 }
 .filter-dropdown::-webkit-scrollbar { width: 8px; }
-.filter-dropdown::-webkit-scrollbar-track { background: transparent; margin: 10% 0; }
+.filter-dropdown::-webkit-scrollbar-track { background: transparent; margin: 16px 0; }
 .filter-dropdown::-webkit-scrollbar-thumb {
 background: linear-gradient(180deg, rgb(255 255 255 / 45%), rgb(255 255 255 / 22%));
 border-radius: var(--radius-sm);
@@ -640,6 +640,18 @@ scene.add(fillBack);
 const rim = new THREE.DirectionalLight(0xdfe8ff, 0.22);
 rim.position.set(10, 8, -12);
 scene.add(rim);
+
+const fillBelow = new THREE.DirectionalLight(0xffffff, 0.16);
+fillBelow.position.set(3, -8, 6);
+scene.add(fillBelow);
+
+const sideLeftLow = new THREE.DirectionalLight(0xffffff, 0.16);
+sideLeftLow.position.set(-13, 1.5, 3);
+scene.add(sideLeftLow);
+
+const sideRightLow = new THREE.DirectionalLight(0xffffff, 0.16);
+sideRightLow.position.set(13, 1.5, -3);
+scene.add(sideRightLow);
 
 const grid = new THREE.GridHelper(80, 40, 0x4a4a4c, 0x323234);
 scene.add(grid);
